@@ -1,4 +1,4 @@
-# v0.2.0-alpha — запуск реального main.lua
+# v0.2.1-alpha — полный Lua bootstrap
 
 Второй аппаратный alpha-пакет нативного Switch-порта Repentance Plus.
 
