@@ -1,0 +1,75 @@
+<pocketitems>
+	<!-- EXAMPLES FROM BASE GAME:
+		<card type="special" pickup="8" achievement="97" description="???" id="42" name="Chaos Card" announcer="334" mimiccharge="6" />
+		<card type="object" pickup="15" achievement="444" description="???" name="Cracked Key" id="78" mimiccharge="4" />
+	
+		Pill classes:
+			3: Major (a permanent effect, usually a stat modifier)
+			2: Medium (an effect with a significant impact, i.e. health or damage)
+			1: Minor (an effect which is only situationally useful)
+			0: Joke (an effect which is nigh useless)
+		Append a + or - at the end to denote a positive or negative effect, no suffix means a neutral effect
+
+		<pilleffect id="0" name="Bad Gas" announcer="328" class="1+" mimiccharge="1" / 
+		
+		backs and secondary slot are done via pickup tag, custom backs need new pickup-numbers, which must have an entry in the entities2.xml
+		already existing backs need the assigned pickup-numbers (e.g. 2 for suit back, 17 for uno back, look into gamefiles if you need them)
+	-->
+	
+	<!-- custom backs -->
+	<rune type="rune" name="Red Rune" hud="Red Rune" mimiccharge="4" description="Abyss" pickup="160" /> 
+	<card type="object" name="Spindown Dice Shard" hud="Spindown Dice Shard" mimiccharge="6" description="-1?" pickup="161"/> 
+	<card type="object" name="Needle and Thread" hud="Needle and Thread" mimiccharge="6" description="To cure my broken heart" pickup="162" />
+	<card type="object" name="Bag Tissue" hud="Bag Tissue" mimiccharge="4" description="Craft a piece of your destiny" pickup="163" />
+	<card type="object" name="Loaded Dice" hud="Loaded Dice" mimiccharge="6" description="Luck is on your side" pickup="164" />
+	<rune type="rune" name="Quasar Shard" hud="Quasar Shard" mimiccharge="6" description="Shard of knowledge" pickup="165" />
+	<card type="special" name="Business Card" hud="Business Card" mimiccharge="4" description="Reusable partnership" pickup="166" />
+	<card type="object" name="Sacrificial Blood" hud="Sacrificial Blood" mimiccharge="3" description="Feed on their pain" pickup="167" achievement="999" />
+	<card type="special" name="Flypaper" hud="Flypaper" mimiccharge="12" description="Sticky!" pickup="168" />
+	<card type="special" name="Library Card" hud="Library Card" mimiccharge="6" description="8)" pickup="169" />
+	<card type="special" name="Antimaterial Card" hud="Antimaterial Card" mimiccharge="12" description="Erase thy enemy... once" pickup="170" />
+	<card type="special" name="Funeral Service" hud="Funeral Services" mimiccharge="12" description="My time has come..." pickup="171" />
+	<card type="special" name="Mom's ID" hud="Mom's ID" mimiccharge="6" description="Feel her wrath" pickup="172" />
+	<card type="special" name="Fiend Fire" hud="Fiend Fire" mimiccharge="2" description="Feel the heat!" pickup="173" />
+	<card type="special" name="Demon Form" hud="Demon Form" mimiccharge="12" description="Your demons grow stronger" pickup="174" />
+	<card type="special" name="Valentine's Card" hud="Valentine's Card" mimiccharge="6" description="<3" pickup="175" />
+	<card type="special" name="Cursed Card" hud="Cursed Card" mimiccharge="2" description="Grief and sorrow" pickup="183" />
+
+	<!-- extras -->
+	<rune type="rune" name="Dark Remnants" hud="Dark Remnants" mimiccharge="4" description="Mass cripple" pickup="184" />
+	<card type="special" name="Funeral Services?" hud="Funeral Services?" mimiccharge="12" description="???" pickup="185" />
+	
+	<!-- Sin's Jewels -->
+	<rune type="rune" pickup="176" hud="Canine of Wrath" description="Subconscious anger" name="Canine of Wrath" mimiccharge="6" achievement="999" />
+    <rune type="rune" pickup="177" hud="Mask of Envy" description="Defiled from the inside" name="Mask of Envy" mimiccharge="4" achievement="999" />
+    <rune type="rune" pickup="178" hud="Crown of Greed" description="Want, want, want" name="Crown of Greed" mimiccharge="3" achievement="999" />
+    <rune type="rune" pickup="179" hud="Void of Gluttony" description="Devour all" name="Void of Gluttony" mimiccharge="12" achievement="999" />
+    <rune type="rune" pickup="180" hud="Apple of Pride" description="Succumb to being the Almighty" name="Apple of Pride" mimiccharge="6" achievement="999" />
+    <rune type="rune" pickup="181" hud="Flower of Lust" description="Do anything for more" name="Flower of Lust" mimiccharge="6" achievement="999" />
+    <rune type="rune" pickup="182" hud="Acid of Sloth" description="Embrace laziness" name="Acid of Sloth" mimiccharge="3" achievement="999" />
+	
+	<!-- non-custom backs -->
+	<card type="special" name="Spiritual Reserves" hud="Spiritual Reserves" mimiccharge="12" description="Awaken your spirits" pickup="8" />
+	<card type="special" name="Mirrored Landscape" hud="Mirrored Landscape" mimiccharge="2" description="Ever changing" pickup="8" />
+	<card type="suit" name="Joker?" hud="Joker?" mimiccharge="1" description="¿¿¿" pickup="2"/>
+	<card type="special" name="Reverse Card" hud="Reverse Card" mimiccharge="4" description="No, You!" pickup="17" /> 
+	<card type="suit" name="King of Spades" hud="King of Spades" mimiccharge="6" description="Lose everything to get something" pickup="2" />
+	<card type="suit" name="King of Clubs" hud="King of Clubs" mimiccharge="6" description="Lose everything to get something" pickup="2" />
+	<card type="suit" name="King of Diamonds" hud="King of Diamonds" mimiccharge="6" description="Lose everything to get something" pickup="2" />
+	<card type="suit" name="Queen of Diamonds" hud="Queen of Diamonds" mimiccharge="12" description="$" pickup="2" />
+	<card type="suit" name="Queen of Clubs" hud="Queen of Clubs" mimiccharge="12" description="!" pickup="2" />
+	<card type="suit" name="Bedside Queen" hud="Bedside Queen" mimiccharge="12" description="0--&#34;" pickup="2" />
+	<card type="suit" name="Jack of Diamonds" hud="Jack of Diamonds" mimiccharge="2" description="Increase your Wealth" pickup="2" /> 
+	<card type="suit" name="Jack of Clubs" hud="Jack of Clubs" mimiccharge="2" description="Increase your Blast" pickup="2" />
+	<card type="suit" name="Jack of Spades" hud="Jack of Spades" mimiccharge="2" description="Increase your Access" pickup="2" />
+	<card type="suit" name="Jack of Hearts" hud="Jack of Hearts" mimiccharge="2" description="Increase your Health" pickup="2" />
+	
+	<!-- pill effects -->
+	<pilleffect name="Estrogen Up" mimiccharge="4" class="2+" />
+	<pilleffect name="Laxative" mimiccharge="2" class="0" />
+	<pilleffect name="Phantom Pains" mimiccharge="4" class="2-" />
+	<pilleffect name="Yum!" mimiccharge="12" class="2+" />
+	<pilleffect name="Yuck!" mimiccharge="6" class="1+" />
+	<pilleffect name="Suppository" mimiccharge="6" class="1" />
+	
+</pocketitems>

@@ -1,0 +1,327 @@
+<entities anm2root="gfx/" version="5">
+
+<!-- EFFECTS -->
+<entity anm2path="gfx/backdrop/blankanim.anm2" id="1000" name="Animated Item Dummy Entity" variant="3457435" collisionRadius="0" numGridCollisionPoints="0" baseHP="0" boss="0" collisionDamage="0" collisionMass="0" friction="0" shadowSize="0">
+	</entity>
+
+<entity anm2path="1000.666_cripple_hands_helper.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" id="1000" name="Crippling Hands Helper" numGridCollisionPoints="1" shadowSize="0" stageHP="0" variant="666">
+    </entity>
+	
+<entity anm2path="1000.764_falling_knife.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" id="1000" name="Falling Knife Helper" numGridCollisionPoints="1" shadowSize="0" stageHP="0" variant="764">
+    </entity>
+	
+<entity anm2path="1000.777_pure_soul.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" id="1000" name="Pure Soul" numGridCollisionPoints="1" shadowSize="0" stageHP="0" variant="777">
+    </entity>
+	
+<entity anm2path="1000.767_placard_effect_border.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" id="1000" name="Handicapped Placard Effect Border" numGridCollisionPoints="1" shadowSize="0" stageHP="0" variant="767">
+    </entity>
+
+<entity anm2path="1000.788_broken_heart_above_pedestal.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" id="1000" name="Pedestal Broken Heart Helper" numGridCollisionPoints="1" shadowSize="0" stageHP="0" variant="788">
+    </entity>
+
+    <!-- PICKUPS -->
+<entity anm2path="005.069.07_white_sack.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="White Sack" numGridCollisionPoints="24" shadowSize="18" stageHP="0" variant="69" subtype="7">
+    </entity>
+
+<entity anm2path="005.069.55_stomack.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Stomack" numGridCollisionPoints="24" shadowSize="18" stageHP="0" variant="69" subtype="8">
+    </entity>
+
+<entity anm2path="005.090_51_heattery_red.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Hearttery (Red)" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="90" subtype="51">
+</entity>
+
+<entity anm2path="005.090_52_heattery_soul.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Hearttery (Soul)" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="90" subtype="52">
+</entity>
+
+<entity anm2path="005.512_scarletchest.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="6" collisionRadius="12" friction="0.8" id="5" name="Scarlet Chest" numGridCollisionPoints="24" shadowSize="24" stageHP="0" variant="512">
+</entity>
+
+<entity anm2path="005.513_fleshchest.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="6" collisionRadius="12" friction="0.8" id="5" name="Flesh Chest" numGridCollisionPoints="24" shadowSize="24" stageHP="0" variant="513">
+</entity>
+
+<entity anm2path="005.514_blackchest.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="6" collisionRadius="12" friction="0.8" id="5" name="Black Chest" numGridCollisionPoints="24" shadowSize="24" stageHP="0" variant="514">
+</entity>
+
+<entity anm2path="005.515_coffin.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="6" collisionRadius="32" collisionRadiusYMulti="0.33" friction="0" id="5" name="Coffin" numGridCollisionPoints="24" shadowSize="27" stageHP="0" variant="515">
+</entity>
+
+<entity anm2path="006.334_red_king_crawlspace.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="16" collisionRadius="10" friction="1" id="6" name="Red Trapdoor" numGridCollisionPoints="16" shadowSize="0" stageHP="0" variant="334">
+</entity>
+
+<entity anm2path="006.335_stargazer.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="6" name="Stargazer" numGridCollisionPoints="24" shadowSize="15" stageHP="0" variant="335" subtype="0">
+        <gibs amount="6" blood="1" bone="1" eye="1" gut="1" large="0" />
+    </entity>
+
+<entity anm2path="items/pick ups/001.broken_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Broken Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="84">
+    </entity>
+
+<entity anm2path="items/pick ups/002.dauntless_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Dauntless Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="85">
+    </entity>
+
+<entity anm2path="items/pick ups/002.1.half_dauntless_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Half Dauntless Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="101">
+    </entity>
+	
+<entity anm2path="items/pick ups/003.hoarded_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Hoarded Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="86">
+    </entity>
+	
+<entity anm2path="items/pick ups/004.deceiver_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Deceiver Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="87">
+    </entity>
+
+<entity anm2path="items/pick ups/005.soiled_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Soiled Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="88">
+    </entity>
+	
+<entity anm2path="items/pick ups/006.curdled_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Curdled Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="89">
+    </entity>
+	
+<entity anm2path="items/pick ups/007.savage_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Savage Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="90">
+    </entity>
+	
+<entity anm2path="items/pick ups/008.benighted_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Benighted Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="91">
+    </entity>
+
+<entity anm2path="items/pick ups/009.enigma_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Enigma Heart" numGridCollisionPoints="24" shadowSize="1" stageHP="0" variant="10" subtype="92">
+    </entity>
+
+<entity anm2path="items/pick ups/010.capricious_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Capricious Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="93">
+    </entity>
+	
+<entity anm2path="items/pick ups/011.baleful_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Baleful Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="94">
+    </entity>
+	
+<entity anm2path="items/pick ups/012.harlot_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Harlot Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="95">
+    </entity>
+
+<entity anm2path="items/pick ups/013.miser_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Miser Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="96">
+    </entity>
+
+<entity anm2path="items/pick ups/014.empty_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Empty Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="97">
+    </entity>
+
+<entity anm2path="items/pick ups/015.fettered_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Fettered Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="98">
+    </entity>
+
+<entity anm2path="items/pick ups/016.zealot_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Zealot Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="99">
+    </entity>
+	
+<entity anm2path="items/pick ups/017.deserted_heart.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Deserted Heart" numGridCollisionPoints="24" shadowSize="17" stageHP="0" variant="10" subtype="100">
+    </entity>
+
+<!-- CONSUMABLES -->
+
+<entity anm2path="005.390_redrune.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Red Rune" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="160">
+</entity>
+
+<entity anm2path="005.391_spindowndiceshard.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Spindowndice Shard" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="161">
+</entity>
+
+<entity anm2path="005.393_needleandthread.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Needle and Thread" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="162">
+</entity>
+
+<entity anm2path="005.394_bagtissue.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Bag Tissue" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="163">
+</entity>
+
+<entity anm2path="005.395_loadeddice.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Loaded Dice" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="164">
+</entity>
+
+<entity anm2path="005.396_quasarshard.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Quasar Shard" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="165">
+</entity>
+
+<entity anm2path="005.397_businesscard.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Business Card" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="166">
+</entity>
+
+<entity anm2path="005.398_sacrificialblood.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Sacrificial Blood" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="167">
+</entity>
+
+<entity anm2path="005.399_flypaper.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Flypaper" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="168">
+</entity>
+
+<entity anm2path="005.400_librarycard.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Library Card" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="169">
+</entity>
+
+<entity anm2path="005.402_funeralservices.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Funeral Services" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="171">
+</entity>
+
+<entity anm2path="005.401_momsid.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Mom's ID" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="172">
+</entity>
+
+<entity anm2path="005.403_antimaterialcard.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Antimaterial Card" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="170">
+</entity>
+
+<entity anm2path="005.404_slaythespire.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Demon From" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="174">
+</entity>
+
+<entity anm2path="005.404_slaythespire.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Fiend Fire" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="173">
+</entity>
+
+<entity anm2path="005.405_valentinescard.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Valentine's Card" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="175">
+</entity>
+
+<entity anm2path="005.412_canine_of_wrath.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Canine of Wrath" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="176">
+</entity>
+
+<entity anm2path="005.409_mask_of_envy.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Mask of Envy" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="177">
+</entity>
+
+<entity anm2path="005.410_crown_of_greed.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Crown of Greed" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="178">
+</entity>
+
+<entity anm2path="005.411_void_of_gluttony.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Void of Gluttony" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="179">
+</entity>
+
+<entity anm2path="005.408_apple_of_pride.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Apple of Pride" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="180">
+</entity>
+
+<entity anm2path="005.406_flower_of_lust.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Flower of Lust" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="181">
+</entity>
+
+<entity anm2path="005.407_acid_of_sloth.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Acid of Sloth" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="182">
+</entity>
+
+<entity anm2path="005.413_cursedcard.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Cursed Card" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="183">
+</entity>
+
+<entity anm2path="005.414_darkremnants.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Dark Remnants" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="184">
+</entity>
+
+<entity anm2path="005.415_funeralservices_reversed.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Funeral Services?" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="185">
+</entity>
+
+<!-- FAMILIARS -->
+
+<entity anm2path="003.210_bagotrash.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Bag-o-Trash" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="2100">
+	</entity>
+
+<entity anm2path="003.211_zenbaby.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Cherubim" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="2101">
+	</entity>
+
+<entity anm2path="003.212_cherry.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="16" friction="1" id="3" name="Cherry" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="2102" subtype="1">
+	</entity>
+
+<entity anm2path="003.213_bird.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Bird of Hope" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="2103">
+    </entity>
+
+<entity anm2path="003.214_soul.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="50" collisionRadius="13" friction="1" id="3" name="Enraged Soul" numGridCollisionPoints="12" shadowSize="14" stageHP="0" variant="2104">
+    </entity>
+
+    <!-- Tank Boys types -->
+<entity anm2path="003.215_toytank_1.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Toy Tank 1" numGridCollisionPoints="12" shadowSize="14" stageHP="0" variant="2105" subtype="0">
+    </entity>
+	
+<entity anm2path="003.215_toytank_2.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Toy Tank 2" numGridCollisionPoints="12" shadowSize="14" stageHP="0" variant="2105" subtype="1">
+    </entity>
+
+<entity anm2path="003.223_helicopter_1.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Toy Helicopter 1" numGridCollisionPoints="12" shadowSize="14" stageHP="0" variant="2105" subtype="10">
+    </entity>
+
+<entity anm2path="003.223_helicopter_2.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Toy Helicopter 2" numGridCollisionPoints="12" shadowSize="14" stageHP="0" variant="2105" subtype="11">
+    </entity>
+
+    <!-- 2106 IS NOW VACANT -->
+	
+<entity anm2path="003.216_peacefulsibling_1.anm2" baseHP="0" boss="0" champion="0" collisionDamage="3" collisionInterval="2" collisionMass="3" collisionRadius="7" friction="1" id="3" name="Peaceful Sibling 1" numGridCollisionPoints="12" shadowSize="14" stageHP="0" variant="2107">
+    </entity>
+	
+<entity anm2path="003.216_peacefulsibling_2.anm2" baseHP="0" boss="0" champion="0" collisionDamage="3" collisionInterval="2" collisionMass="3" collisionRadius="7" friction="1" id="3" name="Peaceful Sibling 2" numGridCollisionPoints="12" shadowSize="14" stageHP="0" variant="2108">
+    </entity>
+	
+<entity anm2path="003.216_fightingsiblings.anm2" baseHP="0" boss="0" champion="0" collisionDamage="6" collisionInterval="2" collisionMass="3" collisionRadius="8" friction="1" id="3" name="Fighting Siblings" numGridCollisionPoints="12" shadowSize="14" stageHP="0" variant="2109">
+    </entity>
+	
+<entity anm2path="003.217_rejectionfetus.anm2" baseHP="0" boss="0" champion="0" collisionDamage="2.5" collisionInterval="3" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Rejection Fetus" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="2110">
+	</entity>
+	
+<entity anm2path="003.218_enoch.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Enoch" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="2111">
+	</entity>
+	
+<entity anm2path="003.218a_enoch_tainted.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Enoch (tainted)" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="2112">
+	</entity>
+
+    <!-- friendly orbital ghosts -->
+<entity anm2path="003.219_spiritual_reserves_sun.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionInterval="2" collisionMass="3" collisionRadius="10" collisionRadiusXMulti="0.66" friction="1" id="3" name="Spiritual Reserves (Sun)" numGridCollisionPoints="12" shadowSize="10" stageHP="0" variant="2113" subtype="1">
+    </entity>
+	
+<entity anm2path="003.219_spiritual_reserves_moon.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionInterval="2" collisionMass="3" collisionRadius="10" collisionRadiusXMulti="0.66" friction="1" id="3" name="Spiritual Reserves (Moon)" numGridCollisionPoints="12" shadowSize="10" stageHP="0" variant="2113" subtype="2">
+    </entity>
+
+<entity anm2path="003.219_spiritual_reserves_fettered.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionInterval="2" collisionMass="3" collisionRadius="10" collisionRadiusXMulti="0.66" friction="1" id="3" name="Spiritual Reserves (Fettered)" numGridCollisionPoints="12" shadowSize="10" stageHP="0" variant="2113" subtype="8">
+    </entity>
+
+<entity anm2path="003.219_spiritual_reserves_moon.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionInterval="2" collisionMass="3" collisionRadius="10" collisionRadiusXMulti="0.66" friction="1" id="3" name="Spiritual Reserves (Permanent)" numGridCollisionPoints="12" shadowSize="10" stageHP="0" variant="2113" subtype="16">
+    </entity>
+
+    <!-- 2114 IS NOW VACANT -->
+	
+<entity anm2path="003.220_friendlysack.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Friendly Sack" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="2115">
+	</entity>
+	
+	<!-- Ultra flesh kid levels -->
+<entity anm2path="003.221_ultrafleshkid_l1.anm2" baseHP="0" boss="0" champion="0" collisionDamage="1.8" collisionInterval="3" collisionMass="3" collisionRadius="12" friction="1" id="3" name="Ultra Flesh Kid lvl 1" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="2116">
+	</entity>
+<entity anm2path="003.221_ultrafleshkid_l2.anm2" baseHP="0" boss="0" champion="0" collisionDamage="2.2" collisionInterval="3" collisionMass="3" collisionRadius="14" friction="1" id="3" name="Ultra Flesh Kid lvl 2" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="2117">
+	</entity>
+<entity anm2path="003.221_ultrafleshkid_l3.anm2" baseHP="0" boss="0" champion="0" collisionDamage="2.6" collisionInterval="3" collisionMass="3" collisionRadius="15" friction="1" id="3" name="Ultra Flesh Kid lvl 3" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="2118">
+	</entity>
+<entity anm2path="003.221_ultrafleshkid_l3_head.anm2" baseHP="0" boss="0" champion="0" collisionDamage="2.6" collisionInterval="3" collisionMass="3" collisionRadius="15" friction="1" id="3" name="Ultra Flesh Kid lvl 3 (head)" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="2119">
+	</entity>
+	
+<entity anm2path="003.222_placard.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="3" name="Handicapped Placard" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="2120" >
+	</entity>
+
+<entity anm2path="003.224_deadweight.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="16" friction="1" id="3" name="Dead Weight" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="2121" >
+	</entity>
+
+<entity anm2path="003.225_keepersannoyingfly.anm2" tags="cansacrifice fly" baseHP="0" boss="0" champion="0" collisionDamage="1.5" collisionInterval="2" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Keeper's Annoying Fly" numGridCollisionPoints="12" shadowSize="8" stageHP="0" variant="2122">
+    </entity>
+
+    <!-- BLOOD CLOTS
+        x Dauntless: tears are spectral and shielded
+        x Soiled: tears have a chance to turn enemy into poop
+        Enigma: the heart can't be "sucked out" via Sumptorium
+        Baleful: base eternal clot
+        Miser: base golden clot
+        x Empty: tears spawn flies on hit (Mulligan)
+        x Zealot: tears have a chance to apply fear or confusion
+        -->
+
+<entity anm2path="003.238.20_dauntless_clot.anm2" baseHP="15" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Blood Baby (Dauntless)" numGridCollisionPoints="12" shadowSize="10" stageHP="0" tags="cansacrifice" variant="238" subtype="20" />
+
+<entity anm2path="003.238.21_soiled_clot.anm2" baseHP="15" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Blood Baby (Soiled)" numGridCollisionPoints="12" shadowSize="10" stageHP="0" tags="cansacrifice" variant="238" subtype="21" />
+
+<entity anm2path="003.238.22_empty_clot.anm2" baseHP="15" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Blood Baby (Empty)" numGridCollisionPoints="12" shadowSize="10" stageHP="0" tags="cansacrifice" variant="238" subtype="22" />
+
+<entity anm2path="003.238.23_zealot_clot.anm2" baseHP="15" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Blood Baby (Zealot)" numGridCollisionPoints="12" shadowSize="10" stageHP="0" tags="cansacrifice" variant="238" subtype="23" />
+
+<entity anm2path="003.079.010_harlotfetus.anm2" baseHP="0" boss="0" champion="0" collisionDamage="3" collisionInterval="14" collisionMass="6" collisionRadius="13" friction="1" id="3" name="Harlot Fetus" numGridCollisionPoints="12" shadowSize="11" stageHP="0" variant="79" subtype="10" />
+
+<!-- TEAR VARIANTS -->
+
+<entity anm2path="002.120_ceremonial_blade_tear.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="8" collisionRadius="8" friction="1" id="2" name="Ceremonial Dagger Tear" numGridCollisionPoints="8" shadowSize="7" stageHP="0" variant="120" />
+
+<entity anm2path="002.121_sinners_heart_tear.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="8" collisionRadius="8" friction="1" id="2" name="Sinner's Heart Tear" numGridCollisionPoints="8" shadowSize="7" stageHP="0" variant="121" />
+
+<entity anm2path="002.122_corn_tear.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="8" collisionRadius="8" friction="1" id="2" name="Corn Tear" numGridCollisionPoints="8" shadowSize="7" stageHP="0" variant="122" />
+
+<entity anm2path="002.123_antimaterial_card_tear.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="8" collisionRadius="10" friction="1" id="2" name="Antimaterial Card Tear" numGridCollisionPoints="8" shadowSize="7" stageHP="0" variant="123" />
+
+<entity anm2path="002.124_rejected_baby_tear.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="8" collisionRadius="18" friction="1" id="2" name="Rejected Baby Tear" numGridCollisionPoints="8" shadowSize="8" stageHP="0" variant="124">
+	<gibs amount="10" blood="2" bone="1" eye="1" gut="3" large="0" />
+</entity>
+
+<entity anm2path="002.125_dogma_feather_tear.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="8" collisionRadius="8" friction="1" id="2" name="Dogma Feather Tear" numGridCollisionPoints="8" shadowSize="7" stageHP="0" variant="125" />
+
+<entity anm2path="002.126_valentines_card_tear.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="8" collisionRadius="10" friction="1" id="2" name="Valentine's Card Tear" numGridCollisionPoints="8" shadowSize="7" stageHP="0" variant="126" />
+
+<entity anm2path="002.127_key_to_the_heart_tear.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="8" collisionRadius="9" friction="1" id="2" name="Key to the Heart Tear" numGridCollisionPoints="8" shadowSize="7" stageHP="0" variant="127" />
+	
+    <!-- Enemy: Jewel Crawler -->
+<entity anm2path="894.10_jewel_crawler.anm2" shieldStrength="4" reroll="false" baseHP="15" boss="0" champion="0" stageHP="3" collisionDamage="2" collisionMass="8" collisionRadius="12" friction="1" id="894" name="Jewel Crawler (Random)" numGridCollisionPoints="8" shadowSize="8" variant="10" subtype="0" />
+
+    <!-- Christmas specials -->
+
+<!--entity anm2path="christmas_present.anm2" name="Christmas Gift" id="5" variant="69" collisionDamage="0" collisionMass="3" collisionRadius="16" friction="1" numGridCollisionPoints="24" shadowSize="16" subtype="103">
+    </entity-->
+
+<!--entity anm2path="006.335_stargazer_christmas.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="6" name="Stargazer (Christmas)" numGridCollisionPoints="24" shadowSize="15" stageHP="0" variant="335" subtype="1">
+        <gibs amount="6" blood="1" bone="1" eye="1" gut="1" large="0" />
+    </entity-->
+
+</entities>

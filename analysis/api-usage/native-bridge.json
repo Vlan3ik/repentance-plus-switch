@@ -1,0 +1,5992 @@
+{
+  "stock_cdefs": {
+    "declared_unique": 544,
+    "declared_names": [
+      "LC_ANM2__GetDefaultAnimationName",
+      "LC_ANM2__GetFilename",
+      "LC_ANM2__GetFrame",
+      "LC_ANM2__GetLayerCount",
+      "LC_ANM2__GetNullCount",
+      "LC_ANM2__GetOverlayFrame",
+      "LC_ANM2__IsEventTriggered",
+      "LC_ANM2__IsFinished",
+      "LC_ANM2__IsLoaded",
+      "LC_ANM2__IsOverlayFinished",
+      "LC_ANM2__IsOverlayPlaying",
+      "LC_ANM2__IsPlaying",
+      "LC_ANM2__Load",
+      "LC_ANM2__LoadGraphics",
+      "LC_ANM2__Play",
+      "LC_ANM2__PlayOverlay",
+      "LC_ANM2__PlayRandom",
+      "LC_ANM2__Reload",
+      "LC_ANM2__RemoveOverlay",
+      "LC_ANM2__Render",
+      "LC_ANM2__RenderLayer",
+      "LC_ANM2__ReplaceSpritesheet",
+      "LC_ANM2__Reset",
+      "LC_ANM2__SetAnimation",
+      "LC_ANM2__SetFrame",
+      "LC_ANM2__SetFrame2",
+      "LC_ANM2__SetLastFrame",
+      "LC_ANM2__SetLayerFrame",
+      "LC_ANM2__SetOverlayAnimation",
+      "LC_ANM2__SetOverlayFrame",
+      "LC_ANM2__SetOverlayFrame2",
+      "LC_ANM2__SetOverlayRenderPriority",
+      "LC_ANM2__Stop",
+      "LC_ANM2__Update",
+      "LC_ANM2__WasEventTriggered",
+      "LC_Entity_Player__AddBlackHearts",
+      "LC_Entity_Player__AddBlueFlies",
+      "LC_Entity_Player__AddBlueSpider",
+      "LC_Entity_Player__AddBombs",
+      "LC_Entity_Player__AddBrokenHearts",
+      "LC_Entity_Player__AddCacheFlags",
+      "LC_Entity_Player__AddCard",
+      "LC_Entity_Player__AddCoins",
+      "LC_Entity_Player__AddCollectible",
+      "LC_Entity_Player__AddEternalHearts",
+      "LC_Entity_Player__AddGoldenBomb",
+      "LC_Entity_Player__AddGoldenHearts",
+      "LC_Entity_Player__AddGoldenKey",
+      "LC_Entity_Player__AddHearts",
+      "LC_Entity_Player__AddJarFlies",
+      "LC_Entity_Player__AddJarHearts",
+      "LC_Entity_Player__AddKeys",
+      "LC_Entity_Player__AddMaxHearts",
+      "LC_Entity_Player__AddPill",
+      "LC_Entity_Player__AddPrettyFly",
+      "LC_Entity_Player__AddRottenHearts",
+      "LC_Entity_Player__AddSoulHearts",
+      "LC_Entity_Player__AddTrinket",
+      "LC_Entity_Player__AreOpposingShootDirectionsPressed",
+      "LC_Entity_Player__CanAddCollectible",
+      "LC_Entity_Player__CanPickBlackHearts",
+      "LC_Entity_Player__CanPickBoneHearts",
+      "LC_Entity_Player__CanPickGoldenHearts",
+      "LC_Entity_Player__CanPickRedHearts",
+      "LC_Entity_Player__CanPickSoulHearts",
+      "LC_Entity_Player__ClearCostumes",
+      "LC_Entity_Player__ClearTemporaryEffects",
+      "LC_Entity_Player__DischargeActiveItem",
+      "LC_Entity_Player__DonateLuck",
+      "LC_Entity_Player__DropCollectible",
+      "LC_Entity_Player__DropPocketItem",
+      "LC_Entity_Player__DropTrinket",
+      "LC_Entity_Player__EvaluateItems",
+      "LC_Entity_Player__FindActiveItem",
+      "LC_Entity_Player__FlushQueueItem",
+      "LC_Entity_Player__FullCharge",
+      "LC_Entity_Player__GetActiveCharge",
+      "LC_Entity_Player__GetActiveItem",
+      "LC_Entity_Player__GetActiveSubCharge",
+      "LC_Entity_Player__GetAimDirection",
+      "LC_Entity_Player__GetBatteryCharge",
+      "LC_Entity_Player__GetBlackHearts",
+      "LC_Entity_Player__GetBombFlags",
+      "LC_Entity_Player__GetBombVariant",
+      "LC_Entity_Player__GetBoneHearts",
+      "LC_Entity_Player__GetBrokenHearts",
+      "LC_Entity_Player__GetCard",
+      "LC_Entity_Player__GetCollectibleCount",
+      "LC_Entity_Player__GetCollectibleNum",
+      "LC_Entity_Player__GetEffectiveMaxHearts",
+      "LC_Entity_Player__GetEternalHearts",
+      "LC_Entity_Player__GetExtraLives",
+      "LC_Entity_Player__GetFireDirection",
+      "LC_Entity_Player__GetGoldenHearts",
+      "LC_Entity_Player__GetHeadDirection",
+      "LC_Entity_Player__GetHeartLimit",
+      "LC_Entity_Player__GetHearts",
+      "LC_Entity_Player__GetItemState",
+      "LC_Entity_Player__GetJarFlies",
+      "LC_Entity_Player__GetJarHearts",
+      "LC_Entity_Player__GetLastDirection",
+      "LC_Entity_Player__GetLuck",
+      "LC_Entity_Player__GetMaxHearts",
+      "LC_Entity_Player__GetMaxPocketItems",
+      "LC_Entity_Player__GetMaxTrinkets",
+      "LC_Entity_Player__GetMovementDirection",
+      "LC_Entity_Player__GetMovementInput",
+      "LC_Entity_Player__GetMovementVector",
+      "LC_Entity_Player__GetNPCTarget",
+      "LC_Entity_Player__GetName",
+      "LC_Entity_Player__GetNumBlueFlies",
+      "LC_Entity_Player__GetNumBlueSpiders",
+      "LC_Entity_Player__GetNumBombs",
+      "LC_Entity_Player__GetNumCoins",
+      "LC_Entity_Player__GetNumKeys",
+      "LC_Entity_Player__GetPill",
+      "LC_Entity_Player__GetPlayerType",
+      "LC_Entity_Player__GetRecentMovementVector",
+      "LC_Entity_Player__GetRottenHearts",
+      "LC_Entity_Player__GetShootingInput",
+      "LC_Entity_Player__GetSmoothBodyRotation",
+      "LC_Entity_Player__GetSoulHearts",
+      "LC_Entity_Player__GetSpeed",
+      "LC_Entity_Player__GetTearPoisonDamage",
+      "LC_Entity_Player__GetTearRangeModifier",
+      "LC_Entity_Player__GetTearsOffset",
+      "LC_Entity_Player__GetTrinket",
+      "LC_Entity_Player__GetTrinketMultiplier",
+      "LC_Entity_Player__GetVelocityBeforeUpdate",
+      "LC_Entity_Player__HasCollectible",
+      "LC_Entity_Player__HasFullHearts",
+      "LC_Entity_Player__HasFullHeartsSoulHearts",
+      "LC_Entity_Player__HasGoldenBomb",
+      "LC_Entity_Player__HasGoldenKey",
+      "LC_Entity_Player__HasPlayerForm",
+      "LC_Entity_Player__HasTrinket",
+      "LC_Entity_Player__IsBlackHeart",
+      "LC_Entity_Player__IsBoneHeart",
+      "LC_Entity_Player__IsItemQueueEmpty",
+      "LC_Entity_Player__NeedsCharge",
+      "LC_Entity_Player__RemoveBlackHeart",
+      "LC_Entity_Player__RemoveBlueFly",
+      "LC_Entity_Player__RemoveBlueSpider",
+      "LC_Entity_Player__RemoveCollectible",
+      "LC_Entity_Player__RemoveGoldenBomb",
+      "LC_Entity_Player__RemoveGoldenKey",
+      "LC_Entity_Player__RenderBody",
+      "LC_Entity_Player__RenderGlow",
+      "LC_Entity_Player__RenderHead",
+      "LC_Entity_Player__RenderTop",
+      "LC_Entity_Player__RespawnFamiliars",
+      "LC_Entity_Player__SetActiveCharge",
+      "LC_Entity_Player__SetCard",
+      "LC_Entity_Player__SetFullHearts",
+      "LC_Entity_Player__SetPill",
+      "LC_Entity_Player__SetTearsOffset",
+      "LC_Entity_Player__ThrowBlueSpider",
+      "LC_Entity_Player__TryHoldTrinket",
+      "LC_Entity_Player__TryRemoveTrinket",
+      "LC_Entity_Player__TryUseKey",
+      "LC_Entity_Player__UseActiveItem",
+      "LC_Entity__AddBurn",
+      "LC_Entity__AddCharmed",
+      "LC_Entity__AddConfusion",
+      "LC_Entity__AddEntityFlags",
+      "LC_Entity__AddFear",
+      "LC_Entity__AddFreeze",
+      "LC_Entity__AddHealth",
+      "LC_Entity__AddMidasFreeze",
+      "LC_Entity__AddPoison",
+      "LC_Entity__AddShrink",
+      "LC_Entity__AddSlowing",
+      "LC_Entity__AddVelocity",
+      "LC_Entity__BloodExplode",
+      "LC_Entity__CanShutDoors",
+      "LC_Entity__ClearEntityFlags",
+      "LC_Entity__CollidesWithGrid",
+      "LC_Entity__Die",
+      "LC_Entity__DoesEntityShareStatus",
+      "LC_Entity__Exists",
+      "LC_Entity__GetBossID",
+      "LC_Entity__GetChild",
+      "LC_Entity__GetCollisionDamage",
+      "LC_Entity__GetColor",
+      "LC_Entity__GetDefaultColor",
+      "LC_Entity__GetDepthOffset",
+      "LC_Entity__GetDropRNG",
+      "LC_Entity__GetDropSeed",
+      "LC_Entity__GetEntityCollisionClass",
+      "LC_Entity__GetEntityFlags",
+      "LC_Entity__GetFlipX",
+      "LC_Entity__GetFrameCount",
+      "LC_Entity__GetFriction",
+      "LC_Entity__GetGridCollisionClass",
+      "LC_Entity__GetHitPoints",
+      "LC_Entity__GetIndex",
+      "LC_Entity__GetInitSeed",
+      "LC_Entity__GetLastChild",
+      "LC_Entity__GetLastParent",
+      "LC_Entity__GetMass",
+      "LC_Entity__GetMaxHitPoints",
+      "LC_Entity__GetParent",
+      "LC_Entity__GetPosition",
+      "LC_Entity__GetPositionOffset",
+      "LC_Entity__GetRef",
+      "LC_Entity__GetRenderZOffset",
+      "LC_Entity__GetSize",
+      "LC_Entity__GetSizeMulti",
+      "LC_Entity__GetSpawnGridIndex",
+      "LC_Entity__GetSpawnerEntity",
+      "LC_Entity__GetSpawnerType",
+      "LC_Entity__GetSpawnerVariant",
+      "LC_Entity__GetSplatColor",
+      "LC_Entity__GetSprite",
+      "LC_Entity__GetSpriteOffset",
+      "LC_Entity__GetSpriteRotation",
+      "LC_Entity__GetSpriteScale",
+      "LC_Entity__GetSubType",
+      "LC_Entity__GetTarget",
+      "LC_Entity__GetTargetPosition",
+      "LC_Entity__GetType",
+      "LC_Entity__GetVariant",
+      "LC_Entity__GetVelocity",
+      "LC_Entity__GetVisible",
+      "LC_Entity__HasCommonParentWithEntity",
+      "LC_Entity__HasEntityFlags",
+      "LC_Entity__HasFullHealth",
+      "LC_Entity__HasMortalDamage",
+      "LC_Entity__IsActiveEnemy",
+      "LC_Entity__IsBoss",
+      "LC_Entity__IsDead",
+      "LC_Entity__IsEnemy",
+      "LC_Entity__IsEntityConnected",
+      "LC_Entity__IsFlying",
+      "LC_Entity__IsFrame",
+      "LC_Entity__IsInvincible",
+      "LC_Entity__IsVisible",
+      "LC_Entity__IsVulnerableEnemy",
+      "LC_Entity__Kill",
+      "LC_Entity__MultiplyFriction",
+      "LC_Entity__PostRender",
+      "LC_Entity__Remove",
+      "LC_Entity__RemoveStatusEffects",
+      "LC_Entity__Render",
+      "LC_Entity__RenderShadowLayer",
+      "LC_Entity__SetChild",
+      "LC_Entity__SetCollisionDamage",
+      "LC_Entity__SetColor",
+      "LC_Entity__SetDepthOffset",
+      "LC_Entity__SetEntityCollisionClass",
+      "LC_Entity__SetFlipX",
+      "LC_Entity__SetFriction",
+      "LC_Entity__SetGridCollisionClass",
+      "LC_Entity__SetHitPoints",
+      "LC_Entity__SetMass",
+      "LC_Entity__SetMaxHitPoints",
+      "LC_Entity__SetParent",
+      "LC_Entity__SetPosition",
+      "LC_Entity__SetPositionOffset",
+      "LC_Entity__SetRef",
+      "LC_Entity__SetRenderZOffset",
+      "LC_Entity__SetSize",
+      "LC_Entity__SetSizeMulti",
+      "LC_Entity__SetSpawnerEntity",
+      "LC_Entity__SetSpawnerType",
+      "LC_Entity__SetSpawnerVariant",
+      "LC_Entity__SetSplatColor",
+      "LC_Entity__SetSpriteFrame",
+      "LC_Entity__SetSpriteOffset",
+      "LC_Entity__SetSpriteOverlayFrame",
+      "LC_Entity__SetSpriteRotation",
+      "LC_Entity__SetSpriteScale",
+      "LC_Entity__SetSubType",
+      "LC_Entity__SetTarget",
+      "LC_Entity__SetTargetPosition",
+      "LC_Entity__SetVariant",
+      "LC_Entity__SetVelocity",
+      "LC_Entity__SetVisible",
+      "LC_Entity__TakeDamage",
+      "LC_Entity__Update",
+      "LC_LevelGenerator__CreateRoom",
+      "LC_RNG__Next",
+      "LC_RNG__RandomFloat",
+      "LC_RNG__RandomInt",
+      "LC_RNG__SetSeed",
+      "LL_Game__AddEncounteredBoss",
+      "LL_Game__AddPixelation",
+      "LL_Game__AddStageWithoutDamage",
+      "LL_Game__AddStageWithoutHeartsPicked",
+      "LL_Game__AddTreasureRoomsVisited",
+      "LL_Game__BombDamage",
+      "LL_Game__BombExplosionEffects",
+      "LL_Game__BombTearflagEffects",
+      "LL_Game__ButterBeanFart",
+      "LL_Game__ChangeRoom",
+      "LL_Game__CharmFart",
+      "LL_Game__ClearDonationModAngel",
+      "LL_Game__ClearDonationModGreed",
+      "LL_Game__ClearStagesWithoutDamage",
+      "LL_Game__ClearStagesWithoutHeartsPicked",
+      "LL_Game__Darken",
+      "LL_Game__DonateAngel",
+      "LL_Game__DonateGreed",
+      "LL_Game__End",
+      "LL_Game__Fadein",
+      "LL_Game__Fadeout",
+      "LL_Game__Fart",
+      "LL_Game__FinishChallenge",
+      "LL_Game__GetBlueWombParTime",
+      "LL_Game__GetBossRushParTime",
+      "LL_Game__GetChallenge",
+      "LL_Game__GetDarknessModifier",
+      "LL_Game__GetDevilRoomDeals",
+      "LL_Game__GetDifficulty",
+      "LL_Game__GetDonationModAngel",
+      "LL_Game__GetDonationModGreed",
+      "LL_Game__GetFont",
+      "LL_Game__GetFrameCount",
+      "LL_Game__GetGreedBossWaveNum",
+      "LL_Game__GetGreedWavesNum",
+      "LL_Game__GetLastDevilRoomStage",
+      "LL_Game__GetLastLevelWithDamage",
+      "LL_Game__GetLastLevelWithoutHalfHp",
+      "LL_Game__GetNearestPlayer",
+      "LL_Game__GetNumEncounteredBosses",
+      "LL_Game__GetNumPlayers",
+      "LL_Game__GetRandomPlayer",
+      "LL_Game__GetScreenShakeCountdown",
+      "LL_Game__GetScreenShakeOffset",
+      "LL_Game__GetStagesWithoutDamage",
+      "LL_Game__GetStagesWithoutHeartsPicked",
+      "LL_Game__GetStateFlag",
+      "LL_Game__GetTargetDarkness",
+      "LL_Game__GetTimeCounter",
+      "LL_Game__GetTreasureRoomVisitCount",
+      "LL_Game__GetVictoryLap",
+      "LL_Game__HasEncounteredBoss",
+      "LL_Game__HasHallucination",
+      "LL_Game__IsGreedMode",
+      "LL_Game__IsPaused",
+      "LL_Game__MoveToRandomRoom",
+      "LL_Game__NextVictoryLap",
+      "LL_Game__Render",
+      "LL_Game__RerollEnemy",
+      "LL_Game__RerollLevelCollectibles",
+      "LL_Game__RerollLevelPickups",
+      "LL_Game__SetBlueWombParTime",
+      "LL_Game__SetBossRushParTime",
+      "LL_Game__SetChallenge",
+      "LL_Game__SetDarknessModifier",
+      "LL_Game__SetLastDevilRoomStage",
+      "LL_Game__SetLastLevelWithDamage",
+      "LL_Game__SetLastLevelWithoutHalfHp",
+      "LL_Game__SetScreenShakeOffset",
+      "LL_Game__SetStateFlag",
+      "LL_Game__SetTimeCounter",
+      "LL_Game__ShakeScreen",
+      "LL_Game__ShowFortune",
+      "LL_Game__ShowHallucination",
+      "LL_Game__ShowRule",
+      "LL_Game__Spawn",
+      "LL_Game__SpawnParticles",
+      "LL_Game__StartRoomTransition",
+      "LL_Game__StartStageTransition",
+      "LL_Game__Update",
+      "LL_Game__UpdateStrangeAttractor",
+      "LL_HUD__HideItemText",
+      "LL_HUD__IsVisible",
+      "LL_HUD__SetVisible",
+      "LL_HUD__ShowFortuneText",
+      "LL_HUD__ShowItemText",
+      "LL_Input__GetActionValue",
+      "LL_Input__GetButtonValue",
+      "LL_Input__GetMousePos",
+      "LL_Input__IsActionPressed",
+      "LL_Input__IsActionTriggered",
+      "LL_Input__IsButtonPressed",
+      "LL_Input__IsButtonTriggered",
+      "LL_Input__IsMouseBtnPressed",
+      "LL_Isaac__AddPillEffectToPool",
+      "LL_Isaac__ConsoleOutput",
+      "LL_Isaac__CountBosses",
+      "LL_Isaac__CountEnemies",
+      "LL_Isaac__CountEntities",
+      "LL_Isaac__ExecuteCommand",
+      "LL_Isaac__FindByType",
+      "LL_Isaac__FindInRadius",
+      "LL_Isaac__GetCardIdByName",
+      "LL_Isaac__GetChallenge",
+      "LL_Isaac__GetChallengeIdByName",
+      "LL_Isaac__GetCostumeIdByPath",
+      "LL_Isaac__GetCurseIdByName",
+      "LL_Isaac__GetEntityTypeByName",
+      "LL_Isaac__GetEntityVariantByName",
+      "LL_Isaac__GetFrameCount",
+      "LL_Isaac__GetFreeNearPosition",
+      "LL_Isaac__GetItemIdByName",
+      "LL_Isaac__GetMusicIdByName",
+      "LL_Isaac__GetPillEffectByName",
+      "LL_Isaac__GetPlayer",
+      "LL_Isaac__GetPlayerTypeByName",
+      "LL_Isaac__GetPointScale",
+      "LL_Isaac__GetRandomPosition",
+      "LL_Isaac__GetScreenHeight",
+      "LL_Isaac__GetScreenWidth",
+      "LL_Isaac__GetSoundIdByName",
+      "LL_Isaac__GetTextWidth",
+      "LL_Isaac__GetTime",
+      "LL_Isaac__GetTrinketIdByName",
+      "LL_Isaac__RenderScaledText",
+      "LL_Isaac__RenderText",
+      "LL_Isaac__ScreenToWorld",
+      "LL_Isaac__ScreenToWorldDistance",
+      "LL_Isaac__WorldToRenderPosition",
+      "LL_Isaac__WorldToScreen",
+      "LL_Isaac__WorldToScreenDistance",
+      "LL_ItemPool__AddBibleUpgrade",
+      "LL_ItemPool__AddRoomBlacklist",
+      "LL_ItemPool__ForceAddPillEffect",
+      "LL_ItemPool__GetCard",
+      "LL_ItemPool__GetCardEx",
+      "LL_ItemPool__GetCollectible",
+      "LL_ItemPool__GetCollectibleFromList",
+      "LL_ItemPool__GetLastPool",
+      "LL_ItemPool__GetPill",
+      "LL_ItemPool__GetPillEffect",
+      "LL_ItemPool__GetPoolForRoom",
+      "LL_ItemPool__GetTrinket",
+      "LL_ItemPool__IdentifyPill",
+      "LL_ItemPool__IsInBlacklist",
+      "LL_ItemPool__IsInRoomBlacklist",
+      "LL_ItemPool__IsPillIdentified",
+      "LL_ItemPool__RemoveCollectible",
+      "LL_ItemPool__RemoveTrinket",
+      "LL_ItemPool__ResetRoomBlacklist",
+      "LL_ItemPool__ResetTrinkets",
+      "LL_Level__AddAngelRoomChance",
+      "LL_Level__AddCurse",
+      "LL_Level__ApplyBlueMapEffect",
+      "LL_Level__ApplyCompassEffect",
+      "LL_Level__ApplyMapEffect",
+      "LL_Level__CanOpenChallengeRoom",
+      "LL_Level__CanSpawnDevilRoom",
+      "LL_Level__CanStageHaveCurseOfLabyrinth",
+      "LL_Level__ChangeRoom",
+      "LL_Level__DisableDevilRoom",
+      "LL_Level__ForceHorsemanBoss",
+      "LL_Level__GetAbsoluteStage",
+      "LL_Level__GetAddAngelRoomChance",
+      "LL_Level__GetCanSeeEverything",
+      "LL_Level__GetCurrentRoomDesc",
+      "LL_Level__GetCurrentRoomIndex",
+      "LL_Level__GetCurseName",
+      "LL_Level__GetCurses",
+      "LL_Level__GetDevilAngelRoomRNG",
+      "LL_Level__GetDungeonPlacementSeed",
+      "LL_Level__GetDungeonReturnPosition",
+      "LL_Level__GetDungeonReturnRoomIndex",
+      "LL_Level__GetEnterDoor",
+      "LL_Level__GetEnterPosition",
+      "LL_Level__GetGreedModeWave",
+      "LL_Level__GetHeartPicked",
+      "LL_Level__GetLastBossRoomListIndex",
+      "LL_Level__GetLastRoomDesc",
+      "LL_Level__GetLeaveDoor",
+      "LL_Level__GetName",
+      "LL_Level__GetNonCompleteRoomIndex",
+      "LL_Level__GetPreviousRoomIndex",
+      "LL_Level__GetRandomRoomIndex",
+      "LL_Level__GetRoomByIdx",
+      "LL_Level__GetRoomCount",
+      "LL_Level__GetRooms",
+      "LL_Level__GetStage",
+      "LL_Level__GetStageType",
+      "LL_Level__GetStartingRoomIndex",
+      "LL_Level__GetStateFlag",
+      "LL_Level__HasBossChallenge",
+      "LL_Level__InitializeDevilAngelRoom",
+      "LL_Level__IsAltStage",
+      "LL_Level__IsDevilRoomDisabled",
+      "LL_Level__IsNextStageAvailable",
+      "LL_Level__PlaceRoom",
+      "LL_Level__QueryRoomTypeIndex",
+      "LL_Level__RemoveCompassEffect",
+      "LL_Level__RemoveCurse",
+      "LL_Level__RemoveCurses",
+      "LL_Level__SetCanSeeEverything",
+      "LL_Level__SetDungeonReturnPosition",
+      "LL_Level__SetDungeonReturnRoomIndex",
+      "LL_Level__SetEnterDoor",
+      "LL_Level__SetGreedModeWave",
+      "LL_Level__SetHeartPicked",
+      "LL_Level__SetLeaveDoor",
+      "LL_Level__SetNextStage",
+      "LL_Level__SetRedHeartDamage",
+      "LL_Level__SetStage",
+      "LL_Level__SetStateFlag",
+      "LL_Level__ShowMap",
+      "LL_Level__ShowName",
+      "LL_Level__UncoverHiddenDoor",
+      "LL_Level__Update",
+      "LL_Level__UpdateVisibility",
+      "LL_Music__Crossfade",
+      "LL_Music__Fadein",
+      "LL_Music__Fadeout",
+      "LL_Music__GetCurrentMusicID",
+      "LL_Music__GetQueuedMusicID",
+      "LL_Music__IsEnabled",
+      "LL_Music__IsLayerEnabled",
+      "LL_Music__Pause",
+      "LL_Music__PitchSlide",
+      "LL_Music__Play",
+      "LL_Music__Queue",
+      "LL_Music__ResetPitch",
+      "LL_Music__Resume",
+      "LL_Music__SetEnabled",
+      "LL_Music__SetLayerEnabled",
+      "LL_Music__UpdateVolume",
+      "LL_Music__VolumeSlide",
+      "LL_RoomConfig__GetRandomRoom",
+      "LL_RoomConfig__GetRoom",
+      "LL_RoomConfig__ResetRoomWeights",
+      "LL_SFX__AdjustPitch",
+      "LL_SFX__AdjustVolume",
+      "LL_SFX__GetAmbientSoundVolume",
+      "LL_SFX__IsPlaying",
+      "LL_SFX__Play",
+      "LL_SFX__Preload",
+      "LL_SFX__SetAmbientSound",
+      "LL_SFX__Stop",
+      "LL_SFX__StopLoopingSounds",
+      "L_DebugString",
+      "L_EnableCallback",
+      "L_Free",
+      "L_LevelGenerator",
+      "L_LevelGenerator__destructor",
+      "L_Mod_HasData",
+      "L_Mod_LoadData",
+      "L_Mod_RemoveData",
+      "L_Mod_SaveData",
+      "L_Random",
+      "L_RandomFloat",
+      "L_RandomU32",
+      "L_RandomUnitVector"
+    ],
+    "note": "The repository cdefs.lua contains 544 unique declarations; the often-quoted 531 is a version-dependent subset."
+  },
+  "stock_binding_refs": {
+    "unique": 533,
+    "names": [
+      "LC_ANM2__GetDefaultAnimationName",
+      "LC_ANM2__GetFilename",
+      "LC_ANM2__GetFrame",
+      "LC_ANM2__GetLayerCount",
+      "LC_ANM2__GetNullCount",
+      "LC_ANM2__GetOverlayFrame",
+      "LC_ANM2__IsEventTriggered",
+      "LC_ANM2__IsFinished",
+      "LC_ANM2__IsLoaded",
+      "LC_ANM2__IsOverlayFinished",
+      "LC_ANM2__IsOverlayPlaying",
+      "LC_ANM2__IsPlaying",
+      "LC_ANM2__Load",
+      "LC_ANM2__LoadGraphics",
+      "LC_ANM2__Play",
+      "LC_ANM2__PlayOverlay",
+      "LC_ANM2__PlayRandom",
+      "LC_ANM2__Reload",
+      "LC_ANM2__RemoveOverlay",
+      "LC_ANM2__Render",
+      "LC_ANM2__RenderLayer",
+      "LC_ANM2__ReplaceSpritesheet",
+      "LC_ANM2__Reset",
+      "LC_ANM2__SetAnimation",
+      "LC_ANM2__SetFrame",
+      "LC_ANM2__SetFrame2",
+      "LC_ANM2__SetLastFrame",
+      "LC_ANM2__SetLayerFrame",
+      "LC_ANM2__SetOverlayAnimation",
+      "LC_ANM2__SetOverlayFrame",
+      "LC_ANM2__SetOverlayFrame2",
+      "LC_ANM2__SetOverlayRenderPriority",
+      "LC_ANM2__Stop",
+      "LC_ANM2__Update",
+      "LC_ANM2__WasEventTriggered",
+      "LC_Entity_Player__AddBlackHearts",
+      "LC_Entity_Player__AddBlueFlies",
+      "LC_Entity_Player__AddBlueSpider",
+      "LC_Entity_Player__AddBombs",
+      "LC_Entity_Player__AddBrokenHearts",
+      "LC_Entity_Player__AddCacheFlags",
+      "LC_Entity_Player__AddCard",
+      "LC_Entity_Player__AddCoins",
+      "LC_Entity_Player__AddCollectible",
+      "LC_Entity_Player__AddEternalHearts",
+      "LC_Entity_Player__AddGoldenBomb",
+      "LC_Entity_Player__AddGoldenHearts",
+      "LC_Entity_Player__AddGoldenKey",
+      "LC_Entity_Player__AddHearts",
+      "LC_Entity_Player__AddJarFlies",
+      "LC_Entity_Player__AddJarHearts",
+      "LC_Entity_Player__AddKeys",
+      "LC_Entity_Player__AddMaxHearts",
+      "LC_Entity_Player__AddPill",
+      "LC_Entity_Player__AddPrettyFly",
+      "LC_Entity_Player__AddRottenHearts",
+      "LC_Entity_Player__AddSoulHearts",
+      "LC_Entity_Player__AddTrinket",
+      "LC_Entity_Player__AreOpposingShootDirectionsPressed",
+      "LC_Entity_Player__CanAddCollectible",
+      "LC_Entity_Player__CanPickBlackHearts",
+      "LC_Entity_Player__CanPickBoneHearts",
+      "LC_Entity_Player__CanPickGoldenHearts",
+      "LC_Entity_Player__CanPickRedHearts",
+      "LC_Entity_Player__CanPickSoulHearts",
+      "LC_Entity_Player__ClearCostumes",
+      "LC_Entity_Player__ClearTemporaryEffects",
+      "LC_Entity_Player__DischargeActiveItem",
+      "LC_Entity_Player__DonateLuck",
+      "LC_Entity_Player__DropCollectible",
+      "LC_Entity_Player__DropPocketItem",
+      "LC_Entity_Player__DropTrinket",
+      "LC_Entity_Player__EvaluateItems",
+      "LC_Entity_Player__FindActiveItem",
+      "LC_Entity_Player__FlushQueueItem",
+      "LC_Entity_Player__FullCharge",
+      "LC_Entity_Player__GetActiveCharge",
+      "LC_Entity_Player__GetActiveItem",
+      "LC_Entity_Player__GetActiveSubCharge",
+      "LC_Entity_Player__GetAimDirection",
+      "LC_Entity_Player__GetBatteryCharge",
+      "LC_Entity_Player__GetBlackHearts",
+      "LC_Entity_Player__GetBombFlags",
+      "LC_Entity_Player__GetBombVariant",
+      "LC_Entity_Player__GetBoneHearts",
+      "LC_Entity_Player__GetBrokenHearts",
+      "LC_Entity_Player__GetCard",
+      "LC_Entity_Player__GetCollectibleCount",
+      "LC_Entity_Player__GetCollectibleNum",
+      "LC_Entity_Player__GetEffectiveMaxHearts",
+      "LC_Entity_Player__GetEternalHearts",
+      "LC_Entity_Player__GetExtraLives",
+      "LC_Entity_Player__GetFireDirection",
+      "LC_Entity_Player__GetGoldenHearts",
+      "LC_Entity_Player__GetHeadDirection",
+      "LC_Entity_Player__GetHeartLimit",
+      "LC_Entity_Player__GetHearts",
+      "LC_Entity_Player__GetItemState",
+      "LC_Entity_Player__GetJarFlies",
+      "LC_Entity_Player__GetJarHearts",
+      "LC_Entity_Player__GetLastDirection",
+      "LC_Entity_Player__GetLuck",
+      "LC_Entity_Player__GetMaxHearts",
+      "LC_Entity_Player__GetMaxPocketItems",
+      "LC_Entity_Player__GetMaxTrinkets",
+      "LC_Entity_Player__GetMovementDirection",
+      "LC_Entity_Player__GetMovementInput",
+      "LC_Entity_Player__GetMovementVector",
+      "LC_Entity_Player__GetNPCTarget",
+      "LC_Entity_Player__GetName",
+      "LC_Entity_Player__GetNumBlueFlies",
+      "LC_Entity_Player__GetNumBlueSpiders",
+      "LC_Entity_Player__GetNumBombs",
+      "LC_Entity_Player__GetNumCoins",
+      "LC_Entity_Player__GetNumKeys",
+      "LC_Entity_Player__GetPill",
+      "LC_Entity_Player__GetPlayerType",
+      "LC_Entity_Player__GetRecentMovementVector",
+      "LC_Entity_Player__GetRottenHearts",
+      "LC_Entity_Player__GetShootingInput",
+      "LC_Entity_Player__GetSmoothBodyRotation",
+      "LC_Entity_Player__GetSoulHearts",
+      "LC_Entity_Player__GetSpeed",
+      "LC_Entity_Player__GetTearPoisonDamage",
+      "LC_Entity_Player__GetTearRangeModifier",
+      "LC_Entity_Player__GetTearsOffset",
+      "LC_Entity_Player__GetTrinket",
+      "LC_Entity_Player__GetTrinketMultiplier",
+      "LC_Entity_Player__GetVelocityBeforeUpdate",
+      "LC_Entity_Player__HasCollectible",
+      "LC_Entity_Player__HasFullHearts",
+      "LC_Entity_Player__HasFullHeartsSoulHearts",
+      "LC_Entity_Player__HasGoldenBomb",
+      "LC_Entity_Player__HasGoldenKey",
+      "LC_Entity_Player__HasPlayerForm",
+      "LC_Entity_Player__HasTrinket",
+      "LC_Entity_Player__IsBlackHeart",
+      "LC_Entity_Player__IsBoneHeart",
+      "LC_Entity_Player__IsItemQueueEmpty",
+      "LC_Entity_Player__NeedsCharge",
+      "LC_Entity_Player__RemoveBlackHeart",
+      "LC_Entity_Player__RemoveBlueFly",
+      "LC_Entity_Player__RemoveBlueSpider",
+      "LC_Entity_Player__RemoveCollectible",
+      "LC_Entity_Player__RemoveGoldenBomb",
+      "LC_Entity_Player__RemoveGoldenKey",
+      "LC_Entity_Player__RenderBody",
+      "LC_Entity_Player__RenderGlow",
+      "LC_Entity_Player__RenderHead",
+      "LC_Entity_Player__RenderTop",
+      "LC_Entity_Player__RespawnFamiliars",
+      "LC_Entity_Player__SetActiveCharge",
+      "LC_Entity_Player__SetCard",
+      "LC_Entity_Player__SetFullHearts",
+      "LC_Entity_Player__SetPill",
+      "LC_Entity_Player__SetTearsOffset",
+      "LC_Entity_Player__ThrowBlueSpider",
+      "LC_Entity_Player__TryHoldTrinket",
+      "LC_Entity_Player__TryRemoveTrinket",
+      "LC_Entity_Player__TryUseKey",
+      "LC_Entity_Player__UseActiveItem",
+      "LC_Entity__AddBurn",
+      "LC_Entity__AddCharmed",
+      "LC_Entity__AddConfusion",
+      "LC_Entity__AddEntityFlags",
+      "LC_Entity__AddFear",
+      "LC_Entity__AddFreeze",
+      "LC_Entity__AddHealth",
+      "LC_Entity__AddMidasFreeze",
+      "LC_Entity__AddPoison",
+      "LC_Entity__AddShrink",
+      "LC_Entity__AddSlowing",
+      "LC_Entity__AddVelocity",
+      "LC_Entity__BloodExplode",
+      "LC_Entity__CanShutDoors",
+      "LC_Entity__ClearEntityFlags",
+      "LC_Entity__CollidesWithGrid",
+      "LC_Entity__Die",
+      "LC_Entity__DoesEntityShareStatus",
+      "LC_Entity__Exists",
+      "LC_Entity__GetBossID",
+      "LC_Entity__GetChild",
+      "LC_Entity__GetCollisionDamage",
+      "LC_Entity__GetColor",
+      "LC_Entity__GetDefaultColor",
+      "LC_Entity__GetDepthOffset",
+      "LC_Entity__GetDropRNG",
+      "LC_Entity__GetDropSeed",
+      "LC_Entity__GetEntityCollisionClass",
+      "LC_Entity__GetEntityFlags",
+      "LC_Entity__GetFlipX",
+      "LC_Entity__GetFrameCount",
+      "LC_Entity__GetFriction",
+      "LC_Entity__GetGridCollisionClass",
+      "LC_Entity__GetHitPoints",
+      "LC_Entity__GetIndex",
+      "LC_Entity__GetInitSeed",
+      "LC_Entity__GetLastChild",
+      "LC_Entity__GetLastParent",
+      "LC_Entity__GetMass",
+      "LC_Entity__GetMaxHitPoints",
+      "LC_Entity__GetParent",
+      "LC_Entity__GetPosition",
+      "LC_Entity__GetPositionOffset",
+      "LC_Entity__GetRenderZOffset",
+      "LC_Entity__GetSize",
+      "LC_Entity__GetSizeMulti",
+      "LC_Entity__GetSpawnGridIndex",
+      "LC_Entity__GetSpawnerEntity",
+      "LC_Entity__GetSpawnerType",
+      "LC_Entity__GetSpawnerVariant",
+      "LC_Entity__GetSplatColor",
+      "LC_Entity__GetSprite",
+      "LC_Entity__GetSpriteOffset",
+      "LC_Entity__GetSpriteRotation",
+      "LC_Entity__GetSpriteScale",
+      "LC_Entity__GetSubType",
+      "LC_Entity__GetTarget",
+      "LC_Entity__GetTargetPosition",
+      "LC_Entity__GetType",
+      "LC_Entity__GetVariant",
+      "LC_Entity__GetVelocity",
+      "LC_Entity__GetVisible",
+      "LC_Entity__HasCommonParentWithEntity",
+      "LC_Entity__HasEntityFlags",
+      "LC_Entity__HasFullHealth",
+      "LC_Entity__HasMortalDamage",
+      "LC_Entity__IsActiveEnemy",
+      "LC_Entity__IsBoss",
+      "LC_Entity__IsDead",
+      "LC_Entity__IsEnemy",
+      "LC_Entity__IsEntityConnected",
+      "LC_Entity__IsFlying",
+      "LC_Entity__IsFrame",
+      "LC_Entity__IsInvincible",
+      "LC_Entity__IsVisible",
+      "LC_Entity__IsVulnerableEnemy",
+      "LC_Entity__Kill",
+      "LC_Entity__MultiplyFriction",
+      "LC_Entity__PostRender",
+      "LC_Entity__Remove",
+      "LC_Entity__RemoveStatusEffects",
+      "LC_Entity__Render",
+      "LC_Entity__RenderShadowLayer",
+      "LC_Entity__SetChild",
+      "LC_Entity__SetCollisionDamage",
+      "LC_Entity__SetColor",
+      "LC_Entity__SetDepthOffset",
+      "LC_Entity__SetEntityCollisionClass",
+      "LC_Entity__SetFlipX",
+      "LC_Entity__SetFriction",
+      "LC_Entity__SetGridCollisionClass",
+      "LC_Entity__SetHitPoints",
+      "LC_Entity__SetMass",
+      "LC_Entity__SetMaxHitPoints",
+      "LC_Entity__SetParent",
+      "LC_Entity__SetPosition",
+      "LC_Entity__SetPositionOffset",
+      "LC_Entity__SetRenderZOffset",
+      "LC_Entity__SetSize",
+      "LC_Entity__SetSizeMulti",
+      "LC_Entity__SetSpawnerEntity",
+      "LC_Entity__SetSpawnerType",
+      "LC_Entity__SetSpawnerVariant",
+      "LC_Entity__SetSplatColor",
+      "LC_Entity__SetSpriteFrame",
+      "LC_Entity__SetSpriteOffset",
+      "LC_Entity__SetSpriteOverlayFrame",
+      "LC_Entity__SetSpriteRotation",
+      "LC_Entity__SetSpriteScale",
+      "LC_Entity__SetSubType",
+      "LC_Entity__SetTarget",
+      "LC_Entity__SetTargetPosition",
+      "LC_Entity__SetVariant",
+      "LC_Entity__SetVelocity",
+      "LC_Entity__SetVisible",
+      "LC_Entity__TakeDamage",
+      "LC_Entity__Update",
+      "LC_LevelGenerator__CreateRoom",
+      "LL_Game__AddEncounteredBoss",
+      "LL_Game__AddPixelation",
+      "LL_Game__AddStageWithoutDamage",
+      "LL_Game__AddStageWithoutHeartsPicked",
+      "LL_Game__AddTreasureRoomsVisited",
+      "LL_Game__BombDamage",
+      "LL_Game__BombExplosionEffects",
+      "LL_Game__BombTearflagEffects",
+      "LL_Game__ButterBeanFart",
+      "LL_Game__ChangeRoom",
+      "LL_Game__CharmFart",
+      "LL_Game__ClearDonationModAngel",
+      "LL_Game__ClearDonationModGreed",
+      "LL_Game__ClearStagesWithoutDamage",
+      "LL_Game__ClearStagesWithoutHeartsPicked",
+      "LL_Game__Darken",
+      "LL_Game__DonateAngel",
+      "LL_Game__DonateGreed",
+      "LL_Game__End",
+      "LL_Game__Fadein",
+      "LL_Game__Fadeout",
+      "LL_Game__Fart",
+      "LL_Game__FinishChallenge",
+      "LL_Game__GetBlueWombParTime",
+      "LL_Game__GetBossRushParTime",
+      "LL_Game__GetChallenge",
+      "LL_Game__GetDarknessModifier",
+      "LL_Game__GetDevilRoomDeals",
+      "LL_Game__GetDifficulty",
+      "LL_Game__GetDonationModAngel",
+      "LL_Game__GetDonationModGreed",
+      "LL_Game__GetFont",
+      "LL_Game__GetFrameCount",
+      "LL_Game__GetGreedBossWaveNum",
+      "LL_Game__GetGreedWavesNum",
+      "LL_Game__GetLastDevilRoomStage",
+      "LL_Game__GetLastLevelWithDamage",
+      "LL_Game__GetLastLevelWithoutHalfHp",
+      "LL_Game__GetNearestPlayer",
+      "LL_Game__GetNumEncounteredBosses",
+      "LL_Game__GetNumPlayers",
+      "LL_Game__GetRandomPlayer",
+      "LL_Game__GetScreenShakeCountdown",
+      "LL_Game__GetScreenShakeOffset",
+      "LL_Game__GetStagesWithoutDamage",
+      "LL_Game__GetStagesWithoutHeartsPicked",
+      "LL_Game__GetStateFlag",
+      "LL_Game__GetTargetDarkness",
+      "LL_Game__GetTimeCounter",
+      "LL_Game__GetTreasureRoomVisitCount",
+      "LL_Game__GetVictoryLap",
+      "LL_Game__HasEncounteredBoss",
+      "LL_Game__HasHallucination",
+      "LL_Game__IsGreedMode",
+      "LL_Game__IsPaused",
+      "LL_Game__MoveToRandomRoom",
+      "LL_Game__NextVictoryLap",
+      "LL_Game__Render",
+      "LL_Game__RerollEnemy",
+      "LL_Game__RerollLevelCollectibles",
+      "LL_Game__RerollLevelPickups",
+      "LL_Game__SetBlueWombParTime",
+      "LL_Game__SetBossRushParTime",
+      "LL_Game__SetChallenge",
+      "LL_Game__SetDarknessModifier",
+      "LL_Game__SetLastDevilRoomStage",
+      "LL_Game__SetLastLevelWithDamage",
+      "LL_Game__SetLastLevelWithoutHalfHp",
+      "LL_Game__SetScreenShakeOffset",
+      "LL_Game__SetStateFlag",
+      "LL_Game__SetTimeCounter",
+      "LL_Game__ShakeScreen",
+      "LL_Game__ShowFortune",
+      "LL_Game__ShowHallucination",
+      "LL_Game__ShowRule",
+      "LL_Game__Spawn",
+      "LL_Game__SpawnParticles",
+      "LL_Game__StartRoomTransition",
+      "LL_Game__StartStageTransition",
+      "LL_Game__Update",
+      "LL_Game__UpdateStrangeAttractor",
+      "LL_HUD__HideItemText",
+      "LL_HUD__IsVisible",
+      "LL_HUD__SetVisible",
+      "LL_HUD__ShowFortuneText",
+      "LL_HUD__ShowItemText",
+      "LL_Input__GetActionValue",
+      "LL_Input__GetButtonValue",
+      "LL_Input__GetMousePos",
+      "LL_Input__IsActionPressed",
+      "LL_Input__IsActionTriggered",
+      "LL_Input__IsButtonPressed",
+      "LL_Input__IsButtonTriggered",
+      "LL_Input__IsMouseBtnPressed",
+      "LL_Isaac__AddPillEffectToPool",
+      "LL_Isaac__ConsoleOutput",
+      "LL_Isaac__CountBosses",
+      "LL_Isaac__CountEnemies",
+      "LL_Isaac__CountEntities",
+      "LL_Isaac__ExecuteCommand",
+      "LL_Isaac__GetCardIdByName",
+      "LL_Isaac__GetChallenge",
+      "LL_Isaac__GetChallengeIdByName",
+      "LL_Isaac__GetCostumeIdByPath",
+      "LL_Isaac__GetCurseIdByName",
+      "LL_Isaac__GetEntityTypeByName",
+      "LL_Isaac__GetEntityVariantByName",
+      "LL_Isaac__GetFrameCount",
+      "LL_Isaac__GetFreeNearPosition",
+      "LL_Isaac__GetItemIdByName",
+      "LL_Isaac__GetMusicIdByName",
+      "LL_Isaac__GetPillEffectByName",
+      "LL_Isaac__GetPlayer",
+      "LL_Isaac__GetPlayerTypeByName",
+      "LL_Isaac__GetPointScale",
+      "LL_Isaac__GetRandomPosition",
+      "LL_Isaac__GetScreenHeight",
+      "LL_Isaac__GetScreenWidth",
+      "LL_Isaac__GetSoundIdByName",
+      "LL_Isaac__GetTextWidth",
+      "LL_Isaac__GetTime",
+      "LL_Isaac__GetTrinketIdByName",
+      "LL_Isaac__RenderScaledText",
+      "LL_Isaac__RenderText",
+      "LL_Isaac__ScreenToWorld",
+      "LL_Isaac__ScreenToWorldDistance",
+      "LL_Isaac__WorldToRenderPosition",
+      "LL_Isaac__WorldToScreen",
+      "LL_Isaac__WorldToScreenDistance",
+      "LL_ItemPool__AddBibleUpgrade",
+      "LL_ItemPool__AddRoomBlacklist",
+      "LL_ItemPool__ForceAddPillEffect",
+      "LL_ItemPool__GetCard",
+      "LL_ItemPool__GetCardEx",
+      "LL_ItemPool__GetCollectible",
+      "LL_ItemPool__GetCollectibleFromList",
+      "LL_ItemPool__GetLastPool",
+      "LL_ItemPool__GetPill",
+      "LL_ItemPool__GetPillEffect",
+      "LL_ItemPool__GetPoolForRoom",
+      "LL_ItemPool__GetTrinket",
+      "LL_ItemPool__IdentifyPill",
+      "LL_ItemPool__IsInBlacklist",
+      "LL_ItemPool__IsInRoomBlacklist",
+      "LL_ItemPool__IsPillIdentified",
+      "LL_ItemPool__RemoveCollectible",
+      "LL_ItemPool__RemoveTrinket",
+      "LL_ItemPool__ResetRoomBlacklist",
+      "LL_ItemPool__ResetTrinkets",
+      "LL_Level__AddAngelRoomChance",
+      "LL_Level__AddCurse",
+      "LL_Level__ApplyBlueMapEffect",
+      "LL_Level__ApplyCompassEffect",
+      "LL_Level__ApplyMapEffect",
+      "LL_Level__CanOpenChallengeRoom",
+      "LL_Level__CanSpawnDevilRoom",
+      "LL_Level__CanStageHaveCurseOfLabyrinth",
+      "LL_Level__ChangeRoom",
+      "LL_Level__DisableDevilRoom",
+      "LL_Level__ForceHorsemanBoss",
+      "LL_Level__GetAbsoluteStage",
+      "LL_Level__GetAddAngelRoomChance",
+      "LL_Level__GetCanSeeEverything",
+      "LL_Level__GetCurrentRoomDesc",
+      "LL_Level__GetCurrentRoomIndex",
+      "LL_Level__GetCurseName",
+      "LL_Level__GetCurses",
+      "LL_Level__GetDevilAngelRoomRNG",
+      "LL_Level__GetDungeonPlacementSeed",
+      "LL_Level__GetDungeonReturnPosition",
+      "LL_Level__GetDungeonReturnRoomIndex",
+      "LL_Level__GetEnterDoor",
+      "LL_Level__GetEnterPosition",
+      "LL_Level__GetGreedModeWave",
+      "LL_Level__GetHeartPicked",
+      "LL_Level__GetLastBossRoomListIndex",
+      "LL_Level__GetLastRoomDesc",
+      "LL_Level__GetLeaveDoor",
+      "LL_Level__GetName",
+      "LL_Level__GetNonCompleteRoomIndex",
+      "LL_Level__GetPreviousRoomIndex",
+      "LL_Level__GetRandomRoomIndex",
+      "LL_Level__GetRoomByIdx",
+      "LL_Level__GetRoomCount",
+      "LL_Level__GetStage",
+      "LL_Level__GetStageType",
+      "LL_Level__GetStartingRoomIndex",
+      "LL_Level__GetStateFlag",
+      "LL_Level__HasBossChallenge",
+      "LL_Level__InitializeDevilAngelRoom",
+      "LL_Level__IsAltStage",
+      "LL_Level__IsDevilRoomDisabled",
+      "LL_Level__IsNextStageAvailable",
+      "LL_Level__PlaceRoom",
+      "LL_Level__QueryRoomTypeIndex",
+      "LL_Level__RemoveCompassEffect",
+      "LL_Level__RemoveCurse",
+      "LL_Level__RemoveCurses",
+      "LL_Level__SetCanSeeEverything",
+      "LL_Level__SetDungeonReturnPosition",
+      "LL_Level__SetDungeonReturnRoomIndex",
+      "LL_Level__SetEnterDoor",
+      "LL_Level__SetGreedModeWave",
+      "LL_Level__SetHeartPicked",
+      "LL_Level__SetLeaveDoor",
+      "LL_Level__SetNextStage",
+      "LL_Level__SetRedHeartDamage",
+      "LL_Level__SetStage",
+      "LL_Level__SetStateFlag",
+      "LL_Level__ShowMap",
+      "LL_Level__ShowName",
+      "LL_Level__UncoverHiddenDoor",
+      "LL_Level__Update",
+      "LL_Level__UpdateVisibility",
+      "LL_Music__Crossfade",
+      "LL_Music__Fadein",
+      "LL_Music__Fadeout",
+      "LL_Music__GetCurrentMusicID",
+      "LL_Music__GetQueuedMusicID",
+      "LL_Music__IsEnabled",
+      "LL_Music__IsLayerEnabled",
+      "LL_Music__Pause",
+      "LL_Music__PitchSlide",
+      "LL_Music__Play",
+      "LL_Music__Queue",
+      "LL_Music__ResetPitch",
+      "LL_Music__Resume",
+      "LL_Music__SetEnabled",
+      "LL_Music__SetLayerEnabled",
+      "LL_Music__UpdateVolume",
+      "LL_Music__VolumeSlide",
+      "LL_RoomConfig__GetRandomRoom",
+      "LL_RoomConfig__GetRoom",
+      "LL_RoomConfig__ResetRoomWeights",
+      "LL_SFX__AdjustPitch",
+      "LL_SFX__AdjustVolume",
+      "LL_SFX__GetAmbientSoundVolume",
+      "LL_SFX__IsPlaying",
+      "LL_SFX__Play",
+      "LL_SFX__Preload",
+      "LL_SFX__SetAmbientSound",
+      "LL_SFX__Stop",
+      "LL_SFX__StopLoopingSounds",
+      "L_DebugString",
+      "L_EnableCallback",
+      "L_Free",
+      "L_Mod_HasData",
+      "L_Mod_LoadData",
+      "L_Mod_RemoveData",
+      "L_Mod_SaveData",
+      "L_Random",
+      "L_RandomFloat",
+      "L_RandomU32",
+      "L_RandomUnitVector"
+    ]
+  },
+  "closure": {
+    "required_unique": 200,
+    "required_names": [
+      "LC_ANM2__GetFrame",
+      "LC_ANM2__IsEventTriggered",
+      "LC_ANM2__IsFinished",
+      "LC_ANM2__IsPlaying",
+      "LC_ANM2__Load",
+      "LC_ANM2__LoadGraphics",
+      "LC_ANM2__Play",
+      "LC_ANM2__Render",
+      "LC_ANM2__RenderLayer",
+      "LC_ANM2__ReplaceSpritesheet",
+      "LC_ANM2__Reset",
+      "LC_ANM2__SetFrame",
+      "LC_ANM2__SetFrame2",
+      "LC_ANM2__Stop",
+      "LC_ANM2__Update",
+      "LC_ANM2__WasEventTriggered",
+      "LC_Entity_Player__AddBlackHearts",
+      "LC_Entity_Player__AddBombs",
+      "LC_Entity_Player__AddBrokenHearts",
+      "LC_Entity_Player__AddCacheFlags",
+      "LC_Entity_Player__AddCard",
+      "LC_Entity_Player__AddCoins",
+      "LC_Entity_Player__AddCollectible",
+      "LC_Entity_Player__AddEternalHearts",
+      "LC_Entity_Player__AddGoldenHearts",
+      "LC_Entity_Player__AddHearts",
+      "LC_Entity_Player__AddJarHearts",
+      "LC_Entity_Player__AddKeys",
+      "LC_Entity_Player__AddMaxHearts",
+      "LC_Entity_Player__AddPill",
+      "LC_Entity_Player__AddRottenHearts",
+      "LC_Entity_Player__AddSoulHearts",
+      "LC_Entity_Player__AddTrinket",
+      "LC_Entity_Player__CanPickBlackHearts",
+      "LC_Entity_Player__CanPickBoneHearts",
+      "LC_Entity_Player__CanPickGoldenHearts",
+      "LC_Entity_Player__CanPickRedHearts",
+      "LC_Entity_Player__CanPickSoulHearts",
+      "LC_Entity_Player__DischargeActiveItem",
+      "LC_Entity_Player__EvaluateItems",
+      "LC_Entity_Player__FlushQueueItem",
+      "LC_Entity_Player__FullCharge",
+      "LC_Entity_Player__GetActiveCharge",
+      "LC_Entity_Player__GetActiveItem",
+      "LC_Entity_Player__GetAimDirection",
+      "LC_Entity_Player__GetBlackHearts",
+      "LC_Entity_Player__GetBoneHearts",
+      "LC_Entity_Player__GetBrokenHearts",
+      "LC_Entity_Player__GetCard",
+      "LC_Entity_Player__GetCollectibleNum",
+      "LC_Entity_Player__GetEffectiveMaxHearts",
+      "LC_Entity_Player__GetEternalHearts",
+      "LC_Entity_Player__GetExtraLives",
+      "LC_Entity_Player__GetFireDirection",
+      "LC_Entity_Player__GetGoldenHearts",
+      "LC_Entity_Player__GetHeadDirection",
+      "LC_Entity_Player__GetHeartLimit",
+      "LC_Entity_Player__GetHearts",
+      "LC_Entity_Player__GetJarHearts",
+      "LC_Entity_Player__GetMaxHearts",
+      "LC_Entity_Player__GetMaxTrinkets",
+      "LC_Entity_Player__GetMovementDirection",
+      "LC_Entity_Player__GetMovementInput",
+      "LC_Entity_Player__GetNumBombs",
+      "LC_Entity_Player__GetNumCoins",
+      "LC_Entity_Player__GetNumKeys",
+      "LC_Entity_Player__GetPill",
+      "LC_Entity_Player__GetPlayerType",
+      "LC_Entity_Player__GetRottenHearts",
+      "LC_Entity_Player__GetSoulHearts",
+      "LC_Entity_Player__GetTrinket",
+      "LC_Entity_Player__GetTrinketMultiplier",
+      "LC_Entity_Player__HasCollectible",
+      "LC_Entity_Player__HasFullHearts",
+      "LC_Entity_Player__HasGoldenBomb",
+      "LC_Entity_Player__HasGoldenKey",
+      "LC_Entity_Player__HasPlayerForm",
+      "LC_Entity_Player__HasTrinket",
+      "LC_Entity_Player__IsBlackHeart",
+      "LC_Entity_Player__IsBoneHeart",
+      "LC_Entity_Player__NeedsCharge",
+      "LC_Entity_Player__RemoveBlackHeart",
+      "LC_Entity_Player__RemoveCollectible",
+      "LC_Entity_Player__RemoveGoldenBomb",
+      "LC_Entity_Player__RemoveGoldenKey",
+      "LC_Entity_Player__SetActiveCharge",
+      "LC_Entity_Player__SetCard",
+      "LC_Entity_Player__SetFullHearts",
+      "LC_Entity_Player__SetPill",
+      "LC_Entity_Player__ThrowBlueSpider",
+      "LC_Entity_Player__TryRemoveTrinket",
+      "LC_Entity_Player__UseActiveItem",
+      "LC_Entity__AddBurn",
+      "LC_Entity__AddCharmed",
+      "LC_Entity__AddConfusion",
+      "LC_Entity__AddEntityFlags",
+      "LC_Entity__AddFear",
+      "LC_Entity__AddFreeze",
+      "LC_Entity__AddHealth",
+      "LC_Entity__AddMidasFreeze",
+      "LC_Entity__AddPoison",
+      "LC_Entity__AddShrink",
+      "LC_Entity__AddSlowing",
+      "LC_Entity__AddVelocity",
+      "LC_Entity__ClearEntityFlags",
+      "LC_Entity__CollidesWithGrid",
+      "LC_Entity__Die",
+      "LC_Entity__GetDropRNG",
+      "LC_Entity__GetFrameCount",
+      "LC_Entity__GetSprite",
+      "LC_Entity__GetType",
+      "LC_Entity__HasEntityFlags",
+      "LC_Entity__HasMortalDamage",
+      "LC_Entity__IsActiveEnemy",
+      "LC_Entity__IsBoss",
+      "LC_Entity__IsDead",
+      "LC_Entity__IsVulnerableEnemy",
+      "LC_Entity__Kill",
+      "LC_Entity__Remove",
+      "LC_Entity__Render",
+      "LC_Entity__SetColor",
+      "LC_Entity__TakeDamage",
+      "LC_Entity__Update",
+      "LL_Game__CharmFart",
+      "LL_Game__ClearStagesWithoutHeartsPicked",
+      "LL_Game__Fart",
+      "LL_Game__GetChallenge",
+      "LL_Game__GetFrameCount",
+      "LL_Game__GetNumPlayers",
+      "LL_Game__GetStateFlag",
+      "LL_Game__IsPaused",
+      "LL_Game__Render",
+      "LL_Game__SetStateFlag",
+      "LL_Game__ShakeScreen",
+      "LL_Game__ShowHallucination",
+      "LL_Game__Spawn",
+      "LL_Game__StartRoomTransition",
+      "LL_Game__Update",
+      "LL_Input__IsActionTriggered",
+      "LL_Input__IsButtonPressed",
+      "LL_Input__IsButtonTriggered",
+      "LL_Isaac__ConsoleOutput",
+      "LL_Isaac__CountBosses",
+      "LL_Isaac__CountEnemies",
+      "LL_Isaac__ExecuteCommand",
+      "LL_Isaac__FindByType",
+      "LL_Isaac__FindInRadius",
+      "LL_Isaac__GetCardIdByName",
+      "LL_Isaac__GetChallenge",
+      "LL_Isaac__GetChallengeIdByName",
+      "LL_Isaac__GetCostumeIdByPath",
+      "LL_Isaac__GetEntityTypeByName",
+      "LL_Isaac__GetEntityVariantByName",
+      "LL_Isaac__GetFrameCount",
+      "LL_Isaac__GetFreeNearPosition",
+      "LL_Isaac__GetItemIdByName",
+      "LL_Isaac__GetPillEffectByName",
+      "LL_Isaac__GetPlayer",
+      "LL_Isaac__GetRandomPosition",
+      "LL_Isaac__GetScreenHeight",
+      "LL_Isaac__GetScreenWidth",
+      "LL_Isaac__GetSoundIdByName",
+      "LL_Isaac__GetTrinketIdByName",
+      "LL_Isaac__RenderScaledText",
+      "LL_Isaac__RenderText",
+      "LL_Isaac__WorldToRenderPosition",
+      "LL_Isaac__WorldToScreen",
+      "LL_ItemPool__GetCard",
+      "LL_ItemPool__GetPill",
+      "LL_ItemPool__GetTrinket",
+      "LL_ItemPool__RemoveCollectible",
+      "LL_Level__GetCurrentRoomDesc",
+      "LL_Level__GetCurrentRoomIndex",
+      "LL_Level__GetCurses",
+      "LL_Level__GetRoomByIdx",
+      "LL_Level__GetStage",
+      "LL_Level__GetStageType",
+      "LL_Level__GetStartingRoomIndex",
+      "LL_Level__GetStateFlag",
+      "LL_Level__QueryRoomTypeIndex",
+      "LL_Level__RemoveCurses",
+      "LL_Level__SetStateFlag",
+      "LL_Level__Update",
+      "LL_Level__UpdateVisibility",
+      "LL_Music__Play",
+      "LL_RoomConfig__GetRoom",
+      "LL_SFX__IsPlaying",
+      "LL_SFX__Play",
+      "LL_SFX__Stop",
+      "L_DebugString",
+      "L_EnableCallback",
+      "L_Free",
+      "L_Mod_HasData",
+      "L_Mod_LoadData",
+      "L_Mod_RemoveData",
+      "L_Mod_SaveData",
+      "L_Random",
+      "L_RandomFloat",
+      "L_RandomU32",
+      "L_RandomUnitVector"
+    ],
+    "occurrence_weight": {
+      "LL_Game__Spawn": 408,
+      "LL_Isaac__GetItemIdByName": 168,
+      "LC_Entity_Player__HasCollectible": 164,
+      "LC_Entity_Player__GetPlayerType": 155,
+      "LL_Isaac__GetPlayer": 118,
+      "LC_ANM2__Play": 114,
+      "LL_Music__Play": 114,
+      "LL_SFX__Play": 114,
+      "LL_Isaac__GetSoundIdByName": 112,
+      "LL_Isaac__FindByType": 87,
+      "LC_Entity__GetSprite": 85,
+      "LL_Isaac__GetEntityVariantByName": 82,
+      "LL_Isaac__GetCardIdByName": 80,
+      "L_RandomFloat": 76,
+      "L_EnableCallback": 69,
+      "LC_Entity__AddHealth": 68,
+      "LL_Isaac__GetFrameCount": 68,
+      "LC_Entity_Player__HasTrinket": 64,
+      "LC_ANM2__Load": 60,
+      "LC_Entity__GetFrameCount": 60,
+      "LL_Game__GetFrameCount": 60,
+      "LC_Entity__Remove": 47,
+      "LL_Isaac__GetTrinketIdByName": 46,
+      "LC_Entity_Player__AddCacheFlags": 45,
+      "LL_RoomConfig__GetRoom": 44,
+      "LC_Entity_Player__GetHearts": 42,
+      "LL_Isaac__ExecuteCommand": 42,
+      "LC_Entity_Player__EvaluateItems": 38,
+      "LC_Entity_Player__GetMaxHearts": 38,
+      "LC_Entity_Player__GetSoulHearts": 36,
+      "LL_Isaac__GetFreeNearPosition": 36,
+      "LL_Game__GetNumPlayers": 34,
+      "LC_Entity_Player__AddHearts": 31,
+      "LC_Entity_Player__GetBoneHearts": 30,
+      "LL_Isaac__FindInRadius": 30,
+      "LC_Entity_Player__GetActiveItem": 28,
+      "LC_Entity__GetType": 28,
+      "LC_Entity__TakeDamage": 26,
+      "LC_Entity_Player__GetActiveCharge": 25,
+      "LC_Entity_Player__GetBrokenHearts": 25,
+      "LC_Entity_Player__UseActiveItem": 23,
+      "LC_Entity_Player__CanPickRedHearts": 22,
+      "LL_Isaac__GetChallenge": 22,
+      "LC_Entity_Player__GetTrinketMultiplier": 21,
+      "LC_Entity_Player__RemoveCollectible": 21,
+      "LL_ItemPool__RemoveCollectible": 21,
+      "L_DebugString": 21,
+      "LC_ANM2__Render": 20,
+      "LC_Entity__Render": 20,
+      "LL_Game__Render": 20,
+      "LC_Entity_Player__GetFireDirection": 19,
+      "LC_ANM2__IsPlaying": 18,
+      "LL_SFX__IsPlaying": 18,
+      "LC_Entity_Player__GetGoldenHearts": 17,
+      "LC_Entity_Player__GetRottenHearts": 17,
+      "LL_Input__IsButtonTriggered": 17,
+      "LC_Entity_Player__AddCollectible": 16,
+      "LC_Entity_Player__AddMaxHearts": 15,
+      "LC_Entity_Player__AddSoulHearts": 15,
+      "LL_Level__GetStage": 15,
+      "LC_Entity_Player__GetEternalHearts": 14,
+      "LC_Entity__IsVulnerableEnemy": 14,
+      "LL_Level__GetCurrentRoomDesc": 14,
+      "LC_ANM2__Update": 13,
+      "LC_Entity_Player__GetNumCoins": 13,
+      "LC_Entity_Player__SetActiveCharge": 13,
+      "LC_Entity__Update": 13,
+      "LL_Game__Update": 13,
+      "LL_Level__GetCurrentRoomIndex": 13,
+      "LL_Level__Update": 13,
+      "LC_Entity_Player__GetEffectiveMaxHearts": 12,
+      "LC_Entity_Player__HasPlayerForm": 12,
+      "LC_Entity__IsActiveEnemy": 12,
+      "LL_Isaac__GetPillEffectByName": 12,
+      "LL_Isaac__WorldToScreen": 12,
+      "LC_Entity_Player__AddBlackHearts": 11,
+      "LC_Entity_Player__AddBrokenHearts": 11,
+      "LC_Entity_Player__CanPickBlackHearts": 11,
+      "LC_Entity_Player__CanPickSoulHearts": 11,
+      "LC_Entity_Player__GetHeartLimit": 11,
+      "LL_Game__GetChallenge": 11,
+      "LC_Entity__AddEntityFlags": 10,
+      "LC_Entity__IsBoss": 10,
+      "LC_Entity_Player__AddRottenHearts": 9,
+      "LC_Entity_Player__SetCard": 9,
+      "LC_Entity__Die": 9,
+      "LC_Entity__SetColor": 9,
+      "LC_ANM2__IsFinished": 8,
+      "LC_Entity_Player__AddCoins": 8,
+      "LC_Entity_Player__GetCard": 8,
+      "LC_Entity_Player__GetNumKeys": 8,
+      "LL_Isaac__GetChallengeIdByName": 8,
+      "LL_ItemPool__GetCard": 8,
+      "LC_Entity_Player__AddEternalHearts": 7,
+      "LC_Entity_Player__AddGoldenHearts": 7,
+      "LC_Entity_Player__GetBlackHearts": 7,
+      "LC_Entity_Player__GetCollectibleNum": 7,
+      "LC_Entity_Player__GetNumBombs": 7,
+      "LC_Entity__HasEntityFlags": 7,
+      "LC_ANM2__SetFrame": 6,
+      "LC_ANM2__SetFrame2": 6,
+      "LC_Entity_Player__AddJarHearts": 6,
+      "LC_Entity_Player__AddKeys": 6,
+      "LC_Entity_Player__CanPickBoneHearts": 6,
+      "LC_Entity_Player__GetTrinket": 6,
+      "LC_Entity_Player__TryRemoveTrinket": 6,
+      "LC_Entity__AddBurn": 6,
+      "LC_Entity__IsDead": 6,
+      "LL_Input__IsButtonPressed": 6,
+      "LL_ItemPool__GetTrinket": 6,
+      "LL_Level__GetRoomByIdx": 6,
+      "LL_Level__GetStageType": 6,
+      "LL_Level__GetStartingRoomIndex": 6,
+      "LC_ANM2__GetFrame": 5,
+      "LC_Entity_Player__CanPickGoldenHearts": 5,
+      "LC_Entity_Player__GetMovementDirection": 5,
+      "LC_Entity_Player__HasGoldenKey": 5,
+      "LC_Entity_Player__IsBlackHeart": 5,
+      "LC_Entity_Player__IsBoneHeart": 5,
+      "LC_Entity__ClearEntityFlags": 5,
+      "LL_Level__GetCurses": 5,
+      "L_Mod_SaveData": 5,
+      "LC_Entity_Player__AddBombs": 4,
+      "LC_Entity_Player__HasFullHearts": 4,
+      "LC_Entity_Player__RemoveBlackHeart": 4,
+      "LC_Entity_Player__SetFullHearts": 4,
+      "LL_Input__IsActionTriggered": 4,
+      "LL_Isaac__CountEnemies": 4,
+      "LL_Isaac__GetScreenHeight": 4,
+      "LL_Isaac__GetScreenWidth": 4,
+      "LL_Isaac__RenderText": 4,
+      "LL_Isaac__WorldToRenderPosition": 4,
+      "LC_ANM2__LoadGraphics": 3,
+      "LC_ANM2__ReplaceSpritesheet": 3,
+      "LC_Entity_Player__GetAimDirection": 3,
+      "LC_Entity_Player__GetJarHearts": 3,
+      "LC_Entity__AddConfusion": 3,
+      "LC_Entity__CollidesWithGrid": 3,
+      "LL_Game__StartRoomTransition": 3,
+      "L_Free": 3,
+      "L_Mod_LoadData": 3,
+      "LC_ANM2__IsEventTriggered": 2,
+      "LC_ANM2__Stop": 2,
+      "LC_ANM2__WasEventTriggered": 2,
+      "LC_Entity_Player__AddPill": 2,
+      "LC_Entity_Player__DischargeActiveItem": 2,
+      "LC_Entity_Player__GetExtraLives": 2,
+      "LC_Entity_Player__GetHeadDirection": 2,
+      "LC_Entity_Player__GetPill": 2,
+      "LC_Entity_Player__ThrowBlueSpider": 2,
+      "LC_Entity__AddCharmed": 2,
+      "LC_Entity__AddFear": 2,
+      "LC_Entity__GetDropRNG": 2,
+      "LL_Game__ShakeScreen": 2,
+      "LL_Isaac__ConsoleOutput": 2,
+      "LL_Isaac__CountBosses": 2,
+      "LL_Isaac__GetCostumeIdByPath": 2,
+      "LL_Isaac__GetEntityTypeByName": 2,
+      "LL_Isaac__RenderScaledText": 2,
+      "LL_ItemPool__GetPill": 2,
+      "LL_Level__QueryRoomTypeIndex": 2,
+      "LL_Level__RemoveCurses": 2,
+      "LL_Level__UpdateVisibility": 2,
+      "LL_SFX__Stop": 2,
+      "LC_ANM2__RenderLayer": 1,
+      "LC_ANM2__Reset": 1,
+      "LC_Entity_Player__AddCard": 1,
+      "LC_Entity_Player__AddTrinket": 1,
+      "LC_Entity_Player__FlushQueueItem": 1,
+      "LC_Entity_Player__FullCharge": 1,
+      "LC_Entity_Player__GetMaxTrinkets": 1,
+      "LC_Entity_Player__GetMovementInput": 1,
+      "LC_Entity_Player__HasGoldenBomb": 1,
+      "LC_Entity_Player__NeedsCharge": 1,
+      "LC_Entity_Player__RemoveGoldenBomb": 1,
+      "LC_Entity_Player__RemoveGoldenKey": 1,
+      "LC_Entity_Player__SetPill": 1,
+      "LC_Entity__AddFreeze": 1,
+      "LC_Entity__AddMidasFreeze": 1,
+      "LC_Entity__AddPoison": 1,
+      "LC_Entity__AddShrink": 1,
+      "LC_Entity__AddSlowing": 1,
+      "LC_Entity__AddVelocity": 1,
+      "LC_Entity__HasMortalDamage": 1,
+      "LC_Entity__Kill": 1,
+      "LL_Game__CharmFart": 1,
+      "LL_Game__ClearStagesWithoutHeartsPicked": 1,
+      "LL_Game__Fart": 1,
+      "LL_Game__GetStateFlag": 1,
+      "LL_Game__IsPaused": 1,
+      "LL_Game__SetStateFlag": 1,
+      "LL_Game__ShowHallucination": 1,
+      "LL_Isaac__GetRandomPosition": 1,
+      "LL_Level__GetStateFlag": 1,
+      "LL_Level__SetStateFlag": 1,
+      "L_Mod_HasData": 1,
+      "L_Mod_RemoveData": 1,
+      "L_Random": 1,
+      "L_RandomU32": 1,
+      "L_RandomUnitVector": 1
+    },
+    "families": {
+      "LC": 123,
+      "L": 11,
+      "LL": 66
+    }
+  },
+  "mapped_high_level": {
+    "*::AddBlackHearts": {
+      "occurrences": 11,
+      "native": [
+        "LC_Entity_Player__AddBlackHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1853,
+          "refs": [
+            "LC_Entity_Player__AddBlackHearts"
+          ]
+        }
+      ]
+    },
+    "*::AddBombs": {
+      "occurrences": 4,
+      "native": [
+        "LC_Entity_Player__AddBombs"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1891,
+          "refs": [
+            "LC_Entity_Player__AddBombs"
+          ]
+        }
+      ]
+    },
+    "*::AddBrokenHearts": {
+      "occurrences": 11,
+      "native": [
+        "LC_Entity_Player__AddBrokenHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2295,
+          "refs": [
+            "LC_Entity_Player__AddBrokenHearts"
+          ]
+        }
+      ]
+    },
+    "*::AddBurn": {
+      "occurrences": 6,
+      "native": [
+        "LC_Entity__AddBurn"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 870,
+          "refs": [
+            "LC_Entity__AddBurn"
+          ]
+        }
+      ]
+    },
+    "*::AddCacheFlags": {
+      "occurrences": 45,
+      "native": [
+        "LC_Entity_Player__AddCacheFlags"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2159,
+          "refs": [
+            "LC_Entity_Player__AddCacheFlags"
+          ]
+        }
+      ]
+    },
+    "*::AddCallback": {
+      "occurrences": 17,
+      "native": [
+        "L_EnableCallback"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 424,
+          "refs": [
+            "L_EnableCallback"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 462,
+          "refs": []
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 505,
+          "refs": [
+            "L_EnableCallback"
+          ]
+        }
+      ]
+    },
+    "*::AddCard": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity_Player__AddCard"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2094,
+          "refs": [
+            "LC_Entity_Player__AddCard"
+          ]
+        }
+      ]
+    },
+    "*::AddCharmed": {
+      "occurrences": 2,
+      "native": [
+        "LC_Entity__AddCharmed"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 845,
+          "refs": [
+            "LC_Entity__AddCharmed"
+          ]
+        }
+      ]
+    },
+    "*::AddCoins": {
+      "occurrences": 8,
+      "native": [
+        "LC_Entity_Player__AddCoins"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1886,
+          "refs": [
+            "LC_Entity_Player__AddCoins"
+          ]
+        }
+      ]
+    },
+    "*::AddCollectible": {
+      "occurrences": 16,
+      "native": [
+        "LC_Entity_Player__AddCollectible"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1968,
+          "refs": [
+            "LC_Entity_Player__AddCollectible"
+          ]
+        }
+      ]
+    },
+    "*::AddConfusion": {
+      "occurrences": 3,
+      "native": [
+        "LC_Entity__AddConfusion"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 851,
+          "refs": [
+            "LC_Entity__AddConfusion"
+          ]
+        }
+      ]
+    },
+    "*::AddEntityFlags": {
+      "occurrences": 10,
+      "native": [
+        "LC_Entity__AddEntityFlags"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 796,
+          "refs": [
+            "LC_Entity__AddEntityFlags"
+          ]
+        }
+      ]
+    },
+    "*::AddEternalHearts": {
+      "occurrences": 7,
+      "native": [
+        "LC_Entity_Player__AddEternalHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1843,
+          "refs": [
+            "LC_Entity_Player__AddEternalHearts"
+          ]
+        }
+      ]
+    },
+    "*::AddFear": {
+      "occurrences": 2,
+      "native": [
+        "LC_Entity__AddFear"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 864,
+          "refs": [
+            "LC_Entity__AddFear"
+          ]
+        }
+      ]
+    },
+    "*::AddFreeze": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity__AddFreeze"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 831,
+          "refs": [
+            "LC_Entity__AddFreeze"
+          ]
+        }
+      ]
+    },
+    "*::AddGoldenHearts": {
+      "occurrences": 7,
+      "native": [
+        "LC_Entity_Player__AddGoldenHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1917,
+          "refs": [
+            "LC_Entity_Player__AddGoldenHearts"
+          ]
+        }
+      ]
+    },
+    "*::AddHealth": {
+      "occurrences": 68,
+      "native": [
+        "LC_Entity__AddHealth"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 819,
+          "refs": [
+            "LC_Entity__AddHealth"
+          ]
+        }
+      ]
+    },
+    "*::AddHearts": {
+      "occurrences": 31,
+      "native": [
+        "LC_Entity_Player__AddHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1838,
+          "refs": [
+            "LC_Entity_Player__AddHearts"
+          ]
+        }
+      ]
+    },
+    "*::AddJarHearts": {
+      "occurrences": 6,
+      "native": [
+        "LC_Entity_Player__AddJarHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1868,
+          "refs": [
+            "LC_Entity_Player__AddJarHearts"
+          ]
+        }
+      ]
+    },
+    "*::AddKeys": {
+      "occurrences": 6,
+      "native": [
+        "LC_Entity_Player__AddKeys"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1896,
+          "refs": [
+            "LC_Entity_Player__AddKeys"
+          ]
+        }
+      ]
+    },
+    "*::AddMaxHearts": {
+      "occurrences": 15,
+      "native": [
+        "LC_Entity_Player__AddMaxHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1833,
+          "refs": [
+            "LC_Entity_Player__AddMaxHearts"
+          ]
+        }
+      ]
+    },
+    "*::AddMidasFreeze": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity__AddMidasFreeze"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 858,
+          "refs": [
+            "LC_Entity__AddMidasFreeze"
+          ]
+        }
+      ]
+    },
+    "*::AddPill": {
+      "occurrences": 2,
+      "native": [
+        "LC_Entity_Player__AddPill"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2099,
+          "refs": [
+            "LC_Entity_Player__AddPill"
+          ]
+        }
+      ]
+    },
+    "*::AddPoison": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity__AddPoison"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 824,
+          "refs": [
+            "LC_Entity__AddPoison"
+          ]
+        }
+      ]
+    },
+    "*::AddRottenHearts": {
+      "occurrences": 9,
+      "native": [
+        "LC_Entity_Player__AddRottenHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2304,
+          "refs": [
+            "LC_Entity_Player__AddRottenHearts"
+          ]
+        }
+      ]
+    },
+    "*::AddShrink": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity__AddShrink"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 877,
+          "refs": [
+            "LC_Entity__AddShrink"
+          ]
+        }
+      ]
+    },
+    "*::AddSlowing": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity__AddSlowing"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 837,
+          "refs": [
+            "LC_Entity__AddSlowing"
+          ]
+        }
+      ]
+    },
+    "*::AddSoulHearts": {
+      "occurrences": 15,
+      "native": [
+        "LC_Entity_Player__AddSoulHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1848,
+          "refs": [
+            "LC_Entity_Player__AddSoulHearts"
+          ]
+        }
+      ]
+    },
+    "*::AddTrinket": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity_Player__AddTrinket"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1989,
+          "refs": [
+            "LC_Entity_Player__AddTrinket"
+          ]
+        }
+      ]
+    },
+    "*::AddVelocity": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity__AddVelocity"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 579,
+          "refs": [
+            "LC_Entity__AddVelocity"
+          ]
+        }
+      ]
+    },
+    "*::CanPickBlackHearts": {
+      "occurrences": 11,
+      "native": [
+        "LC_Entity_Player__CanPickBlackHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2036,
+          "refs": [
+            "LC_Entity_Player__CanPickBlackHearts"
+          ]
+        }
+      ]
+    },
+    "*::CanPickBoneHearts": {
+      "occurrences": 6,
+      "native": [
+        "LC_Entity_Player__CanPickBoneHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2044,
+          "refs": [
+            "LC_Entity_Player__CanPickBoneHearts"
+          ]
+        }
+      ]
+    },
+    "*::CanPickGoldenHearts": {
+      "occurrences": 5,
+      "native": [
+        "LC_Entity_Player__CanPickGoldenHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2040,
+          "refs": [
+            "LC_Entity_Player__CanPickGoldenHearts"
+          ]
+        }
+      ]
+    },
+    "*::CanPickRedHearts": {
+      "occurrences": 22,
+      "native": [
+        "LC_Entity_Player__CanPickRedHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2028,
+          "refs": [
+            "LC_Entity_Player__CanPickRedHearts"
+          ]
+        }
+      ]
+    },
+    "*::CanPickSoulHearts": {
+      "occurrences": 11,
+      "native": [
+        "LC_Entity_Player__CanPickSoulHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2032,
+          "refs": [
+            "LC_Entity_Player__CanPickSoulHearts"
+          ]
+        }
+      ]
+    },
+    "*::CharmFart": {
+      "occurrences": 1,
+      "native": [
+        "LL_Game__CharmFart"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1074,
+          "refs": [
+            "LL_Game__CharmFart"
+          ]
+        }
+      ]
+    },
+    "*::ClearEntityFlags": {
+      "occurrences": 5,
+      "native": [
+        "LC_Entity__ClearEntityFlags"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 801,
+          "refs": [
+            "LC_Entity__ClearEntityFlags"
+          ]
+        }
+      ]
+    },
+    "*::ClearStagesWithoutHeartsPicked": {
+      "occurrences": 1,
+      "native": [
+        "LL_Game__ClearStagesWithoutHeartsPicked"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1217,
+          "refs": [
+            "LL_Game__ClearStagesWithoutHeartsPicked"
+          ]
+        }
+      ]
+    },
+    "*::CollidesWithGrid": {
+      "occurrences": 3,
+      "native": [
+        "LC_Entity__CollidesWithGrid"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 772,
+          "refs": [
+            "LC_Entity__CollidesWithGrid"
+          ]
+        }
+      ]
+    },
+    "*::ConsoleOutput": {
+      "occurrences": 1,
+      "native": [
+        "LL_Isaac__ConsoleOutput"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 189,
+          "refs": [
+            "LL_Isaac__ConsoleOutput"
+          ]
+        }
+      ]
+    },
+    "*::CountBosses": {
+      "occurrences": 1,
+      "native": [
+        "LL_Isaac__CountBosses"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 202,
+          "refs": [
+            "LL_Isaac__CountBosses"
+          ]
+        }
+      ]
+    },
+    "*::CountEnemies": {
+      "occurrences": 2,
+      "native": [
+        "LL_Isaac__CountEnemies"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 206,
+          "refs": [
+            "LL_Isaac__CountEnemies"
+          ]
+        }
+      ]
+    },
+    "*::DebugString": {
+      "occurrences": 10,
+      "native": [
+        "L_DebugString"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 264,
+          "refs": [
+            "L_DebugString"
+          ]
+        }
+      ]
+    },
+    "*::Die": {
+      "occurrences": 9,
+      "native": [
+        "LC_Entity__Die"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 527,
+          "refs": [
+            "LC_Entity__Die"
+          ]
+        }
+      ]
+    },
+    "*::DischargeActiveItem": {
+      "occurrences": 2,
+      "native": [
+        "LC_Entity_Player__DischargeActiveItem"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2079,
+          "refs": [
+            "LC_Entity_Player__DischargeActiveItem"
+          ]
+        }
+      ]
+    },
+    "*::EvaluateItems": {
+      "occurrences": 38,
+      "native": [
+        "LC_Entity_Player__EvaluateItems"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2164,
+          "refs": [
+            "LC_Entity_Player__EvaluateItems"
+          ]
+        }
+      ]
+    },
+    "*::ExecuteCommand": {
+      "occurrences": 21,
+      "native": [
+        "LL_Isaac__ExecuteCommand"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 184,
+          "refs": [
+            "LL_Isaac__ExecuteCommand"
+          ]
+        }
+      ]
+    },
+    "*::Fart": {
+      "occurrences": 1,
+      "native": [
+        "LL_Game__Fart"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1065,
+          "refs": [
+            "LL_Game__Fart"
+          ]
+        }
+      ]
+    },
+    "*::FlushQueueItem": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity_Player__FlushQueueItem"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1960,
+          "refs": [
+            "LC_Entity_Player__FlushQueueItem"
+          ]
+        }
+      ]
+    },
+    "*::FullCharge": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity_Player__FullCharge"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2089,
+          "refs": [
+            "LC_Entity_Player__FullCharge"
+          ]
+        }
+      ]
+    },
+    "*::GetActiveCharge": {
+      "occurrences": 25,
+      "native": [
+        "LC_Entity_Player__GetActiveCharge"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2058,
+          "refs": [
+            "LC_Entity_Player__GetActiveCharge"
+          ]
+        }
+      ]
+    },
+    "*::GetActiveItem": {
+      "occurrences": 28,
+      "native": [
+        "LC_Entity_Player__GetActiveItem"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2053,
+          "refs": [
+            "LC_Entity_Player__GetActiveItem"
+          ]
+        }
+      ]
+    },
+    "*::GetAimDirection": {
+      "occurrences": 3,
+      "native": [
+        "LC_Entity_Player__GetAimDirection"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2199,
+          "refs": [
+            "LC_Entity_Player__GetAimDirection"
+          ]
+        }
+      ]
+    },
+    "*::GetBlackHearts": {
+      "occurrences": 7,
+      "native": [
+        "LC_Entity_Player__GetBlackHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1740,
+          "refs": [
+            "LC_Entity_Player__GetBlackHearts"
+          ]
+        }
+      ]
+    },
+    "*::GetBoneHearts": {
+      "occurrences": 30,
+      "native": [
+        "LC_Entity_Player__GetBoneHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2286,
+          "refs": [
+            "LC_Entity_Player__GetBoneHearts"
+          ]
+        }
+      ]
+    },
+    "*::GetBrokenHearts": {
+      "occurrences": 25,
+      "native": [
+        "LC_Entity_Player__GetBrokenHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2300,
+          "refs": [
+            "LC_Entity_Player__GetBrokenHearts"
+          ]
+        }
+      ]
+    },
+    "*::GetCard": {
+      "occurrences": 8,
+      "native": [
+        "LC_Entity_Player__GetCard",
+        "LL_ItemPool__GetCard"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2104,
+          "refs": [
+            "LC_Entity_Player__GetCard"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2342,
+          "refs": [
+            "LL_ItemPool__GetCard"
+          ]
+        }
+      ]
+    },
+    "*::GetCardIdByName": {
+      "occurrences": 40,
+      "native": [
+        "LL_Isaac__GetCardIdByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 140,
+          "refs": [
+            "LL_Isaac__GetCardIdByName"
+          ]
+        }
+      ]
+    },
+    "*::GetChallenge": {
+      "occurrences": 11,
+      "native": [
+        "LL_Game__GetChallenge",
+        "LL_Isaac__GetChallenge"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 116,
+          "refs": [
+            "LL_Isaac__GetChallenge"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1348,
+          "refs": [
+            "LL_Game__GetChallenge"
+          ]
+        }
+      ]
+    },
+    "*::GetChallengeIdByName": {
+      "occurrences": 4,
+      "native": [
+        "LL_Isaac__GetChallengeIdByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 155,
+          "refs": [
+            "LL_Isaac__GetChallengeIdByName"
+          ]
+        }
+      ]
+    },
+    "*::GetCollectibleNum": {
+      "occurrences": 7,
+      "native": [
+        "LC_Entity_Player__GetCollectibleNum"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2131,
+          "refs": [
+            "LC_Entity_Player__GetCollectibleNum"
+          ]
+        }
+      ]
+    },
+    "*::GetCostumeIdByPath": {
+      "occurrences": 1,
+      "native": [
+        "LL_Isaac__GetCostumeIdByPath"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 160,
+          "refs": [
+            "LL_Isaac__GetCostumeIdByPath"
+          ]
+        }
+      ]
+    },
+    "*::GetCurrentRoomDesc": {
+      "occurrences": 14,
+      "native": [
+        "LL_Level__GetCurrentRoomDesc"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1711,
+          "refs": [
+            "LL_Level__GetCurrentRoomDesc"
+          ]
+        }
+      ]
+    },
+    "*::GetCurrentRoomIndex": {
+      "occurrences": 13,
+      "native": [
+        "LL_Level__GetCurrentRoomIndex"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1491,
+          "refs": [
+            "LL_Level__GetCurrentRoomIndex"
+          ]
+        }
+      ]
+    },
+    "*::GetCurses": {
+      "occurrences": 5,
+      "native": [
+        "LL_Level__GetCurses"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1446,
+          "refs": [
+            "LL_Level__GetCurses"
+          ]
+        }
+      ]
+    },
+    "*::GetDropRNG": {
+      "occurrences": 2,
+      "native": [
+        "LC_Entity__GetDropRNG"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 982,
+          "refs": [
+            "LC_Entity__GetDropRNG"
+          ]
+        }
+      ]
+    },
+    "*::GetEffectiveMaxHearts": {
+      "occurrences": 12,
+      "native": [
+        "LC_Entity_Player__GetEffectiveMaxHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1727,
+          "refs": [
+            "LC_Entity_Player__GetEffectiveMaxHearts"
+          ]
+        }
+      ]
+    },
+    "*::GetEntityTypeByName": {
+      "occurrences": 1,
+      "native": [
+        "LL_Isaac__GetEntityTypeByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 120,
+          "refs": [
+            "LL_Isaac__GetEntityTypeByName"
+          ]
+        }
+      ]
+    },
+    "*::GetEntityVariantByName": {
+      "occurrences": 41,
+      "native": [
+        "LL_Isaac__GetEntityVariantByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 125,
+          "refs": [
+            "LL_Isaac__GetEntityVariantByName"
+          ]
+        }
+      ]
+    },
+    "*::GetEternalHearts": {
+      "occurrences": 14,
+      "native": [
+        "LC_Entity_Player__GetEternalHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1744,
+          "refs": [
+            "LC_Entity_Player__GetEternalHearts"
+          ]
+        }
+      ]
+    },
+    "*::GetExtraLives": {
+      "occurrences": 2,
+      "native": [
+        "LC_Entity_Player__GetExtraLives"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1748,
+          "refs": [
+            "LC_Entity_Player__GetExtraLives"
+          ]
+        }
+      ]
+    },
+    "*::GetFireDirection": {
+      "occurrences": 19,
+      "native": [
+        "LC_Entity_Player__GetFireDirection"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2191,
+          "refs": [
+            "LC_Entity_Player__GetFireDirection"
+          ]
+        }
+      ]
+    },
+    "*::GetFrame": {
+      "occurrences": 5,
+      "native": [
+        "LC_ANM2__GetFrame"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2514,
+          "refs": [
+            "LC_ANM2__GetFrame"
+          ]
+        }
+      ]
+    },
+    "*::GetFrameCount": {
+      "occurrences": 60,
+      "native": [
+        "LC_Entity__GetFrameCount",
+        "LL_Game__GetFrameCount",
+        "LL_Isaac__GetFrameCount"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 69,
+          "refs": [
+            "LL_Isaac__GetFrameCount"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 964,
+          "refs": [
+            "LC_Entity__GetFrameCount"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1163,
+          "refs": [
+            "LL_Game__GetFrameCount"
+          ]
+        }
+      ]
+    },
+    "*::GetFreeNearPosition": {
+      "occurrences": 18,
+      "native": [
+        "LL_Isaac__GetFreeNearPosition"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 102,
+          "refs": [
+            "LL_Isaac__GetFreeNearPosition"
+          ]
+        }
+      ]
+    },
+    "*::GetGoldenHearts": {
+      "occurrences": 17,
+      "native": [
+        "LC_Entity_Player__GetGoldenHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1768,
+          "refs": [
+            "LC_Entity_Player__GetGoldenHearts"
+          ]
+        }
+      ]
+    },
+    "*::GetHeadDirection": {
+      "occurrences": 2,
+      "native": [
+        "LC_Entity_Player__GetHeadDirection"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2195,
+          "refs": [
+            "LC_Entity_Player__GetHeadDirection"
+          ]
+        }
+      ]
+    },
+    "*::GetHeartLimit": {
+      "occurrences": 11,
+      "native": [
+        "LC_Entity_Player__GetHeartLimit"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1731,
+          "refs": [
+            "LC_Entity_Player__GetHeartLimit"
+          ]
+        }
+      ]
+    },
+    "*::GetHearts": {
+      "occurrences": 42,
+      "native": [
+        "LC_Entity_Player__GetHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1719,
+          "refs": [
+            "LC_Entity_Player__GetHearts"
+          ]
+        }
+      ]
+    },
+    "*::GetItemIdByName": {
+      "occurrences": 84,
+      "native": [
+        "LL_Isaac__GetItemIdByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 130,
+          "refs": [
+            "LL_Isaac__GetItemIdByName"
+          ]
+        }
+      ]
+    },
+    "*::GetJarHearts": {
+      "occurrences": 3,
+      "native": [
+        "LC_Entity_Player__GetJarHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1873,
+          "refs": [
+            "LC_Entity_Player__GetJarHearts"
+          ]
+        }
+      ]
+    },
+    "*::GetMaxHearts": {
+      "occurrences": 38,
+      "native": [
+        "LC_Entity_Player__GetMaxHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1723,
+          "refs": [
+            "LC_Entity_Player__GetMaxHearts"
+          ]
+        }
+      ]
+    },
+    "*::GetMaxTrinkets": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity_Player__GetMaxTrinkets"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2005,
+          "refs": [
+            "LC_Entity_Player__GetMaxTrinkets"
+          ]
+        }
+      ]
+    },
+    "*::GetMovementDirection": {
+      "occurrences": 5,
+      "native": [
+        "LC_Entity_Player__GetMovementDirection"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2187,
+          "refs": [
+            "LC_Entity_Player__GetMovementDirection"
+          ]
+        }
+      ]
+    },
+    "*::GetMovementInput": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity_Player__GetMovementInput"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2217,
+          "refs": [
+            "LC_Entity_Player__GetMovementInput"
+          ]
+        }
+      ]
+    },
+    "*::GetNumBombs": {
+      "occurrences": 7,
+      "native": [
+        "LC_Entity_Player__GetNumBombs"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1752,
+          "refs": [
+            "LC_Entity_Player__GetNumBombs"
+          ]
+        }
+      ]
+    },
+    "*::GetNumCoins": {
+      "occurrences": 13,
+      "native": [
+        "LC_Entity_Player__GetNumCoins"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1772,
+          "refs": [
+            "LC_Entity_Player__GetNumCoins"
+          ]
+        }
+      ]
+    },
+    "*::GetNumKeys": {
+      "occurrences": 8,
+      "native": [
+        "LC_Entity_Player__GetNumKeys"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1756,
+          "refs": [
+            "LC_Entity_Player__GetNumKeys"
+          ]
+        }
+      ]
+    },
+    "*::GetNumPlayers": {
+      "occurrences": 34,
+      "native": [
+        "LL_Game__GetNumPlayers"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1120,
+          "refs": [
+            "LL_Game__GetNumPlayers"
+          ]
+        }
+      ]
+    },
+    "*::GetPill": {
+      "occurrences": 2,
+      "native": [
+        "LC_Entity_Player__GetPill",
+        "LL_ItemPool__GetPill"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2109,
+          "refs": [
+            "LC_Entity_Player__GetPill"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2359,
+          "refs": [
+            "LL_ItemPool__GetPill"
+          ]
+        }
+      ]
+    },
+    "*::GetPillEffectByName": {
+      "occurrences": 6,
+      "native": [
+        "LL_Isaac__GetPillEffectByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 145,
+          "refs": [
+            "LL_Isaac__GetPillEffectByName"
+          ]
+        }
+      ]
+    },
+    "*::GetPlayer": {
+      "occurrences": 59,
+      "native": [
+        "LL_Isaac__GetPlayer"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 64,
+          "refs": [
+            "LL_Isaac__GetPlayer"
+          ]
+        }
+      ]
+    },
+    "*::GetPlayerType": {
+      "occurrences": 155,
+      "native": [
+        "LC_Entity_Player__GetPlayerType"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1776,
+          "refs": [
+            "LC_Entity_Player__GetPlayerType"
+          ]
+        }
+      ]
+    },
+    "*::GetRandomPosition": {
+      "occurrences": 1,
+      "native": [
+        "LL_Isaac__GetRandomPosition"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 96,
+          "refs": [
+            "LL_Isaac__GetRandomPosition"
+          ]
+        }
+      ]
+    },
+    "*::GetRoom": {
+      "occurrences": 44,
+      "native": [
+        "LL_RoomConfig__GetRoom"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2601,
+          "refs": [
+            "LL_RoomConfig__GetRoom"
+          ]
+        }
+      ]
+    },
+    "*::GetRoomByIdx": {
+      "occurrences": 6,
+      "native": [
+        "LL_Level__GetRoomByIdx"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1706,
+          "refs": [
+            "LL_Level__GetRoomByIdx"
+          ]
+        }
+      ]
+    },
+    "*::GetRottenHearts": {
+      "occurrences": 17,
+      "native": [
+        "LC_Entity_Player__GetRottenHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2309,
+          "refs": [
+            "LC_Entity_Player__GetRottenHearts"
+          ]
+        }
+      ]
+    },
+    "*::GetScreenHeight": {
+      "occurrences": 2,
+      "native": [
+        "LL_Isaac__GetScreenHeight"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 214,
+          "refs": [
+            "LL_Isaac__GetScreenHeight"
+          ]
+        }
+      ]
+    },
+    "*::GetScreenWidth": {
+      "occurrences": 2,
+      "native": [
+        "LL_Isaac__GetScreenWidth"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 210,
+          "refs": [
+            "LL_Isaac__GetScreenWidth"
+          ]
+        }
+      ]
+    },
+    "*::GetSoulHearts": {
+      "occurrences": 36,
+      "native": [
+        "LC_Entity_Player__GetSoulHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1736,
+          "refs": [
+            "LC_Entity_Player__GetSoulHearts"
+          ]
+        }
+      ]
+    },
+    "*::GetSoundIdByName": {
+      "occurrences": 56,
+      "native": [
+        "LL_Isaac__GetSoundIdByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 175,
+          "refs": [
+            "LL_Isaac__GetSoundIdByName"
+          ]
+        }
+      ]
+    },
+    "*::GetSprite": {
+      "occurrences": 85,
+      "native": [
+        "LC_Entity__GetSprite"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 986,
+          "refs": [
+            "LC_Entity__GetSprite"
+          ]
+        }
+      ]
+    },
+    "*::GetStage": {
+      "occurrences": 15,
+      "native": [
+        "LL_Level__GetStage"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1442,
+          "refs": [
+            "LL_Level__GetStage"
+          ]
+        }
+      ]
+    },
+    "*::GetStageType": {
+      "occurrences": 6,
+      "native": [
+        "LL_Level__GetStageType"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1454,
+          "refs": [
+            "LL_Level__GetStageType"
+          ]
+        }
+      ]
+    },
+    "*::GetStartingRoomIndex": {
+      "occurrences": 6,
+      "native": [
+        "LL_Level__GetStartingRoomIndex"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1509,
+          "refs": [
+            "LL_Level__GetStartingRoomIndex"
+          ]
+        }
+      ]
+    },
+    "*::GetStateFlag": {
+      "occurrences": 1,
+      "native": [
+        "LL_Game__GetStateFlag",
+        "LL_Level__GetStateFlag"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1167,
+          "refs": [
+            "LL_Game__GetStateFlag"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1476,
+          "refs": [
+            "LL_Level__GetStateFlag"
+          ]
+        }
+      ]
+    },
+    "*::GetTrinket": {
+      "occurrences": 6,
+      "native": [
+        "LC_Entity_Player__GetTrinket",
+        "LL_ItemPool__GetTrinket"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1780,
+          "refs": [
+            "LC_Entity_Player__GetTrinket"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2338,
+          "refs": [
+            "LL_ItemPool__GetTrinket"
+          ]
+        }
+      ]
+    },
+    "*::GetTrinketIdByName": {
+      "occurrences": 23,
+      "native": [
+        "LL_Isaac__GetTrinketIdByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 150,
+          "refs": [
+            "LL_Isaac__GetTrinketIdByName"
+          ]
+        }
+      ]
+    },
+    "*::GetTrinketMultiplier": {
+      "occurrences": 21,
+      "native": [
+        "LC_Entity_Player__GetTrinketMultiplier"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2282,
+          "refs": [
+            "LC_Entity_Player__GetTrinketMultiplier"
+          ]
+        }
+      ]
+    },
+    "*::GetType": {
+      "occurrences": 28,
+      "native": [
+        "LC_Entity__GetType"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 539,
+          "refs": [
+            "LC_Entity__GetType"
+          ]
+        }
+      ]
+    },
+    "*::HasCollectible": {
+      "occurrences": 164,
+      "native": [
+        "LC_Entity_Player__HasCollectible"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2126,
+          "refs": [
+            "LC_Entity_Player__HasCollectible"
+          ]
+        }
+      ]
+    },
+    "*::HasEntityFlags": {
+      "occurrences": 7,
+      "native": [
+        "LC_Entity__HasEntityFlags"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 810,
+          "refs": [
+            "LC_Entity__HasEntityFlags"
+          ]
+        }
+      ]
+    },
+    "*::HasFullHearts": {
+      "occurrences": 4,
+      "native": [
+        "LC_Entity_Player__HasFullHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1825,
+          "refs": [
+            "LC_Entity_Player__HasFullHearts"
+          ]
+        }
+      ]
+    },
+    "*::HasGoldenBomb": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity_Player__HasGoldenBomb"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1764,
+          "refs": [
+            "LC_Entity_Player__HasGoldenBomb"
+          ]
+        }
+      ]
+    },
+    "*::HasGoldenKey": {
+      "occurrences": 5,
+      "native": [
+        "LC_Entity_Player__HasGoldenKey"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1760,
+          "refs": [
+            "LC_Entity_Player__HasGoldenKey"
+          ]
+        }
+      ]
+    },
+    "*::HasMortalDamage": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity__HasMortalDamage"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 519,
+          "refs": [
+            "LC_Entity__HasMortalDamage"
+          ]
+        }
+      ]
+    },
+    "*::HasPlayerForm": {
+      "occurrences": 12,
+      "native": [
+        "LC_Entity_Player__HasPlayerForm"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2141,
+          "refs": [
+            "LC_Entity_Player__HasPlayerForm"
+          ]
+        }
+      ]
+    },
+    "*::HasTrinket": {
+      "occurrences": 64,
+      "native": [
+        "LC_Entity_Player__HasTrinket"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2136,
+          "refs": [
+            "LC_Entity_Player__HasTrinket"
+          ]
+        }
+      ]
+    },
+    "*::IsActionTriggered": {
+      "occurrences": 4,
+      "native": [
+        "LL_Input__IsActionTriggered"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 277,
+          "refs": [
+            "LL_Input__IsActionTriggered"
+          ]
+        }
+      ]
+    },
+    "*::IsActiveEnemy": {
+      "occurrences": 12,
+      "native": [
+        "LC_Entity__IsActiveEnemy"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 784,
+          "refs": [
+            "LC_Entity__IsActiveEnemy"
+          ]
+        }
+      ]
+    },
+    "*::IsBlackHeart": {
+      "occurrences": 5,
+      "native": [
+        "LC_Entity_Player__IsBlackHeart"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1863,
+          "refs": [
+            "LC_Entity_Player__IsBlackHeart"
+          ]
+        }
+      ]
+    },
+    "*::IsBoneHeart": {
+      "occurrences": 5,
+      "native": [
+        "LC_Entity_Player__IsBoneHeart"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2290,
+          "refs": [
+            "LC_Entity_Player__IsBoneHeart"
+          ]
+        }
+      ]
+    },
+    "*::IsBoss": {
+      "occurrences": 10,
+      "native": [
+        "LC_Entity__IsBoss"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 907,
+          "refs": [
+            "LC_Entity__IsBoss"
+          ]
+        }
+      ]
+    },
+    "*::IsButtonPressed": {
+      "occurrences": 6,
+      "native": [
+        "LL_Input__IsButtonPressed"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 265,
+          "refs": [
+            "LL_Input__IsButtonPressed"
+          ]
+        }
+      ]
+    },
+    "*::IsButtonTriggered": {
+      "occurrences": 17,
+      "native": [
+        "LL_Input__IsButtonTriggered"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 259,
+          "refs": [
+            "LL_Input__IsButtonTriggered"
+          ]
+        }
+      ]
+    },
+    "*::IsDead": {
+      "occurrences": 6,
+      "native": [
+        "LC_Entity__IsDead"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 891,
+          "refs": [
+            "LC_Entity__IsDead"
+          ]
+        }
+      ]
+    },
+    "*::IsEventTriggered": {
+      "occurrences": 2,
+      "native": [
+        "LC_ANM2__IsEventTriggered"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2577,
+          "refs": [
+            "LC_ANM2__IsEventTriggered"
+          ]
+        }
+      ]
+    },
+    "*::IsFinished": {
+      "occurrences": 8,
+      "native": [
+        "LC_ANM2__IsFinished"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2430,
+          "refs": [
+            "LC_ANM2__IsFinished"
+          ]
+        }
+      ]
+    },
+    "*::IsPaused": {
+      "occurrences": 1,
+      "native": [
+        "LL_Game__IsPaused"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1018,
+          "refs": [
+            "LL_Game__IsPaused"
+          ]
+        }
+      ]
+    },
+    "*::IsPlaying": {
+      "occurrences": 18,
+      "native": [
+        "LC_ANM2__IsPlaying",
+        "LL_SFX__IsPlaying"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 424,
+          "refs": [
+            "LL_SFX__IsPlaying"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2522,
+          "refs": [
+            "LC_ANM2__IsPlaying"
+          ]
+        }
+      ]
+    },
+    "*::IsVulnerableEnemy": {
+      "occurrences": 14,
+      "native": [
+        "LC_Entity__IsVulnerableEnemy"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 788,
+          "refs": [
+            "LC_Entity__IsVulnerableEnemy"
+          ]
+        }
+      ]
+    },
+    "*::Kill": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity__Kill"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 523,
+          "refs": [
+            "LC_Entity__Kill"
+          ]
+        }
+      ]
+    },
+    "*::Load": {
+      "occurrences": 60,
+      "native": [
+        "LC_ANM2__Load"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2472,
+          "refs": [
+            "LC_ANM2__Load"
+          ]
+        }
+      ]
+    },
+    "*::LoadData": {
+      "occurrences": 2,
+      "native": [
+        "L_Free",
+        "L_Mod_LoadData"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 477,
+          "refs": [
+            "L_Free",
+            "L_Mod_LoadData"
+          ]
+        }
+      ]
+    },
+    "*::LoadGraphics": {
+      "occurrences": 3,
+      "native": [
+        "LC_ANM2__LoadGraphics"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2488,
+          "refs": [
+            "LC_ANM2__LoadGraphics"
+          ]
+        }
+      ]
+    },
+    "*::NeedsCharge": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity_Player__NeedsCharge"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2084,
+          "refs": [
+            "LC_Entity_Player__NeedsCharge"
+          ]
+        }
+      ]
+    },
+    "*::Play": {
+      "occurrences": 114,
+      "native": [
+        "LC_ANM2__Play",
+        "LL_Music__Play",
+        "LL_SFX__Play"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 309,
+          "refs": [
+            "LL_Music__Play"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 389,
+          "refs": [
+            "LL_SFX__Play"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2435,
+          "refs": [
+            "LC_ANM2__Play"
+          ]
+        }
+      ]
+    },
+    "*::QueryRoomTypeIndex": {
+      "occurrences": 2,
+      "native": [
+        "LL_Level__QueryRoomTypeIndex"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1513,
+          "refs": [
+            "LL_Level__QueryRoomTypeIndex"
+          ]
+        }
+      ]
+    },
+    "*::RandomFloat": {
+      "occurrences": 75,
+      "native": [
+        "L_RandomFloat"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 288,
+          "refs": [
+            "L_RandomFloat"
+          ]
+        }
+      ]
+    },
+    "*::Remove": {
+      "occurrences": 47,
+      "native": [
+        "LC_Entity__Remove"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 531,
+          "refs": [
+            "LC_Entity__Remove"
+          ]
+        }
+      ]
+    },
+    "*::RemoveBlackHeart": {
+      "occurrences": 4,
+      "native": [
+        "LC_Entity_Player__RemoveBlackHeart"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1858,
+          "refs": [
+            "LC_Entity_Player__RemoveBlackHeart"
+          ]
+        }
+      ]
+    },
+    "*::RemoveCallback": {
+      "occurrences": 51,
+      "native": [],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 442,
+          "refs": []
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 467,
+          "refs": []
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 518,
+          "refs": []
+        }
+      ]
+    },
+    "*::RemoveCollectible": {
+      "occurrences": 21,
+      "native": [
+        "LC_Entity_Player__RemoveCollectible",
+        "LL_ItemPool__RemoveCollectible"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1975,
+          "refs": [
+            "LC_Entity_Player__RemoveCollectible"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2322,
+          "refs": [
+            "LL_ItemPool__RemoveCollectible"
+          ]
+        }
+      ]
+    },
+    "*::RemoveCurses": {
+      "occurrences": 2,
+      "native": [
+        "LL_Level__RemoveCurses"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1648,
+          "refs": [
+            "LL_Level__RemoveCurses"
+          ]
+        }
+      ]
+    },
+    "*::RemoveGoldenBomb": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity_Player__RemoveGoldenBomb"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1913,
+          "refs": [
+            "LC_Entity_Player__RemoveGoldenBomb"
+          ]
+        }
+      ]
+    },
+    "*::RemoveGoldenKey": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity_Player__RemoveGoldenKey"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1905,
+          "refs": [
+            "LC_Entity_Player__RemoveGoldenKey"
+          ]
+        }
+      ]
+    },
+    "*::Render": {
+      "occurrences": 20,
+      "native": [
+        "LC_ANM2__Render",
+        "LC_Entity__Render",
+        "LL_Game__Render"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 497,
+          "refs": [
+            "LC_Entity__Render"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1014,
+          "refs": [
+            "LL_Game__Render"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2459,
+          "refs": [
+            "LC_ANM2__Render"
+          ]
+        }
+      ]
+    },
+    "*::RenderLayer": {
+      "occurrences": 1,
+      "native": [
+        "LC_ANM2__RenderLayer"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2466,
+          "refs": [
+            "LC_ANM2__RenderLayer"
+          ]
+        }
+      ]
+    },
+    "*::RenderScaledText": {
+      "occurrences": 1,
+      "native": [
+        "LL_Isaac__RenderScaledText"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 81,
+          "refs": [
+            "LL_Isaac__RenderScaledText"
+          ]
+        }
+      ]
+    },
+    "*::RenderText": {
+      "occurrences": 2,
+      "native": [
+        "LL_Isaac__RenderText"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 73,
+          "refs": [
+            "LL_Isaac__RenderText"
+          ]
+        }
+      ]
+    },
+    "*::ReplaceSpritesheet": {
+      "occurrences": 3,
+      "native": [
+        "LC_ANM2__ReplaceSpritesheet"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2482,
+          "refs": [
+            "LC_ANM2__ReplaceSpritesheet"
+          ]
+        }
+      ]
+    },
+    "*::Reset": {
+      "occurrences": 1,
+      "native": [
+        "LC_ANM2__Reset"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2451,
+          "refs": [
+            "LC_ANM2__Reset"
+          ]
+        }
+      ]
+    },
+    "*::SaveData": {
+      "occurrences": 4,
+      "native": [
+        "L_Mod_SaveData"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 471,
+          "refs": [
+            "L_Mod_SaveData"
+          ]
+        }
+      ]
+    },
+    "*::SetActiveCharge": {
+      "occurrences": 13,
+      "native": [
+        "LC_Entity_Player__SetActiveCharge"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2073,
+          "refs": [
+            "LC_Entity_Player__SetActiveCharge"
+          ]
+        }
+      ]
+    },
+    "*::SetCard": {
+      "occurrences": 9,
+      "native": [
+        "LC_Entity_Player__SetCard"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2114,
+          "refs": [
+            "LC_Entity_Player__SetCard"
+          ]
+        }
+      ]
+    },
+    "*::SetColor": {
+      "occurrences": 9,
+      "native": [
+        "LC_Entity__SetColor"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 484,
+          "refs": [
+            "LC_Entity__SetColor"
+          ]
+        }
+      ]
+    },
+    "*::SetFrame": {
+      "occurrences": 6,
+      "native": [
+        "LC_ANM2__SetFrame",
+        "LC_ANM2__SetFrame2"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2442,
+          "refs": [
+            "LC_ANM2__SetFrame",
+            "LC_ANM2__SetFrame2"
+          ]
+        }
+      ]
+    },
+    "*::SetFullHearts": {
+      "occurrences": 4,
+      "native": [
+        "LC_Entity_Player__SetFullHearts"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2155,
+          "refs": [
+            "LC_Entity_Player__SetFullHearts"
+          ]
+        }
+      ]
+    },
+    "*::SetPill": {
+      "occurrences": 1,
+      "native": [
+        "LC_Entity_Player__SetPill"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2120,
+          "refs": [
+            "LC_Entity_Player__SetPill"
+          ]
+        }
+      ]
+    },
+    "*::SetStateFlag": {
+      "occurrences": 1,
+      "native": [
+        "LL_Game__SetStateFlag",
+        "LL_Level__SetStateFlag"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1172,
+          "refs": [
+            "LL_Game__SetStateFlag"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1481,
+          "refs": [
+            "LL_Level__SetStateFlag"
+          ]
+        }
+      ]
+    },
+    "*::ShakeScreen": {
+      "occurrences": 2,
+      "native": [
+        "LL_Game__ShakeScreen"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1309,
+          "refs": [
+            "LL_Game__ShakeScreen"
+          ]
+        }
+      ]
+    },
+    "*::ShowHallucination": {
+      "occurrences": 1,
+      "native": [
+        "LL_Game__ShowHallucination"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1391,
+          "refs": [
+            "LL_Game__ShowHallucination"
+          ]
+        }
+      ]
+    },
+    "*::Spawn": {
+      "occurrences": 204,
+      "native": [
+        "LL_Game__Spawn"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1022,
+          "refs": [
+            "LL_Game__Spawn"
+          ]
+        }
+      ]
+    },
+    "*::StartRoomTransition": {
+      "occurrences": 3,
+      "native": [
+        "LL_Game__StartRoomTransition"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1137,
+          "refs": [
+            "LL_Game__StartRoomTransition"
+          ]
+        }
+      ]
+    },
+    "*::Stop": {
+      "occurrences": 2,
+      "native": [
+        "LC_ANM2__Stop",
+        "LL_SFX__Stop"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 410,
+          "refs": [
+            "LL_SFX__Stop"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2505,
+          "refs": [
+            "LC_ANM2__Stop"
+          ]
+        }
+      ]
+    },
+    "*::TakeDamage": {
+      "occurrences": 26,
+      "native": [
+        "LC_Entity__TakeDamage"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 511,
+          "refs": [
+            "LC_Entity__TakeDamage"
+          ]
+        }
+      ]
+    },
+    "*::ThrowBlueSpider": {
+      "occurrences": 2,
+      "native": [
+        "LC_Entity_Player__ThrowBlueSpider"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1927,
+          "refs": [
+            "LC_Entity_Player__ThrowBlueSpider"
+          ]
+        }
+      ]
+    },
+    "*::TryRemoveTrinket": {
+      "occurrences": 6,
+      "native": [
+        "LC_Entity_Player__TryRemoveTrinket"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1994,
+          "refs": [
+            "LC_Entity_Player__TryRemoveTrinket"
+          ]
+        }
+      ]
+    },
+    "*::Update": {
+      "occurrences": 13,
+      "native": [
+        "LC_ANM2__Update",
+        "LC_Entity__Update",
+        "LL_Game__Update",
+        "LL_Level__Update"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 493,
+          "refs": [
+            "LC_Entity__Update"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1010,
+          "refs": [
+            "LL_Game__Update"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1428,
+          "refs": [
+            "LL_Level__Update"
+          ]
+        },
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2455,
+          "refs": [
+            "LC_ANM2__Update"
+          ]
+        }
+      ]
+    },
+    "*::UpdateVisibility": {
+      "occurrences": 2,
+      "native": [
+        "LL_Level__UpdateVisibility"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 1595,
+          "refs": [
+            "LL_Level__UpdateVisibility"
+          ]
+        }
+      ]
+    },
+    "*::UseActiveItem": {
+      "occurrences": 23,
+      "native": [
+        "LC_Entity_Player__UseActiveItem"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2269,
+          "refs": [
+            "LC_Entity_Player__UseActiveItem"
+          ]
+        }
+      ]
+    },
+    "*::WasEventTriggered": {
+      "occurrences": 2,
+      "native": [
+        "LC_ANM2__WasEventTriggered"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 2582,
+          "refs": [
+            "LC_ANM2__WasEventTriggered"
+          ]
+        }
+      ]
+    },
+    "*::WorldToRenderPosition": {
+      "occurrences": 2,
+      "native": [
+        "LL_Isaac__WorldToRenderPosition"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 243,
+          "refs": [
+            "LL_Isaac__WorldToRenderPosition"
+          ]
+        }
+      ]
+    },
+    "*::WorldToScreen": {
+      "occurrences": 6,
+      "native": [
+        "LL_Isaac__WorldToScreen"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 229,
+          "refs": [
+            "LL_Isaac__WorldToScreen"
+          ]
+        }
+      ]
+    },
+    "Isaac.AddCallback": {
+      "occurrences": 12,
+      "native": [
+        "L_EnableCallback"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 424,
+          "refs": [
+            "L_EnableCallback"
+          ]
+        }
+      ]
+    },
+    "Isaac.ConsoleOutput": {
+      "occurrences": 1,
+      "native": [
+        "LL_Isaac__ConsoleOutput"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 189,
+          "refs": [
+            "LL_Isaac__ConsoleOutput"
+          ]
+        }
+      ]
+    },
+    "Isaac.CountBosses": {
+      "occurrences": 1,
+      "native": [
+        "LL_Isaac__CountBosses"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 202,
+          "refs": [
+            "LL_Isaac__CountBosses"
+          ]
+        }
+      ]
+    },
+    "Isaac.CountEnemies": {
+      "occurrences": 2,
+      "native": [
+        "LL_Isaac__CountEnemies"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 206,
+          "refs": [
+            "LL_Isaac__CountEnemies"
+          ]
+        }
+      ]
+    },
+    "Isaac.DebugString": {
+      "occurrences": 10,
+      "native": [
+        "L_DebugString"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 264,
+          "refs": [
+            "L_DebugString"
+          ]
+        }
+      ]
+    },
+    "Isaac.ExecuteCommand": {
+      "occurrences": 21,
+      "native": [
+        "LL_Isaac__ExecuteCommand"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 184,
+          "refs": [
+            "LL_Isaac__ExecuteCommand"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetCardIdByName": {
+      "occurrences": 40,
+      "native": [
+        "LL_Isaac__GetCardIdByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 140,
+          "refs": [
+            "LL_Isaac__GetCardIdByName"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetChallenge": {
+      "occurrences": 11,
+      "native": [
+        "LL_Isaac__GetChallenge"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 116,
+          "refs": [
+            "LL_Isaac__GetChallenge"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetChallengeIdByName": {
+      "occurrences": 4,
+      "native": [
+        "LL_Isaac__GetChallengeIdByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 155,
+          "refs": [
+            "LL_Isaac__GetChallengeIdByName"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetCostumeIdByPath": {
+      "occurrences": 1,
+      "native": [
+        "LL_Isaac__GetCostumeIdByPath"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 160,
+          "refs": [
+            "LL_Isaac__GetCostumeIdByPath"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetEntityTypeByName": {
+      "occurrences": 1,
+      "native": [
+        "LL_Isaac__GetEntityTypeByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 120,
+          "refs": [
+            "LL_Isaac__GetEntityTypeByName"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetEntityVariantByName": {
+      "occurrences": 41,
+      "native": [
+        "LL_Isaac__GetEntityVariantByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 125,
+          "refs": [
+            "LL_Isaac__GetEntityVariantByName"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetFrameCount": {
+      "occurrences": 8,
+      "native": [
+        "LL_Isaac__GetFrameCount"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 69,
+          "refs": [
+            "LL_Isaac__GetFrameCount"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetFreeNearPosition": {
+      "occurrences": 18,
+      "native": [
+        "LL_Isaac__GetFreeNearPosition"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 102,
+          "refs": [
+            "LL_Isaac__GetFreeNearPosition"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetItemIdByName": {
+      "occurrences": 84,
+      "native": [
+        "LL_Isaac__GetItemIdByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 130,
+          "refs": [
+            "LL_Isaac__GetItemIdByName"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetPillEffectByName": {
+      "occurrences": 6,
+      "native": [
+        "LL_Isaac__GetPillEffectByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 145,
+          "refs": [
+            "LL_Isaac__GetPillEffectByName"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetPlayer": {
+      "occurrences": 59,
+      "native": [
+        "LL_Isaac__GetPlayer"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 64,
+          "refs": [
+            "LL_Isaac__GetPlayer"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetScreenHeight": {
+      "occurrences": 2,
+      "native": [
+        "LL_Isaac__GetScreenHeight"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 214,
+          "refs": [
+            "LL_Isaac__GetScreenHeight"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetScreenWidth": {
+      "occurrences": 2,
+      "native": [
+        "LL_Isaac__GetScreenWidth"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 210,
+          "refs": [
+            "LL_Isaac__GetScreenWidth"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetSoundIdByName": {
+      "occurrences": 56,
+      "native": [
+        "LL_Isaac__GetSoundIdByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 175,
+          "refs": [
+            "LL_Isaac__GetSoundIdByName"
+          ]
+        }
+      ]
+    },
+    "Isaac.GetTrinketIdByName": {
+      "occurrences": 23,
+      "native": [
+        "LL_Isaac__GetTrinketIdByName"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 150,
+          "refs": [
+            "LL_Isaac__GetTrinketIdByName"
+          ]
+        }
+      ]
+    },
+    "Isaac.RenderScaledText": {
+      "occurrences": 1,
+      "native": [
+        "LL_Isaac__RenderScaledText"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 81,
+          "refs": [
+            "LL_Isaac__RenderScaledText"
+          ]
+        }
+      ]
+    },
+    "Isaac.RenderText": {
+      "occurrences": 2,
+      "native": [
+        "LL_Isaac__RenderText"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 73,
+          "refs": [
+            "LL_Isaac__RenderText"
+          ]
+        }
+      ]
+    },
+    "Isaac.WorldToRenderPosition": {
+      "occurrences": 2,
+      "native": [
+        "LL_Isaac__WorldToRenderPosition"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 243,
+          "refs": [
+            "LL_Isaac__WorldToRenderPosition"
+          ]
+        }
+      ]
+    },
+    "Isaac.WorldToScreen": {
+      "occurrences": 6,
+      "native": [
+        "LL_Isaac__WorldToScreen"
+      ],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/bindings.lua",
+          "line": 229,
+          "refs": [
+            "LL_Isaac__WorldToScreen"
+          ]
+        }
+      ]
+    },
+    "RegisterMod": {
+      "occurrences": 3,
+      "native": [],
+      "wrappers": [
+        {
+          "file": "switch-port/reference/stock-lua/dlc/resources/scripts_v2/main.lua",
+          "line": 533,
+          "refs": []
+        }
+      ]
+    },
+    "Isaac.Spawn": {
+      "occurrences": 204,
+      "native": [
+        "LL_Game__Spawn"
+      ],
+      "wrappers": [
+        {
+          "alias_of": "Game.Spawn"
+        }
+      ]
+    },
+    "Isaac.FindByType": {
+      "occurrences": 87,
+      "native": [
+        "LL_Isaac__FindByType"
+      ],
+      "wrappers": []
+    },
+    "Isaac.FindInRadius": {
+      "occurrences": 30,
+      "native": [
+        "LL_Isaac__FindInRadius"
+      ],
+      "wrappers": []
+    },
+    "Isaac.AddPriorityCallback": {
+      "occurrences": 39,
+      "native": [
+        "L_EnableCallback"
+      ],
+      "wrappers": [
+        {
+          "alias_of": "Isaac.AddCallback"
+        }
+      ]
+    }
+  },
+  "unmapped_high_level": {
+    "*::GetData": 748,
+    "*::addCollectible": 337,
+    "*::addCard": 234,
+    "Vector": 170,
+    "*::GetEffects": 151,
+    "*::GetOtherTwin": 150,
+    "*::addTrinket": 126,
+    "*::UpdateHealthMasks": 118,
+    "AddCallback": 89,
+    "*::GetSubPlayer": 88,
+    "Game": 88,
+    "*::FindByType": 87,
+    "*::GetInfoOfHealth": 81,
+    "*::SetSeed": 74,
+    "Sprite": 71,
+    "*::GetInfoOfKey": 70,
+    "*::UpdateBasegameHealthState": 69,
+    "*::PlayerIsIgnored": 63,
+    "*::RandomInt": 56,
+    "*::addEntity": 51,
+    "EntityRef": 45,
+    "*::GetCallbacks": 44,
+    "*::addIcon": 40,
+    "*::AddPriorityCallback": 39,
+    "*::CheckHealthIsInitializedForPlayer": 39,
+    "*::FromAngle": 39,
+    "*::CheckSubPlayerInfoOfPlayer": 38,
+    "*::CheckIfHealthOrderSet": 37,
+    "*::CanPickKey": 36,
+    "SFXManager": 35,
+    "*::ResyncHealthOfPlayer": 34,
+    "*::addCardMetadata": 33,
+    "*::addPill": 33,
+    "*::FindInRadius": 30,
+    "*::GetItemConfig": 30,
+    "*::GetItemPool": 29,
+    "*::GetTotalMaxHP": 29,
+    "*::Morph": 29,
+    "Isaac.GetItemConfig": 29,
+    "*::FindFreePickupSpawnPosition": 28,
+    "*::GetTotalKeys": 28,
+    "*::GetTotalRedHP": 28,
+    "*::Distance": 27,
+    "*::AddPickup": 25,
+    "*::GetCollectibleRNG": 25,
+    "*::GetTotalSoulHP": 25,
+    "*::GetLevel": 24,
+    "*::GetTotalHP": 24,
+    "*::ToPlayer": 24,
+    "*::GetTotalBoneHP": 23,
+    "*::AddIcon": 22,
+    "*::CheckFamiliar": 22,
+    "*::addGoldenTrinketMetadata": 22,
+    "*::SaveSaveData": 20,
+    "*::AddBasegameGoldenHealthWithoutModifiers": 17,
+    "*::IsShopItem": 17,
+    "*::IsFirstVisit": 16,
+    "*::ToPickup": 16,
+    "*::getDssSettings": 16,
+    "*::GetAmountUnoccupiedContainers": 15,
+    "*::GetHPOfKey": 15,
+    "*::PlayerIsTheForgotten": 15,
+    "*::GetRoomForOtherKeys": 13,
+    "*::AnimateCollectible": 12,
+    "*::GetBasegameBlackHeartsNum": 12,
+    "*::GetPlayerIndex": 12,
+    "*::AddBasegameEternalHealthWithoutModifiers": 11,
+    "*::AddBoneHearts": 11,
+    "*::ChangePlayerType": 11,
+    "*::CheckIfRedShouldUseCustomLogic": 11,
+    "*::GetGridEntity": 11,
+    "*::IsCoopGhost": 11,
+    "*::IsFoundSoul": 11,
+    "*::PlayerIsTheSoul": 11,
+    "*::RenderHealth": 11,
+    "*::appendToDescription": 11,
+    "*::FinishDamageDesync": 10,
+    "*::IsMirrorWorld": 10,
+    "*::IsTrinket": 10,
+    "*::Lerp": 10,
+    "*::RenderHolyMantle": 10,
+    "RNG": 10,
+    "*::AddBasegameRedHealthWithoutModifiers": 9,
+    "*::AddHeartsKissesFix": 9,
+    "*::GetGridSize": 9,
+    "*::GetHealthSprite": 9,
+    "*::GetTotalHPOfKey": 9,
+    "*::HandleGoldenRoom": 9,
+    "*::Length": 9,
+    "*::AddBasegameSoulHealthWithoutModifiers": 8,
+    "*::GetMenuKeybindSetting": 8,
+    "*::GetMenusNotified": 8,
+    "*::IsClear": 8,
+    "*::RestrictBoneHearts": 8,
+    "*::RestrictBrokenHearts": 8,
+    "*::AddSoulHeartsKissesFix": 7,
+    "*::CanPickRottenHearts": 7,
+    "*::ChangeVariant": 7,
+    "*::GetGamepadToggleSetting": 7,
+    "*::GetPaletteSetting": 7,
+    "*::HandleSodomAppleEffects": 7,
+    "*::HealRedAnywhere": 7,
+    "*::HealthHasTaintedMaggieProtection": 7,
+    "*::RemoveTemporaryHP": 7,
+    "*::RestrictRedHearts": 7,
+    "*::RestrictSoulHearts": 7,
+    "*::SaveMenuKeybindSetting": 7,
+    "*::SaveMenusNotified": 7,
+    "*::SavePaletteSetting": 7,
+    "*::assignTransformation": 7,
+    "*::AddBasegameBoneHealthWithoutModifiers": 6,
+    "*::AddBasegameMaxHealthWithoutModifiers": 6,
+    "*::AddTearFlags": 6,
+    "*::FireProjectile": 6,
+    "*::FollowParent": 6,
+    "*::GetDoor": 6,
+    "*::GetHudOffsetSetting": 6,
+    "*::GetMenusPoppedUp": 6,
+    "*::GetOtherHealthOrder": 6,
+    "*::GetPalette": 6,
+    "*::GetRedCapacity": 6,
+    "*::GetRedHealthOrder": 6,
+    "*::GetRoomEntities": 6,
+    "*::HealSoulAnywhere": 6,
+    "*::IsOpen": 6,
+    "*::OpenMenu": 6,
+    "*::RegisterHealthContainer": 6,
+    "*::RegisterSoulHealth": 6,
+    "*::SaveGamepadToggleSetting": 6,
+    "*::SaveHudOffsetSetting": 6,
+    "*::SaveMenuBuzzerSetting": 6,
+    "*::SaveMenuHintSetting": 6,
+    "*::SaveMenusPoppedUp": 6,
+    "*::addPillMetadata": 6,
+    "*::setOption": 6,
+    "GetPtrHash": 6,
+    "Isaac.GetRoomEntities": 6,
+    "*::AddBasegameRottenHealthWithoutModifiers": 5,
+    "*::AddBloodyBabylonPrevention": 5,
+    "*::AddBoneHeartsKissesFix": 5,
+    "*::AddItemWisp": 5,
+    "*::AddMaxHeartsKissesFix": 5,
+    "*::AddSoulCharge": 5,
+    "*::AddWhoreOfBabylonPrevention": 5,
+    "*::CheckIfSoulShouldUseCustomLogic": 5,
+    "*::ClearCandiesAndLockets": 5,
+    "*::FireTear": 5,
+    "*::GetDimension": 5,
+    "*::GetGridPosition": 5,
+    "*::GetHealthBackup": 5,
+    "*::GetMenuBuzzerSetting": 5,
+    "*::GetMenuHintSetting": 5,
+    "*::GetNumOverlayableHearts": 5,
+    "*::HandleGoldDamage": 5,
+    "*::PlayerIsBethany": 5,
+    "*::PlayerIsKeeper": 5,
+    "*::PlayerIsTaintedMaggie": 5,
+    "*::PlusContainerMain": 5,
+    "*::RegisterHealthOverlay": 5,
+    "*::RegisterRedHealth": 5,
+    "*::RemoveBloodyBabylonPrevention": 5,
+    "*::RemoveLowestPriorityRedKey": 5,
+    "*::RemoveWhoreOfBabylonPrevention": 5,
+    "*::RenderCustomHealthOfPlayer": 5,
+    "*::RestrictHeartContainers": 5,
+    "*::SetMinDamageCooldown": 5,
+    "*::ShootAngle": 5,
+    "*::SubtractTemporaryHP": 5,
+    "KColor": 5,
+    "*::AddBasegameBlackHealthWithoutModifiers": 4,
+    "*::AddEternalHeartsKissesFix": 4,
+    "*::AddGoldenHeartsKissesFix": 4,
+    "*::AddRottenHeartsKissesFix": 4,
+    "*::CanPickContainer": 4,
+    "*::CanPickRed": 4,
+    "*::CanPickSoul": 4,
+    "*::CheckIfBlackShouldUseCustomLogic": 4,
+    "*::CheckIfBoneShouldUseCustomLogic": 4,
+    "*::CheckIfRottenShouldUseCustomLogic": 4,
+    "*::CloseMenu": 4,
+    "*::DoesLogWantNotification": 4,
+    "*::GetCenterPos": 4,
+    "*::GetDamageCooldown": 4,
+    "*::GetHealableSoulHP": 4,
+    "*::GetHealthColor": 4,
+    "*::GetSoulCharge": 4,
+    "*::HandleRedEternalDamage": 4,
+    "*::HandleTemporaryHP": 4,
+    "*::HasFullHeartsAndSoulHearts": 4,
+    "*::OpenMenuToPath": 4,
+    "*::PlayerIsTaintedBethany": 4,
+    "*::RenderCurseOfTheUnknown": 4,
+    "*::RenderKeeperHealth": 4,
+    "*::ToFamiliar": 4,
+    "*::TryRemoveLowPrioritySoulFromMask": 4,
+    "*::addDescriptionModifier": 4,
+    "*::getLanguage": 4,
+    "Font": 4,
+    "*::AddBrokenHeartsKissesFix": 3,
+    "*::AddContainerMain": 3,
+    "*::AddFamiliarDescription": 3,
+    "*::AddMenu": 3,
+    "*::AddOverlayMain": 3,
+    "*::AddRedMain": 3,
+    "*::AddSoulMain": 3,
+    "*::AddToOrbit": 3,
+    "*::AnimateHappy": 3,
+    "*::AnimatePickup": 3,
+    "*::CanOpenGlobalMenu": 3,
+    "*::CheckHealthIsInitialized": 3,
+    "*::CheckIfEternalShouldUseCustomLogic": 3,
+    "*::CheckIfHealthOfPlayerChanged": 3,
+    "*::CheckIfSwapSubPlayerInfo": 3,
+    "*::CheckSubPlayerInfo": 3,
+    "*::GetAngleDegrees": 3,
+    "*::GetCoreInput": 3,
+    "*::GetCurrentOtherHealthForRendering": 3,
+    "*::GetDoorSlotPosition": 3,
+    "*::GetGreedAndMotherContainers": 3,
+    "*::GetGridIndex": 3,
+    "*::GetHUD": 3,
+    "*::GetHealthOrder": 3,
+    "*::GetOrbitPosition": 3,
+    "*::GetPriceOfPickup": 3,
+    "*::GetSeed": 3,
+    "*::GetTrueHeartLimit": 3,
+    "*::HandleCollectibleHP": 3,
+    "*::HandleGlassCannonOnBreaking": 3,
+    "*::HandleHealthOnConvertToGeneric": 3,
+    "*::HandleItemRecycle": 3,
+    "*::HasCustomRestocked": 3,
+    "*::IsDebugThreeActive": 3,
+    "*::IsExtraAnimationFinished": 3,
+    "*::IsMenuCore": 3,
+    "*::LoadHealthFromBackup": 3,
+    "*::LoadHealthOfPlayerFromBackup": 3,
+    "*::LoadModData": 3,
+    "*::MakeFamiliarAvailable": 3,
+    "*::PlusRedMain": 3,
+    "*::PlusSoulMain": 3,
+    "*::PostChangePlayerType": 3,
+    "*::PreChangePlayerType": 3,
+    "*::RemoveOtherKey": 3,
+    "*::ResetDamageCooldown": 3,
+    "*::SaveModData": 3,
+    "*::SetPocketActiveItem": 3,
+    "*::ToProjectile": 3,
+    "*::TriggerGoldHearts": 3,
+    "*::TriggerRestock": 3,
+    "*::TryConvertingRedHP": 3,
+    "*::TryConvertingSoulHP": 3,
+    "*::TryRemoveLowPriorityMaxFromMask": 3,
+    "*::TryRemoveLowPriorityRedFromMask": 3,
+    "*::TryRemoveStoreCredit": 3,
+    "*::UnregisterCallbacks": 3,
+    "*::back": 3,
+    "*::checkMenu": 3,
+    "*::drawMenu": 3,
+    "*::reloadButton": 3,
+    "Isaac.LoadModData": 3,
+    "Isaac.SaveModData": 3,
+    "*::AddBasegameBrokenHealthWithoutModifiers": 2,
+    "*::AddBlackHeartsKissesFix": 2,
+    "*::AddCandyHeartBonus": 2,
+    "*::AddEternalMain": 2,
+    "*::AddGoldMain": 2,
+    "*::AddPalettes": 2,
+    "*::AddSetting": 2,
+    "*::AddSoulLocketBonus": 2,
+    "*::AddSpace": 2,
+    "*::AddWisp": 2,
+    "*::AnimateSad": 2,
+    "*::BackupHealthForGlowingHourglass": 2,
+    "*::CanAffordPickup": 2,
+    "*::CheckBadLoad": 2,
+    "*::CheckDangerHealth": 2,
+    "*::CheckFadedHealth": 2,
+    "*::CheckIfHealthOfKeeperChanged": 2,
+    "*::CheckIfHealthValuesChanged": 2,
+    "*::CheckIfHeartShouldUseCustomLogic": 2,
+    "*::CheckIfPlayerRespawned": 2,
+    "*::CheckLeakingHealth": 2,
+    "*::ClearBasegameHealth": 2,
+    "*::ClearBasegameHealthNoOther": 2,
+    "*::ClearHealthForGenesis": 2,
+    "*::Close": 2,
+    "*::CollapseSubPlayerInfo": 2,
+    "*::CurrentlyHeldPillCallback": 2,
+    "*::EmptyAllHealth": 2,
+    "*::Explode": 2,
+    "*::GetBloodCharge": 2,
+    "*::GetCurrentRedHealthForRendering": 2,
+    "*::GetDamageStreams": 2,
+    "*::GetDefaultMenuSprites": 2,
+    "*::GetDefaultPanelSprites": 2,
+    "*::GetEternalRenderIndex": 2,
+    "*::GetForcedRedDamageStream": 2,
+    "*::GetGoldenRenderMask": 2,
+    "*::GetHealableRedHP": 2,
+    "*::GetHealthInOrder": 2,
+    "*::GetNumSteamSales": 2,
+    "*::GetOtherHealthMask": 2,
+    "*::GetRedHPToBeSpent": 2,
+    "*::GetRedHealthMask": 2,
+    "*::GetRoomShape": 2,
+    "*::GridSpawn": 2,
+    "*::HandleAbaddon": 2,
+    "*::HandleBasegameHealthStateUpdate": 2,
+    "*::HandleBoneEternalDamage": 2,
+    "*::HandleBrittleBonesCollection": 2,
+    "*::HandleBrittleBonesOnBreak": 2,
+    "*::HandleCollectiblePickup": 2,
+    "*::HandleDamage": 2,
+    "*::HandleDamageDesync": 2,
+    "*::HandleEternalHeartsPostChange": 2,
+    "*::HandleGoldenHeartsPostChange": 2,
+    "*::HandleHealthOnConvertFromForgotten": 2,
+    "*::HandleHealthOnConvertFromTheSoul": 2,
+    "*::HandleHealthOnConvertFromTwin": 2,
+    "*::HandleHealthOnConvertToBethany": 2,
+    "*::HandleHealthOnConvertToForgotten": 2,
+    "*::HandleHealthOnConvertToJacobEsau": 2,
+    "*::HandleHealthOnConvertToSoulHpPlayer": 2,
+    "*::HandleHealthOnConvertToTheSoul": 2,
+    "*::HandleHematemesis": 2,
+    "*::HandleOddNumberedRotten": 2,
+    "*::HandleReverseEmpress": 2,
+    "*::HandleReverseEmpressOnRemove": 2,
+    "*::HandleReverseFool": 2,
+    "*::HandleReverseSun": 2,
+    "*::HandleReverseSunSyncing": 2,
+    "*::HandleSoulEternalDamage": 2,
+    "*::HandleStrength": 2,
+    "*::HandleUnexpectedMax": 2,
+    "*::HandleUnexpectedRed": 2,
+    "*::HasRemovableMaxHP": 2,
+    "*::HeartCollisionCallback": 2,
+    "*::InitializeOtherHealthMasks": 2,
+    "*::InitializeOtherHealthOrder": 2,
+    "*::InitializeOverlays": 2,
+    "*::InitializeRedHealthMasks": 2,
+    "*::InitializeRedHealthOrder": 2,
+    "*::IsAscent": 2,
+    "*::IsCollectible": 2,
+    "*::IsHoldingItem": 2,
+    "*::IsHoldingTaintedForgotten": 2,
+    "*::IsMenuSafe": 2,
+    "*::IsPlayerUsingHorsePill": 2,
+    "*::LoadHealthForGlowingHourglass": 2,
+    "*::MinusContainerMain": 2,
+    "*::MinusRedMain": 2,
+    "*::MinusSoulMain": 2,
+    "*::OtherMaskHasMaxForRemoval": 2,
+    "*::OtherMaskHasSoul": 2,
+    "*::PlayerHasClots": 2,
+    "*::PlayerIsSoulHeartOnly": 2,
+    "*::QueueMenuOpen": 2,
+    "*::RemoveCallbacks": 2,
+    "*::RenderCustomHealth": 2,
+    "*::RenderCustomHealthCallback": 2,
+    "*::RenderHUD": 2,
+    "*::RenderShardOfGlass": 2,
+    "*::ResyncHealth": 2,
+    "*::ResyncOtherHealthOfPlayer": 2,
+    "*::ResyncOverlays": 2,
+    "*::ResyncRedHealthOfPlayer": 2,
+    "*::ShouldRestock": 2,
+    "*::SomeoneHasPoundOfFlesh": 2,
+    "*::SomeoneHasStoreCredit": 2,
+    "*::SplitSubPlayerInfo": 2,
+    "*::ToTear": 2,
+    "*::TryConvertOtherKey": 2,
+    "*::TryConvertingContainerHP": 2,
+    "*::TryHealingRedHP": 2,
+    "*::TryHealingSoulHP": 2,
+    "*::TryInsertingContainerHP": 2,
+    "*::TryInsertingRedHP": 2,
+    "*::TryInsertingSoulHP": 2,
+    "*::TryRemoveLowPriorityMaxFromAnywhere": 2,
+    "*::TryRemoveLowPriorityRedFromAnywhere": 2,
+    "*::TryRemoveLowPrioritySoulFromAnywhere": 2,
+    "*::UpdateBasegameHealthStateNoOther": 2,
+    "*::UpdateShardOfGlass": 2,
+    "*::UpdateShardOfGlassColor": 2,
+    "*::UseCardCallback": 2,
+    "*::UseItemCallback": 2,
+    "*::UseOverriddenAddFunctionForKeeperAndLost": 2,
+    "*::UsePillCallback": 2,
+    "*::addGaldrabokRune": 2,
+    "*::addTemporaryDmgBoost": 2,
+    "*::generate": 2,
+    "*::generateDynamicSet": 2,
+    "*::generateMenuDraw": 2,
+    "*::getInput": 2,
+    "*::handleInputs": 2,
+    "*::isPickupUnlocked": 2,
+    "*::playSound": 2,
+    "*::reloadButtons": 2,
+    "*::update": 2,
+    "Isaac.Explode": 2,
+    "Isaac.GridSpawn": 2,
+    "*::AddBlacklistedSodomGomorrahItems": 1,
+    "*::AddBlacklistedSodomGomorrahTrinkets": 1,
+    "*::AddBloodCharge": 1,
+    "*::AddBrittleBonesCacheCallback": 1,
+    "*::AddCandiesAndLocketsCacheCallback": 1,
+    "*::AddChangelog": 1,
+    "*::AddCheckIfHealthValuesChangedCallback": 1,
+    "*::AddClearCandiesAndLocketsCallback": 1,
+    "*::AddClearOnAbyssCallback": 1,
+    "*::AddClearOnVoidCallback": 1,
+    "*::AddCostume": 1,
+    "*::AddCurrentlyHeldPillCallback": 1,
+    "*::AddCurrentlyHeldPillForAllCallback": 1,
+    "*::AddEndTakeDamageCallback": 1,
+    "*::AddEsauJrCallback": 1,
+    "*::AddFlipCallback": 1,
+    "*::AddGenesisAndGlowingHourglassOnNewRoomCallback": 1,
+    "*::AddHallowPeffectCallback": 1,
+    "*::AddHallowPlayerCallback": 1,
+    "*::AddHallowRoomCallback": 1,
+    "*::AddHandleBloodOathCallback": 1,
+    "*::AddHandleDebugThreeCallback": 1,
+    "*::AddHandleSaveDataOnGameStartCallback": 1,
+    "*::AddHandleStrengthOnNewRoomCallback": 1,
+    "*::AddHeartCollisionCallback": 1,
+    "*::AddHeartSpikesCostCallback": 1,
+    "*::AddItem": 1,
+    "*::AddItemPedestalCollisionCallback": 1,
+    "*::AddMinisaac": 1,
+    "*::AddNullCostume": 1,
+    "*::AddPostEvaluateCacheCallback": 1,
+    "*::AddPreEvaluateCacheCallback": 1,
+    "*::AddPreUseClickerCallback": 1,
+    "*::AddPreUseGlowingHourglassCallback": 1,
+    "*::AddPreUseItemCallback": 1,
+    "*::AddPreventSumptoriumReloadOnRecallBugCallback": 1,
+    "*::AddProcessTakeDamageCallback": 1,
+    "*::AddRenderCustomHealthCallback": 1,
+    "*::AddRenderCustomHealthOfStrawmanCallback": 1,
+    "*::AddResetEvaluateCacheCallback": 1,
+    "*::AddResetRecursivePreventionCallback": 1,
+    "*::AddRestockPickupsCallback": 1,
+    "*::AddSaveDataOnExitCallback": 1,
+    "*::AddSaveDataOnNewLevelCallback": 1,
+    "*::AddSingularityPickups": 1,
+    "*::AddStrawmanDetectionCallback": 1,
+    "*::AddSumptoriumInitCallback": 1,
+    "*::AddSumptoriumPreSpawnCallback": 1,
+    "*::AddSumptoriumUpdateCallback": 1,
+    "*::AddSwarmFlyOrbital": 1,
+    "*::AddTestBadLoadCallback": 1,
+    "*::AddToFollowers": 1,
+    "*::AddUpdatePickupPriceCallback": 1,
+    "*::AddUpdateShardOfGlassCallback": 1,
+    "*::AddUpdateShardOfGlassColorCallback": 1,
+    "*::AddUseCardCallback": 1,
+    "*::AddUseClickerCallback": 1,
+    "*::AddUseGenesisCallback": 1,
+    "*::AddUseGlowingHourglassCallback": 1,
+    "*::AddUseItemCallback": 1,
+    "*::AddUsePillCallback": 1,
+    "*::AnimateCard": 1,
+    "*::BrittleBonesCacheCallback": 1,
+    "*::CallbackHandler": 1,
+    "*::CanPickupItem": 1,
+    "*::CandiesAndLocketsCacheCallback": 1,
+    "*::CheckIfHealthValuesChangedCallback": 1,
+    "*::CheckMenuOpenStageAPI": 1,
+    "*::ClearCandiesAndLocketsCallback": 1,
+    "*::ClearOnAbyssCallback": 1,
+    "*::ClearOnVoidCallback": 1,
+    "*::CurrentlyHeldPillForAllCallback": 1,
+    "*::DefineContainerForRedHealth": 1,
+    "*::DestroyGrid": 1,
+    "*::EndTakeDamageCallback": 1,
+    "*::EsauJrCallback": 1,
+    "*::FindGridPath": 1,
+    "*::FireBomb": 1,
+    "*::FlipCallback": 1,
+    "*::GenesisAndGlowingHourglassOnNewRoomCallback": 1,
+    "*::GetAwardSeed": 1,
+    "*::GetBabySkin": 1,
+    "*::GetBackdropType": 1,
+    "*::GetGridEntityFromPos": 1,
+    "*::GetSeeds": 1,
+    "*::GetSoulHPToBeSpent": 1,
+    "*::GetTearMovementInheritance": 1,
+    "*::GetTopLeftPos": 1,
+    "*::GetTrinketRNG": 1,
+    "*::GetUnlockedVanillaCollectible": 1,
+    "*::HallowPeffectCallback": 1,
+    "*::HallowPlayerCallback": 1,
+    "*::HallowRoomCallback": 1,
+    "*::HandleBloodOathCallback": 1,
+    "*::HandleDebugThreeCallback": 1,
+    "*::HandleForcedRedDamage": 1,
+    "*::HandleRegularDamage": 1,
+    "*::HandleSaveDataOnGameStartCallback": 1,
+    "*::HandleStrengthOnNewRoomCallback": 1,
+    "*::HasProjectileFlags": 1,
+    "*::HeartSpikesCostCallback": 1,
+    "*::IsDoorSlotAllowed": 1,
+    "*::IsPauseMenuOpen": 1,
+    "*::ItemPedestalCollisionCallback": 1,
+    "*::LengthSquared": 1,
+    "*::Next": 1,
+    "*::Normalized": 1,
+    "*::Open": 1,
+    "*::OriginalAddCallback": 1,
+    "*::PostEvaluateCacheCallback": 1,
+    "*::PreEvaluateCacheCallback": 1,
+    "*::PreUseClickerCallback": 1,
+    "*::PreUseGlowingHourglassCallback": 1,
+    "*::PreUseItemCallback": 1,
+    "*::PreventSumptoriumReloadOnRecallBugCallback": 1,
+    "*::ProcessTakeDamageCallback": 1,
+    "*::RegisterCharacterAsConvertingMaxHealth": 1,
+    "*::RegisterCharacterAsRedHealthless": 1,
+    "*::RegisterSprite": 1,
+    "*::RemoveBrittleBonesCacheCallback": 1,
+    "*::RemoveCandiesAndLocketsCacheCallback": 1,
+    "*::RemoveCheckIfHealthValuesChangedCallback": 1,
+    "*::RemoveClearCandiesAndLocketsCallback": 1,
+    "*::RemoveClearOnAbyssCallback": 1,
+    "*::RemoveClearOnVoidCallback": 1,
+    "*::RemoveCostume": 1,
+    "*::RemoveCurrentlyHeldPillCallback": 1,
+    "*::RemoveCurrentlyHeldPillForAllCallback": 1,
+    "*::RemoveEndTakeDamageCallback": 1,
+    "*::RemoveEsauJrCallback": 1,
+    "*::RemoveFlipCallback": 1,
+    "*::RemoveGenesisAndGlowingHourglassOnNewRoomCallback": 1,
+    "*::RemoveGridEntity": 1,
+    "*::RemoveHallowPeffectCallback": 1,
+    "*::RemoveHallowPlayerCallback": 1,
+    "*::RemoveHallowRoomCallback": 1,
+    "*::RemoveHandleBloodOathCallback": 1,
+    "*::RemoveHandleDebugThreeCallback": 1,
+    "*::RemoveHandleSaveDataOnGameStartCallback": 1,
+    "*::RemoveHandleStrengthOnNewRoomCallback": 1,
+    "*::RemoveHeartCollisionCallback": 1,
+    "*::RemoveHeartSpikesCostCallback": 1,
+    "*::RemoveItemPedestalCollisionCallback": 1,
+    "*::RemovePostEvaluateCacheCallback": 1,
+    "*::RemovePreEvaluateCacheCallback": 1,
+    "*::RemovePreUseClickerCallback": 1,
+    "*::RemovePreUseGlowingHourglassCallback": 1,
+    "*::RemovePreUseItemCallback": 1,
+    "*::RemovePreventSumptoriumReloadOnRecallBugCallback": 1,
+    "*::RemoveProcessTakeDamageCallback": 1,
+    "*::RemoveRedKey": 1,
+    "*::RemoveRenderCustomHealthCallback": 1,
+    "*::RemoveRenderCustomHealthOfStrawmanCallback": 1,
+    "*::RemoveResetEvaluateCacheCallback": 1,
+    "*::RemoveResetRecursivePreventionCallback": 1,
+    "*::RemoveRestockPickupsCallback": 1,
+    "*::RemoveSaveDataOnExitCallback": 1,
+    "*::RemoveSaveDataOnNewLevelCallback": 1,
+    "*::RemoveStrawmanDetectionCallback": 1,
+    "*::RemoveSumptoriumInitCallback": 1,
+    "*::RemoveSumptoriumPreSpawnCallback": 1,
+    "*::RemoveSumptoriumUpdateCallback": 1,
+    "*::RemoveTestBadLoadCallback": 1,
+    "*::RemoveUpdatePickupPriceCallback": 1,
+    "*::RemoveUpdateShardOfGlassCallback": 1,
+    "*::RemoveUpdateShardOfGlassColorCallback": 1,
+    "*::RemoveUseCardCallback": 1,
+    "*::RemoveUseClickerCallback": 1,
+    "*::RemoveUseGenesisCallback": 1,
+    "*::RemoveUseGlowingHourglassCallback": 1,
+    "*::RemoveUseItemCallback": 1,
+    "*::RemoveUsePillCallback": 1,
+    "*::RenderCustomHealthOfStrawmanCallback": 1,
+    "*::ResetBuzzerCheck": 1,
+    "*::ResetEvaluateCacheCallback": 1,
+    "*::ResetPlayerData": 1,
+    "*::ResetRecursivePreventionCallback": 1,
+    "*::ResetSpriteScale": 1,
+    "*::Resized": 1,
+    "*::RestockPickupsCallback": 1,
+    "*::Revive": 1,
+    "*::Run": 1,
+    "*::SaveDataOnExitCallback": 1,
+    "*::SaveDataOnNewLevelCallback": 1,
+    "*::StrawmanDetectionCallback": 1,
+    "*::SumptoriumInitCallback": 1,
+    "*::SumptoriumPreSpawnCallback": 1,
+    "*::SumptoriumUpdateCallback": 1,
+    "*::TakeDamageEntity": 1,
+    "*::TakeDamagePlayer": 1,
+    "*::TestBadLoadCallback": 1,
+    "*::ToEffect": 1,
+    "*::ToKnife": 1,
+    "*::TriggerGoldHeartsOld": 1,
+    "*::TryRemoveNullCostume": 1,
+    "*::UpdateCategory": 1,
+    "*::UpdatePickupPriceCallback": 1,
+    "*::UpdateShardOfGlassCallback": 1,
+    "*::UpdateShardOfGlassColorCallback": 1,
+    "*::UseCard": 1,
+    "*::UseClickerCallback": 1,
+    "*::UseGenesisCallback": 1,
+    "*::UseGlowingHourglassCallback": 1,
+    "*::UsePill": 1,
+    "*::WillPlayerRevive": 1,
+    "*::changefunc": 1,
+    "*::closeMenu": 1,
+    "*::condition": 1,
+    "*::displayif": 1,
+    "*::getDescriptionEntry": 1,
+    "*::getSpindownResult": 1,
+    "*::isSelfDamage": 1,
+    "*::load": 1,
+    "*::onRevival": 1,
+    "*::openMenu": 1,
+    "*::postrender": 1,
+    "*::runMenu": 1,
+    "*::setModIndicatorIcon": 1,
+    "*::setModIndicatorName": 1,
+    "*::store": 1,
+    "*::storeDssSettings": 1
+  },
+  "unmapped_categories": {
+    "exact_public_or_global": {
+      "Vector": 170,
+      "AddCallback": 89,
+      "Game": 88,
+      "Sprite": 71,
+      "EntityRef": 45,
+      "SFXManager": 35,
+      "Isaac.GetItemConfig": 29,
+      "RNG": 10,
+      "GetPtrHash": 6,
+      "Isaac.GetRoomEntities": 6,
+      "KColor": 5,
+      "Font": 4,
+      "Isaac.LoadModData": 3,
+      "Isaac.SaveModData": 3,
+      "Isaac.Explode": 2,
+      "Isaac.GridSpawn": 2
+    },
+    "dynamic_engine_methods": {
+      "*::GetData": 748,
+      "*::addCollectible": 337,
+      "*::addCard": 234,
+      "*::GetEffects": 151,
+      "*::GetOtherTwin": 150,
+      "*::addTrinket": 126,
+      "*::UpdateHealthMasks": 118,
+      "*::GetSubPlayer": 88,
+      "*::FindByType": 87,
+      "*::GetInfoOfHealth": 81,
+      "*::SetSeed": 74,
+      "*::GetInfoOfKey": 70,
+      "*::UpdateBasegameHealthState": 69,
+      "*::PlayerIsIgnored": 63,
+      "*::RandomInt": 56,
+      "*::addEntity": 51,
+      "*::GetCallbacks": 44,
+      "*::addIcon": 40,
+      "*::AddPriorityCallback": 39,
+      "*::CheckHealthIsInitializedForPlayer": 39,
+      "*::FromAngle": 39,
+      "*::CheckSubPlayerInfoOfPlayer": 38,
+      "*::CheckIfHealthOrderSet": 37,
+      "*::CanPickKey": 36,
+      "*::ResyncHealthOfPlayer": 34,
+      "*::addCardMetadata": 33,
+      "*::addPill": 33,
+      "*::FindInRadius": 30,
+      "*::GetItemConfig": 30,
+      "*::GetItemPool": 29,
+      "*::GetTotalMaxHP": 29,
+      "*::Morph": 29,
+      "*::FindFreePickupSpawnPosition": 28,
+      "*::GetTotalKeys": 28,
+      "*::GetTotalRedHP": 28,
+      "*::Distance": 27,
+      "*::AddPickup": 25,
+      "*::GetCollectibleRNG": 25,
+      "*::GetTotalSoulHP": 25,
+      "*::GetLevel": 24,
+      "*::GetTotalHP": 24,
+      "*::ToPlayer": 24,
+      "*::GetTotalBoneHP": 23,
+      "*::AddIcon": 22,
+      "*::CheckFamiliar": 22,
+      "*::addGoldenTrinketMetadata": 22,
+      "*::SaveSaveData": 20,
+      "*::AddBasegameGoldenHealthWithoutModifiers": 17,
+      "*::IsShopItem": 17,
+      "*::IsFirstVisit": 16,
+      "*::ToPickup": 16,
+      "*::getDssSettings": 16,
+      "*::GetAmountUnoccupiedContainers": 15,
+      "*::GetHPOfKey": 15,
+      "*::PlayerIsTheForgotten": 15,
+      "*::GetRoomForOtherKeys": 13,
+      "*::AnimateCollectible": 12,
+      "*::GetBasegameBlackHeartsNum": 12,
+      "*::GetPlayerIndex": 12,
+      "*::AddBasegameEternalHealthWithoutModifiers": 11,
+      "*::AddBoneHearts": 11,
+      "*::ChangePlayerType": 11,
+      "*::CheckIfRedShouldUseCustomLogic": 11,
+      "*::GetGridEntity": 11,
+      "*::IsCoopGhost": 11,
+      "*::IsFoundSoul": 11,
+      "*::PlayerIsTheSoul": 11,
+      "*::RenderHealth": 11,
+      "*::appendToDescription": 11,
+      "*::FinishDamageDesync": 10,
+      "*::IsMirrorWorld": 10,
+      "*::IsTrinket": 10,
+      "*::Lerp": 10,
+      "*::RenderHolyMantle": 10,
+      "*::AddBasegameRedHealthWithoutModifiers": 9,
+      "*::AddHeartsKissesFix": 9,
+      "*::GetGridSize": 9,
+      "*::GetHealthSprite": 9,
+      "*::GetTotalHPOfKey": 9,
+      "*::HandleGoldenRoom": 9,
+      "*::Length": 9,
+      "*::AddBasegameSoulHealthWithoutModifiers": 8,
+      "*::GetMenuKeybindSetting": 8,
+      "*::GetMenusNotified": 8,
+      "*::IsClear": 8,
+      "*::RestrictBoneHearts": 8,
+      "*::RestrictBrokenHearts": 8,
+      "*::AddSoulHeartsKissesFix": 7,
+      "*::CanPickRottenHearts": 7,
+      "*::ChangeVariant": 7,
+      "*::GetGamepadToggleSetting": 7,
+      "*::GetPaletteSetting": 7,
+      "*::HandleSodomAppleEffects": 7,
+      "*::HealRedAnywhere": 7,
+      "*::HealthHasTaintedMaggieProtection": 7,
+      "*::RemoveTemporaryHP": 7,
+      "*::RestrictRedHearts": 7,
+      "*::RestrictSoulHearts": 7,
+      "*::SaveMenuKeybindSetting": 7,
+      "*::SaveMenusNotified": 7,
+      "*::SavePaletteSetting": 7,
+      "*::assignTransformation": 7,
+      "*::AddBasegameBoneHealthWithoutModifiers": 6,
+      "*::AddBasegameMaxHealthWithoutModifiers": 6,
+      "*::AddTearFlags": 6,
+      "*::FireProjectile": 6,
+      "*::FollowParent": 6,
+      "*::GetDoor": 6,
+      "*::GetHudOffsetSetting": 6,
+      "*::GetMenusPoppedUp": 6,
+      "*::GetOtherHealthOrder": 6,
+      "*::GetPalette": 6,
+      "*::GetRedCapacity": 6,
+      "*::GetRedHealthOrder": 6,
+      "*::GetRoomEntities": 6,
+      "*::HealSoulAnywhere": 6,
+      "*::IsOpen": 6,
+      "*::OpenMenu": 6,
+      "*::RegisterHealthContainer": 6,
+      "*::RegisterSoulHealth": 6,
+      "*::SaveGamepadToggleSetting": 6,
+      "*::SaveHudOffsetSetting": 6,
+      "*::SaveMenuBuzzerSetting": 6,
+      "*::SaveMenuHintSetting": 6,
+      "*::SaveMenusPoppedUp": 6,
+      "*::addPillMetadata": 6,
+      "*::setOption": 6,
+      "*::AddBasegameRottenHealthWithoutModifiers": 5,
+      "*::AddBloodyBabylonPrevention": 5,
+      "*::AddBoneHeartsKissesFix": 5,
+      "*::AddItemWisp": 5,
+      "*::AddMaxHeartsKissesFix": 5,
+      "*::AddSoulCharge": 5,
+      "*::AddWhoreOfBabylonPrevention": 5,
+      "*::CheckIfSoulShouldUseCustomLogic": 5,
+      "*::ClearCandiesAndLockets": 5,
+      "*::FireTear": 5,
+      "*::GetDimension": 5,
+      "*::GetGridPosition": 5,
+      "*::GetHealthBackup": 5,
+      "*::GetMenuBuzzerSetting": 5,
+      "*::GetMenuHintSetting": 5,
+      "*::GetNumOverlayableHearts": 5,
+      "*::HandleGoldDamage": 5,
+      "*::PlayerIsBethany": 5,
+      "*::PlayerIsKeeper": 5,
+      "*::PlayerIsTaintedMaggie": 5,
+      "*::PlusContainerMain": 5,
+      "*::RegisterHealthOverlay": 5,
+      "*::RegisterRedHealth": 5,
+      "*::RemoveBloodyBabylonPrevention": 5,
+      "*::RemoveLowestPriorityRedKey": 5,
+      "*::RemoveWhoreOfBabylonPrevention": 5,
+      "*::RenderCustomHealthOfPlayer": 5,
+      "*::RestrictHeartContainers": 5,
+      "*::SetMinDamageCooldown": 5,
+      "*::ShootAngle": 5,
+      "*::SubtractTemporaryHP": 5,
+      "*::AddBasegameBlackHealthWithoutModifiers": 4,
+      "*::AddEternalHeartsKissesFix": 4,
+      "*::AddGoldenHeartsKissesFix": 4,
+      "*::AddRottenHeartsKissesFix": 4,
+      "*::CanPickContainer": 4,
+      "*::CanPickRed": 4,
+      "*::CanPickSoul": 4,
+      "*::CheckIfBlackShouldUseCustomLogic": 4,
+      "*::CheckIfBoneShouldUseCustomLogic": 4,
+      "*::CheckIfRottenShouldUseCustomLogic": 4,
+      "*::CloseMenu": 4,
+      "*::DoesLogWantNotification": 4,
+      "*::GetCenterPos": 4,
+      "*::GetDamageCooldown": 4,
+      "*::GetHealableSoulHP": 4,
+      "*::GetHealthColor": 4,
+      "*::GetSoulCharge": 4,
+      "*::HandleRedEternalDamage": 4,
+      "*::HandleTemporaryHP": 4,
+      "*::HasFullHeartsAndSoulHearts": 4,
+      "*::OpenMenuToPath": 4,
+      "*::PlayerIsTaintedBethany": 4,
+      "*::RenderCurseOfTheUnknown": 4,
+      "*::RenderKeeperHealth": 4,
+      "*::ToFamiliar": 4,
+      "*::TryRemoveLowPrioritySoulFromMask": 4,
+      "*::addDescriptionModifier": 4,
+      "*::getLanguage": 4,
+      "*::AddBrokenHeartsKissesFix": 3,
+      "*::AddContainerMain": 3,
+      "*::AddFamiliarDescription": 3,
+      "*::AddMenu": 3,
+      "*::AddOverlayMain": 3,
+      "*::AddRedMain": 3,
+      "*::AddSoulMain": 3,
+      "*::AddToOrbit": 3,
+      "*::AnimateHappy": 3,
+      "*::AnimatePickup": 3,
+      "*::CanOpenGlobalMenu": 3,
+      "*::CheckHealthIsInitialized": 3,
+      "*::CheckIfEternalShouldUseCustomLogic": 3,
+      "*::CheckIfHealthOfPlayerChanged": 3,
+      "*::CheckIfSwapSubPlayerInfo": 3,
+      "*::CheckSubPlayerInfo": 3,
+      "*::GetAngleDegrees": 3,
+      "*::GetCoreInput": 3,
+      "*::GetCurrentOtherHealthForRendering": 3,
+      "*::GetDoorSlotPosition": 3,
+      "*::GetGreedAndMotherContainers": 3,
+      "*::GetGridIndex": 3,
+      "*::GetHUD": 3,
+      "*::GetHealthOrder": 3,
+      "*::GetOrbitPosition": 3,
+      "*::GetPriceOfPickup": 3,
+      "*::GetSeed": 3,
+      "*::GetTrueHeartLimit": 3,
+      "*::HandleCollectibleHP": 3,
+      "*::HandleGlassCannonOnBreaking": 3,
+      "*::HandleHealthOnConvertToGeneric": 3,
+      "*::HandleItemRecycle": 3,
+      "*::HasCustomRestocked": 3,
+      "*::IsDebugThreeActive": 3,
+      "*::IsExtraAnimationFinished": 3,
+      "*::IsMenuCore": 3,
+      "*::LoadHealthFromBackup": 3,
+      "*::LoadHealthOfPlayerFromBackup": 3,
+      "*::LoadModData": 3,
+      "*::MakeFamiliarAvailable": 3,
+      "*::PlusRedMain": 3,
+      "*::PlusSoulMain": 3,
+      "*::PostChangePlayerType": 3,
+      "*::PreChangePlayerType": 3,
+      "*::RemoveOtherKey": 3,
+      "*::ResetDamageCooldown": 3,
+      "*::SaveModData": 3,
+      "*::SetPocketActiveItem": 3,
+      "*::ToProjectile": 3,
+      "*::TriggerGoldHearts": 3,
+      "*::TriggerRestock": 3,
+      "*::TryConvertingRedHP": 3,
+      "*::TryConvertingSoulHP": 3,
+      "*::TryRemoveLowPriorityMaxFromMask": 3,
+      "*::TryRemoveLowPriorityRedFromMask": 3,
+      "*::TryRemoveStoreCredit": 3,
+      "*::UnregisterCallbacks": 3,
+      "*::back": 3,
+      "*::checkMenu": 3,
+      "*::drawMenu": 3,
+      "*::reloadButton": 3,
+      "*::AddBasegameBrokenHealthWithoutModifiers": 2,
+      "*::AddBlackHeartsKissesFix": 2,
+      "*::AddCandyHeartBonus": 2,
+      "*::AddEternalMain": 2,
+      "*::AddGoldMain": 2,
+      "*::AddPalettes": 2,
+      "*::AddSetting": 2,
+      "*::AddSoulLocketBonus": 2,
+      "*::AddSpace": 2,
+      "*::AddWisp": 2,
+      "*::AnimateSad": 2,
+      "*::BackupHealthForGlowingHourglass": 2,
+      "*::CanAffordPickup": 2,
+      "*::CheckBadLoad": 2,
+      "*::CheckDangerHealth": 2,
+      "*::CheckFadedHealth": 2,
+      "*::CheckIfHealthOfKeeperChanged": 2,
+      "*::CheckIfHealthValuesChanged": 2,
+      "*::CheckIfHeartShouldUseCustomLogic": 2,
+      "*::CheckIfPlayerRespawned": 2,
+      "*::CheckLeakingHealth": 2,
+      "*::ClearBasegameHealth": 2,
+      "*::ClearBasegameHealthNoOther": 2,
+      "*::ClearHealthForGenesis": 2,
+      "*::Close": 2,
+      "*::CollapseSubPlayerInfo": 2,
+      "*::CurrentlyHeldPillCallback": 2,
+      "*::EmptyAllHealth": 2,
+      "*::Explode": 2,
+      "*::GetBloodCharge": 2,
+      "*::GetCurrentRedHealthForRendering": 2,
+      "*::GetDamageStreams": 2,
+      "*::GetDefaultMenuSprites": 2,
+      "*::GetDefaultPanelSprites": 2,
+      "*::GetEternalRenderIndex": 2,
+      "*::GetForcedRedDamageStream": 2,
+      "*::GetGoldenRenderMask": 2,
+      "*::GetHealableRedHP": 2,
+      "*::GetHealthInOrder": 2,
+      "*::GetNumSteamSales": 2,
+      "*::GetOtherHealthMask": 2,
+      "*::GetRedHPToBeSpent": 2,
+      "*::GetRedHealthMask": 2,
+      "*::GetRoomShape": 2,
+      "*::GridSpawn": 2,
+      "*::HandleAbaddon": 2,
+      "*::HandleBasegameHealthStateUpdate": 2,
+      "*::HandleBoneEternalDamage": 2,
+      "*::HandleBrittleBonesCollection": 2,
+      "*::HandleBrittleBonesOnBreak": 2,
+      "*::HandleCollectiblePickup": 2,
+      "*::HandleDamage": 2,
+      "*::HandleDamageDesync": 2,
+      "*::HandleEternalHeartsPostChange": 2,
+      "*::HandleGoldenHeartsPostChange": 2,
+      "*::HandleHealthOnConvertFromForgotten": 2,
+      "*::HandleHealthOnConvertFromTheSoul": 2,
+      "*::HandleHealthOnConvertFromTwin": 2,
+      "*::HandleHealthOnConvertToBethany": 2,
+      "*::HandleHealthOnConvertToForgotten": 2,
+      "*::HandleHealthOnConvertToJacobEsau": 2,
+      "*::HandleHealthOnConvertToSoulHpPlayer": 2,
+      "*::HandleHealthOnConvertToTheSoul": 2,
+      "*::HandleHematemesis": 2,
+      "*::HandleOddNumberedRotten": 2,
+      "*::HandleReverseEmpress": 2,
+      "*::HandleReverseEmpressOnRemove": 2,
+      "*::HandleReverseFool": 2,
+      "*::HandleReverseSun": 2,
+      "*::HandleReverseSunSyncing": 2,
+      "*::HandleSoulEternalDamage": 2,
+      "*::HandleStrength": 2,
+      "*::HandleUnexpectedMax": 2,
+      "*::HandleUnexpectedRed": 2,
+      "*::HasRemovableMaxHP": 2,
+      "*::HeartCollisionCallback": 2,
+      "*::InitializeOtherHealthMasks": 2,
+      "*::InitializeOtherHealthOrder": 2,
+      "*::InitializeOverlays": 2,
+      "*::InitializeRedHealthMasks": 2,
+      "*::InitializeRedHealthOrder": 2,
+      "*::IsAscent": 2,
+      "*::IsCollectible": 2,
+      "*::IsHoldingItem": 2,
+      "*::IsHoldingTaintedForgotten": 2,
+      "*::IsMenuSafe": 2,
+      "*::IsPlayerUsingHorsePill": 2,
+      "*::LoadHealthForGlowingHourglass": 2,
+      "*::MinusContainerMain": 2,
+      "*::MinusRedMain": 2,
+      "*::MinusSoulMain": 2,
+      "*::OtherMaskHasMaxForRemoval": 2,
+      "*::OtherMaskHasSoul": 2,
+      "*::PlayerHasClots": 2,
+      "*::PlayerIsSoulHeartOnly": 2,
+      "*::QueueMenuOpen": 2,
+      "*::RemoveCallbacks": 2,
+      "*::RenderCustomHealth": 2,
+      "*::RenderCustomHealthCallback": 2,
+      "*::RenderHUD": 2,
+      "*::RenderShardOfGlass": 2,
+      "*::ResyncHealth": 2,
+      "*::ResyncOtherHealthOfPlayer": 2,
+      "*::ResyncOverlays": 2,
+      "*::ResyncRedHealthOfPlayer": 2,
+      "*::ShouldRestock": 2,
+      "*::SomeoneHasPoundOfFlesh": 2,
+      "*::SomeoneHasStoreCredit": 2,
+      "*::SplitSubPlayerInfo": 2,
+      "*::ToTear": 2,
+      "*::TryConvertOtherKey": 2,
+      "*::TryConvertingContainerHP": 2,
+      "*::TryHealingRedHP": 2,
+      "*::TryHealingSoulHP": 2,
+      "*::TryInsertingContainerHP": 2,
+      "*::TryInsertingRedHP": 2,
+      "*::TryInsertingSoulHP": 2,
+      "*::TryRemoveLowPriorityMaxFromAnywhere": 2,
+      "*::TryRemoveLowPriorityRedFromAnywhere": 2,
+      "*::TryRemoveLowPrioritySoulFromAnywhere": 2,
+      "*::UpdateBasegameHealthStateNoOther": 2,
+      "*::UpdateShardOfGlass": 2,
+      "*::UpdateShardOfGlassColor": 2,
+      "*::UseCardCallback": 2,
+      "*::UseItemCallback": 2,
+      "*::UseOverriddenAddFunctionForKeeperAndLost": 2,
+      "*::UsePillCallback": 2,
+      "*::addGaldrabokRune": 2,
+      "*::addTemporaryDmgBoost": 2,
+      "*::generate": 2,
+      "*::generateDynamicSet": 2,
+      "*::generateMenuDraw": 2,
+      "*::getInput": 2,
+      "*::handleInputs": 2,
+      "*::isPickupUnlocked": 2,
+      "*::playSound": 2,
+      "*::reloadButtons": 2,
+      "*::update": 2,
+      "*::AddBlacklistedSodomGomorrahItems": 1,
+      "*::AddBlacklistedSodomGomorrahTrinkets": 1,
+      "*::AddBloodCharge": 1,
+      "*::AddBrittleBonesCacheCallback": 1,
+      "*::AddCandiesAndLocketsCacheCallback": 1,
+      "*::AddChangelog": 1,
+      "*::AddCheckIfHealthValuesChangedCallback": 1,
+      "*::AddClearCandiesAndLocketsCallback": 1,
+      "*::AddClearOnAbyssCallback": 1,
+      "*::AddClearOnVoidCallback": 1,
+      "*::AddCostume": 1,
+      "*::AddCurrentlyHeldPillCallback": 1,
+      "*::AddCurrentlyHeldPillForAllCallback": 1,
+      "*::AddEndTakeDamageCallback": 1,
+      "*::AddEsauJrCallback": 1,
+      "*::AddFlipCallback": 1,
+      "*::AddGenesisAndGlowingHourglassOnNewRoomCallback": 1,
+      "*::AddHallowPeffectCallback": 1,
+      "*::AddHallowPlayerCallback": 1,
+      "*::AddHallowRoomCallback": 1,
+      "*::AddHandleBloodOathCallback": 1,
+      "*::AddHandleDebugThreeCallback": 1,
+      "*::AddHandleSaveDataOnGameStartCallback": 1,
+      "*::AddHandleStrengthOnNewRoomCallback": 1,
+      "*::AddHeartCollisionCallback": 1,
+      "*::AddHeartSpikesCostCallback": 1,
+      "*::AddItem": 1,
+      "*::AddItemPedestalCollisionCallback": 1,
+      "*::AddMinisaac": 1,
+      "*::AddNullCostume": 1,
+      "*::AddPostEvaluateCacheCallback": 1,
+      "*::AddPreEvaluateCacheCallback": 1,
+      "*::AddPreUseClickerCallback": 1,
+      "*::AddPreUseGlowingHourglassCallback": 1,
+      "*::AddPreUseItemCallback": 1,
+      "*::AddPreventSumptoriumReloadOnRecallBugCallback": 1,
+      "*::AddProcessTakeDamageCallback": 1,
+      "*::AddRenderCustomHealthCallback": 1,
+      "*::AddRenderCustomHealthOfStrawmanCallback": 1,
+      "*::AddResetEvaluateCacheCallback": 1,
+      "*::AddResetRecursivePreventionCallback": 1,
+      "*::AddRestockPickupsCallback": 1,
+      "*::AddSaveDataOnExitCallback": 1,
+      "*::AddSaveDataOnNewLevelCallback": 1,
+      "*::AddSingularityPickups": 1,
+      "*::AddStrawmanDetectionCallback": 1,
+      "*::AddSumptoriumInitCallback": 1,
+      "*::AddSumptoriumPreSpawnCallback": 1,
+      "*::AddSumptoriumUpdateCallback": 1,
+      "*::AddSwarmFlyOrbital": 1,
+      "*::AddTestBadLoadCallback": 1,
+      "*::AddToFollowers": 1,
+      "*::AddUpdatePickupPriceCallback": 1,
+      "*::AddUpdateShardOfGlassCallback": 1,
+      "*::AddUpdateShardOfGlassColorCallback": 1,
+      "*::AddUseCardCallback": 1,
+      "*::AddUseClickerCallback": 1,
+      "*::AddUseGenesisCallback": 1,
+      "*::AddUseGlowingHourglassCallback": 1,
+      "*::AddUseItemCallback": 1,
+      "*::AddUsePillCallback": 1,
+      "*::AnimateCard": 1,
+      "*::BrittleBonesCacheCallback": 1,
+      "*::CallbackHandler": 1,
+      "*::CanPickupItem": 1,
+      "*::CandiesAndLocketsCacheCallback": 1,
+      "*::CheckIfHealthValuesChangedCallback": 1,
+      "*::CheckMenuOpenStageAPI": 1,
+      "*::ClearCandiesAndLocketsCallback": 1,
+      "*::ClearOnAbyssCallback": 1,
+      "*::ClearOnVoidCallback": 1,
+      "*::CurrentlyHeldPillForAllCallback": 1,
+      "*::DefineContainerForRedHealth": 1,
+      "*::DestroyGrid": 1,
+      "*::EndTakeDamageCallback": 1,
+      "*::EsauJrCallback": 1,
+      "*::FindGridPath": 1,
+      "*::FireBomb": 1,
+      "*::FlipCallback": 1,
+      "*::GenesisAndGlowingHourglassOnNewRoomCallback": 1,
+      "*::GetAwardSeed": 1,
+      "*::GetBabySkin": 1,
+      "*::GetBackdropType": 1,
+      "*::GetGridEntityFromPos": 1,
+      "*::GetSeeds": 1,
+      "*::GetSoulHPToBeSpent": 1,
+      "*::GetTearMovementInheritance": 1,
+      "*::GetTopLeftPos": 1,
+      "*::GetTrinketRNG": 1,
+      "*::GetUnlockedVanillaCollectible": 1,
+      "*::HallowPeffectCallback": 1,
+      "*::HallowPlayerCallback": 1,
+      "*::HallowRoomCallback": 1,
+      "*::HandleBloodOathCallback": 1,
+      "*::HandleDebugThreeCallback": 1,
+      "*::HandleForcedRedDamage": 1,
+      "*::HandleRegularDamage": 1,
+      "*::HandleSaveDataOnGameStartCallback": 1,
+      "*::HandleStrengthOnNewRoomCallback": 1,
+      "*::HasProjectileFlags": 1,
+      "*::HeartSpikesCostCallback": 1,
+      "*::IsDoorSlotAllowed": 1,
+      "*::IsPauseMenuOpen": 1,
+      "*::ItemPedestalCollisionCallback": 1,
+      "*::LengthSquared": 1,
+      "*::Next": 1,
+      "*::Normalized": 1,
+      "*::Open": 1,
+      "*::OriginalAddCallback": 1,
+      "*::PostEvaluateCacheCallback": 1,
+      "*::PreEvaluateCacheCallback": 1,
+      "*::PreUseClickerCallback": 1,
+      "*::PreUseGlowingHourglassCallback": 1,
+      "*::PreUseItemCallback": 1,
+      "*::PreventSumptoriumReloadOnRecallBugCallback": 1,
+      "*::ProcessTakeDamageCallback": 1,
+      "*::RegisterCharacterAsConvertingMaxHealth": 1,
+      "*::RegisterCharacterAsRedHealthless": 1,
+      "*::RegisterSprite": 1,
+      "*::RemoveBrittleBonesCacheCallback": 1,
+      "*::RemoveCandiesAndLocketsCacheCallback": 1,
+      "*::RemoveCheckIfHealthValuesChangedCallback": 1,
+      "*::RemoveClearCandiesAndLocketsCallback": 1,
+      "*::RemoveClearOnAbyssCallback": 1,
+      "*::RemoveClearOnVoidCallback": 1,
+      "*::RemoveCostume": 1,
+      "*::RemoveCurrentlyHeldPillCallback": 1,
+      "*::RemoveCurrentlyHeldPillForAllCallback": 1,
+      "*::RemoveEndTakeDamageCallback": 1,
+      "*::RemoveEsauJrCallback": 1,
+      "*::RemoveFlipCallback": 1,
+      "*::RemoveGenesisAndGlowingHourglassOnNewRoomCallback": 1,
+      "*::RemoveGridEntity": 1,
+      "*::RemoveHallowPeffectCallback": 1,
+      "*::RemoveHallowPlayerCallback": 1,
+      "*::RemoveHallowRoomCallback": 1,
+      "*::RemoveHandleBloodOathCallback": 1,
+      "*::RemoveHandleDebugThreeCallback": 1,
+      "*::RemoveHandleSaveDataOnGameStartCallback": 1,
+      "*::RemoveHandleStrengthOnNewRoomCallback": 1,
+      "*::RemoveHeartCollisionCallback": 1,
+      "*::RemoveHeartSpikesCostCallback": 1,
+      "*::RemoveItemPedestalCollisionCallback": 1,
+      "*::RemovePostEvaluateCacheCallback": 1,
+      "*::RemovePreEvaluateCacheCallback": 1,
+      "*::RemovePreUseClickerCallback": 1,
+      "*::RemovePreUseGlowingHourglassCallback": 1,
+      "*::RemovePreUseItemCallback": 1,
+      "*::RemovePreventSumptoriumReloadOnRecallBugCallback": 1,
+      "*::RemoveProcessTakeDamageCallback": 1,
+      "*::RemoveRedKey": 1,
+      "*::RemoveRenderCustomHealthCallback": 1,
+      "*::RemoveRenderCustomHealthOfStrawmanCallback": 1,
+      "*::RemoveResetEvaluateCacheCallback": 1,
+      "*::RemoveResetRecursivePreventionCallback": 1,
+      "*::RemoveRestockPickupsCallback": 1,
+      "*::RemoveSaveDataOnExitCallback": 1,
+      "*::RemoveSaveDataOnNewLevelCallback": 1,
+      "*::RemoveStrawmanDetectionCallback": 1,
+      "*::RemoveSumptoriumInitCallback": 1,
+      "*::RemoveSumptoriumPreSpawnCallback": 1,
+      "*::RemoveSumptoriumUpdateCallback": 1,
+      "*::RemoveTestBadLoadCallback": 1,
+      "*::RemoveUpdatePickupPriceCallback": 1,
+      "*::RemoveUpdateShardOfGlassCallback": 1,
+      "*::RemoveUpdateShardOfGlassColorCallback": 1,
+      "*::RemoveUseCardCallback": 1,
+      "*::RemoveUseClickerCallback": 1,
+      "*::RemoveUseGenesisCallback": 1,
+      "*::RemoveUseGlowingHourglassCallback": 1,
+      "*::RemoveUseItemCallback": 1,
+      "*::RemoveUsePillCallback": 1,
+      "*::RenderCustomHealthOfStrawmanCallback": 1,
+      "*::ResetBuzzerCheck": 1,
+      "*::ResetEvaluateCacheCallback": 1,
+      "*::ResetPlayerData": 1,
+      "*::ResetRecursivePreventionCallback": 1,
+      "*::ResetSpriteScale": 1,
+      "*::Resized": 1,
+      "*::RestockPickupsCallback": 1,
+      "*::Revive": 1,
+      "*::Run": 1,
+      "*::SaveDataOnExitCallback": 1,
+      "*::SaveDataOnNewLevelCallback": 1,
+      "*::StrawmanDetectionCallback": 1,
+      "*::SumptoriumInitCallback": 1,
+      "*::SumptoriumPreSpawnCallback": 1,
+      "*::SumptoriumUpdateCallback": 1,
+      "*::TakeDamageEntity": 1,
+      "*::TakeDamagePlayer": 1,
+      "*::TestBadLoadCallback": 1,
+      "*::ToEffect": 1,
+      "*::ToKnife": 1,
+      "*::TriggerGoldHeartsOld": 1,
+      "*::TryRemoveNullCostume": 1,
+      "*::UpdateCategory": 1,
+      "*::UpdatePickupPriceCallback": 1,
+      "*::UpdateShardOfGlassCallback": 1,
+      "*::UpdateShardOfGlassColorCallback": 1,
+      "*::UseCard": 1,
+      "*::UseClickerCallback": 1,
+      "*::UseGenesisCallback": 1,
+      "*::UseGlowingHourglassCallback": 1,
+      "*::UsePill": 1,
+      "*::WillPlayerRevive": 1,
+      "*::changefunc": 1,
+      "*::closeMenu": 1,
+      "*::condition": 1,
+      "*::displayif": 1,
+      "*::getDescriptionEntry": 1,
+      "*::getSpindownResult": 1,
+      "*::isSelfDamage": 1,
+      "*::load": 1,
+      "*::onRevival": 1,
+      "*::openMenu": 1,
+      "*::postrender": 1,
+      "*::runMenu": 1,
+      "*::setModIndicatorIcon": 1,
+      "*::setModIndicatorName": 1,
+      "*::store": 1,
+      "*::storeDssSettings": 1
+    }
+  },
+  "direct_main_abi": [
+    "L_DebugString",
+    "L_EnableCallback",
+    "L_Free",
+    "L_Mod_HasData",
+    "L_Mod_LoadData",
+    "L_Mod_RemoveData",
+    "L_Mod_SaveData",
+    "L_Random",
+    "L_RandomFloat",
+    "L_RandomU32",
+    "L_RandomUnitVector"
+  ],
+  "important_unmapped": {
+    "entity_userdata": [
+      "Entity:GetData",
+      "Entity:GetPtrHash",
+      "Entity:ToPlayer",
+      "Entity:ToPickup",
+      "Entity:ToTear",
+      "Entity:ToFamiliar",
+      "Entity:ToEffect",
+      "Entity:ToProjectile"
+    ],
+    "repentance_only_or_missing_stock_wrapper": [
+      "*::AddBrokenHeartsKissesFix",
+      "*::GetData",
+      "*::GetEffects",
+      "*::GetOtherTwin",
+      "*::GetSubPlayer"
+    ],
+    "custom_health_and_dss": []
+  },
+  "notes": [
+    "The closure is conservative: a method name used through a dynamically typed receiver is matched against all stock wrappers with that method name.",
+    "A missing wrapper means either a helper/library method, a Repentance-only API, or userdata/metatable behavior implemented outside scripts_v2.",
+    "CustomHealthAPI/DSS are bundled mod code and require additional Lua-level compatibility, not just one native C symbol."
+  ]
+}

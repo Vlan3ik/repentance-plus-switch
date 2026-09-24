@@ -1,0 +1,11 @@
+--- a/src/lj_prng.c
++++ b/src/lj_prng.c
+@@ -180,7 +180,10 @@ int LJ_FASTCALL lj_prng_seed_secure(PRNGState *rs)
+ #elif LJ_TARGET_NX
+ 
+-  if (getentropy(rs->u, sizeof(rs->u)) == 0)
++  /* Horizon/newlib does not provide a linkable POSIX getentropy().
++  ** Supply this hook from the libnx CSRNG bridge in the embedding runtime. */
++  extern int luaJIT_nx_getentropy(void *buf, size_t len);
++  if (luaJIT_nx_getentropy(rs->u, sizeof(rs->u)) == 0)
+     goto ok;

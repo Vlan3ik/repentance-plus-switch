@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <name>[REP] Repentance Plus!</name>
+    <directory>repentanceplus</directory>
+    <id>2627014611</id>
+    <description>[h2]IMPORTANT:[/h2]
+SINCE THE ARRIVAL OF REPENTANCE v1.7.9b, DIFFERENT MODS CAN BREAK THIS MOD IN DIFFERENT WAYS. MOSTLY THOSE ARE THE ONES THAT USE [b]MOD CONFIG MENU CONTINUED[/b] DEPENDENCY, BUT NOT ALL OF THEM. IT IS EVERY USER'S INDIVIDUAL TASK TO IDENTIFY AND DISABLE THE CULPRIT. LIKEWISE, IT IS EVERY MODDER'S TASK TO FIX THE INCOMPATIBILITY ON THEIR END.
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2917616737]THIS MOD[/url] CAN BE INSTALLED TO POTENTIALLY FIX ALL THE RELATED ISSUES, INCLUDING THE ONE THAT MAKES THE MOD RELOCK ALL THE UNLOCKS CONSTANTLY.
+
+----------------------------------------------------------
+
+[h1]More Unlocks to Spice Your Game![/h1]
+Repentance Plus is a mod that adds:
+[list]
+    [*] 52 [i](+7)[/i] new items;
+    [*] 19 [i](+4)[/i] new trinkets;
+    [*] 38 [i](+2)[/i] new cards;
+    [*] 5 [i](+1)[/i] new pills;
+    [*] 17 new heart subtypes;
+    [*] 4 new chest variants, a beggar, a grid entity variant, [i]and a bit more?[/i]
+[/list]
+into the game!
+
+This mod was designed to provide a more thorough Repentance experience, because it does what devs didn't want to do: brings [b]all remaining unlocks[/b], thematically fitting for tainted characters, into the game, awarding players for beating final bosses [b]on hard difficulty:[/b]
+[list]
+    [*] Mom's Heart;
+	[*] Ultra Greed;
+	[*] Boss Rush;
+	[*] Satan;
+	[*] Isaac;
+	[*] Blue Baby;
+[/list]
+and unlocking the respective tainted character, equalizing the amount of unlocks for a- and b-sides!
+It also provides console commands, a MCM dependency, and a DSS embeddable menu, which can be used to unlock modded content. Keep in mind that [i]the content will not be unlocked retroactively[/i]; you can read more on that at the mod's Wiki.
+
+[h1]Repentance+ Community Discord Server[/h1]
+If you want to ask a question or just have a chit-chat with the devs and the rest of the Repentance+ community,
+feel free to jump right into it by [url=https://discord.gg/RwHB8axYrN]CLICKING HERE[/url]. It's really fun!
+
+[h1]Our FANDOM Wiki Page[/h1]
+The Wiki is 100% relevant to the latest version of the mod, which is currently version 1.33. It has all the bugs, notes and details listed!
+[url=https://repentanceplusmod.fandom.com/wiki/Repentance%2B_Mod_Wiki]Get to reading the Wiki HERE[/url].
+
+[h2]Our Team[/h2]
+[list]
+    [*] Mr. SeemsGood - lead programmer, room design, sprites
+    [*] erawalks - lead sprite artist and the inspirer (this mod exists only thanks to [url=https://www.reddit.com/r/bindingofisaac/comments/ommys1/had_the_idea_for_the_mod_but_then_i_realized_that/]his post[/url] with drawings)
+    [*] Laraz, Scorch71 - programmers
+    [*] Contributions by: Kartoschka, FloofyDwgn, Hobbiefox, Sockblouse, The Owl
+[/list]
+
+[h2]Special Thanks[/h2]
+[list]
+    [*] to TaigaTreant for creating Custom Health API and for providing A LOT of help with implementing it into the mod;
+    [*] to Wofsauge for Isaac Lua API docs, thorough EID API documentation and a guide on how to apply persistent player costumes;
+    [*] to DeadInfinity for the creation of DSS mod menu and providing support with adjusting it for the mod;
+    [*] to The Owl for making amazing voiceovers for modded cards and pills;
+    [*] to Sanio because they are an epic person;
+    [*] to reddit user u/pijon95 for [url=https://www.reddit.com/r/bindingofisaac/comments/oodrci/all_missing_tainted_character_unlocks/]this post[/url] with ideas for all unlocks (we used these great ideas for couple of items, namely Temper Tantrum, Cherry Friends and Enraged Soul);
+    [*] to Badsy the Edgecat for actually downloading, playing and sending feedback on the pre-release of v1.31;
+    [*] to Hobbiefox and Sockblouse for comissioning sprites for Repentance+ extras;
+    [*] to our Discord community member a_galvantula for implementing custom Abyss locusts for Repentance+ items, and to Blind, the Bound Demon, for the creation of Abyss++ mod and providing the assets;
+    [*] to siraxtas for providing documentation and support for implementing the Sewing Machine Mod compatibility for modded familiars;
+    [*] to Onyx and their Achievement System mod for helping us understand how to implement the unlocks system;
+    [*] to everyone from our Discord server for support, bug reports, chit-chat and throwing new content ideas;
+    [*] to everyone from #modding-dev channel of TBoI Discord server who helped create this mod;
+    [*] and [b]to you[/b] for playing!
+[/list]
+
+[h2]Compatibilities[/h2]
+Repentance Plus features full support with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2376005362]External Item Descriptions[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=836319872]Encyclopedia[/url] mods. It also has minor compatibilities with many other big mods on the workshop!
+
+[h3]EID Contributors[/h3]
+Since version 1.7, the mod supports Spanish EID! Thanks to [i]Kotry[/i] for that!
+Since version 1.13, the mod supports Russian EID! Thanks to [i]Laraz[/i] for that!
+Since version 1.21, the mod supports Korean EID! Thanks to [i]미카[/i]  for that!
+Since version 1.25a, the mod supports Chinese EID! Thanks to [i]ReLU丶 and Saurtya[/i] for that!
+Since version 1.31, the mod supports French EID! Thanks to [i]biobak[/i] for that!
+
+---------------
+This mod is [url=https://github.com/MrSeemsGood/RepentancePlus]open source[/url]. Source code is fully available for learning, using as a reference and copying with modifications. [b]Crediting the owner (Mr. SeemsGood) will be very welcome[/b], but is not mandatory. Corrections to the mod can also be submitted through PR's in the repository.</description>
+    <version>1.60</version>
+    <visibility>Public</visibility>
+    <tag id="Lua"/>
+    <tag id="Items"/>
+    <tag id="Active Items"/>
+    <tag id="Trinkets"/>
+    <tag id="Pills"/>
+    <tag id="Cards"/>
+    <tag id="Pickups"/>
+    <tag id="Familiars"/>
+    <tag id="Rooms"/>
+    <tag id="Enemies"/>
+    <tag id="Hazards"/>
+    <tag id="Challenges"/>
+    <tag id="Sound Effects"/>
+</metadata>

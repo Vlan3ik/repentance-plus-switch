@@ -1,0 +1,40 @@
+--- a/src/lj_clib.c
++++ b/src/lj_clib.c
+@@ -279,4 +279,37 @@ static void *clib_getsym(CLibrary *cl, const char *name)
+   return p;
+ }
+ 
++#elif LJ_TARGET_NX
++
++/* Horizon has no POSIX dlopen/dlsym for the injected game module.  Keep
++** ffi.load() unavailable and resolve only the embedding runtime's table. */
++#define CLIB_DEFHANDLE  NULL
++
++extern void *luaJIT_nx_resolve(const char *name);
++
++LJ_NORET LJ_NOINLINE static void clib_error(lua_State *L, const char *fmt,
++                                            const char *name)
++{
++  lj_err_callermsg(L, lj_strfmt_pushf(L, fmt, name,
++                                       "dynamic libraries disabled on NX"));
++}
++
++static void *clib_loadlib(lua_State *L, const char *name, int global)
++{
++  clib_error(L, "cannot load library " LUA_QS, name);
++  UNUSED(global);
++  return NULL;
++}
++
++static void clib_unloadlib(CLibrary *cl)
++{
++  UNUSED(cl);
++}
++
++static void *clib_getsym(CLibrary *cl, const char *name)
++{
++  UNUSED(cl);
++  return luaJIT_nx_resolve(name);
++}
++
+ #else

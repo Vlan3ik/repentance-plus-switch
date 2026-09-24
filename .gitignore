@@ -1,0 +1,12 @@
+/runtime/.build/
+/runtime/out/
+/runtime/vendor/luajit/build/
+/reference/stock-lua/
+*.nso
+*.nro
+*.nca
+*.ns[pxz]
+prod.keys
+title.keys
+*.elf
+*.log
