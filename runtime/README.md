@@ -103,7 +103,7 @@ Deploy the resulting `out/atmosphere/` tree to the SD root. Keep the existing
 The reproducible container build currently produces:
 
 ```text
-sha256  b6c6f94eceb358d735d40ecafa86aa3dd5ad90b4304ea349bb5314125354c5ab  out/subsdk9
+sha256  42dcabc77f62a8169ff8ccae9f4132fd30a88f57dd689c1000acd526fe27472a  out/subsdk9
 ```
 
 Do **not** deploy the `main.npdm` temporarily generated inside

@@ -80,6 +80,7 @@ constexpr std::uintptr_t kTrinketVectorOffset = 0x18;
 constexpr std::uintptr_t kCardVectorOffset = 0x48;
 constexpr std::uintptr_t kPillEffectVectorOffset = 0x60;
 constexpr std::size_t kSoundEffectStride = 0x1f0;
+constexpr std::uintptr_t kSoundEffectIdOffset = 0x1d4;
 constexpr std::size_t kChallengeStride = 0xf0;
 constexpr std::uintptr_t kModdingDataPathRva = 0xabbc04;
 constexpr std::uintptr_t kModdingSaveDataPathRva = 0xabc004;
@@ -850,9 +851,20 @@ extern "C" int LL_Isaac__GetSoundIdByName(const char* name) {
     auto* manager = GetLiveManager();
     if (!manager || !g_mod_manager_config_ready || !name)
         return 0;
+    const char* sample_path = nullptr;
+    for (std::size_t index = 0; index < isaac_port::mod_ids::kSoundCount;
+         ++index) {
+        const auto& sound = isaac_port::mod_ids::kSounds[index];
+        if (std::strcmp(sound.name, name) == 0) {
+            sample_path = sound.sample_path;
+            break;
+        }
+    }
+    if (!sample_path)
+        return 0;
     return LookupInlineConfigVector(
         reinterpret_cast<std::uintptr_t>(manager) + kSoundEffectsOffset,
-        kSoundEffectStride, 8, 0, name);
+        kSoundEffectStride, 8, kSoundEffectIdOffset, sample_path);
 }
 
 extern "C" int LL_Isaac__GetChallengeIdByName(const char* name) {
