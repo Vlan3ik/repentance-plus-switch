@@ -17,7 +17,7 @@ fi
 if [[ -d "/repentanceplus" ]]; then
     MOD_SOURCE_DIR="/repentanceplus"
 else
-    MOD_SOURCE_DIR="$ROOT_DIR/../repentanceplus"
+    MOD_SOURCE_DIR="$ROOT_DIR/../../repentanceplus"
 fi
 LUA_GENERATOR="$ROOT_DIR/tools/generate_embedded_lua.py"
 
@@ -27,7 +27,7 @@ if [[ -z "${DEVKITPRO:-}" ]]; then
 fi
 
 if [[ ! -d "$LUA_SOURCE_DIR" ]]; then
-    echo "missing stock Lua source: $LUA_SOURCE_DIR (mount reference/ into the build container)" >&2
+    echo "missing stock Lua source: $LUA_SOURCE_DIR (mount switch-port/reference into the build container)" >&2
     exit 2
 fi
 if [[ ! -d "$MOD_SOURCE_DIR" ]]; then
@@ -46,6 +46,9 @@ mkdir -p "$STAGE_DIR/source/generated"
 python3 "$LUA_GENERATOR" \
     --source "$LUA_SOURCE_DIR" "" \
     --source "$MOD_SOURCE_DIR" mods/repentanceplus \
+    --output "$STAGE_DIR/source/generated"
+python3 "$ROOT_DIR/tools/generate_mod_ids.py" \
+    --mod "$MOD_SOURCE_DIR" \
     --output "$STAGE_DIR/source/generated"
 
 sed -i \

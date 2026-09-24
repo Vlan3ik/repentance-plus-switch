@@ -1,6 +1,6 @@
-# v0.1.0-alpha — первый аппаратный bring-up
+# v0.2.0-alpha — запуск реального main.lua
 
-Первый публичный пакет нативного Switch-порта Repentance Plus.
+Второй аппаратный alpha-пакет нативного Switch-порта Repentance Plus.
 
 Установка:
 
@@ -18,8 +18,12 @@
 Не добавляйте чужой `main.npdm`. Если уже установлен другой `subsdk9`, он
 конфликтует с этим инжектором.
 
-Статус: alpha. Lua runtime, callback smoke, resource package и штатный
-ModManager собраны; полное покрытие Isaac Lua ABI ещё в работе. При сбое
+В v0.2 добавлены нативные RNG и Sprite/ANM2, lookup загруженных конфигов,
+исправлена регистрация API-v1 callback и впервые выполняется реальный
+`repentanceplus/main.lua` после `ModManager::LoadConfigs()`.
+
+Статус: непроверенная на железе alpha. Полное покрытие 43 Isaac callback ещё в
+работе. При сбое
 приложите Atmosphère crash report и строки `[isaac-port]` к GitHub Issue.
 
 NSP/NSZ игры, ключи и оригинальные Nintendo-бинарники в релиз не входят.

@@ -1,5 +1,6 @@
 #include "lib.hpp"
 #include "generated/embedded_lua.hpp"
+#include "generated/mod_ids.hpp"
 extern "C" {
 #include "lua.h"
 #include "lauxlib.h"
@@ -71,10 +72,51 @@ constexpr std::uint32_t kExpectedGameUpdatePrologue[] = {
 constexpr std::uintptr_t kGameGlobalRva = 0xabb448;
 constexpr std::uintptr_t kManagerGlobalRva = 0xabcce0;
 constexpr std::uintptr_t kModManagerOffset = 0x36800;
+constexpr std::uintptr_t kSoundEffectsOffset = 0x364a8;
+constexpr std::uintptr_t kItemConfigOffset = 0x36538;
+constexpr std::uintptr_t kChallengeVectorOffset = 0x36740;
+constexpr std::uintptr_t kCollectibleVectorOffset = 0x00;
+constexpr std::uintptr_t kTrinketVectorOffset = 0x18;
+constexpr std::uintptr_t kCardVectorOffset = 0x48;
+constexpr std::uintptr_t kPillEffectVectorOffset = 0x60;
+constexpr std::size_t kSoundEffectStride = 0x1f0;
+constexpr std::size_t kChallengeStride = 0xf0;
 constexpr std::uintptr_t kModdingDataPathRva = 0xabbc04;
 constexpr std::uintptr_t kModdingSaveDataPathRva = 0xabc004;
 constexpr std::size_t kModdingPathCapacity = 0x400;
 constexpr std::uintptr_t kGameFrameCountOffset = 0x24f99c;
+constexpr std::uintptr_t kRngSetSeedRva = 0x44e3c0;
+constexpr std::uintptr_t kRngRandomIntRva = 0x44e3e8;
+constexpr std::uintptr_t kRngNextRva = 0x44e464;
+constexpr std::uintptr_t kRngRandomFloatRva = 0x44e4c0;
+constexpr std::uintptr_t kAnm2ConstructorRva = 0x6540;
+constexpr std::uintptr_t kAnm2DestructorRva = 0x71a4;
+constexpr std::uintptr_t kAnm2PlayRva = 0xa1f4;
+constexpr std::uintptr_t kAnm2LoadRva = 0xc970;
+constexpr std::size_t kAnm2Size = 0x158;
+constexpr std::uintptr_t kAnm2ScaleOffset = 0xdc;
+constexpr std::uintptr_t kAnm2PlaybackSpeedOffset = 0x144;
+constexpr std::uint32_t kExpectedRngSetSeedPrologue[] = {
+    0xb9000001, 0xf00032e8, 0xf9416508, 0x52800189,
+};
+constexpr std::uint32_t kExpectedRngRandomIntPrologue[] = {
+    0xa9be7bfd, 0xa9014ff4, 0x910003fd, 0xb9400008,
+};
+constexpr std::uint32_t kExpectedRngNextPrologue[] = {
+    0xa9be7bfd, 0xf9000bf3, 0x910003fd, 0xb9400008,
+};
+constexpr std::uint32_t kExpectedAnm2ConstructorPrologue[] = {
+    0xa9be7bfd, 0xf9000bf3, 0x910003fd, 0xaa0003f3,
+};
+constexpr std::uint32_t kExpectedAnm2DestructorPrologue[] = {
+    0xa9be7bfd, 0xf9000bf3, 0x910003fd, 0xaa0003f3,
+};
+constexpr std::uint32_t kExpectedAnm2PlayPrologue[] = {
+    0xa9bd7bfd, 0xa90157f6, 0x910003fd, 0xa9024ff4,
+};
+constexpr std::uint32_t kExpectedAnm2LoadPrologue[] = {
+    0xa9ba7bfd, 0xf9000bfb, 0x910003fd, 0xa90267fa,
+};
 constexpr std::uintptr_t kMainMallocRva = 0x7d2b0;
 constexpr std::uintptr_t kMainFreeRva = 0x7d300;
 constexpr std::uintptr_t kMainReallocRva = 0x7d3a0;
@@ -82,6 +124,27 @@ constexpr std::uintptr_t kMainReallocRva = 0x7d3a0;
 std::uintptr_t g_repentance_base = 0;
 lua_State* g_lua_state = nullptr;
 bool g_post_update_enabled = false;
+bool g_mod_manager_config_ready = false;
+bool g_repentance_plus_started = false;
+
+struct LuaRng {
+    std::uint32_t seed;
+    std::uint32_t shift[3];
+};
+static_assert(sizeof(LuaRng) == 16);
+
+struct LuaVector2 {
+    float x;
+    float y;
+};
+static_assert(sizeof(LuaVector2) == 8);
+
+struct NativeVector {
+    std::uintptr_t begin;
+    std::uintptr_t end;
+    std::uintptr_t capacity;
+};
+static_assert(sizeof(NativeVector) == 24);
 
 struct NativeLuaCallback {
     std::int32_t callback;
@@ -187,6 +250,93 @@ bool IsMappedDataRange(std::uintptr_t address, std::size_t size,
         return false;
     return require_write ? memory.perm == Perm_Rw
                          : (memory.perm == Perm_Rw || memory.perm == Perm_R);
+}
+
+void* GetLiveManager() {
+    if (!g_repentance_base)
+        return nullptr;
+    const auto address = g_repentance_base + kManagerGlobalRva;
+    if (address < g_repentance_base ||
+        !IsMappedDataRange(address, sizeof(void*), false))
+        return nullptr;
+    return *reinterpret_cast<void* const*>(address);
+}
+
+bool NativeStringEquals(const void* object, const char* expected) {
+    if (!object || !expected ||
+        !IsMappedDataRange(reinterpret_cast<std::uintptr_t>(object), 24,
+                           false))
+        return false;
+
+    const auto* bytes = reinterpret_cast<const std::uint8_t*>(object);
+    const bool is_long = (bytes[0] & 1) != 0;
+    std::size_t size = 0;
+    const char* data = nullptr;
+    if (is_long) {
+        std::memcpy(&size, bytes + 8, sizeof(size));
+        std::memcpy(&data, bytes + 16, sizeof(data));
+    } else {
+        size = bytes[0] >> 1;
+        data = reinterpret_cast<const char*>(bytes + 1);
+    }
+
+    const std::size_t expected_size = std::strlen(expected);
+    return size == expected_size && size <= 4096 && data &&
+           IsMappedDataRange(reinterpret_cast<std::uintptr_t>(data), size,
+                             false) &&
+           std::memcmp(data, expected, size) == 0;
+}
+
+bool ReadNativeVector(std::uintptr_t address, std::size_t stride,
+                      NativeVector* vector, std::size_t* count) {
+    if (!vector || !count || stride == 0 ||
+        !IsMappedDataRange(address, sizeof(*vector), false))
+        return false;
+    std::memcpy(vector, reinterpret_cast<const void*>(address),
+                sizeof(*vector));
+    if (vector->end < vector->begin ||
+        (vector->end - vector->begin) % stride != 0)
+        return false;
+    *count = (vector->end - vector->begin) / stride;
+    return *count <= 65536 &&
+           (*count == 0 || IsMappedDataRange(
+                               vector->begin, *count * stride, false));
+}
+
+int LookupPointerConfigVector(std::uintptr_t vector_address,
+                              std::size_t id_offset, const char* name) {
+    NativeVector vector{};
+    std::size_t count = 0;
+    if (!ReadNativeVector(vector_address, sizeof(void*), &vector, &count))
+        return 0;
+
+    const auto* entries = reinterpret_cast<void* const*>(vector.begin);
+    for (std::size_t index = 0; index < count; ++index) {
+        const auto entry = reinterpret_cast<std::uintptr_t>(entries[index]);
+        if (!entry || !IsMappedDataRange(entry, id_offset + sizeof(int),
+                                         false) ||
+            !NativeStringEquals(reinterpret_cast<const void*>(entry + 8),
+                                name))
+            continue;
+        return *reinterpret_cast<const int*>(entry + id_offset);
+    }
+    return 0;
+}
+
+int LookupInlineConfigVector(std::uintptr_t vector_address,
+                             std::size_t stride, std::size_t name_offset,
+                             std::size_t id_offset, const char* name) {
+    NativeVector vector{};
+    std::size_t count = 0;
+    if (!ReadNativeVector(vector_address, stride, &vector, &count))
+        return 0;
+    for (std::size_t index = 0; index < count; ++index) {
+        const auto entry = vector.begin + index * stride;
+        if (NativeStringEquals(
+                reinterpret_cast<const void*>(entry + name_offset), name))
+            return *reinterpret_cast<const int*>(entry + id_offset);
+    }
+    return 0;
 }
 
 bool InitializeStockModManager(void* hook_manager) {
@@ -353,6 +503,34 @@ void* GameLuaAllocator(void*, void* old_ptr, std::size_t,
     return old_ptr ? game_realloc(old_ptr, new_size) : game_malloc(new_size);
 }
 
+void* GameAllocate(std::size_t size) {
+    const auto main_base = exl::util::GetMainModuleInfo().m_Total.m_Start;
+    return reinterpret_cast<void* (*)(std::size_t)>(
+        main_base + kMainMallocRva)(size);
+}
+
+void GameFree(void* pointer) {
+    const auto main_base = exl::util::GetMainModuleInfo().m_Total.m_Start;
+    reinterpret_cast<void (*)(void*)>(main_base + kMainFreeRva)(pointer);
+}
+
+/* libc++'s AArch64 std::string uses a 24-byte object.  The engine only keeps
+ * this value for the duration of ANM2::Load, whose copy assignment owns the
+ * resulting path.  Supplying a valid long-string view avoids importing the
+ * title's C++ ABI into subsdk9. */
+struct LibcppStringView {
+    std::uint64_t capacity_and_long_flag;
+    std::uint64_t size;
+    const char* data;
+};
+static_assert(sizeof(LibcppStringView) == 24);
+
+LibcppStringView MakeLibcppStringView(const char* value) {
+    const std::size_t size = value ? std::strlen(value) : 0;
+    return {static_cast<std::uint64_t>((size + 1) | 1),
+            static_cast<std::uint64_t>(size), value ? value : ""};
+}
+
 bool RunLuaChunk(lua_State* state, const char* bytes, std::size_t size,
                  const char* chunk_name, int expected_results) {
     int status = luaL_loadbuffer(state, bytes, size, chunk_name);
@@ -415,6 +593,127 @@ bool ValidateEmbeddedModScripts(lua_State* state, std::size_t* count_out) {
     return count != 0;
 }
 
+bool InstallBootstrapCompatibility(lua_State* state) {
+    static constexpr char kCompatibility[] = R"LUA(
+local ffi = require('ffi')
+ffi.cdef[[
+void* IsaacPort_ANM2_Create(void);
+void IsaacPort_ANM2_Destroy(void*);
+void IsaacPort_ANM2_Load(void*, const char*, bool);
+void IsaacPort_ANM2_Play(void*, const char*, bool);
+void IsaacPort_ANM2_SetScale(void*, const Vector2*);
+void IsaacPort_ANM2_GetScale(void*, Vector2*);
+void IsaacPort_ANM2_SetPlaybackSpeed(void*, float);
+float IsaacPort_ANM2_GetPlaybackSpeed(void*);
+]]
+
+local hud = {}
+function hud:ShowItemText(...) end
+function hud:ShowFortuneText(...) end
+function hud:IsVisible() return true end
+Game.GetHUD = function() return hud end
+setmetatable(Game, { __call = function(self) return self end })
+
+local methods = {}
+function methods:Load(path, loadGraphics)
+  if loadGraphics == nil then loadGraphics = true end
+  ffi.C.IsaacPort_ANM2_Load(rawget(self, '__native'), path, loadGraphics)
+end
+function methods:Play(animation, force)
+  ffi.C.IsaacPort_ANM2_Play(rawget(self, '__native'), animation, not not force)
+end
+
+local spriteMeta = {
+  __index = function(self, key)
+    local method = methods[key]
+    if method then return method end
+    local native = rawget(self, '__native')
+    if key == 'Scale' then
+      local value = ffi.new('Vector2')
+      ffi.C.IsaacPort_ANM2_GetScale(native, value)
+      return value
+    elseif key == 'PlaybackSpeed' then
+      return ffi.C.IsaacPort_ANM2_GetPlaybackSpeed(native)
+    end
+  end,
+  __newindex = function(self, key, value)
+    local native = rawget(self, '__native')
+    if key == 'Scale' then
+      ffi.C.IsaacPort_ANM2_SetScale(native, value)
+    elseif key == 'PlaybackSpeed' then
+      ffi.C.IsaacPort_ANM2_SetPlaybackSpeed(native, value)
+    else
+      rawset(self, key, value)
+    end
+  end,
+}
+
+function Sprite()
+  local native = ffi.C.IsaacPort_ANM2_Create()
+  if native == ffi.NULL then error('ANM2 allocation failed', 2) end
+  native = ffi.gc(native, ffi.C.IsaacPort_ANM2_Destroy)
+  return setmetatable({ __native = native }, spriteMeta)
+end
+
+-- The retail Switch script accidentally keys every API-v1 callback by the
+-- callback ID, replacing earlier handlers.  Route v1 mods through the sound
+-- API-v2 registry with unique keys while preserving the leading mod argument.
+local stockRegisterMod = RegisterMod
+local stockIsaac = Isaac
+local nextCompatCallback = 0
+function RegisterMod(name, apiVersion)
+  local mod = stockRegisterMod(name, apiVersion)
+  if apiVersion == 1 then
+    -- stockRegisterMod changed this wrapper's environment to COMPAT_ENV;
+    -- propagate it to the actual mod chunk as retail Isaac does directly.
+    setfenv(2, getfenv(1))
+    local wrappedCallbacks = {}
+    function mod:AddCallback(callbackId, fn, entityId)
+      local wrapped = function(...) return fn(self, ...) end
+      wrappedCallbacks[fn] = wrapped
+      stockIsaac.AddCallback(callbackId,
+        'isaac-port-v1-' .. tostring(nextCompatCallback), wrapped,
+        entityId, self)
+      nextCompatCallback = nextCompatCallback + 1
+    end
+    function mod:AddPriorityCallback(callbackId, priority, fn, entityId)
+      self:AddCallback(callbackId, fn, entityId)
+    end
+    function mod:RemoveCallback(callbackId, fn)
+      local wrapped = wrappedCallbacks[fn]
+      if wrapped then
+        stockIsaac.RemoveCallback(callbackId, wrapped)
+        wrappedCallbacks[fn] = nil
+      end
+    end
+  end
+  return mod
+end
+)LUA";
+    return RunLuaChunk(state, kCompatibility, sizeof(kCompatibility) - 1,
+                       "@isaac-port/bootstrap-compat.lua", 0);
+}
+
+bool RunEmbeddedRepentancePlus() {
+    if (!g_lua_state || !g_mod_manager_config_ready ||
+        g_repentance_plus_started)
+        return false;
+
+    g_repentance_plus_started = true;
+    const auto* script =
+        FindEmbeddedLua("mods/repentanceplus/main.lua");
+    if (!script) {
+        Logging.Log("[isaac-port] REPENTANCE_PLUS_FAIL source_missing");
+        return false;
+    }
+
+    const bool ok = RunLuaChunk(
+        g_lua_state, reinterpret_cast<const char*>(script->bytes),
+        script->size, "@mods/repentanceplus/main.lua", 0);
+    Logging.Log("[isaac-port] REPENTANCE_PLUS_%s", ok ? "READY" : "FAIL");
+    return ok;
+}
+
 void DispatchLuaCallback(std::int32_t callback_id) {
     if (!g_lua_state)
         return;
@@ -452,8 +751,12 @@ HOOK_DEFINE_TRAMPOLINE(ManagerUpdateHook) {
             if (IsMappedDataRange(manager_global, sizeof(void*), false) &&
                 *reinterpret_cast<void* const*>(manager_global) == manager) {
                 mod_manager_attempted = true;
-                if (!InitializeStockModManager(manager))
+                if (!InitializeStockModManager(manager)) {
                     Logging.Log("[isaac-port] MOD_MANAGER_SCAN_FAIL");
+                } else {
+                    g_mod_manager_config_ready = true;
+                    RunEmbeddedRepentancePlus();
+                }
             }
         }
 
@@ -516,6 +819,191 @@ extern "C" int LL_Isaac__GetFrameCount() {
     return frame;
 }
 
+int LookupItemConfigName(std::uintptr_t vector_offset, std::size_t id_offset,
+                         const char* name) {
+    auto* manager = GetLiveManager();
+    if (!manager || !g_mod_manager_config_ready || !name)
+        return 0;
+    return LookupPointerConfigVector(
+        reinterpret_cast<std::uintptr_t>(manager) + kItemConfigOffset +
+            vector_offset,
+        id_offset, name);
+}
+
+extern "C" int LL_Isaac__GetItemIdByName(const char* name) {
+    return LookupItemConfigName(kCollectibleVectorOffset, 4, name);
+}
+
+extern "C" int LL_Isaac__GetTrinketIdByName(const char* name) {
+    return LookupItemConfigName(kTrinketVectorOffset, 4, name);
+}
+
+extern "C" int LL_Isaac__GetCardIdByName(const char* name) {
+    return LookupItemConfigName(kCardVectorOffset, 0, name);
+}
+
+extern "C" int LL_Isaac__GetPillEffectByName(const char* name) {
+    return LookupItemConfigName(kPillEffectVectorOffset, 0, name);
+}
+
+extern "C" int LL_Isaac__GetSoundIdByName(const char* name) {
+    auto* manager = GetLiveManager();
+    if (!manager || !g_mod_manager_config_ready || !name)
+        return 0;
+    return LookupInlineConfigVector(
+        reinterpret_cast<std::uintptr_t>(manager) + kSoundEffectsOffset,
+        kSoundEffectStride, 8, 0, name);
+}
+
+extern "C" int LL_Isaac__GetChallengeIdByName(const char* name) {
+    auto* manager = GetLiveManager();
+    if (!manager || !g_mod_manager_config_ready || !name)
+        return 0;
+    const auto vector_address = reinterpret_cast<std::uintptr_t>(manager) +
+                                kChallengeVectorOffset;
+    NativeVector vector{};
+    std::size_t count = 0;
+    if (!ReadNativeVector(vector_address, kChallengeStride, &vector, &count))
+        return 0;
+    for (std::size_t index = 0; index < count; ++index) {
+        const auto entry = vector.begin + index * kChallengeStride;
+        if (NativeStringEquals(reinterpret_cast<const void*>(entry), name))
+            return static_cast<int>(index);
+    }
+    return 0;
+}
+
+const isaac_port::mod_ids::EntityId* LookupEmbeddedEntity(const char* name) {
+    if (!name)
+        return nullptr;
+    for (std::size_t index = 0;
+         index < isaac_port::mod_ids::kEntityCount; ++index) {
+        const auto& entity = isaac_port::mod_ids::kEntities[index];
+        if (std::strcmp(entity.name, name) == 0)
+            return &entity;
+    }
+    return nullptr;
+}
+
+extern "C" int LL_Isaac__GetEntityTypeByName(const char* name) {
+    const auto* entity = LookupEmbeddedEntity(name);
+    return entity ? entity->type : 0;
+}
+
+extern "C" int LL_Isaac__GetEntityVariantByName(const char* name) {
+    const auto* entity = LookupEmbeddedEntity(name);
+    return entity ? entity->variant : 0;
+}
+
+extern "C" int LL_Isaac__GetCostumeIdByPath(const char* path) {
+    /* The only eager lookup in Repentance Plus is its first mod costume.
+     * LoadCostumes assigns it slot zero within this ModEntry.  This keeps the
+     * bootstrap moving until the full ItemConfig costume vector is exposed. */
+    return path && std::strcmp(
+                       path,
+                       "gfx/characters/costume_004_birdofhope.anm2") == 0
+               ? 0
+               : -1;
+}
+
+extern "C" void LC_RNG__SetSeed(LuaRng* rng, unsigned int seed,
+                                  unsigned int shift_index) {
+    if (!rng || !g_repentance_base)
+        return;
+    reinterpret_cast<void (*)(LuaRng*, unsigned int, unsigned int)>(
+        g_repentance_base + kRngSetSeedRva)(rng, seed, shift_index);
+}
+
+extern "C" unsigned int LC_RNG__RandomInt(LuaRng* rng,
+                                            unsigned int maximum) {
+    if (!rng || !g_repentance_base)
+        return 0;
+    return reinterpret_cast<unsigned int (*)(LuaRng*, unsigned int)>(
+        g_repentance_base + kRngRandomIntRva)(rng, maximum);
+}
+
+extern "C" float LC_RNG__RandomFloat(LuaRng* rng) {
+    if (!rng || !g_repentance_base)
+        return 0.0f;
+    return reinterpret_cast<float (*)(LuaRng*)>(
+        g_repentance_base + kRngRandomFloatRva)(rng);
+}
+
+extern "C" unsigned int LC_RNG__Next(LuaRng* rng) {
+    if (!rng || !g_repentance_base)
+        return 0;
+    return reinterpret_cast<unsigned int (*)(LuaRng*)>(
+        g_repentance_base + kRngNextRva)(rng);
+}
+
+extern "C" void* IsaacPort_ANM2_Create() {
+    if (!g_repentance_base)
+        return nullptr;
+    void* object = GameAllocate(kAnm2Size);
+    if (!object)
+        return nullptr;
+    std::memset(object, 0, kAnm2Size);
+    return reinterpret_cast<void* (*)(void*)>(
+        g_repentance_base + kAnm2ConstructorRva)(object);
+}
+
+extern "C" void IsaacPort_ANM2_Destroy(void* object) {
+    if (!object)
+        return;
+    if (g_repentance_base)
+        reinterpret_cast<void (*)(void*)>(
+            g_repentance_base + kAnm2DestructorRva)(object);
+    GameFree(object);
+}
+
+extern "C" void IsaacPort_ANM2_Load(void* object, const char* path,
+                                      bool load_graphics) {
+    if (!object || !path || !g_repentance_base)
+        return;
+    const auto path_view = MakeLibcppStringView(path);
+    reinterpret_cast<void (*)(void*, const LibcppStringView*, bool)>(
+        g_repentance_base + kAnm2LoadRva)(object, &path_view, load_graphics);
+}
+
+extern "C" void IsaacPort_ANM2_Play(void* object, const char* animation,
+                                      bool force) {
+    if (!object || !animation || !g_repentance_base)
+        return;
+    reinterpret_cast<void (*)(void*, const char*, bool)>(
+        g_repentance_base + kAnm2PlayRva)(object, animation, force);
+}
+
+extern "C" void IsaacPort_ANM2_SetScale(void* object,
+                                         const LuaVector2* scale) {
+    if (object && scale)
+        std::memcpy(reinterpret_cast<std::uint8_t*>(object) +
+                        kAnm2ScaleOffset,
+                    scale, sizeof(*scale));
+}
+
+extern "C" void IsaacPort_ANM2_GetScale(void* object, LuaVector2* scale) {
+    if (object && scale)
+        std::memcpy(scale, reinterpret_cast<const std::uint8_t*>(object) +
+                               kAnm2ScaleOffset,
+                    sizeof(*scale));
+}
+
+extern "C" void IsaacPort_ANM2_SetPlaybackSpeed(void* object, float speed) {
+    if (object)
+        std::memcpy(reinterpret_cast<std::uint8_t*>(object) +
+                        kAnm2PlaybackSpeedOffset,
+                    &speed, sizeof(speed));
+}
+
+extern "C" float IsaacPort_ANM2_GetPlaybackSpeed(void* object) {
+    float speed = 0.0f;
+    if (object)
+        std::memcpy(&speed, reinterpret_cast<const std::uint8_t*>(object) +
+                                kAnm2PlaybackSpeedOffset,
+                    sizeof(speed));
+    return speed;
+}
+
 extern "C" void* luaJIT_nx_resolve(const char* name) {
     if (name && std::strcmp(name, "IsaacPortSmoke") == 0)
         return reinterpret_cast<void*>(&IsaacPortSmoke);
@@ -525,6 +1013,48 @@ extern "C" void* luaJIT_nx_resolve(const char* name) {
         return reinterpret_cast<void*>(&L_EnableCallback);
     if (name && std::strcmp(name, "LL_Isaac__GetFrameCount") == 0)
         return reinterpret_cast<void*>(&LL_Isaac__GetFrameCount);
+    if (name && std::strcmp(name, "LL_Isaac__GetItemIdByName") == 0)
+        return reinterpret_cast<void*>(&LL_Isaac__GetItemIdByName);
+    if (name && std::strcmp(name, "LL_Isaac__GetTrinketIdByName") == 0)
+        return reinterpret_cast<void*>(&LL_Isaac__GetTrinketIdByName);
+    if (name && std::strcmp(name, "LL_Isaac__GetCardIdByName") == 0)
+        return reinterpret_cast<void*>(&LL_Isaac__GetCardIdByName);
+    if (name && std::strcmp(name, "LL_Isaac__GetPillEffectByName") == 0)
+        return reinterpret_cast<void*>(&LL_Isaac__GetPillEffectByName);
+    if (name && std::strcmp(name, "LL_Isaac__GetSoundIdByName") == 0)
+        return reinterpret_cast<void*>(&LL_Isaac__GetSoundIdByName);
+    if (name && std::strcmp(name, "LL_Isaac__GetChallengeIdByName") == 0)
+        return reinterpret_cast<void*>(&LL_Isaac__GetChallengeIdByName);
+    if (name && std::strcmp(name, "LL_Isaac__GetEntityTypeByName") == 0)
+        return reinterpret_cast<void*>(&LL_Isaac__GetEntityTypeByName);
+    if (name && std::strcmp(name, "LL_Isaac__GetEntityVariantByName") == 0)
+        return reinterpret_cast<void*>(&LL_Isaac__GetEntityVariantByName);
+    if (name && std::strcmp(name, "LL_Isaac__GetCostumeIdByPath") == 0)
+        return reinterpret_cast<void*>(&LL_Isaac__GetCostumeIdByPath);
+    if (name && std::strcmp(name, "LC_RNG__SetSeed") == 0)
+        return reinterpret_cast<void*>(&LC_RNG__SetSeed);
+    if (name && std::strcmp(name, "LC_RNG__RandomInt") == 0)
+        return reinterpret_cast<void*>(&LC_RNG__RandomInt);
+    if (name && std::strcmp(name, "LC_RNG__RandomFloat") == 0)
+        return reinterpret_cast<void*>(&LC_RNG__RandomFloat);
+    if (name && std::strcmp(name, "LC_RNG__Next") == 0)
+        return reinterpret_cast<void*>(&LC_RNG__Next);
+    if (name && std::strcmp(name, "IsaacPort_ANM2_Create") == 0)
+        return reinterpret_cast<void*>(&IsaacPort_ANM2_Create);
+    if (name && std::strcmp(name, "IsaacPort_ANM2_Destroy") == 0)
+        return reinterpret_cast<void*>(&IsaacPort_ANM2_Destroy);
+    if (name && std::strcmp(name, "IsaacPort_ANM2_Load") == 0)
+        return reinterpret_cast<void*>(&IsaacPort_ANM2_Load);
+    if (name && std::strcmp(name, "IsaacPort_ANM2_Play") == 0)
+        return reinterpret_cast<void*>(&IsaacPort_ANM2_Play);
+    if (name && std::strcmp(name, "IsaacPort_ANM2_SetScale") == 0)
+        return reinterpret_cast<void*>(&IsaacPort_ANM2_SetScale);
+    if (name && std::strcmp(name, "IsaacPort_ANM2_GetScale") == 0)
+        return reinterpret_cast<void*>(&IsaacPort_ANM2_GetScale);
+    if (name && std::strcmp(name, "IsaacPort_ANM2_SetPlaybackSpeed") == 0)
+        return reinterpret_cast<void*>(&IsaacPort_ANM2_SetPlaybackSpeed);
+    if (name && std::strcmp(name, "IsaacPort_ANM2_GetPlaybackSpeed") == 0)
+        return reinterpret_cast<void*>(&IsaacPort_ANM2_GetPlaybackSpeed);
     return nullptr;
 }
 
@@ -573,6 +1103,12 @@ static bool InitializeLuaRuntime() {
 
     if (!PreloadEmbeddedJson(state)) {
         Logging.Log("[isaac-port] JSON_PRELOAD_FAIL");
+        lua_close(state);
+        return false;
+    }
+
+    if (!InstallBootstrapCompatibility(state)) {
+        Logging.Log("[isaac-port] BOOTSTRAP_COMPAT_FAIL");
         lua_close(state);
         return false;
     }
@@ -662,7 +1198,31 @@ extern "C" void HookRunRepentance() {
                             kExpectedManagerGameSelectorGameId,
                             sizeof(kExpectedManagerGameSelectorGameId)) &&
                 MatchesCode(game_update, kExpectedGameUpdatePrologue,
-                            sizeof(kExpectedGameUpdatePrologue));
+                            sizeof(kExpectedGameUpdatePrologue)) &&
+                MatchesCode(repentance_base + kRngSetSeedRva,
+                            kExpectedRngSetSeedPrologue,
+                            sizeof(kExpectedRngSetSeedPrologue)) &&
+                MatchesCode(repentance_base + kRngRandomIntRva,
+                            kExpectedRngRandomIntPrologue,
+                            sizeof(kExpectedRngRandomIntPrologue)) &&
+                MatchesCode(repentance_base + kRngNextRva,
+                            kExpectedRngNextPrologue,
+                            sizeof(kExpectedRngNextPrologue)) &&
+                MatchesCode(repentance_base + kRngRandomFloatRva,
+                            kExpectedRngNextPrologue,
+                            sizeof(kExpectedRngNextPrologue)) &&
+                MatchesCode(repentance_base + kAnm2ConstructorRva,
+                            kExpectedAnm2ConstructorPrologue,
+                            sizeof(kExpectedAnm2ConstructorPrologue)) &&
+                MatchesCode(repentance_base + kAnm2DestructorRva,
+                            kExpectedAnm2DestructorPrologue,
+                            sizeof(kExpectedAnm2DestructorPrologue)) &&
+                MatchesCode(repentance_base + kAnm2PlayRva,
+                            kExpectedAnm2PlayPrologue,
+                            sizeof(kExpectedAnm2PlayPrologue)) &&
+                MatchesCode(repentance_base + kAnm2LoadRva,
+                            kExpectedAnm2LoadPrologue,
+                            sizeof(kExpectedAnm2LoadPrologue));
             if (!manager_signatures_ok) {
                 Logging.Log(
                     "[isaac-port] skipping engine hook: Manager signatures "

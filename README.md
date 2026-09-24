@@ -45,7 +45,12 @@ sd:/atmosphere/contents/010021C000B6A000/
 - все 53 Lua-файла Repentance Plus встроены и компилируются;
 - ресурсы/XML мода упакованы в LayeredFS;
 - штатные `ModManager::ListMods()` и `LoadConfigs()` вызываются на живом
-  `g_Manager+0x36800`.
+  `g_Manager+0x36800`;
+- прямой ARM64-мост RNG и нативные `Sprite()`/ANM2;
+- lookup модовых item/trinket/card/pill/sound/challenge/entity ID после
+  `LoadConfigs()`;
+- реальный отложенный запуск `mods/repentanceplus/main.lua` с маркером
+  `REPENTANCE_PLUS_READY` либо точной Lua-ошибкой в debug log.
 
 Это **alpha/hardware bring-up**, а не обещание полностью пройденного мода:
 полный Isaac ABI и все 43 используемых callback ещё восстанавливаются. Если
@@ -62,6 +67,7 @@ LUA_SMOKE_READY result=42
 MOD_MANAGER_SCAN_BEGIN
 MOD_MANAGER_LIST_READY
 MOD_MANAGER_CONFIG_READY
+REPENTANCE_PLUS_READY
 ENGINE_SMOKE_READY
 ```
 

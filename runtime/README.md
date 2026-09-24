@@ -39,7 +39,18 @@ RomFS-relative mod paths to `mods/`, and calls the surviving stock
 `ModManager::ListMods()` and `ModManager::LoadConfigs()`. Both entry points are
 covered by the same pinned code-signature gate. The hardware log markers are
 `MOD_MANAGER_SCAN_BEGIN`, `MOD_MANAGER_LIST_READY`, and
-`MOD_MANAGER_CONFIG_READY`.
+`MOD_MANAGER_CONFIG_READY`.  Only after that point the runtime executes the
+real embedded `mods/repentanceplus/main.lua`, so dynamically assigned config
+IDs already exist. `REPENTANCE_PLUS_READY` confirms the complete top-level
+chunk; `REPENTANCE_PLUS_FAIL` is accompanied by the exact Lua error.
+
+The bootstrap now includes direct, signature-gated ARM64 bridges for the
+engine RNG and ANM2 constructor/load/play/destructor path. Item, trinket, card,
+pill, sound and challenge names are resolved from the live vectors populated
+by `LoadConfigs`; explicit entity IDs are generated deterministically from the
+mod's `entities2.xml`. The retail API-v1 callback overwrite bug is also avoided
+with unique registrations. Callback dispatch beyond `MC_POST_UPDATE` remains
+the main incomplete runtime area.
 
 The Switch loader does not expose the NSO header's Build ID directly to an
 injected module.  Therefore the runtime gate logs the pinned Build ID and
@@ -92,7 +103,7 @@ Deploy the resulting `out/atmosphere/` tree to the SD root. Keep the existing
 The reproducible container build currently produces:
 
 ```text
-sha256  6171ad4422e9864f493bba6686f7a7d3802289faff7ae7096ffbd05bf5dd309a  out/subsdk9
+sha256  b6c6f94eceb358d735d40ecafa86aa3dd5ad90b4304ea349bb5314125354c5ab  out/subsdk9
 ```
 
 Do **not** deploy the `main.npdm` temporarily generated inside
