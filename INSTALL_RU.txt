@@ -1,0 +1,16 @@
+REPENTANCE PLUS SWITCH — v0.1.0-alpha
+
+1. Нужна легально установленная The Binding of Isaac: Repentance.
+   Title ID: 010021C000B6A000
+2. Скопируйте папку atmosphere из этого архива в корень microSD.
+3. Запустите игру через Atmosphère.
+
+Не копируйте чужой main.npdm. Если уже есть
+atmosphere/contents/010021C000B6A000/exefs/subsdk9, сохраните его копию:
+другой runtime-мод конфликтует с этим инжектором.
+
+Это alpha-сборка. При сбое приложите Atmosphère crash report и строки
+[isaac-port] из debug log:
+https://github.com/Vlan3ik/repentance-plus-switch/issues
+
+Игра, NSP/NSZ и ключи в архив не входят.
