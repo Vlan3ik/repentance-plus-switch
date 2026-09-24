@@ -2551,7 +2551,7 @@ local function getBlackHeartNumFromBitmask(Player)
 	local y = {}
 	while b > 0 do
 		table.insert(y, b % 2)
-		b = b // 2
+			b = math.floor(b / 2)
 	end
 
 	-- if we just need the amount of black hearts, return right now
@@ -6870,9 +6870,9 @@ function rplus:PostPickupUpdate(Pickup)
 
 			if pf % 5 == 0 then
 				if Pickup:GetData().Data == "normal price" then
-					Pickup.Price = math.min(math.random(22 + pf // 24, 32 + pf // 24), 99)
+					Pickup.Price = math.min(math.random(22 + math.floor(pf / 24), 32 + math.floor(pf / 24)), 99)
 				elseif Pickup:GetData().Data == "sale price" then
-					Pickup.Price = math.min(math.random(10 + pf // 27, 20 + pf // 27), 99)
+					Pickup.Price = math.min(math.random(10 + math.floor(pf / 27), 20 + math.floor(pf / 27)), 99)
 				end
 			end
 		end
@@ -7243,7 +7243,7 @@ function rplus:OnCacheEvaluate(Player, Flag)
 		if Player:GetEffects():HasCollectibleEffect(CustomCollectibles.ORBITAL_GHOSTS) then
 			local g = Player:GetEffects():GetCollectibleEffectNum(CustomCollectibles.ORBITAL_GHOSTS)
 			for _, v in pairs({1, 2, 8}) do
-				Player:CheckFamiliar(CustomFamiliars.ORBITAL_GHOST, (g % (v * 2)) // v, Player:GetCollectibleRNG(1), nil, v)
+				Player:CheckFamiliar(CustomFamiliars.ORBITAL_GHOST, math.floor((g % (v * 2)) / v), Player:GetCollectibleRNG(1), nil, v)
 			end
 		end
 		Player:CheckFamiliar(CustomFamiliars.ORBITAL_GHOST, Player:GetTrinketMultiplier(CustomTrinkets.MY_SOUL), Player:GetCollectibleRNG(1), nil, 16)
@@ -8295,7 +8295,7 @@ function rplus:PickupAwardSpawn(_, Pos)
 			elseif level:GetCurrentRoomDesc().Data.Weight > 0 then
 				if #Isaac.FindByType(6, CustomSlots.SLOT_RED_KING_CRAWSPACE, 0) == 0 then
 					local randomRoom = rng:RandomInt(4)
-					local chapterAdd = (level:GetStage() + 1) // 2
+					local chapterAdd = math.floor((level:GetStage() + 1) / 2)
 					local isAltPath = level:GetStageType() > 3 and 100 or 0
 
 					local redCrawlspace = Isaac.Spawn(6, CustomSlots.SLOT_RED_KING_CRAWLSPACE, 0, c, Vector.Zero, nil)

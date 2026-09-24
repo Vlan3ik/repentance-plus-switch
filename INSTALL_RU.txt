@@ -1,4 +1,4 @@
-REPENTANCE PLUS SWITCH — v0.1.0-alpha
+REPENTANCE PLUS SWITCH — v0.2.0-alpha
 
 1. Нужна легально установленная The Binding of Isaac: Repentance.
    Title ID: 010021C000B6A000

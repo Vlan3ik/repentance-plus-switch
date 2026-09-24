@@ -51,6 +51,9 @@ sd:/atmosphere/contents/010021C000B6A000/
   `LoadConfigs()`;
 - реальный отложенный запуск `mods/repentanceplus/main.lua` с маркером
   `REPENTANCE_PLUS_READY` либо точной Lua-ошибкой в debug log.
+- полный host-bootstrap реального мода, включая Custom Health API 0.946;
+- compatibility-shim для Repentance enum, priority callback, вложенных
+  API-v1 `include()`, class hook и DSS Font.
 
 Это **alpha/hardware bring-up**, а не обещание полностью пройденного мода:
 полный Isaac ABI и все 43 используемых callback ещё восстанавливаются. Если
@@ -85,6 +88,7 @@ reference/stock-lua/dlc/resources/scripts_v2/
 
 ```sh
 ./runtime/vendor/luajit/build.sh
+./runtime/tests/test-bootstrap-host.sh
 ./runtime/build-container.sh
 ```
 

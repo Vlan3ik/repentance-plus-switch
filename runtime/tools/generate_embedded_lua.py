@@ -7,6 +7,17 @@ import argparse
 from pathlib import Path
 
 
+CLASS_EXPORT_MARKER = "-- Load locals for further bindings"
+CLASS_EXPORT = r'''
+-- Injected by isaac-port: expose the old handle metadata so Repentance-era
+-- libraries can install their class method hooks.
+__ISAAC_PORT_ENTITY_CLASSES = {
+    Entity = luahelper.GetEntityRegisterData("Entity"),
+    EntityPlayer = luahelper.GetEntityRegisterData("Entity_Player"),
+}
+'''
+
+
 def c_string(value: str) -> str:
     out = ['"']
     for byte in value.encode("utf-8"):
@@ -31,6 +42,19 @@ def byte_rows(data: bytes) -> str:
     return ",\n".join(rows)
 
 
+def transform(logical_path: str, data: bytes) -> bytes:
+    if logical_path != "main.lua":
+        return data
+    text = data.decode("utf-8")
+    if CLASS_EXPORT_MARKER not in text:
+        raise ValueError("stock main.lua class export marker not found")
+    return text.replace(
+        CLASS_EXPORT_MARKER,
+        CLASS_EXPORT + "\n" + CLASS_EXPORT_MARKER,
+        1,
+    ).encode("utf-8")
+
+
 def generate(sources: list[tuple[Path, str]], output_root: Path) -> int:
     entries: list[tuple[str, bytes]] = []
     seen: dict[str, Path] = {}
@@ -47,7 +71,7 @@ def generate(sources: list[tuple[Path, str]], output_root: Path) -> int:
                     f"logical path collision: {logical_path}: {seen[logical_path]} and {path}"
                 )
             seen[logical_path] = path
-            entries.append((logical_path, path.read_bytes()))
+            entries.append((logical_path, transform(logical_path, path.read_bytes())))
     entries.sort(key=lambda entry: entry[0])
 
     output_root.mkdir(parents=True, exist_ok=True)

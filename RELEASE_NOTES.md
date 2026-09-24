@@ -22,6 +22,12 @@
 исправлена регистрация API-v1 callback и впервые выполняется реальный
 `repentanceplus/main.lua` после `ModManager::LoadConfigs()`.
 
+Текущая пересборка также исправляет ABI конструктора ANM2, lookup costume и
+sound ID, Lua 5.3-совместимость исходников, наследование API-v1 окружения в
+`include()`, priority callbacks и class hooks Custom Health API. Полный
+host-bootstrap завершается маркерами `Custom Health API: v0.946 Loaded`
+и `REPENTANCE_PLUS_HOST_BOOTSTRAP_READY`.
+
 Статус: непроверенная на железе alpha. Полное покрытие 43 Isaac callback ещё в
 работе. При сбое
 приложите Atmosphère crash report и строки `[isaac-port]` к GitHub Issue.

@@ -483,6 +483,17 @@ int LuaInclude(lua_State* state) {
     if (luaL_loadbuffer(state, reinterpret_cast<const char*>(file->bytes),
                         file->size, chunk_name) != 0)
         return lua_error(state);
+
+    // API-v1 RegisterMod runs the root chunk in COMPAT_ENV. Includes must
+    // inherit that caller environment as well, otherwise nested modules lose
+    // PlayerType, ModCallbacks and the other compatibility enum tables.
+    lua_Debug caller{};
+    if (lua_getstack(state, 1, &caller) &&
+        lua_getinfo(state, "f", &caller)) {
+        lua_getfenv(state, -1);
+        lua_setfenv(state, -3);
+        lua_pop(state, 1);
+    }
     lua_call(state, 0, LUA_MULTRET);
     return lua_gettop(state) - 1;
 }
@@ -608,12 +619,74 @@ void IsaacPort_ANM2_SetPlaybackSpeed(void*, float);
 float IsaacPort_ANM2_GetPlaybackSpeed(void*);
 ]]
 
-local hud = {}
-function hud:ShowItemText(...) end
-function hud:ShowFortuneText(...) end
-function hud:IsVisible() return true end
+local hudClass = {}
+function hudClass:ShowItemText(...) end
+function hudClass:ShowFortuneText(...) end
+function hudClass:IsVisible() return true end
+function hudClass:Render(...) end
+hudClass.__index = function(_, key) return rawget(hudClass, key) end
+local hud = setmetatable({}, hudClass)
 Game.GetHUD = function() return hud end
 setmetatable(Game, { __call = function(self) return self end })
+
+-- This Switch revision predates the two Repentance+ shot-speed pills. Keep
+-- their names available to old API-v1 scripts without colliding with IDs that
+-- the local ItemConfig assigns to modded pill effects.
+PILLEFFECT_SHOT_SPEED_DOWN = -1001
+PILLEFFECT_SHOT_SPEED_UP = -1002
+PICKUP_HEART_ROTTEN = 12
+PICKUP_COIN_GOLDEN = 7
+DMG_NO_MODIFIERS = 0x2000000
+DMG_NO_PENALTIES = 0x10000000
+NO_DIRECTION = -1
+PLAYER_MAGDALENE = 1
+PLAYER_BLUEBABY = 4
+PLAYER_BETHANY = 18
+PLAYER_JACOB = 19
+PLAYER_ISAAC_B = 21
+PLAYER_MAGDALENE_B = 22
+PLAYER_CAIN_B = 23
+PLAYER_JUDAS_B = 24
+PLAYER_BLUEBABY_B = 25
+PLAYER_EVE_B = 26
+PLAYER_AZAZEL_B = 28
+PLAYER_LAZARUS_B = 29
+PLAYER_EDEN_B = 30
+PLAYER_THELOST_B = 31
+PLAYER_KEEPER_B = 33
+PLAYER_THEFORGOTTEN_B = 35
+PLAYER_BETHANY_B = 36
+PLAYER_LAZARUS2_B = 38
+PLAYER_JACOB2_B = 39
+PLAYER_THESOUL_B = 40
+BatterySubType = {
+  BATTERY_NORMAL = 1,
+  BATTERY_MICRO = 2,
+  BATTERY_MEGA = 3,
+  BATTERY_GOLDEN = 4,
+}
+CallbackPriority = {
+  IMPORTANT = -200,
+  EARLY = -100,
+  DEFAULT = 0,
+  LATE = 100,
+}
+
+-- The bundled Switch API predates Repentance. Extend its compatibility enum
+-- with the variants referenced by Repentance Plus.
+local repentanceFamiliars = {
+  INTRUDER = 200, DIP = 201, BLOOD_OATH = 203, PSY_FLY = 204,
+  WISP = 206, BOILED_BABY = 208, FREEZER_BABY = 209, LOST_SOUL = 211,
+  LIL_DUMPY = 212, TINYTOMA = 216, BOT_FLY = 218, PASCHAL_CANDLE = 221,
+  FRUITY_PLUM = 225, MINISAAC = 228, LIL_ABADDON = 230,
+  ABYSS_LOCUST = 231, LIL_PORTAL = 232, WORM_FRIEND = 233,
+  BONE_SPUR = 234, TWISTED_BABY = 235, STAR_OF_BETHLEHEM = 236,
+  BLOOD_BABY = 238, CUBE_BABY = 239, BLOOD_PUPPY = 241,
+  VANISHING_TWIN = 242,
+}
+for name, value in pairs(repentanceFamiliars) do
+  _G['FAMILIAR_' .. name] = value
+end
 
 local methods = {}
 function methods:Load(path, loadGraphics)
@@ -656,23 +729,55 @@ function Sprite()
   return setmetatable({ __native = native }, spriteMeta)
 end
 
+-- The old Switch API exposes Game:GetFont() but no constructible Font API.
+-- DSS only uses this instance for two optional hint lines; keep menu bootstrap
+-- alive until the native font bridge is implemented.
+local fontMethods = {}
+function fontMethods:Load(...) return true end
+function fontMethods:GetStringWidth(text) return #(tostring(text or '')) * 8 end
+function fontMethods:DrawStringScaled(...) end
+function Font() return setmetatable({}, { __index = fontMethods }) end
+
 -- The retail Switch script accidentally keys every API-v1 callback by the
 -- callback ID, replacing earlier handlers.  Route v1 mods through the sound
 -- API-v2 registry with unique keys while preserving the leading mod argument.
 local stockRegisterMod = RegisterMod
 local stockIsaac = Isaac
+local stockIsaacAddCallback = stockIsaac.AddCallback
 local nextCompatCallback = 0
+local compatActiveMod
+function stockIsaac.AddCallback(callbackId, fn, entityId)
+  return compatActiveMod:AddCallback(callbackId, fn, entityId)
+end
+function stockIsaac.AddPriorityCallback(callbackId, priority, fn, entityId)
+  return compatActiveMod:AddPriorityCallback(callbackId, priority, fn, entityId)
+end
 function RegisterMod(name, apiVersion)
   local mod = stockRegisterMod(name, apiVersion)
   if apiVersion == 1 then
+    compatActiveMod = mod
     -- stockRegisterMod changed this wrapper's environment to COMPAT_ENV;
     -- propagate it to the actual mod chunk as retail Isaac does directly.
-    setfenv(2, getfenv(1))
+    local compat = getfenv(1)
+    compat.Direction.NO_DIRECTION = -1
+    local classes = rawget(_G, '__ISAAC_PORT_ENTITY_CLASSES')
+    if classes then
+      local function exposeClass(classData)
+        for key, value in pairs(classData.functions) do
+          rawset(classData.meta, key, value)
+        end
+        return setmetatable({}, { __class = classData.meta })
+      end
+      compat.Entity = exposeClass(classes.Entity)
+      compat.EntityPlayer = exposeClass(classes.EntityPlayer)
+    end
+    compat.HUD = setmetatable({}, { __class = hudClass })
+    setfenv(2, compat)
     local wrappedCallbacks = {}
     function mod:AddCallback(callbackId, fn, entityId)
       local wrapped = function(...) return fn(self, ...) end
       wrappedCallbacks[fn] = wrapped
-      stockIsaac.AddCallback(callbackId,
+      stockIsaacAddCallback(callbackId,
         'isaac-port-v1-' .. tostring(nextCompatCallback), wrapped,
         entityId, self)
       nextCompatCallback = nextCompatCallback + 1
@@ -908,14 +1013,28 @@ extern "C" int LL_Isaac__GetEntityVariantByName(const char* name) {
 }
 
 extern "C" int LL_Isaac__GetCostumeIdByPath(const char* path) {
-    /* The only eager lookup in Repentance Plus is its first mod costume.
-     * LoadCostumes assigns it slot zero within this ModEntry.  This keeps the
-     * bootstrap moving until the full ItemConfig costume vector is exposed. */
-    return path && std::strcmp(
-                       path,
-                       "gfx/characters/costume_004_birdofhope.anm2") == 0
-               ? 0
-               : -1;
+    auto* manager = GetLiveManager();
+    if (!manager || !g_mod_manager_config_ready || !path)
+        return -1;
+
+    /* Modded null costumes are attached to generated null-item records.
+     * LoadCostumes writes the assigned ID at Item+0x80 and the fully rooted
+     * ANM2 path at Item+0x88 in this pinned AArch64 build. */
+    NativeVector vector{};
+    std::size_t count = 0;
+    const auto vector_address = reinterpret_cast<std::uintptr_t>(manager) +
+                                kItemConfigOffset + 0x30;
+    if (!ReadNativeVector(vector_address, sizeof(void*), &vector, &count))
+        return -1;
+    const auto* entries = reinterpret_cast<void* const*>(vector.begin);
+    for (std::size_t index = 0; index < count; ++index) {
+        const auto entry = reinterpret_cast<std::uintptr_t>(entries[index]);
+        if (entry && IsMappedDataRange(entry, 0xa0, false) &&
+            NativeStringEquals(reinterpret_cast<const void*>(entry + 0x88),
+                               path))
+            return *reinterpret_cast<const int*>(entry + 0x80);
+    }
+    return -1;
 }
 
 extern "C" void LC_RNG__SetSeed(LuaRng* rng, unsigned int seed,
@@ -955,8 +1074,9 @@ extern "C" void* IsaacPort_ANM2_Create() {
     if (!object)
         return nullptr;
     std::memset(object, 0, kAnm2Size);
-    return reinterpret_cast<void* (*)(void*)>(
+    reinterpret_cast<void (*)(void*)>(
         g_repentance_base + kAnm2ConstructorRva)(object);
+    return object;
 }
 
 extern "C" void IsaacPort_ANM2_Destroy(void* object) {

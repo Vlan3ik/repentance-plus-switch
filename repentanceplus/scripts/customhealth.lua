@@ -396,7 +396,7 @@ mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, function()
         local player = Isaac.GetPlayer(i)
 
         if CustomHealthAPI.Library.GetHPOfKey(player, "HEART_ZEALOT") > 0 then
-            for _ = 1, (CustomHealthAPI.Library.GetHPOfKey(player, "HEART_ZEALOT") + 1) // 2 do
+            for _ = 1, math.floor((CustomHealthAPI.Library.GetHPOfKey(player, "HEART_ZEALOT") + 1) / 2) do
                 player:AddItemWisp(mod.GetUnlockedVanillaCollectible(false, false), player.Position, true)
             end
         end
@@ -446,7 +446,7 @@ mod:AddCallback(ModCallbacks.MC_POST_PICKUP_INIT, function(_, pickup)
         local m = CustomHealthAPI.Library.GetHPOfKey(player, "HEART_MISER")
 
         if m > 0 then
-            pickup.Price = math.max(1, math.floor(pickup.Price * (1 - 0.175 * ((m + 1) // 2))))
+            pickup.Price = math.max(1, math.floor(pickup.Price * (1 - 0.175 * math.floor((m + 1) / 2))))
             pickup.AutoUpdatePrice = false
         end
     end

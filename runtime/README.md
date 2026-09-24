@@ -1,7 +1,7 @@
 # Repentance Switch runtime injector
 
-This is the first-stage `subsdk9` loader for title `010021C000B6A000`.  It does
-not patch gameplay yet.  On load it initializes exlaunch, checks the
+This is the native `subsdk9` runtime for title `010021C000B6A000`. On load it
+initializes exlaunch and checks the
 main-module fingerprint belonging to Build ID
 `b6e5bdb9dc12e1d1a25cbfda17f4be24b4754ef5`, and emits the
 `[isaac-port] SAFE_INIT_READY subsdk9` debug marker.  It then replaces only the
@@ -39,18 +39,7 @@ RomFS-relative mod paths to `mods/`, and calls the surviving stock
 `ModManager::ListMods()` and `ModManager::LoadConfigs()`. Both entry points are
 covered by the same pinned code-signature gate. The hardware log markers are
 `MOD_MANAGER_SCAN_BEGIN`, `MOD_MANAGER_LIST_READY`, and
-`MOD_MANAGER_CONFIG_READY`.  Only after that point the runtime executes the
-real embedded `mods/repentanceplus/main.lua`, so dynamically assigned config
-IDs already exist. `REPENTANCE_PLUS_READY` confirms the complete top-level
-chunk; `REPENTANCE_PLUS_FAIL` is accompanied by the exact Lua error.
-
-The bootstrap now includes direct, signature-gated ARM64 bridges for the
-engine RNG and ANM2 constructor/load/play/destructor path. Item, trinket, card,
-pill, sound and challenge names are resolved from the live vectors populated
-by `LoadConfigs`; explicit entity IDs are generated deterministically from the
-mod's `entities2.xml`. The retail API-v1 callback overwrite bug is also avoided
-with unique registrations. Callback dispatch beyond `MC_POST_UPDATE` remains
-the main incomplete runtime area.
+`MOD_MANAGER_CONFIG_READY`.
 
 The Switch loader does not expose the NSO header's Build ID directly to an
 injected module.  Therefore the runtime gate logs the pinned Build ID and
@@ -64,16 +53,16 @@ The image is `devkitpro/devkita64:20260219`:
 
 ```sh
 podman pull docker.io/devkitpro/devkita64:20260219
-./runtime/build-container.sh
+./switch-port/runtime/build-container.sh
 ```
 
 For a native devkitPro shell, set `DEVKITPRO` and run:
 
 ```sh
-./runtime/build.sh
+./switch-port/runtime/build.sh
 ```
 
-Only `runtime/out/subsdk9` and its ready-to-copy Atmosphere tree are
+Only `switch-port/runtime/out/subsdk9` and its ready-to-copy Atmosphere tree are
 copied out; the generated NPDM is an
 internal build input and is not a production artifact.  The build deterministically
 embeds all 15 stock `scripts_v2` files and all 53 Repentance Plus Lua files. At
@@ -85,8 +74,16 @@ mod through `RegisterMod`, `AddCallback`, and `__ProcessCallback`. The first rea
 ABI functions are `L_DebugString`, `L_EnableCallback`, and
 `LL_Isaac__GetFrameCount`; success emits
 `STOCK_API_READY embedded_files=68 micro_mod=ok`. Every embedded Repentance
-Plus Lua file is also compiled (without executing gameplay code yet), and
-success emits `MOD_SOURCES_READY count=53`.
+Plus Lua file is also compiled before gameplay, and success emits
+`MOD_SOURCES_READY count=53`. After `ModManager::LoadConfigs()`, the runtime
+executes the real mod entry point. The host regression test builds the same
+pinned LuaJIT revision and proves eager bootstrap through Custom Health API:
+
+```sh
+./runtime/tests/test-bootstrap-host.sh
+```
+
+Its final marker is `REPENTANCE_PLUS_HOST_BOOTSTRAP_READY`.
 
 The same build packages the runtime mod inputs in two RomFS layouts. The full
 loose mod is placed under
@@ -103,7 +100,7 @@ Deploy the resulting `out/atmosphere/` tree to the SD root. Keep the existing
 The reproducible container build currently produces:
 
 ```text
-sha256  42dcabc77f62a8169ff8ccae9f4132fd30a88f57dd689c1000acd526fe27472a  out/subsdk9
+sha256  b448277bd53d68f6c9dd6832c884e2a65eed3b8722ebedcdfa7442e42f4f9010  out/subsdk9
 ```
 
 Do **not** deploy the `main.npdm` temporarily generated inside
@@ -113,4 +110,4 @@ NPDM already allows the SVCs used by this stage, debug output and debug SD-card
 access, so the release output intentionally contains only `subsdk9`.
 
 The pinned exlaunch source is vendored at
-`runtime/vendor/exlaunch` (commit `f9f4b0dd07b68f97958cb9c79228bbca22ca80d5`).
+`switch-port/runtime/vendor/exlaunch` (commit `f9f4b0dd07b68f97958cb9c79228bbca22ca80d5`).
