@@ -10,3 +10,5 @@ prod.keys
 title.keys
 *.elf
 *.log
+__pycache__/
+*.py[cod]
