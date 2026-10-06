@@ -1,0 +1,561 @@
+{
+  "callback_hooks": [
+    {
+      "callback_ids": [],
+      "evidence": "pinned Manager::Update RVA and prologue gate",
+      "name": "ManagerUpdateHook",
+      "verification_level": "hardware_required"
+    },
+    {
+      "callback_ids": [
+        1
+      ],
+      "evidence": "pinned Game::Update RVA and MC_POST_UPDATE dispatch",
+      "name": "GameUpdateHook",
+      "verification_level": "hardware_required"
+    }
+  ],
+  "frontier": {
+    "blocker": {
+      "args": [
+        "<table>",
+        4294967295
+      ],
+      "classification": "pending",
+      "hardware_required": true,
+      "line": 2947,
+      "name": "EntityPlayer.AddCacheFlags",
+      "reason": "missing_lua_api",
+      "source": "<modroot>/main.lua",
+      "switch_status": "unresolved"
+    },
+    "stage": "post_game_started_minimal_state",
+    "status": "host_bootstrap_blocked",
+    "verification_level": "host_only"
+  },
+  "implemented": {
+    "resolver_symbols": [
+      {
+        "name": "IsaacPortSmoke",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_Create",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_Destroy",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_GetPlaybackSpeed",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_GetScale",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_Load",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_Play",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_SetPlaybackSpeed",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_SetScale",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_RNG__Next",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_RNG__RandomFloat",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_RNG__RandomInt",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_RNG__SetSeed",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetCardIdByName",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetChallengeIdByName",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetCostumeIdByPath",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetEntityTypeByName",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetEntityVariantByName",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetFrameCount",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetItemIdByName",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetPillEffectByName",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetSoundIdByName",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetTrinketIdByName",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_DebugString",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_EnableCallback",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_Free",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_Mod_HasData",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_Mod_LoadData",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_Mod_RemoveData",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_Mod_SaveData",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      }
+    ],
+    "wrappers": [
+      {
+        "name": "IsaacPortSmoke",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_Create",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_Destroy",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_GetPlaybackSpeed",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_GetScale",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_Load",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_Play",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_SetPlaybackSpeed",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_SetScale",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_RNG__Next",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_RNG__RandomFloat",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_RNG__RandomInt",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_RNG__SetSeed",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetCardIdByName",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetChallengeIdByName",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetCostumeIdByPath",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetEntityTypeByName",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetEntityVariantByName",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetFrameCount",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetItemIdByName",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetPillEffectByName",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetSoundIdByName",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Isaac__GetTrinketIdByName",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_DebugString",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_EnableCallback",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_Free",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_Mod_HasData",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_Mod_LoadData",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_Mod_RemoveData",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "L_Mod_SaveData",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      }
+    ]
+  },
+  "markers": [
+    {
+      "name": "BOOTSTRAP_COMPAT_FAIL",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "ENGINE_HOOK_READY",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "ENGINE_SMOKE_READY",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "JSON_PRELOAD_FAIL",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "LATE_INIT",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "LUA_CALLBACK_ENABLED",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "LUA_CALLBACK_FAIL",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "LUA_CHUNK_FAIL",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "LUA_SMOKE_FAIL",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "LUA_SMOKE_READY",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "MICRO_MOD_FAIL",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "MOD_MANAGER_CONFIG_READY",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "MOD_MANAGER_LIST_READY",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "MOD_MANAGER_SCAN_BEGIN",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "MOD_MANAGER_SCAN_FAIL",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "MOD_SOURCE_FAIL",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "MOD_SOURCES_FAIL",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "MOD_SOURCES_READY",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "REPENTANCE_PLUS_FAIL",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "REPENTANCE_PLUS_READY",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "SAFE_INIT_READY",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "STOCK_API_FAIL",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    },
+    {
+      "name": "STOCK_API_READY",
+      "source": "runtime/source/program/main.cpp",
+      "verification_level": "hardware_required"
+    }
+  ],
+  "persistence": {
+    "LoadModData": {
+      "durable": {
+        "evidence": "console reboot/save-data cycle pending",
+        "status": "hardware_required"
+      },
+      "host": {
+        "status": "host_verified",
+        "test": "host_persistence"
+      }
+    },
+    "SaveModData": {
+      "durable": {
+        "evidence": "console reboot/save-data cycle pending",
+        "status": "hardware_required"
+      },
+      "host": {
+        "status": "host_verified",
+        "test": "host_persistence"
+      }
+    },
+    "hardware_persistence_sentinel": {
+      "requires": "save on console, restart process, load and compare sentinel",
+      "status": "pending",
+      "verification_level": "hardware_required"
+    }
+  },
+  "schema_version": 1,
+  "source": {
+    "config": "runtime/config.mk",
+    "native_bridge": "analysis/api-usage/native-bridge.json",
+    "native_bridge_declared_unique": 544,
+    "native_bridge_required_closure": 200,
+    "runtime": "runtime/source/program/main.cpp"
+  },
+  "tests": [
+    {
+      "command": "./runtime/tests/test-bootstrap-host.sh",
+      "name": "host_bootstrap",
+      "scope": "LuaJIT + stock scripts + mod bootstrap with fake/stub engine APIs; no live engine pointers",
+      "verification_level": "host_only"
+    },
+    {
+      "command": "./runtime/tests/test-persistence-host.sh",
+      "name": "host_persistence",
+      "scope": "LuaJIT + in-memory persistence stub; verifies Lua-facing save/load/remove contract only",
+      "verification_level": "host_only"
+    },
+    {
+      "command": "not_run: requires Switch save/restart/load cycle",
+      "name": "hardware_persistence_sentinel",
+      "scope": "durable LoadModData/SaveModData across a real console process restart",
+      "verification_level": "hardware_required"
+    },
+    {
+      "command": "./runtime/build-container.sh",
+      "name": "switch_runtime_build",
+      "scope": "devkitA64/exlaunch subsdk9 build",
+      "verification_level": "build_verified"
+    }
+  ],
+  "title": {
+    "id": "010021C000B6A000",
+    "main_build_id": "b6e5bdb9dc12e1d1a25cbfda17f4be24b4754ef5",
+    "repentance_build_id": "91c73fdd575061318d68886316afeac72388b2ab"
+  },
+  "verification_levels": {
+    "build_verified": "compiled by the declared Switch build command",
+    "hardware_required": "requires the pinned NRO, live pointers, ARM64 ABI, or console callback log",
+    "host_only": "executed by a host-side test with fake/stub engine APIs; does not prove Switch readiness",
+    "host_verified": "executed by a host-side test with fake/stub engine APIs"
+  }
+}

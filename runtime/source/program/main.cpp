@@ -1,4 +1,6 @@
 #include "lib.hpp"
+#include "nn/fs.hpp"
+#include "mod_persistence.hpp"
 #include "generated/embedded_lua.hpp"
 #include "generated/mod_ids.hpp"
 extern "C" {
@@ -9,8 +11,13 @@ extern "C" {
 
 #include <cstddef>
 #include <cstdint>
+#include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <span>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
 
 namespace {
 
@@ -127,6 +134,18 @@ lua_State* g_lua_state = nullptr;
 bool g_post_update_enabled = false;
 bool g_mod_manager_config_ready = false;
 bool g_repentance_plus_started = false;
+bool g_mod_persistence_failure_reported = false;
+
+/* The stock Lua ABI exposes mod data as a byte string keyed by the mod path.
+ * The Switch path below is an alpha backend using the validated nn::fs file
+ * primitives available in the exlaunch SDK headers.  It remains
+ * hardware_required until a console run proves the title's writable mount. */
+std::unordered_map<std::string, std::string> g_mod_data;
+std::unordered_set<void*> g_mod_fallback_allocations;
+std::unordered_set<std::string> g_mod_removed_data;
+
+void* GameAllocate(std::size_t size);
+void GameFree(void* pointer);
 
 struct LuaRng {
     std::uint32_t seed;
@@ -361,16 +380,17 @@ bool InitializeStockModManager(void* hook_manager) {
         !IsMappedDataRange(mod_manager_address, 3 * sizeof(void*), true))
         return false;
 
-    /* IContentManager paths are relative to the game's RomFS mounts.  Keep
-     * the secondary path inside the same read-only tree until the native mod
-     * save API is restored; ListMods uses it to form ModEntry paths. */
+    /* IContentManager paths are relative to the game's RomFS mounts.  The
+     * second global is the engine's mod-save root; REPENTOGON documents the
+     * corresponding PC layout as ../data/<mod>/save1.dat. */
     constexpr char kModPath[] = "mods/";
     std::memset(reinterpret_cast<void*>(data_path), 0, kModdingPathCapacity);
     std::memset(reinterpret_cast<void*>(save_path), 0, kModdingPathCapacity);
     std::memcpy(reinterpret_cast<void*>(data_path), kModPath,
                 sizeof(kModPath));
-    std::memcpy(reinterpret_cast<void*>(save_path), kModPath,
-                sizeof(kModPath));
+    constexpr char kSavePath[] = "../data/";
+    std::memcpy(reinterpret_cast<void*>(save_path), kSavePath,
+                sizeof(kSavePath));
 
     using ModManagerFn = void (*)(void*);
     const auto list_mods = reinterpret_cast<ModManagerFn>(
@@ -609,6 +629,11 @@ bool InstallBootstrapCompatibility(lua_State* state) {
     static constexpr char kCompatibility[] = R"LUA(
 local ffi = require('ffi')
 ffi.cdef[[
+void L_Free(char*);
+void L_Mod_SaveData(const char*, const char*, int);
+char* L_Mod_LoadData(const char*, int*);
+bool L_Mod_HasData(const char*);
+void L_Mod_RemoveData(const char*);
 void* IsaacPort_ANM2_Create(void);
 void IsaacPort_ANM2_Destroy(void*);
 void IsaacPort_ANM2_Load(void*, const char*, bool);
@@ -618,6 +643,31 @@ void IsaacPort_ANM2_GetScale(void*, Vector2*);
 void IsaacPort_ANM2_SetPlaybackSpeed(void*, float);
 float IsaacPort_ANM2_GetPlaybackSpeed(void*);
 ]]
+
+-- Isaac.LoadModData/SaveModData are absent from this stock Switch script
+-- snapshot. Route them through the same byte-string ABI as META_Mod. The
+-- native bridge uses the durable alpha backend on Switch and a session
+-- fallback on host/no-mount environments.
+function Isaac.LoadModData(mod)
+  if not mod or not mod.Path then return nil end
+  local length = ffi.new('int[1]')
+  local data = ffi.C.L_Mod_LoadData(mod.Path, length)
+  if data == ffi.NULL then return nil end
+  local result = ffi.string(data, length[0])
+  ffi.C.L_Free(data)
+  return result
+end
+function Isaac.SaveModData(mod, data)
+  if mod and mod.Path and data then
+    ffi.C.L_Mod_SaveData(mod.Path, data, #data)
+  end
+end
+function Isaac.HasModData(mod)
+  return mod and mod.Path and ffi.C.L_Mod_HasData(mod.Path) or false
+end
+function Isaac.RemoveModData(mod)
+  if mod and mod.Path then ffi.C.L_Mod_RemoveData(mod.Path) end
+end
 
 local hudClass = {}
 function hudClass:ShowItemText(...) end
@@ -913,6 +963,255 @@ extern "C" void L_DebugString(const char* message) {
     Logging.Log("[isaac-lua] %s", message ? message : "(null)");
 }
 
+extern "C" void L_Free(char* pointer) {
+    if (!pointer)
+        return;
+    const auto it = g_mod_fallback_allocations.find(pointer);
+    if (it != g_mod_fallback_allocations.end()) {
+        g_mod_fallback_allocations.erase(it);
+        std::free(pointer);
+        return;
+    }
+    GameFree(pointer);
+}
+
+bool ReadModSaveRoot(char* out, std::size_t out_size) {
+    if (!g_repentance_base || !out || out_size < 2)
+        return false;
+    const auto address = g_repentance_base + kModdingSaveDataPathRva;
+    if (address < g_repentance_base ||
+        !IsMappedDataRange(address, kModdingPathCapacity, false))
+        return false;
+    const auto* root = reinterpret_cast<const char*>(address);
+    std::size_t length = 0;
+    while (length < kModdingPathCapacity && root[length] != '\0')
+        ++length;
+    if (length == 0 || length + 1 > out_size || root[length - 1] != '/')
+        return false;
+    /* Never accept an engine global that points back into the mod/RomFS tree. */
+    if (std::strncmp(root, "mods/", 5) == 0)
+        return false;
+    std::memcpy(out, root, length);
+    out[length] = '\0';
+    return true;
+}
+
+void ReportModPersistenceFailure(const char* operation, const char* reason) {
+    if (!g_mod_persistence_failure_reported) {
+        Logging.Log("[isaac-port] MOD_PERSISTENCE_SWITCH_FAIL op=%s reason=%s result=session_fallback",
+                    operation ? operation : "unknown", reason ? reason : "unknown");
+        g_mod_persistence_failure_reported = true;
+    }
+}
+
+bool BuildModSavePath(const char* identity, char* path, std::size_t path_size,
+                      char* directory, std::size_t directory_size) {
+    char relative[isaac_port::mod_persistence::kMaxPath]{};
+    char root[kModdingPathCapacity]{};
+    if (!isaac_port::mod_persistence::BuildSavePath(identity, relative,
+                                                    sizeof(relative)) ||
+        !ReadModSaveRoot(root, sizeof(root)))
+        return false;
+    const char* relative_name = relative + std::strlen("data/");
+    const int written = std::snprintf(path, path_size, "%s%s", root, relative_name);
+    if (written <= 0 || static_cast<std::size_t>(written) >= path_size)
+        return false;
+    const char* slash = std::strrchr(path, '/');
+    if (!slash || static_cast<std::size_t>(slash - path) + 1 > directory_size)
+        return false;
+    const std::size_t length = static_cast<std::size_t>(slash - path);
+    std::memcpy(directory, path, length);
+    directory[length] = '\0';
+    return true;
+}
+
+bool SaveModDataDurable(const char* identity, const char* data, int length) {
+    if (!g_repentance_base) {
+        ReportModPersistenceFailure("save", "engine_unavailable");
+        return false;
+    }
+    char path[isaac_port::mod_persistence::kMaxPath]{};
+    char directory[isaac_port::mod_persistence::kMaxPath]{};
+    if (!BuildModSavePath(identity, path, sizeof(path), directory,
+                          sizeof(directory))) {
+        ReportModPersistenceFailure("save", "save_path_unavailable");
+        return false;
+    }
+
+    /* Do not remove an existing save before a replacement is ready.  The
+     * checked nn::fs subset has no proven atomic rename/truncate primitive,
+     * so updates are accepted only when the existing file has the same size. */
+    const char* parent_slash = std::strrchr(directory, '/');
+    if (parent_slash) {
+        char parent[isaac_port::mod_persistence::kMaxPath]{};
+        const std::size_t parent_length = static_cast<std::size_t>(parent_slash - directory);
+        if (parent_length >= sizeof(parent)) {
+            ReportModPersistenceFailure("save", "parent_path_too_long");
+            return false;
+        }
+        std::memcpy(parent, directory, parent_length);
+        parent[parent_length] = '\0';
+        nn::fs::CreateDirectory(parent);
+    }
+    nn::fs::CreateDirectory(directory);
+    bool created = nn::fs::CreateFile(path, length) == 0;
+    if (!created) {
+        nn::fs::FileHandle existing{};
+        if (nn::fs::OpenFile(&existing, path, nn::fs::OpenMode_Read) != 0) {
+            ReportModPersistenceFailure("save", "create_or_open_failed");
+            return false;
+        }
+        long existing_size = -1;
+        const bool same_size = nn::fs::GetFileSize(&existing_size, existing) == 0 &&
+                               existing_size == length;
+        nn::fs::CloseFile(existing);
+        if (!same_size) {
+            ReportModPersistenceFailure("save", "size_change_requires_atomic_replace");
+            return false;
+        }
+    }
+    nn::fs::FileHandle file{};
+    if (nn::fs::OpenFile(&file, path, nn::fs::OpenMode_Write) != 0) {
+        ReportModPersistenceFailure("save", "write_open_failed");
+        return false;
+    }
+    bool ok = true;
+    if (length > 0) {
+        const auto option = nn::fs::WriteOption::CreateOption(
+            nn::fs::WriteOptionFlag_Flush);
+        ok = nn::fs::WriteFile(file, 0, data, static_cast<std::uint64_t>(length),
+                               option) == 0;
+    }
+    if (ok)
+        ok = nn::fs::FlushFile(file) == 0;
+    nn::fs::CloseFile(file);
+    if (ok)
+        g_mod_removed_data.erase(identity);
+    else
+        ReportModPersistenceFailure("save", "write_or_flush_failed");
+    return ok;
+}
+
+char* LoadModDataDurable(const char* identity, int* length) {
+    if (length)
+        *length = 0;
+    if (!g_repentance_base) {
+        ReportModPersistenceFailure("load", "engine_unavailable");
+        return nullptr;
+    }
+    char path[isaac_port::mod_persistence::kMaxPath]{};
+    char directory[isaac_port::mod_persistence::kMaxPath]{};
+    if (!BuildModSavePath(identity, path, sizeof(path), directory,
+                          sizeof(directory)) ||
+        g_mod_removed_data.count(identity)) {
+        ReportModPersistenceFailure("load", "save_path_unavailable");
+        return nullptr;
+    }
+    nn::fs::FileHandle file{};
+    if (nn::fs::OpenFile(&file, path, nn::fs::OpenMode_Read) != 0)
+        return nullptr;
+    long size = 0;
+    if (nn::fs::GetFileSize(&size, file) != 0 || size < 0 || size > 16 * 1024 * 1024) {
+        nn::fs::CloseFile(file);
+        ReportModPersistenceFailure("load", "invalid_file_size");
+        return nullptr;
+    }
+    const std::size_t allocation_size = static_cast<std::size_t>(size) + 1;
+    char* result = static_cast<char*>(GameAllocate(allocation_size));
+    if (!result) {
+        nn::fs::CloseFile(file);
+        return nullptr;
+    }
+    ulong bytes_read = 0;
+    const bool ok = size == 0 ||
+        (nn::fs::ReadFile(&bytes_read, file, 0, result) == 0 &&
+         bytes_read == static_cast<ulong>(size));
+    nn::fs::CloseFile(file);
+    if (!ok) {
+        GameFree(result);
+        ReportModPersistenceFailure("load", "read_short_or_failed");
+        return nullptr;
+    }
+    result[size] = '\0';
+    if (length)
+        *length = static_cast<int>(size);
+    return result;
+}
+
+bool HasModDataDurable(const char* identity) {
+    char path[isaac_port::mod_persistence::kMaxPath]{};
+    char directory[isaac_port::mod_persistence::kMaxPath]{};
+    if (!g_repentance_base || !BuildModSavePath(identity, path, sizeof(path),
+                                                directory, sizeof(directory)) ||
+        g_mod_removed_data.count(identity))
+        return false;
+    nn::fs::FileHandle file{};
+    if (nn::fs::OpenFile(&file, path, nn::fs::OpenMode_Read) != 0)
+        return false;
+    nn::fs::CloseFile(file);
+    return true;
+}
+
+void RemoveModDataDurable(const char* identity) {
+    char path[isaac_port::mod_persistence::kMaxPath]{};
+    char directory[isaac_port::mod_persistence::kMaxPath]{};
+    if (!g_repentance_base || !BuildModSavePath(identity, path, sizeof(path),
+                                                directory, sizeof(directory))) {
+        ReportModPersistenceFailure("remove", "save_path_unavailable");
+        return;
+    }
+    if (nn::fs::DeleteDirectoryRecursively(directory) == 0)
+        g_mod_removed_data.insert(identity);
+    else
+        ReportModPersistenceFailure("remove", "delete_failed");
+}
+
+extern "C" void L_Mod_SaveData(const char* path, const char* data,
+                                int length) {
+    if (!path || length < 0 || length > 16 * 1024 * 1024 ||
+        (length > 0 && !data))
+        return;
+    g_mod_data[std::string(path)] =
+        std::string(data ? data : "", static_cast<std::size_t>(length));
+    SaveModDataDurable(path, data, length);
+}
+
+extern "C" char* L_Mod_LoadData(const char* path, int* length) {
+    if (length)
+        *length = 0;
+    if (!path)
+        return nullptr;
+    if (char* durable = LoadModDataDurable(path, length))
+        return durable;
+    const auto it = g_mod_data.find(path);
+    if (it == g_mod_data.end())
+        return nullptr;
+    const std::size_t allocation_size = it->second.size() + 1;
+    char* result = static_cast<char*>(g_repentance_base
+                                         ? GameAllocate(allocation_size)
+                                         : std::malloc(allocation_size));
+    if (!result)
+        return nullptr;
+    if (!g_repentance_base)
+        g_mod_fallback_allocations.insert(result);
+    std::memcpy(result, it->second.data(), it->second.size());
+    result[it->second.size()] = '\0';
+    if (length)
+        *length = static_cast<int>(it->second.size());
+    return result;
+}
+
+extern "C" bool L_Mod_HasData(const char* path) {
+    return path && (HasModDataDurable(path) || g_mod_data.find(path) != g_mod_data.end());
+}
+
+extern "C" void L_Mod_RemoveData(const char* path) {
+    if (path) {
+        g_mod_data.erase(path);
+        RemoveModDataDurable(path);
+    }
+}
+
 extern "C" void L_EnableCallback(unsigned int callback_id) {
     if (callback_id == 1)
         g_post_update_enabled = true;
@@ -1139,10 +1438,20 @@ extern "C" float IsaacPort_ANM2_GetPlaybackSpeed(void* object) {
 extern "C" void* luaJIT_nx_resolve(const char* name) {
     if (name && std::strcmp(name, "IsaacPortSmoke") == 0)
         return reinterpret_cast<void*>(&IsaacPortSmoke);
+    if (name && std::strcmp(name, "L_Free") == 0)
+        return reinterpret_cast<void*>(&L_Free);
     if (name && std::strcmp(name, "L_DebugString") == 0)
         return reinterpret_cast<void*>(&L_DebugString);
     if (name && std::strcmp(name, "L_EnableCallback") == 0)
         return reinterpret_cast<void*>(&L_EnableCallback);
+    if (name && std::strcmp(name, "L_Mod_SaveData") == 0)
+        return reinterpret_cast<void*>(&L_Mod_SaveData);
+    if (name && std::strcmp(name, "L_Mod_LoadData") == 0)
+        return reinterpret_cast<void*>(&L_Mod_LoadData);
+    if (name && std::strcmp(name, "L_Mod_HasData") == 0)
+        return reinterpret_cast<void*>(&L_Mod_HasData);
+    if (name && std::strcmp(name, "L_Mod_RemoveData") == 0)
+        return reinterpret_cast<void*>(&L_Mod_RemoveData);
     if (name && std::strcmp(name, "LL_Isaac__GetFrameCount") == 0)
         return reinterpret_cast<void*>(&LL_Isaac__GetFrameCount);
     if (name && std::strcmp(name, "LL_Isaac__GetItemIdByName") == 0)

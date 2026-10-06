@@ -41,6 +41,8 @@ cp -a "$VENDOR_DIR/Makefile" "$VENDOR_DIR/misc" "$VENDOR_DIR/source" "$STAGE_DIR
 cp "$ROOT_DIR/config.mk" "$STAGE_DIR/config.mk"
 cp "$VENDOR_DIR/misc/npdm-json/qlaunch.json" "$STAGE_DIR/config.json"
 cp "$ROOT_DIR/source/program/main.cpp" "$STAGE_DIR/source/program/main.cpp"
+cp "$ROOT_DIR/source/program/mod_persistence.hpp" \
+   "$STAGE_DIR/source/program/mod_persistence.hpp"
 
 mkdir -p "$STAGE_DIR/source/generated"
 python3 "$LUA_GENERATOR" \
