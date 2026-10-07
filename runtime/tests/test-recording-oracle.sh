@@ -39,17 +39,27 @@ d = json.load(open(sys.argv[1], encoding="utf-8"))
 assert d.get("schema") == 1
 assert d.get("status") in {"host_bootstrap_blocked", "host_bootstrap_complete"}
 assert d.get("verification_level") == "host_only"
-assert d.get("stage") == "post_game_started_minimal_state"
+assert d.get("stage") == "post_game_started_then_post_update_minimal_state"
 assert isinstance(d.get("operations"), list)
 assert len(d.get("callbacks", [])) == 123
 assert d["operations"]
-assert d["status"] == "host_bootstrap_blocked"
-assert d.get("first_unsupported")
-assert d["first_unsupported"]["name"] == "EntityPlayer.AddCacheFlags"
-if d.get("first_unsupported"):
+cache_calls = [event for event in d["operations"]
+               if event.get("name") == "EntityPlayer.AddCacheFlags"
+               and event.get("kind") == "call"]
+assert cache_calls and cache_calls[-1]["args"] == [4294967295]
+evaluate_calls = [event for event in d["operations"]
+                  if event.get("name") == "EntityPlayer.EvaluateItems"
+                  and event.get("kind") == "call"]
+assert evaluate_calls
+if d["status"] == "host_bootstrap_blocked":
+    assert d.get("first_unsupported")
+    assert d["first_unsupported"]["name"] == "Game.GetRoom"
     blocker = d["first_unsupported"]
     assert isinstance(blocker, dict)
     assert isinstance(blocker.get("name"), str) and blocker["name"]
     assert isinstance(blocker.get("reason"), str) and blocker["reason"]
+else:
+    assert d["status"] == "host_bootstrap_complete"
+    assert d.get("first_unsupported") is None
 PY
 printf 'runtime frontier: %s\n' "$OUT_JSON"

@@ -2,6 +2,7 @@
 -- This is deliberately a small observation harness: it records the Lua-facing
 -- boundary and does not emulate engine state or copy any upstream harness.
 local ffi = require("ffi")
+local bit = require("bit")
 local stock = assert(arg[1], "stock scripts_v2 path required")
 local modroot = assert(arg[2], "mod path required")
 local outpath = assert(arg[3], "output JSON path required")
@@ -118,7 +119,15 @@ local stockGame, stockSfx, stockRng = Game, SFXManager, RNG
 -- stage provide exactly one player and one active game slot, then let the
 -- first unimplemented player operation fail through the recording boundary.
 -- This is an observation fixture, not an API implementation.
-local fakePlayer = {}
+local fakePlayer = { __pending_cache_flags = 0 }
+function fakePlayer:AddCacheFlags(flags)
+    record("call", "EntityPlayer.AddCacheFlags", {flags}, 2)
+    self.__pending_cache_flags = bit.bor(self.__pending_cache_flags,
+                                         tonumber(flags) or 0)
+end
+function fakePlayer:EvaluateItems()
+    record("call", "EntityPlayer.EvaluateItems", {}, 2)
+end
 setmetatable(fakePlayer, { __index = function(_, key)
     return function(...)
         record("unsupported", "EntityPlayer." .. tostring(key), {...}, 2)
@@ -140,7 +149,13 @@ function hudClass:Render(...) end
 hudClass.__index = function(_, key) return rawget(hudClass, key) end
 local hud = setmetatable({}, hudClass)
 stockGame.GetHUD = function() return hud end
-setmetatable(stockGame, { __call = function(self) return self end })
+-- Keep the next missing Game member observable instead of letting Lua turn a
+-- nil method lookup into a generic callback error.
+stockGame = wrap_table("Game", stockGame)
+local stockGameMeta = getmetatable(stockGame) or {}
+stockGameMeta.__call = function(self) return self end
+setmetatable(stockGame, stockGameMeta)
+Game = stockGame
 local spriteMethods = {}
 for _, method in ipairs({"Load", "Play", "Render", "Update", "SetFrame", "ReplaceSpritesheet", "LoadGraphics"}) do
     spriteMethods[method] = function() end
@@ -277,16 +292,31 @@ if classes then
     compat_env.EntityPlayer = exposeClass(classes.EntityPlayer)
 end
 compat_env.HUD = setmetatable({}, { __class = hudClass })
+-- `game` in the mod is the object returned by Game(), not the constructor
+-- table above. Wrap that concrete compatibility object so a missing method is
+-- recorded at the Lua boundary.
+local compatGameConstructor = compat_env.Game or _G.Game
+if type(compatGameConstructor) == "function" then
+    local compatGame = compatGameConstructor()
+    if type(compatGame) == "table" then
+        wrap_table("Game", compatGame)
+        compat_env.Game = function() return compatGame end
+    end
+end
 local mod_chunk = assert(loadfile(modroot .. "/main.lua"))
 setfenv(mod_chunk, compat_env)
 local ok, err = xpcall(mod_chunk, debug.traceback)
 if ok and #callbacks > 0 then
-    -- Probe the earliest useful lifecycle callback. POST_GAME_STARTED (15)
-    -- receives only a boolean and therefore needs no fabricated Entity/Room.
-    local probe
-    for _, item in ipairs(callbacks) do if item.callback == 15 then probe = item; break end end
-    if not probe then for _, item in ipairs(callbacks) do if item.callback == 1 then probe = item; break end end end
-    if probe then
+    -- Probe the earliest useful lifecycle callbacks in order.  The game-start
+    -- probe establishes the first player/cache boundary; one update probe then
+    -- advances the same minimal state to the next real missing operation.
+    local probes = {}
+    for _, wanted in ipairs({15, 1}) do
+        for _, item in ipairs(callbacks) do
+            if item.callback == wanted then probes[#probes + 1] = item; break end
+        end
+    end
+    for _, probe in ipairs(probes) do
         local label = probe.callback == 15 and "POST_GAME_STARTED" or "POST_UPDATE"
         record("callback_probe", label, {probe.callback}, 1)
         local probeOk, probeErr = xpcall(function()
@@ -301,6 +331,7 @@ if ok and #callbacks > 0 then
                 firstUnsupported = { name = "callback_error", source = source or "?",
                     line = tonumber(line) or 0, args = {probe.callback}, reason = tostring(probeErr) }
             end
+            break
         end
     end
 end
@@ -368,7 +399,7 @@ for i, item in ipairs(callbacks) do
 end
 local report = { schema = 1, status = ok and "host_bootstrap_complete" or "host_bootstrap_blocked",
     verification_level = "host_only", first_unsupported = firstUnsupported,
-    stage = "post_game_started_minimal_state", callbacks = publicCallbacks, operations = ops }
+    stage = "post_game_started_then_post_update_minimal_state", callbacks = publicCallbacks, operations = ops }
 local file = assert(io.open(outpath, "wb")); file:write(json(report), "\n"); file:close()
 io.stdout:write("RECORDING_ORACLE_" .. report.status:upper() .. "\n")
 if not ok then io.stderr:write(tostring(err), "\n") end

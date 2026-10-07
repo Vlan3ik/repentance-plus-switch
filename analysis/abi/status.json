@@ -18,18 +18,17 @@
   "frontier": {
     "blocker": {
       "args": [
-        "<table>",
-        4294967295
+        "<table>"
       ],
       "classification": "pending",
       "hardware_required": true,
-      "line": 2947,
-      "name": "EntityPlayer.AddCacheFlags",
+      "line": 3570,
+      "name": "Game.GetRoom",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua",
       "switch_status": "unresolved"
     },
-    "stage": "post_game_started_minimal_state",
+    "stage": "post_game_started_then_post_update_minimal_state",
     "status": "host_bootstrap_blocked",
     "verification_level": "host_only"
   },
@@ -77,6 +76,16 @@
       },
       {
         "name": "IsaacPort_ANM2_SetScale",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__AddCacheFlags",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__EvaluateItems",
         "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
         "verification_level": "hardware_required"
       },
@@ -237,6 +246,18 @@
       },
       {
         "name": "IsaacPort_ANM2_SetScale",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__AddCacheFlags",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__EvaluateItems",
         "resolver_exposed": true,
         "source": "runtime/source/program/main.cpp",
         "verification_level": "hardware_required"
@@ -532,6 +553,24 @@
       "command": "./runtime/tests/test-persistence-host.sh",
       "name": "host_persistence",
       "scope": "LuaJIT + in-memory persistence stub; verifies Lua-facing save/load/remove contract only",
+      "verification_level": "host_only"
+    },
+    {
+      "command": "./runtime/tests/test-add-cache-flags.sh",
+      "name": "host_add_cache_flags",
+      "scope": "mock Entity_Player storage; verifies 0x1958 pending-mask offset and uint32 OR semantics only",
+      "verification_level": "host_only"
+    },
+    {
+      "command": "python3 ./runtime/tests/test-cache-flags-evidence.py",
+      "name": "static_add_cache_flags_evidence",
+      "scope": "pinned Repentance.elf build ID plus four exact ARM64 load/orr/store uses of Entity_Player+0x1958",
+      "verification_level": "hardware_required"
+    },
+    {
+      "command": "./runtime/tests/test-evaluate-items.sh",
+      "name": "host_evaluate_items",
+      "scope": "mock opaque Entity_Player pointer; verifies one void EvaluateItems call and mapping guards only",
       "verification_level": "host_only"
     },
     {

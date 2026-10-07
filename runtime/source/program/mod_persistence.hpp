@@ -9,6 +9,16 @@ namespace isaac_port::mod_persistence {
 constexpr std::size_t kMaxModIdentity = 96;
 constexpr std::size_t kMaxPath = 160;
 
+inline bool IsSdmcMountName(const char* mount) {
+    if (!mount || std::strncmp(mount, "sdmc", 4) != 0)
+        return false;
+    return mount[4] == '\0' || mount[4] == ':';
+}
+
+inline bool CommitSucceeded(unsigned long result) {
+    return result == 0;
+}
+
 /* Build the single-file layout used by the alpha backend.  Mod.Path is the
  * engine's `mods/<name>/` identity, not a bare folder name. */
 inline bool BuildSavePath(const char* identity, char* out, std::size_t out_size) {

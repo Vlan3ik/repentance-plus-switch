@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "elf": "../switch-port/analysis/nx2elf/Repentance.elf",
+  "build_id": "91c73fdd575061318d68886316afeac72388b2ab",
+  "field": {
+    "class": "Entity_Player",
+    "member": "pendingCacheFlags",
+    "offset": "0x1958",
+    "width": 4,
+    "operation": "uint32 load | mask, then uint32 store"
+  },
+  "uses": [
+    {
+      "function": "Entity_Player::AddLeprocy",
+      "rva": "0x28d480",
+      "instructions": [
+        "ldr w8, [x0, #0x1958]",
+        "orr w8, w8, #0x200",
+        "str w8, [x0, #0x1958]"
+      ]
+    },
+    {
+      "function": "Entity_Player::AddCollectible",
+      "rva": "0x293680",
+      "instructions": [
+        "ldr w9, [x20, #0x1958]",
+        "orr w8, w9, w8",
+        "str w8, [x20, #0x1958]"
+      ]
+    },
+    {
+      "function": "Entity_Familiar::ai_chubby",
+      "rva": "0xb4b30",
+      "instructions": [
+        "ldr w9, [x14, #0x1958]",
+        "orr w9, w9, #0x200",
+        "str w9, [x14, #0x1958]"
+      ]
+    },
+    {
+      "function": "Entity_Player::update_soul_charges",
+      "rva": "0x28d070",
+      "instruction_addresses": ["0x28d070", "0x28d078", "0x28d07c"],
+      "instructions": [
+        "ldr w8, [x19, #0x1958]",
+        "orr w8, w8, w9",
+        "str w8, [x19, #0x1958]"
+      ]
+    }
+  ],
+  "provenance": "llvm-objdump of the pinned Repentance.elf; RVA evidence is static and remains hardware_required"
+}

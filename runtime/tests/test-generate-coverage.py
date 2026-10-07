@@ -75,11 +75,33 @@ class CoverageGeneratorTest(unittest.TestCase):
         self.assertEqual(report["usage"]["static_receiver_method_count"], 42)
         self.assertTrue(report["switch"]["hardware_required"])
         entry = next(e for e in result["entries"] if e["name"] == "EntityPlayer.AddCacheFlags")
-        self.assertEqual(entry["runtime"]["status"], "unsupported")
+        self.assertEqual(entry["runtime"]["status"], "host_tested")
         self.assertNotEqual(entry["switch"]["status"], "implemented")
         persistence = result["runtime"]["previous_persistence"]
         self.assertEqual(persistence["LoadModData"]["host"]["status"], "host_verified")
         self.assertEqual(persistence["LoadModData"]["durable"]["status"], "hardware_required")
+
+    def test_implemented_frontier_endpoint_remains_visible(self):
+        usage = {"callbacks": {}, "global_calls": {}, "isaac_methods": {}}
+        frontier = {
+            "operations": [{"seq": 1, "name": "EntityPlayer.AddCacheFlags",
+                            "kind": "call", "args": [4294967295]}],
+            "first_unsupported": {"name": "EntityPlayer.EvaluateItems",
+                                  "reason": "missing_lua_api"},
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "frontier.json"
+            path.write_text(json.dumps(frontier))
+            result = coverage.build(usage, path, Path("/missing"),
+                                    Path("/missing"), Path("/missing"))
+        entry = next(e for e in result["entries"]
+                     if e["name"] == "EntityPlayer.AddCacheFlags")
+        self.assertTrue(entry["runtime"]["observed"])
+        self.assertEqual(entry["runtime"]["status"], "host_tested")
+        self.assertEqual(entry["runtime"]["verification_level"], "host_only")
+        self.assertTrue(entry["switch"]["hardware_required"])
+        self.assertEqual(result["runtime"]["blocker"]["name"],
+                         "EntityPlayer.EvaluateItems")
 
 
 if __name__ == "__main__":

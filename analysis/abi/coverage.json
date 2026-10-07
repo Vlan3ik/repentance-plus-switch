@@ -1876,10 +1876,10 @@
         "zhl": []
       },
       "kind": "runtime_frontier_blocker",
-      "name": "EntityPlayer.AddCacheFlags",
+      "name": "Game.GetRoom",
       "runtime": {
         "observed": true,
-        "order": 394,
+        "order": 397,
         "status": "unsupported"
       },
       "switch": {
@@ -1887,24 +1887,57 @@
         "hardware_required": true,
         "status": "unresolved"
       },
-      "usage_count": 45
+      "usage_count": 44
+    },
+    {
+      "evidence": {
+        "host_test": "runtime/tests/test-add-cache-flags.sh",
+        "isaacscript": [
+          {
+            "name": "AddCacheFlags",
+            "source": "types/classes/EntityPlayer.d.ts"
+          }
+        ],
+        "static_elf_evidence": "analysis/abi/entity-player-cache-flags-evidence.json",
+        "zhl": [
+          {
+            "pattern": "558bec8b45??0981????????5dc204008b81",
+            "signature": "__thiscall void Entity_Player::AddCacheFlags(int flags)",
+            "source": "EntityPlayer.zhl",
+            "symbol": "Entity_Player::AddCacheFlags"
+          }
+        ]
+      },
+      "kind": "runtime_observed_method",
+      "name": "EntityPlayer.AddCacheFlags",
+      "runtime": {
+        "observed": true,
+        "order": 393,
+        "status": "host_tested",
+        "verification_level": "host_only"
+      },
+      "switch": {
+        "confidence": "unknown",
+        "hardware_required": true,
+        "rva": null,
+        "status": "unresolved"
+      },
+      "usage_count": 0
     }
   ],
   "runtime": {
     "blocker": {
       "args": [
-        "<table>",
-        4294967295
+        "<table>"
       ],
-      "line": 2947,
-      "name": "EntityPlayer.AddCacheFlags",
+      "line": 3570,
+      "name": "Game.GetRoom",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua"
     },
     "blocker_report": {
       "args": [
-        "<table>",
-        4294967295
+        "<table>"
       ],
       "classification": "pending",
       "evidence": {
@@ -1912,38 +1945,37 @@
           {
             "args": [],
             "kind": "call",
-            "line": 2945,
-            "name": "Game.GetNumPlayers",
-            "seq": 392,
+            "line": 2948,
+            "name": "EntityPlayer.EvaluateItems",
+            "seq": 395,
             "source": "<modroot>/main.lua"
           },
           {
             "args": [
-              0
+              1
             ],
-            "kind": "call",
-            "line": 2946,
-            "name": "Isaac.GetPlayer",
-            "seq": 393,
-            "source": "<modroot>/main.lua"
+            "kind": "callback_probe",
+            "line": 321,
+            "name": "POST_UPDATE",
+            "seq": 396,
+            "source": "...ce-plus-switch/runtime/tests/oracle/recording_oracle.lua"
           },
           {
             "args": [
-              "<table>",
-              4294967295
+              "<table>"
             ],
             "kind": "unsupported",
-            "line": 2947,
-            "name": "EntityPlayer.AddCacheFlags",
-            "seq": 394,
+            "line": 3570,
+            "name": "Game.GetRoom",
+            "seq": 397,
             "source": "<modroot>/main.lua"
           }
         ],
-        "oracle_stage": "post_game_started_minimal_state",
+        "oracle_stage": "post_game_started_then_post_update_minimal_state",
         "verification_level": "host_only"
       },
-      "line": 2947,
-      "name": "EntityPlayer.AddCacheFlags",
+      "line": 3570,
+      "name": "Game.GetRoom",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua",
       "switch": {
@@ -1953,7 +1985,7 @@
       },
       "usage": {
         "frontier_occurrences": 1,
-        "static_receiver_method_count": 45
+        "static_receiver_method_count": 44
       }
     },
     "oracle_present": true,
@@ -5906,7 +5938,7 @@
           15
         ],
         "kind": "callback_probe",
-        "line": 291,
+        "line": 321,
         "name": "POST_GAME_STARTED",
         "seq": 385,
         "source": "...ce-plus-switch/runtime/tests/oracle/recording_oracle.lua"
@@ -5985,13 +6017,40 @@
       },
       {
         "args": [
-          "<table>",
           4294967295
         ],
-        "kind": "unsupported",
+        "kind": "call",
         "line": 2947,
         "name": "EntityPlayer.AddCacheFlags",
         "seq": 394,
+        "source": "<modroot>/main.lua"
+      },
+      {
+        "args": [],
+        "kind": "call",
+        "line": 2948,
+        "name": "EntityPlayer.EvaluateItems",
+        "seq": 395,
+        "source": "<modroot>/main.lua"
+      },
+      {
+        "args": [
+          1
+        ],
+        "kind": "callback_probe",
+        "line": 321,
+        "name": "POST_UPDATE",
+        "seq": 396,
+        "source": "...ce-plus-switch/runtime/tests/oracle/recording_oracle.lua"
+      },
+      {
+        "args": [
+          "<table>"
+        ],
+        "kind": "unsupported",
+        "line": 3570,
+        "name": "Game.GetRoom",
+        "seq": 397,
         "source": "<modroot>/main.lua"
       }
     ],
@@ -6094,10 +6153,10 @@
     }
   },
   "summary": {
-    "entry_count": 90,
-    "isaacscript_evidenced": 10,
-    "runtime_observed": 17,
-    "unresolved": 90,
-    "zhl_evidenced": 7
+    "entry_count": 91,
+    "isaacscript_evidenced": 11,
+    "runtime_observed": 18,
+    "unresolved": 91,
+    "zhl_evidenced": 8
   }
 }

@@ -46,12 +46,13 @@ def main() -> None:
     assert any(test["verification_level"] == "host_only" for test in status["tests"])
     assert any(test["name"] == "host_persistence" for test in status["tests"])
     assert any(test["name"] == "hardware_persistence_sentinel" and test["verification_level"] == "hardware_required" for test in status["tests"])
-    assert status["frontier"]["blocker"]["name"] == "EntityPlayer.AddCacheFlags"
+    assert status["frontier"]["blocker"]["name"] == "Game.GetRoom"
     assert status["frontier"]["blocker"]["classification"] == "pending"
     assert status["frontier"]["blocker"]["switch_status"] == "unresolved"
     assert status["persistence"]["LoadModData"]["host"]["status"] == "host_verified"
     assert status["persistence"]["LoadModData"]["durable"]["status"] == "hardware_required"
     assert status["persistence"]["hardware_persistence_sentinel"]["status"] == "pending"
+    assert any(test["name"] == "host_evaluate_items" for test in status["tests"])
     print("GENERATE_STATUS_TEST_READY")
 
 

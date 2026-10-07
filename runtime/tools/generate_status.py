@@ -200,6 +200,24 @@ def generate(output: Path) -> dict:
             "verification_level": "host_only",
         },
         {
+            "name": "host_add_cache_flags",
+            "command": "./runtime/tests/test-add-cache-flags.sh",
+            "scope": "mock Entity_Player storage; verifies 0x1958 pending-mask offset and uint32 OR semantics only",
+            "verification_level": "host_only",
+        },
+        {
+            "name": "static_add_cache_flags_evidence",
+            "command": "python3 ./runtime/tests/test-cache-flags-evidence.py",
+            "scope": "pinned Repentance.elf build ID plus four exact ARM64 load/orr/store uses of Entity_Player+0x1958",
+            "verification_level": "hardware_required",
+        },
+        {
+            "name": "host_evaluate_items",
+            "command": "./runtime/tests/test-evaluate-items.sh",
+            "scope": "mock opaque Entity_Player pointer; verifies one void EvaluateItems call and mapping guards only",
+            "verification_level": "host_only",
+        },
+        {
             "name": "hardware_persistence_sentinel",
             "command": "not_run: requires Switch save/restart/load cycle",
             "scope": "durable LoadModData/SaveModData across a real console process restart",

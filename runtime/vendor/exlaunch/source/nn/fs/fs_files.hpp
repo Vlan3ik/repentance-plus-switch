@@ -11,6 +11,9 @@ namespace nn::fs {
     */
     Result CreateFile(char const* path, s64 size);
 
+    /* Delete an existing file. */
+    Result DeleteFile(char const* path);
+
     /*
         Open a file.
         outHandle:   Output for handle representing opened file.
@@ -67,7 +70,10 @@ namespace nn::fs {
         size:   File size.
         handle: Handle representing file to check.
     */
-   Result GetFileSize(long* size, nn::fs::FileHandle handle);
+    Result GetFileSize(long* size, nn::fs::FileHandle handle);
+
+    /* Resize an opened file.  This is not atomic with a subsequent write. */
+    Result SetFileSize(FileHandle handle, s64 size);
 
     /*
         Writes to a file.

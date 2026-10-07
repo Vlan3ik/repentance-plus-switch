@@ -10,6 +10,10 @@ FRONTIER="$ROOT_DIR/../analysis/api-usage/runtime-frontier.json"
 cd "$ROOT_DIR/.."
 ./runtime/tests/test-bootstrap-host.sh "$STOCK_DIR" "$MOD_DIR"
 ./runtime/tests/test-persistence-host.sh
+./runtime/tests/test-add-cache-flags.sh
+python3 ./runtime/tests/test-cache-flags-evidence.py
+./runtime/tests/test-evaluate-items.sh
+./runtime/tests/test-post-game-started-hook.sh
 ./runtime/tests/test-recording-oracle.sh "$STOCK_DIR" "$MOD_DIR" "$FRONTIER"
 python3 ./runtime/tools/generate_coverage.py --frontier "$FRONTIER"
 python3 ./runtime/tests/test-generate-coverage.py

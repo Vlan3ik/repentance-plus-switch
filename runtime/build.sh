@@ -43,6 +43,8 @@ cp "$VENDOR_DIR/misc/npdm-json/qlaunch.json" "$STAGE_DIR/config.json"
 cp "$ROOT_DIR/source/program/main.cpp" "$STAGE_DIR/source/program/main.cpp"
 cp "$ROOT_DIR/source/program/mod_persistence.hpp" \
    "$STAGE_DIR/source/program/mod_persistence.hpp"
+cp "$ROOT_DIR/source/program/entity_player_bridge.hpp" \
+   "$STAGE_DIR/source/program/entity_player_bridge.hpp"
 
 mkdir -p "$STAGE_DIR/source/generated"
 python3 "$LUA_GENERATOR" \

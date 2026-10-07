@@ -1,6 +1,7 @@
 #include "lib.hpp"
 #include "nn/fs.hpp"
 #include "mod_persistence.hpp"
+#include "entity_player_bridge.hpp"
 #include "generated/embedded_lua.hpp"
 #include "generated/mod_ids.hpp"
 extern "C" {
@@ -78,6 +79,22 @@ constexpr std::uint32_t kExpectedGameUpdatePrologue[] = {
 };
 constexpr std::uintptr_t kGameGlobalRva = 0xabb448;
 constexpr std::uintptr_t kManagerGlobalRva = 0xabcce0;
+/* IsaacRepentance::Manager::execute_start_game() is the common post-menu
+ * lifecycle gate for new, continued, rerun, and debug starts.  Its ABI is
+ * intentionally simple (Manager* only), unlike Game::Start's by-value Seeds
+ * argument.  We hook the common gate after the original returns, when the
+ * first room/level setup has completed, matching MC_POST_GAME_STARTED's
+ * documented ordering. */
+constexpr std::uintptr_t kManagerExecuteStartGameRva = 0x3f9138;
+constexpr std::uint32_t kExpectedManagerExecuteStartGamePrologue[] = {
+    0xd10543ff, 0xa9107bfd, 0x910403fd, 0xa91167fc,
+};
+constexpr std::uintptr_t kManagerStartStateOffset = 0x1d7308;
+constexpr std::uintptr_t kSaveDataManagerRva = 0xaffbb0;
+constexpr std::uintptr_t kSaveDataCommitRva = 0x4cdd94;
+constexpr std::uint32_t kExpectedSaveDataCommitPrologue[] = {
+    0xf9400800, 0x1406c922,
+};
 constexpr std::uintptr_t kModManagerOffset = 0x36800;
 constexpr std::uintptr_t kSoundEffectsOffset = 0x364a8;
 constexpr std::uintptr_t kItemConfigOffset = 0x36538;
@@ -104,6 +121,13 @@ constexpr std::uintptr_t kAnm2LoadRva = 0xc970;
 constexpr std::size_t kAnm2Size = 0x158;
 constexpr std::uintptr_t kAnm2ScaleOffset = 0xdc;
 constexpr std::uintptr_t kAnm2PlaybackSpeedOffset = 0x144;
+/* REPENTOGON/ZHL symbol: IsaacRepentance::Entity_Player::EvaluateItems()
+ * for Repentance.nro build 91c73fdd575061318d68886316afeac72388b2ab. */
+constexpr std::uintptr_t kEntityPlayerEvaluateItemsRva = 0x280804;
+constexpr std::uint32_t kExpectedEntityPlayerEvaluateItemsPrologue[] = {
+    0x6db63bef, 0x6d0133ed, 0x6d022beb, 0x6d0323e9,
+    0xa9047bfd, 0x910103fd, 0xa9056ffc, 0xa90667fa,
+};
 constexpr std::uint32_t kExpectedRngSetSeedPrologue[] = {
     0xb9000001, 0xf00032e8, 0xf9416508, 0x52800189,
 };
@@ -132,6 +156,7 @@ constexpr std::uintptr_t kMainReallocRva = 0x7d3a0;
 std::uintptr_t g_repentance_base = 0;
 lua_State* g_lua_state = nullptr;
 bool g_post_update_enabled = false;
+bool g_post_game_started_enabled = false;
 bool g_mod_manager_config_ready = false;
 bool g_repentance_plus_started = false;
 bool g_mod_persistence_failure_reported = false;
@@ -272,6 +297,14 @@ bool IsMappedDataRange(std::uintptr_t address, std::size_t size,
                          : (memory.perm == Perm_Rw || memory.perm == Perm_R);
 }
 
+bool IsMappedCodeAddress(std::uintptr_t address) {
+    MemoryInfo memory{};
+    u32 page_info = 0;
+    return R_SUCCEEDED(svcQueryMemory(&memory, &page_info, address)) &&
+           memory.perm == Perm_Rx && address >= memory.addr &&
+           address < memory.addr + memory.size;
+}
+
 void* GetLiveManager() {
     if (!g_repentance_base)
         return nullptr;
@@ -381,14 +414,14 @@ bool InitializeStockModManager(void* hook_manager) {
         return false;
 
     /* IContentManager paths are relative to the game's RomFS mounts.  The
-     * second global is the engine's mod-save root; REPENTOGON documents the
-     * corresponding PC layout as ../data/<mod>/save1.dat. */
+     * second global is the engine's mod-save root; the Switch probe requires
+     * it to resolve into the mounted sdmc:/data namespace. */
     constexpr char kModPath[] = "mods/";
     std::memset(reinterpret_cast<void*>(data_path), 0, kModdingPathCapacity);
     std::memset(reinterpret_cast<void*>(save_path), 0, kModdingPathCapacity);
     std::memcpy(reinterpret_cast<void*>(data_path), kModPath,
                 sizeof(kModPath));
-    constexpr char kSavePath[] = "../data/";
+    constexpr char kSavePath[] = "sdmc:/data/";
     std::memcpy(reinterpret_cast<void*>(save_path), kSavePath,
                 sizeof(kSavePath));
 
@@ -894,6 +927,31 @@ void DispatchLuaCallback(std::int32_t callback_id) {
     lua_settop(g_lua_state, stack_base);
 }
 
+void DispatchLuaCallbackWithBool(std::int32_t callback_id, bool value) {
+    if (!g_lua_state)
+        return;
+
+    const int stack_base = lua_gettop(g_lua_state);
+    lua_getglobal(g_lua_state, "__ProcessCallback");
+    if (!lua_isfunction(g_lua_state, -1)) {
+        lua_settop(g_lua_state, stack_base);
+        return;
+    }
+
+    NativeLuaCallback callback{};
+    callback.callback = callback_id;
+    callback.arguments[0] = value ? 1u : 0u;
+    lua_pushlightuserdata(g_lua_state, &callback);
+    const int status = lua_pcall(g_lua_state, 1, 0, 0);
+    if (status != 0) {
+        const char* error = lua_tostring(g_lua_state, -1);
+        Logging.Log(
+            "[isaac-port] LUA_CALLBACK_FAIL id=%d status=%d error=%s",
+            callback_id, status, error ? error : "unknown");
+    }
+    lua_settop(g_lua_state, stack_base);
+}
+
 } // namespace
 
 HOOK_DEFINE_TRAMPOLINE(ManagerUpdateHook) {
@@ -943,6 +1001,32 @@ HOOK_DEFINE_TRAMPOLINE(GameUpdateHook) {
     }
 };
 
+HOOK_DEFINE_TRAMPOLINE(ManagerExecuteStartGameHook) {
+    static void Callback(void* manager) {
+        if (!manager || !g_post_game_started_enabled || !g_lua_state) {
+            Orig(manager);
+            return;
+        }
+
+        const auto state = reinterpret_cast<std::uintptr_t>(manager) +
+                           kManagerStartStateOffset;
+        if (!IsMappedDataRange(state, 3, false)) {
+            Orig(manager);
+            return;
+        }
+
+        /* execute_start_game clears the active bit before returning.  The
+         * pending start record uses u16 at +1: 0=new/debug, 1=saved run,
+         * and 0x100=rerun. */
+        const bool active = *reinterpret_cast<const std::uint8_t*>(state) != 0;
+        const std::uint16_t mode =
+            *reinterpret_cast<const std::uint16_t*>(state + 1);
+        Orig(manager);
+        if (active)
+            DispatchLuaCallbackWithBool(15, mode == 1);
+    }
+};
+
 /* Exported Horizon SDK symbol already imported by the title's main module. */
 namespace nn::os {
 void GenerateRandomBytes(void* buffer, std::size_t size);
@@ -988,8 +1072,9 @@ bool ReadModSaveRoot(char* out, std::size_t out_size) {
         ++length;
     if (length == 0 || length + 1 > out_size || root[length - 1] != '/')
         return false;
-    /* Never accept an engine global that points back into the mod/RomFS tree. */
-    if (std::strncmp(root, "mods/", 5) == 0)
+    /* Never accept an engine global that points back into the mod/RomFS tree;
+     * the durable alpha backend only operates on the proven sdmc namespace. */
+    if (std::strncmp(root, "sdmc:/data/", sizeof("sdmc:/data/") - 1) != 0)
         return false;
     std::memcpy(out, root, length);
     out[length] = '\0';
@@ -998,10 +1083,51 @@ bool ReadModSaveRoot(char* out, std::size_t out_size) {
 
 void ReportModPersistenceFailure(const char* operation, const char* reason) {
     if (!g_mod_persistence_failure_reported) {
-        Logging.Log("[isaac-port] MOD_PERSISTENCE_SWITCH_FAIL op=%s reason=%s result=session_fallback",
+        Logging.Log("[isaac-port] MOD_PERSISTENCE_SWITCH_FAIL op=%s reason=%s result=unavailable/no_fallback",
                     operation ? operation : "unknown", reason ? reason : "unknown");
         g_mod_persistence_failure_reported = true;
     }
+}
+
+bool CommitModSaveData() {
+    if (!g_repentance_base) {
+        ReportModPersistenceFailure("commit", "engine_unavailable");
+        return false;
+    }
+    const auto manager_address = g_repentance_base + kSaveDataManagerRva;
+    if (manager_address < g_repentance_base ||
+        !IsMappedDataRange(manager_address, 0x18, false)) {
+        ReportModPersistenceFailure("commit", "save_manager_unmapped");
+        return false;
+    }
+    const auto* manager = reinterpret_cast<const std::uint8_t*>(manager_address);
+    const char* mount = nullptr;
+    std::memcpy(&mount, manager + 0x10, sizeof(mount));
+    if (manager[0x08] == 0 || manager[0x09] == 0 || !mount ||
+        !IsMappedDataRange(reinterpret_cast<std::uintptr_t>(mount), 5, false) ||
+        !isaac_port::mod_persistence::IsSdmcMountName(mount)) {
+        ReportModPersistenceFailure("commit", "save_manager_not_mounted");
+        return false;
+    }
+    using CommitFn = Result (*)(void*);
+    const auto commit_address = g_repentance_base + kSaveDataCommitRva;
+    if (commit_address < g_repentance_base ||
+        !MatchesCode(commit_address, kExpectedSaveDataCommitPrologue,
+                     sizeof(kExpectedSaveDataCommitPrologue))) {
+        ReportModPersistenceFailure("commit", "commit_entry_unverified");
+        return false;
+    }
+    Logging.Log("[isaac-port] MOD_PERSISTENCE_COMMIT_ATTEMPT mount=sdmc");
+    const Result result = reinterpret_cast<CommitFn>(commit_address)(
+        reinterpret_cast<void*>(manager_address));
+    if (!isaac_port::mod_persistence::CommitSucceeded(result)) {
+        Logging.Log("[isaac-port] MOD_PERSISTENCE_COMMIT_FAILED result=%u",
+                    static_cast<unsigned int>(result));
+        ReportModPersistenceFailure("commit", "commit_result_failed");
+        return false;
+    }
+    Logging.Log("[isaac-port] MOD_PERSISTENCE_COMMIT_RETURNED result=0 status=hardware_required");
+    return true;
 }
 
 bool BuildModSavePath(const char* identity, char* path, std::size_t path_size,
@@ -1039,8 +1165,8 @@ bool SaveModDataDurable(const char* identity, const char* data, int length) {
     }
 
     /* Do not remove an existing save before a replacement is ready.  The
-     * checked nn::fs subset has no proven atomic rename/truncate primitive,
-     * so updates are accepted only when the existing file has the same size. */
+     * matching ELF imports nn::fs::SetFileSize, so updates use resize-then-
+     * write. This is intentionally non-atomic and remains hardware_required. */
     const char* parent_slash = std::strrchr(directory, '/');
     if (parent_slash) {
         char parent[isaac_port::mod_persistence::kMaxPath]{};
@@ -1055,25 +1181,27 @@ bool SaveModDataDurable(const char* identity, const char* data, int length) {
     }
     nn::fs::CreateDirectory(directory);
     bool created = nn::fs::CreateFile(path, length) == 0;
+    nn::fs::FileHandle file{};
     if (!created) {
         nn::fs::FileHandle existing{};
-        if (nn::fs::OpenFile(&existing, path, nn::fs::OpenMode_Read) != 0) {
+        if (nn::fs::OpenFile(&existing, path, nn::fs::OpenMode_ReadWrite) != 0) {
             ReportModPersistenceFailure("save", "create_or_open_failed");
             return false;
         }
-        long existing_size = -1;
-        const bool same_size = nn::fs::GetFileSize(&existing_size, existing) == 0 &&
-                               existing_size == length;
-        nn::fs::CloseFile(existing);
-        if (!same_size) {
-            ReportModPersistenceFailure("save", "size_change_requires_atomic_replace");
+        if (nn::fs::SetFileSize(existing, length) != 0) {
+            nn::fs::CloseFile(existing);
+            ReportModPersistenceFailure("save", "resize_failed_non_atomic_backend");
             return false;
         }
+        file = existing;
     }
-    nn::fs::FileHandle file{};
-    if (nn::fs::OpenFile(&file, path, nn::fs::OpenMode_Write) != 0) {
-        ReportModPersistenceFailure("save", "write_open_failed");
-        return false;
+    if (created) {
+        nn::fs::FileHandle created_file{};
+        if (nn::fs::OpenFile(&created_file, path, nn::fs::OpenMode_Write) != 0) {
+            ReportModPersistenceFailure("save", "write_open_failed");
+            return false;
+        }
+        file = created_file;
     }
     bool ok = true;
     if (length > 0) {
@@ -1085,6 +1213,8 @@ bool SaveModDataDurable(const char* identity, const char* data, int length) {
     if (ok)
         ok = nn::fs::FlushFile(file) == 0;
     nn::fs::CloseFile(file);
+    if (ok)
+        ok = CommitModSaveData();
     if (ok)
         g_mod_removed_data.erase(identity);
     else
@@ -1171,8 +1301,12 @@ extern "C" void L_Mod_SaveData(const char* path, const char* data,
     if (!path || length < 0 || length > 16 * 1024 * 1024 ||
         (length > 0 && !data))
         return;
-    g_mod_data[std::string(path)] =
-        std::string(data ? data : "", static_cast<std::size_t>(length));
+    if (!g_repentance_base) {
+        g_mod_data[std::string(path)] =
+            std::string(data ? data : "", static_cast<std::size_t>(length));
+        return;
+    }
+    /* A live Switch engine must never report a session-only save as success. */
     SaveModDataDurable(path, data, length);
 }
 
@@ -1181,8 +1315,8 @@ extern "C" char* L_Mod_LoadData(const char* path, int* length) {
         *length = 0;
     if (!path)
         return nullptr;
-    if (char* durable = LoadModDataDurable(path, length))
-        return durable;
+    if (g_repentance_base)
+        return LoadModDataDurable(path, length);
     const auto it = g_mod_data.find(path);
     if (it == g_mod_data.end())
         return nullptr;
@@ -1202,19 +1336,70 @@ extern "C" char* L_Mod_LoadData(const char* path, int* length) {
 }
 
 extern "C" bool L_Mod_HasData(const char* path) {
-    return path && (HasModDataDurable(path) || g_mod_data.find(path) != g_mod_data.end());
+    if (!path)
+        return false;
+    return g_repentance_base ? HasModDataDurable(path)
+                             : g_mod_data.find(path) != g_mod_data.end();
 }
 
 extern "C" void L_Mod_RemoveData(const char* path) {
     if (path) {
-        g_mod_data.erase(path);
-        RemoveModDataDurable(path);
+        if (!g_repentance_base)
+            g_mod_data.erase(path);
+        else
+            RemoveModDataDurable(path);
     }
+}
+
+/* AddCacheFlags is intentionally only the pending-mask operation.  The
+ * follow-up EvaluateItems call remains a separate frontier blocker and is
+ * not invoked here.  g_repentance_base is set only after the pinned
+ * Repentance.nro build gate succeeds. */
+extern "C" void LC_Entity_Player__AddCacheFlags(void* player, int flags) {
+    if (!g_repentance_base || !player)
+        return;
+
+    const auto object = reinterpret_cast<std::uintptr_t>(player);
+    if (object > static_cast<std::uintptr_t>(-1) -
+                    isaac_port::entity_player::kPendingCacheFlagsOffset)
+        return;
+    const auto field = object + isaac_port::entity_player::kPendingCacheFlagsOffset;
+    if (!IsMappedDataRange(field, sizeof(std::uint32_t), true))
+        return;
+
+    auto* pending_flags = reinterpret_cast<std::uint32_t*>(field);
+    isaac_port::entity_player::OrPendingCacheFlags(
+        pending_flags, static_cast<std::uint32_t>(flags));
+}
+
+extern "C" void LC_Entity_Player__EvaluateItems(void* player) {
+    if (!g_repentance_base || !player)
+        return;
+
+    const auto object = reinterpret_cast<std::uintptr_t>(player);
+    if (g_repentance_base > static_cast<std::uintptr_t>(-1) -
+                             kEntityPlayerEvaluateItemsRva)
+        return;
+    const auto target = g_repentance_base + kEntityPlayerEvaluateItemsRva;
+    const bool player_mapped =
+        object <= static_cast<std::uintptr_t>(-1) - sizeof(void*) &&
+        IsMappedDataRange(object, sizeof(void*), false);
+    const bool target_mapped =
+        target >= g_repentance_base && IsMappedCodeAddress(target) &&
+        MatchesCode(target, kExpectedEntityPlayerEvaluateItemsPrologue,
+                    sizeof(kExpectedEntityPlayerEvaluateItemsPrologue));
+    const auto native = reinterpret_cast<
+        isaac_port::entity_player::EvaluateItemsNative>(target);
+    isaac_port::entity_player::InvokeEvaluateItems(
+        player, g_repentance_base, kEntityPlayerEvaluateItemsRva, native,
+        player_mapped, target_mapped);
 }
 
 extern "C" void L_EnableCallback(unsigned int callback_id) {
     if (callback_id == 1)
         g_post_update_enabled = true;
+    if (callback_id == 15)
+        g_post_game_started_enabled = true;
     Logging.Log("[isaac-port] LUA_CALLBACK_ENABLED id=%u", callback_id);
 }
 
@@ -1480,6 +1665,10 @@ extern "C" void* luaJIT_nx_resolve(const char* name) {
         return reinterpret_cast<void*>(&LC_RNG__RandomFloat);
     if (name && std::strcmp(name, "LC_RNG__Next") == 0)
         return reinterpret_cast<void*>(&LC_RNG__Next);
+    if (name && std::strcmp(name, "LC_Entity_Player__AddCacheFlags") == 0)
+        return reinterpret_cast<void*>(&LC_Entity_Player__AddCacheFlags);
+    if (name && std::strcmp(name, "LC_Entity_Player__EvaluateItems") == 0)
+        return reinterpret_cast<void*>(&LC_Entity_Player__EvaluateItems);
     if (name && std::strcmp(name, "IsaacPort_ANM2_Create") == 0)
         return reinterpret_cast<void*>(&IsaacPort_ANM2_Create);
     if (name && std::strcmp(name, "IsaacPort_ANM2_Destroy") == 0)
@@ -1625,6 +1814,8 @@ extern "C" void HookRunRepentance() {
                 repentance_base + kModManagerLoadConfigsRva;
             const auto get_game_id =
                 repentance_base + kManagerGameSelectorGameIdRva;
+            const auto execute_start_game =
+                repentance_base + kManagerExecuteStartGameRva;
             const auto game_update = repentance_base + kGameUpdateRva;
             const bool manager_signatures_ok =
                 MatchesCode(manager_update, kExpectedManagerUpdatePrologue,
@@ -1638,6 +1829,9 @@ extern "C" void HookRunRepentance() {
                 MatchesCode(get_game_id,
                             kExpectedManagerGameSelectorGameId,
                             sizeof(kExpectedManagerGameSelectorGameId)) &&
+                MatchesCode(execute_start_game,
+                            kExpectedManagerExecuteStartGamePrologue,
+                            sizeof(kExpectedManagerExecuteStartGamePrologue)) &&
                 MatchesCode(game_update, kExpectedGameUpdatePrologue,
                             sizeof(kExpectedGameUpdatePrologue)) &&
                 MatchesCode(repentance_base + kRngSetSeedRva,
@@ -1671,11 +1865,13 @@ extern "C" void HookRunRepentance() {
             } else {
                 g_repentance_base = repentance_base;
                 ManagerUpdateHook::InstallAtPtr(manager_update);
+                ManagerExecuteStartGameHook::InstallAtPtr(execute_start_game);
                 GameUpdateHook::InstallAtPtr(game_update);
                 Logging.Log(
                     "[isaac-port] ENGINE_HOOK_READY Manager::Update=%p "
-                    "Game::Update=%p",
+                    "Manager::execute_start_game=%p Game::Update=%p",
                     reinterpret_cast<const void*>(manager_update),
+                    reinterpret_cast<const void*>(execute_start_game),
                     reinterpret_cast<const void*>(game_update));
             }
 

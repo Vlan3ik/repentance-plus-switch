@@ -16,6 +16,13 @@ int main() {
     assert(!isaac_port::mod_persistence::BuildSavePath("mods/a/b", path, sizeof(path)));
     assert(!isaac_port::mod_persistence::BuildSavePath("../escape", path, sizeof(path)));
     assert(!isaac_port::mod_persistence::BuildSavePath("", path, sizeof(path)));
+    assert(!isaac_port::mod_persistence::IsSdmcMountName(nullptr));
+    assert(!isaac_port::mod_persistence::IsSdmcMountName("romfs:/"));
+    assert(isaac_port::mod_persistence::IsSdmcMountName("sdmc"));
+    assert(isaac_port::mod_persistence::IsSdmcMountName("sdmc:/"));
+    assert(!isaac_port::mod_persistence::IsSdmcMountName("sdmcc:/"));
+    assert(isaac_port::mod_persistence::CommitSucceeded(0));
+    assert(!isaac_port::mod_persistence::CommitSucceeded(1));
     return 0;
 }
 CPP

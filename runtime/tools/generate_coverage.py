@@ -264,6 +264,45 @@ def apply_runtime(entries: list[dict[str, Any]], frontier: dict[str, Any]) -> No
             by_name[name]["runtime"] = {"observed": True, "order": index}
 
 
+def add_host_verified_runtime_entries(entries: list[dict[str, Any]],
+                                      frontier: dict[str, Any],
+                                      zhl: dict[str, list[dict[str, str]]],
+                                      ts: dict[str, list[dict[str, str]]]) -> None:
+    """Keep implemented narrow endpoints visible after the frontier advances.
+
+    AddCacheFlags is intentionally host-tested only: the ARM64 field and live
+    Entity_Player pointer still require the pinned NRO on hardware.  It is
+    emitted here because the runtime frontier's first blocker is now the
+    separate EvaluateItems endpoint.
+    """
+    by_name = {entry["name"]: entry for entry in entries}
+    for index, event in enumerate(frontier["order"]):
+        if not isinstance(event, dict) or event.get("name") != "EntityPlayer.AddCacheFlags":
+            continue
+        name = "EntityPlayer.AddCacheFlags"
+        entry = by_name.get(name)
+        if entry is None:
+            entry = {
+                "kind": "runtime_observed_method",
+                "name": name,
+                "usage_count": 0,
+                "runtime": {"observed": True, "order": index,
+                             "status": "host_tested", "verification_level": "host_only"},
+                "evidence": {"zhl": zhl_for("AddCacheFlags", zhl),
+                             "isaacscript": ts.get("AddCacheFlags", []),
+                             "host_test": "runtime/tests/test-add-cache-flags.sh",
+                             "static_elf_evidence": "analysis/abi/entity-player-cache-flags-evidence.json"},
+                "switch": {"rva": None, "confidence": "unknown",
+                           "status": "unresolved", "hardware_required": True},
+            }
+            entries.append(entry)
+            by_name[name] = entry
+        else:
+            entry["runtime"] = {"observed": True, "order": index,
+                                 "status": "host_tested", "verification_level": "host_only"}
+        return
+
+
 def build(usage: dict[str, Any], frontier_path: Path | None, zhl_dir: Path, isaacscript_dir: Path, isaacscript_rg_dir: Path) -> dict[str, Any]:
     zhl = parse_zhl(zhl_dir)
     ts = parse_typescript(isaacscript_dir)
@@ -273,6 +312,7 @@ def build(usage: dict[str, Any], frontier_path: Path | None, zhl_dir: Path, isaa
     frontier = frontier_data(frontier_path)
     entries = [make_entry(kind, name, count, zhl, ts) for kind, name, count in usage_entries(usage)]
     apply_runtime(entries, frontier)
+    add_host_verified_runtime_entries(entries, frontier, zhl, ts)
     blocker = blocker_record(frontier, usage)
     if blocker and not any(entry["name"] == blocker["name"] for entry in entries):
         entries.append({
