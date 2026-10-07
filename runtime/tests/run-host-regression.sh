@@ -22,6 +22,8 @@ python3 ./runtime/tests/test-game-get-room-evidence.py
 python3 ./runtime/tests/test-get-sprite-evidence.py
 ./runtime/tests/test-get-baby-skin.sh
 python3 ./runtime/tests/test-get-baby-skin-evidence.py
+./runtime/tests/test-has-collectible.sh
+python3 ./runtime/tests/test-has-collectible-evidence.py
 ./runtime/tests/test-post-game-started-hook.sh
 ./runtime/tests/dss/test_dss_host.sh "$STOCK_DIR" "$MOD_DIR" \
     >"$REGRESSION_TMP/dss.first"

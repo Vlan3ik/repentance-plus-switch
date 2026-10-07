@@ -18,13 +18,12 @@
   "frontier": {
     "blocker": {
       "args": [
-        "<table>",
-        1
+        "<table>"
       ],
       "classification": "pending",
       "hardware_required": true,
-      "line": 3649,
-      "name": "EntityPlayer.HasTrinket",
+      "line": 3732,
+      "name": "EntityPlayer.GetEffects",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua",
       "switch_status": "unresolved"
@@ -86,6 +85,11 @@
         "verification_level": "hardware_required"
       },
       {
+        "name": "IsaacPort_Entity_Player__HasTrinket",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
         "name": "LC_Entity_Player__AddCacheFlags",
         "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
         "verification_level": "hardware_required"
@@ -97,6 +101,16 @@
       },
       {
         "name": "LC_Entity_Player__GetBabySkin",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__HasCollectible",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__HasTrinket",
         "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
         "verification_level": "hardware_required"
       },
@@ -278,6 +292,12 @@
         "verification_level": "hardware_required"
       },
       {
+        "name": "IsaacPort_Entity_Player__HasTrinket",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
         "name": "LC_Entity_Player__AddCacheFlags",
         "resolver_exposed": true,
         "source": "runtime/source/program/main.cpp",
@@ -291,6 +311,18 @@
       },
       {
         "name": "LC_Entity_Player__GetBabySkin",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__HasCollectible",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__HasTrinket",
         "resolver_exposed": true,
         "source": "runtime/source/program/main.cpp",
         "verification_level": "hardware_required"

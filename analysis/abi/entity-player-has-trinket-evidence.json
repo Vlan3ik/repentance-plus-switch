@@ -1,0 +1,26 @@
+{
+  "build_id": "91c73fdd575061318d68886316afeac72388b2ab",
+  "elf": {
+    "path": "../switch-port/analysis/nx2elf/Repentance.elf",
+    "sha256": "0538e4fb54c8bdcca995121412126355ebdba66e39adb41567e4ba06da436bfc"
+  },
+  "method": "EntityPlayer.HasTrinket",
+  "symbol": {
+    "rva": "0x28d3b8",
+    "size": 164,
+    "abi": ["x0 player", "w1 trinket", "w2 ignoreModifiers", "w0 bool"]
+  },
+  "prologue": ["a9be7bfd", "a9014ff4", "910003fd", "2a0103f3"],
+  "golden_flag": "0x8000",
+  "trinket_id_mask": "0x7fff",
+  "slot_offsets": ["0x1ab0", "0x1ab4"],
+  "modifier_collectible_ids": [139, 458],
+  "proofs": [
+    {"kind": "callsite", "rva": "0x28d3dc", "instructions": ["940f8f25"]},
+    {"kind": "callsite", "rva": "0x28d3f0", "instructions": ["940f8f20"]},
+    {"kind": "callsite", "rva": "0x28d408", "instructions": ["940f932a"]},
+    {"kind": "read", "rva": "0x28d428", "instructions": ["b95ab289", "12003929"]},
+    {"kind": "read", "rva": "0x28d440", "instructions": ["b95ab688", "12003908"]}
+  ],
+  "verification_level": "hardware_required"
+}

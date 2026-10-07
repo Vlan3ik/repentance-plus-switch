@@ -15,6 +15,59 @@ constexpr std::size_t kPendingCacheFlagsOffset = 0x1958;
  * -1, matching the Lua-facing integer sentinel used by this bridge. */
 constexpr std::size_t kBabySkinOffset = 0x20E8;
 
+/* Entity_Player::HasTrinket(const eTrinketType, bool) in the pinned
+ * Repentance.nro.  The two inventory slots are compared by the native
+ * routine after masking the golden modifier bit; the actual engine call is
+ * intentionally kept behind the checked resolver in main.cpp. */
+constexpr std::uintptr_t kHasTrinketRva = 0x28D3B8;
+constexpr std::uint32_t kGoldenTrinketFlag = 0x8000u;
+constexpr std::uint32_t kTrinketIdMask = 0x7FFFu;
+constexpr std::size_t kHasTrinketFirstSlotOffset = 0x1AB0;
+constexpr std::size_t kHasTrinketSecondSlotOffset = 0x1AB4;
+constexpr std::size_t kHasTrinketRequiredBytes =
+    kHasTrinketSecondSlotOffset + sizeof(std::uint32_t);
+
+/* Entity_Player::HasCollectible(eCollectibleType, bool) in the pinned
+ * Repentance.nro.  The native routine reads several direct fields while
+ * handling special collectible cases; the highest direct player access is
+ * Entity_Player+0x27dc (one byte).  Safety of any pointee reached by the
+ * native routine remains native/hardware behavior; this bridge guarantees
+ * only that the player object is mapped through every direct access used by
+ * the symbol. */
+constexpr std::uintptr_t kHasCollectibleRva = 0x27D3F4;
+constexpr std::size_t kHasCollectibleRequiredBytes = 0x27DD;
+
+using HasCollectibleNative = bool (*)(void*, unsigned int, bool);
+
+inline bool InvokeHasCollectible(void* player, unsigned int collectible,
+                                 bool ignore_modifiers,
+                                 std::uintptr_t module_base,
+                                 HasCollectibleNative native,
+                                 bool player_mapped, bool target_mapped) {
+    if (!player || !module_base || !native || !player_mapped ||
+        !target_mapped || module_base > static_cast<std::uintptr_t>(-1) -
+                               kHasCollectibleRva)
+        return false;
+    return native(player, collectible, ignore_modifiers);
+}
+
+using HasTrinketNative = bool (*)(void*, unsigned int, bool);
+
+/* Keep the ABI gate independent from Horizon's memory-query implementation.
+ * This is the host-testable part of the wrapper: all four runtime checks are
+ * supplied by main.cpp after it has verified the live NRO mapping. */
+inline bool InvokeHasTrinket(void* player, unsigned int trinket,
+                             bool ignore_modifiers,
+                             std::uintptr_t module_base,
+                             HasTrinketNative native, bool player_mapped,
+                             bool target_mapped) {
+    if (!player || !module_base || !native || !player_mapped ||
+        !target_mapped || module_base > static_cast<std::uintptr_t>(-1) -
+                               kHasTrinketRva)
+        return false;
+    return native(player, trinket, ignore_modifiers);
+}
+
 inline std::int32_t ReadBabySkin(void* player, bool player_mapped,
                                  bool field_mapped) {
     if (!player || !player_mapped || !field_mapped)

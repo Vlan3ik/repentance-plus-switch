@@ -171,6 +171,23 @@ function fakePlayer:GetBabySkin()
     record("call", "EntityPlayer.GetBabySkin", {}, 2)
     return 0
 end
+function fakePlayer:HasTrinket(trinket, ignoreModifiers)
+    record("call", "EntityPlayer.HasTrinket", {
+        trinket, not not ignoreModifiers
+    }, 2)
+    -- The first frontier call only probes for an optional trinket.  Returning
+    -- false lets the oracle continue to the next genuinely unsupported API;
+    -- native golden/slot semantics are covered by the bridge host matrix.
+    return false
+end
+function fakePlayer:HasCollectible(collectible)
+    record("call", "EntityPlayer.HasCollectible", {collectible}, 2)
+    -- Native HasCollectible is wired by the Switch bridge with the stock
+    -- ignoreModifiers=false default.  The oracle only needs a deterministic
+    -- answer to advance to the next missing API; native inventory semantics
+    -- remain covered by the ARM-gated bridge and hardware evidence test.
+    return false
+end
 setmetatable(fakePlayer, { __index = function(_, key)
     return function(...)
         record("unsupported", "EntityPlayer." .. tostring(key), {...}, 2)

@@ -137,6 +137,21 @@ constexpr std::uint32_t kExpectedEntityPlayerEvaluateItemsPrologue[] = {
     0x6db63bef, 0x6d0133ed, 0x6d022beb, 0x6d0323e9,
     0xa9047bfd, 0x910103fd, 0xa9056ffc, 0xa90667fa,
 };
+/* REPENTOGON/ZHL symbol: Entity_Player::HasTrinket(eTrinketType, bool)
+ * in the pinned Repentance.nro. The stock Lua bridge remains two-argument;
+ * the project symbol below exposes the optional ignoreModifiers argument. */
+constexpr std::uintptr_t kEntityPlayerHasTrinketRva = 0x28d3b8;
+constexpr std::uint32_t kExpectedEntityPlayerHasTrinketPrologue[] = {
+    0xa9be7bfd, 0xa9014ff4, 0x910003fd, 0x2a0103f3,
+};
+/* REPENTOGON/ZHL symbol: Entity_Player::HasCollectible(eCollectibleType,
+ * bool) in the pinned Repentance.nro.  The complete prologue is pinned here
+ * so a stale build cannot be called through the resolver. */
+constexpr std::uintptr_t kEntityPlayerHasCollectibleRva = 0x27d3f4;
+constexpr std::uint32_t kExpectedEntityPlayerHasCollectiblePrologue[] = {
+    0xd10183ff, 0xa9017bfd, 0x910043fd, 0xa90267fa,
+    0xa9035ff8, 0xa90457f6, 0xa9054ff4,
+};
 /* Entity::GetSprite() returns the embedded ANM2 at Entity+0x48 in the
  * pinned Repentance.nro.  This is a borrowed pointer, not an allocation. */
 constexpr std::size_t kEntitySpriteSize = 0x158;
@@ -724,6 +739,8 @@ typedef struct { void *_; } IsaacPortRoom;
 IsaacPortRoom* LL_Game__GetRoom(void);
 void* LC_Entity__GetSprite(void*);
 int LC_Entity_Player__GetBabySkin(void*);
+bool IsaacPort_Entity_Player__HasTrinket(void*, unsigned int, bool);
+bool LC_Entity_Player__HasCollectible(void*, unsigned int, bool);
 void L_Free(char*);
 void L_Mod_SaveData(const char*, const char*, int);
 char* L_Mod_LoadData(const char*, int*);
@@ -907,6 +924,16 @@ local function getEntityPlayerBabySkin(self)
   return ffi.C.LC_Entity_Player__GetBabySkin(player)
 end
 
+-- EntityPlayer:HasTrinket(id[, ignoreModifiers]) is a Repentance method.
+-- The stock two-argument cdef remains intact; this project symbol carries
+-- the native third argument and defaults it exactly as the retail API does.
+local function getEntityPlayerHasTrinket(self, trinket, ignoreModifiers)
+  local player = rawget(self, '__cdata')
+  if not player or player == ffi.NULL then return false end
+  return ffi.C.IsaacPort_Entity_Player__HasTrinket(
+    player, trinket, not not ignoreModifiers)
+end
+
 function Sprite()
   local native = ffi.C.IsaacPort_ANM2_Create()
   if native == ffi.NULL then error('ANM2 allocation failed', 2) end
@@ -956,6 +983,7 @@ function RegisterMod(name, apiVersion)
       classes.Entity.functions.GetSprite = getBorrowedEntitySprite
       classes.EntityPlayer.functions.GetSprite = getBorrowedEntitySprite
       classes.EntityPlayer.functions.GetBabySkin = getEntityPlayerBabySkin
+      classes.EntityPlayer.functions.HasTrinket = getEntityPlayerHasTrinket
       compat.Entity = exposeClass(classes.Entity)
       compat.EntityPlayer = exposeClass(classes.EntityPlayer)
     end
@@ -1543,6 +1571,77 @@ extern "C" int LC_Entity_Player__GetBabySkin(void* player) {
         player, player_mapped, field_mapped);
 }
 
+/* The NRO itself owns HasTrinket's inventory and golden-modifier semantics.
+ * This wrapper only resolves the pinned symbol after all gates have passed;
+ * returning false on any failed gate is safer than calling a stale address.
+ */
+extern "C" bool IsaacPort_Entity_Player__HasTrinket(
+    void* player, unsigned int trinket, bool ignore_modifiers) {
+    if (!g_repentance_base || !player ||
+        g_repentance_base > static_cast<std::uintptr_t>(-1) -
+                               kEntityPlayerHasTrinketRva)
+        return false;
+
+    const auto object = reinterpret_cast<std::uintptr_t>(player);
+    if ((object & (alignof(void*) - 1)) != 0 ||
+        object > static_cast<std::uintptr_t>(-1) -
+                     isaac_port::entity_player::kHasTrinketRequiredBytes ||
+        !IsMappedDataRange(
+            object, isaac_port::entity_player::kHasTrinketRequiredBytes,
+            false))
+        return false;
+
+    const auto target = g_repentance_base + kEntityPlayerHasTrinketRva;
+    if (!IsMappedCodeAddress(target) ||
+        !MatchesCode(target, kExpectedEntityPlayerHasTrinketPrologue,
+                     sizeof(kExpectedEntityPlayerHasTrinketPrologue)))
+        return false;
+
+    const auto native = reinterpret_cast<
+        isaac_port::entity_player::HasTrinketNative>(target);
+    return isaac_port::entity_player::InvokeHasTrinket(
+        player, trinket, ignore_modifiers, g_repentance_base, native, true,
+        true);
+}
+
+/* scripts_v2 declares this stock bridge with two arguments. Keep that ABI
+ * stable and use the native default (ignoreModifiers=false). */
+extern "C" bool LC_Entity_Player__HasTrinket(void* player,
+                                               unsigned int trinket) {
+    return IsaacPort_Entity_Player__HasTrinket(player, trinket, false);
+}
+
+/* scripts_v2 exposes HasCollectible with the stock two-argument ABI.  The
+ * native Repentance symbol has the optional ignoreModifiers argument; the
+ * retail binding uses false, so keep that default at this resolver boundary. */
+extern "C" bool LC_Entity_Player__HasCollectible(void* player,
+                                                  unsigned int collectible) {
+    if (!g_repentance_base || !player ||
+        g_repentance_base > static_cast<std::uintptr_t>(-1) -
+                                kEntityPlayerHasCollectibleRva)
+        return false;
+
+    const auto object = reinterpret_cast<std::uintptr_t>(player);
+    if ((object & (alignof(void*) - 1)) != 0 ||
+        object > static_cast<std::uintptr_t>(-1) -
+                     isaac_port::entity_player::kHasCollectibleRequiredBytes ||
+        !IsMappedDataRange(
+            object, isaac_port::entity_player::kHasCollectibleRequiredBytes,
+            false))
+        return false;
+
+    const auto target = g_repentance_base + kEntityPlayerHasCollectibleRva;
+    if (!IsMappedCodeAddress(target) ||
+        !MatchesCode(target, kExpectedEntityPlayerHasCollectiblePrologue,
+                     sizeof(kExpectedEntityPlayerHasCollectiblePrologue)))
+        return false;
+
+    const auto native = reinterpret_cast<
+        isaac_port::entity_player::HasCollectibleNative>(target);
+    return isaac_port::entity_player::InvokeHasCollectible(
+        player, collectible, false, g_repentance_base, native, true, true);
+}
+
 extern "C" void L_EnableCallback(unsigned int callback_id) {
     if (callback_id == 1)
         g_post_update_enabled = true;
@@ -1844,6 +1943,12 @@ extern "C" void* luaJIT_nx_resolve(const char* name) {
         return reinterpret_cast<void*>(&LC_Entity_Player__EvaluateItems);
     if (name && std::strcmp(name, "LC_Entity_Player__GetBabySkin") == 0)
         return reinterpret_cast<void*>(&LC_Entity_Player__GetBabySkin);
+    if (name && std::strcmp(name, "LC_Entity_Player__HasTrinket") == 0)
+        return reinterpret_cast<void*>(&LC_Entity_Player__HasTrinket);
+    if (name && std::strcmp(name, "LC_Entity_Player__HasCollectible") == 0)
+        return reinterpret_cast<void*>(&LC_Entity_Player__HasCollectible);
+    if (name && std::strcmp(name, "IsaacPort_Entity_Player__HasTrinket") == 0)
+        return reinterpret_cast<void*>(&IsaacPort_Entity_Player__HasTrinket);
     if (name && std::strcmp(name, "LC_Entity__GetSprite") == 0)
         return reinterpret_cast<void*>(&LC_Entity__GetSprite);
     if (name && std::strcmp(name, "IsaacPort_ANM2_Create") == 0)
