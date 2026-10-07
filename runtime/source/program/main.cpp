@@ -170,6 +170,14 @@ constexpr std::uint32_t
     kExpectedTemporaryEffectsHasCollectibleEffectPrologue[] = {
         0x39408408, 0x34000068, 0x2a1f03e0, 0xd65f03c0,
     };
+/* REPENTOGON/ZHL symbol: TemporaryEffects::GetEffectNum(eCollectibleType)
+ * const. The count-returning symbol is pinned to the same NRO build. */
+constexpr std::uintptr_t kTemporaryEffectsGetCollectibleEffectNumRva = 0x4a7228;
+constexpr std::size_t kTemporaryEffectsGetCollectibleEffectNumSize = 0x68;
+constexpr std::uint32_t
+    kExpectedTemporaryEffectsGetCollectibleEffectNumPrologue[] = {
+        0x39408408, 0x34000068, 0x2a1f03e0, 0xd65f03c0,
+    };
 /* Entity::GetSprite() returns the embedded ANM2 at Entity+0x48 in the
  * pinned Repentance.nro.  This is a borrowed pointer, not an allocation. */
 constexpr std::size_t kEntitySpriteSize = 0x158;
@@ -759,6 +767,7 @@ void* LC_Entity__GetSprite(void*);
 int LC_Entity_Player__GetBabySkin(void*);
 void* LC_Entity_Player__GetEffects(void*);
 bool LC_TemporaryEffects__HasCollectibleEffect(void*, unsigned int);
+unsigned int LC_TemporaryEffects__GetCollectibleEffectNum(void*, unsigned int);
 bool IsaacPort_Entity_Player__HasTrinket(void*, unsigned int, bool);
 bool LC_Entity_Player__HasCollectible(void*, unsigned int, bool);
 int LC_Entity_Player__GetCollectibleNum(void*, unsigned int);
@@ -954,6 +963,11 @@ borrowedEffectsMeta.__index = {
     local native = rawget(self, '__native')
     if not native or native == ffi.NULL then return false end
     return ffi.C.LC_TemporaryEffects__HasCollectibleEffect(native, collectible)
+  end,
+  GetCollectibleEffectNum = function(self, collectible)
+    local native = rawget(self, '__native')
+    if not native or native == ffi.NULL then return 0 end
+    return ffi.C.LC_TemporaryEffects__GetCollectibleEffectNum(native, collectible)
   end,
 }
 local function getBorrowedEntityPlayerEffects(self)
@@ -1679,6 +1693,40 @@ extern "C" bool LC_TemporaryEffects__HasCollectibleEffect(
         effects, collectible, g_repentance_base, native, true);
 }
 
+/* TemporaryEffects::GetEffectNum(eCollectibleType) const is a borrowed-object
+ * call. Resolve only the pinned symbol and fail closed when the object or code
+ * mapping/signature is not compatible with this NRO. */
+extern "C" unsigned int LC_TemporaryEffects__GetCollectibleEffectNum(
+    void* effects, unsigned int collectible) {
+    if (!g_repentance_base || !effects ||
+        g_repentance_base > static_cast<std::uintptr_t>(-1) -
+                                kTemporaryEffectsGetCollectibleEffectNumRva)
+        return 0;
+
+    const auto object = reinterpret_cast<std::uintptr_t>(effects);
+    if ((object & (alignof(void*) - 1)) != 0 ||
+        !IsMappedDataRange(
+            object, isaac_port::entity_player::kTemporaryEffectsSize, false))
+        return 0;
+
+    const auto target = g_repentance_base +
+                        kTemporaryEffectsGetCollectibleEffectNumRva;
+    if (target > static_cast<std::uintptr_t>(-1) -
+                     (kTemporaryEffectsGetCollectibleEffectNumSize - 1) ||
+        !IsMappedCodeAddress(target) ||
+        !IsMappedCodeAddress(target +
+                             kTemporaryEffectsGetCollectibleEffectNumSize - 1) ||
+        !MatchesCode(
+            target, kExpectedTemporaryEffectsGetCollectibleEffectNumPrologue,
+            sizeof(kExpectedTemporaryEffectsGetCollectibleEffectNumPrologue)))
+        return 0;
+
+    const auto native = reinterpret_cast<
+        isaac_port::entity_player::GetCollectibleEffectNumNative>(target);
+    return isaac_port::entity_player::InvokeGetCollectibleEffectNum(
+        effects, collectible, g_repentance_base, native, true);
+}
+
 /* The NRO itself owns HasTrinket's inventory and golden-modifier semantics.
  * This wrapper only resolves the pinned symbol after all gates have passed;
  * returning false on any failed gate is safer than calling a stale address.
@@ -2090,6 +2138,8 @@ extern "C" void* luaJIT_nx_resolve(const char* name) {
         return reinterpret_cast<void*>(&LC_Entity_Player__GetEffects);
     if (name && std::strcmp(name, "LC_TemporaryEffects__HasCollectibleEffect") == 0)
         return reinterpret_cast<void*>(&LC_TemporaryEffects__HasCollectibleEffect);
+    if (name && std::strcmp(name, "LC_TemporaryEffects__GetCollectibleEffectNum") == 0)
+        return reinterpret_cast<void*>(&LC_TemporaryEffects__GetCollectibleEffectNum);
     if (name && std::strcmp(name, "LC_Entity_Player__HasTrinket") == 0)
         return reinterpret_cast<void*>(&LC_Entity_Player__HasTrinket);
     if (name && std::strcmp(name, "LC_Entity_Player__HasCollectible") == 0)

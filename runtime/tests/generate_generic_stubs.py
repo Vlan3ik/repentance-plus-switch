@@ -20,6 +20,7 @@ IMPLEMENTED = {
     "LL_Isaac__GetPlayer", "LC_Entity__GetType", "LC_Entity__GetRef",
     "LC_Entity__SetRef", "LC_Entity_Player__GetEffects",
     "LC_TemporaryEffects__HasCollectibleEffect",
+    "LC_TemporaryEffects__GetCollectibleEffectNum",
 }
 
 

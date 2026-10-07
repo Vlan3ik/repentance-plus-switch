@@ -27,6 +27,8 @@ python3 ./runtime/tests/test-get-effects-evidence.py
 ./runtime/tests/test-effects-lua-dispatch.sh "$STOCK_DIR" "$MOD_DIR"
 ./runtime/tests/test-has-collectible-effect.sh
 python3 ./runtime/tests/test-has-collectible-effect-evidence.py
+./runtime/tests/test-get-collectible-effect-num.sh
+python3 ./runtime/tests/test-get-collectible-effect-num-evidence.py
 ./runtime/tests/test-has-collectible.sh
 python3 ./runtime/tests/test-has-collectible-evidence.py
 ./runtime/tests/test-get-collectible-num.sh

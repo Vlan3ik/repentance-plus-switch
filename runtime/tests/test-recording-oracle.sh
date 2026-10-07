@@ -66,7 +66,7 @@ evaluate_calls = [event for event in d["operations"]
 assert evaluate_calls
 if d["status"] == "host_bootstrap_blocked":
     assert d.get("first_unsupported")
-    assert d["first_unsupported"]["name"] == "TemporaryEffects.GetCollectibleEffectNum"
+    assert d["first_unsupported"]["name"] == "EntityPlayer.GetPill"
     trinket_calls = [event for event in d["operations"]
                      if event.get("name") == "EntityPlayer.HasTrinket"
                      and event.get("kind") == "call"]

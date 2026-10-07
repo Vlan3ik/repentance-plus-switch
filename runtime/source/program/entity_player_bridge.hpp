@@ -121,6 +121,27 @@ inline bool InvokeHasCollectibleEffect(
     return native(effects, collectible);
 }
 
+/* TemporaryEffects::GetEffectNum(eCollectibleType) const in the pinned
+ * Repentance.nro.  This returns the unsigned temporary-effect stack count
+ * through w0 and receives the borrowed effects object in x0. */
+constexpr std::uintptr_t kGetCollectibleEffectNumRva = 0x4A7228;
+constexpr std::size_t kGetCollectibleEffectNumSize = 0x68;
+
+using GetCollectibleEffectNumNative = unsigned int (*)(void*, unsigned int);
+
+inline unsigned int InvokeGetCollectibleEffectNum(
+    void* effects, unsigned int collectible, std::uintptr_t module_base,
+    GetCollectibleEffectNumNative native, bool effects_mapped) {
+    if (!effects ||
+        (reinterpret_cast<std::uintptr_t>(effects) & (alignof(void*) - 1)) !=
+            0 ||
+        !module_base || !native || !effects_mapped ||
+        module_base > static_cast<std::uintptr_t>(-1) -
+                           kGetCollectibleEffectNumRva)
+        return 0;
+    return native(effects, collectible);
+}
+
 using HasTrinketNative = bool (*)(void*, unsigned int, bool);
 
 /* Keep the ABI gate independent from Horizon's memory-query implementation.

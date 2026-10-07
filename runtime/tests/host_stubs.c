@@ -32,6 +32,10 @@ bool LC_TemporaryEffects__HasCollectibleEffect(void* effects,
                                                 unsigned int collectible) {
     return effects == g_host_effects && collectible == 42u;
 }
+unsigned int LC_TemporaryEffects__GetCollectibleEffectNum(
+    void* effects, unsigned int collectible) {
+    return effects == g_host_effects && collectible == 42u ? 3u : 0u;
+}
 
 void L_DebugString(const char* message) { (void)message; }
 void L_EnableCallback(unsigned int callback) { (void)callback; }

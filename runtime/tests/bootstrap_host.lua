@@ -2,6 +2,7 @@ local ffi = require("ffi")
 ffi.cdef[=[
 void* LC_Entity_Player__GetEffects(void*);
 bool LC_TemporaryEffects__HasCollectibleEffect(void*, unsigned int);
+unsigned int LC_TemporaryEffects__GetCollectibleEffectNum(void*, unsigned int);
 ]=]
 local stock = assert(arg[1], "stock scripts_v2 path required")
 local modroot = assert(arg[2], "mod path required")
@@ -136,6 +137,11 @@ borrowedEffectsMeta.__index = {
         local native = rawget(self, "__native")
         if not native or native == ffi.NULL then return false end
         return ffi.C.LC_TemporaryEffects__HasCollectibleEffect(native, collectible)
+    end,
+    GetCollectibleEffectNum = function(self, collectible)
+        local native = rawget(self, "__native")
+        if not native or native == ffi.NULL then return 0 end
+        return ffi.C.LC_TemporaryEffects__GetCollectibleEffectNum(native, collectible)
     end,
 }
 local function getBorrowedEntityPlayerEffects(self)

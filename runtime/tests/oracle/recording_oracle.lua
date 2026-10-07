@@ -203,6 +203,10 @@ function fakeTemporaryEffects:HasCollectibleEffect(collectible)
     record("call", "TemporaryEffects.HasCollectibleEffect", {collectible}, 2)
     return false
 end
+function fakeTemporaryEffects:GetCollectibleEffectNum(collectible)
+    record("call", "TemporaryEffects.GetCollectibleEffectNum", {collectible}, 2)
+    return 0
+end
 setmetatable(fakeTemporaryEffects, { __index = function(_, key)
     return function(...)
         record("unsupported", "TemporaryEffects." .. tostring(key), {...}, 2)

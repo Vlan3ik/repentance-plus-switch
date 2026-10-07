@@ -1,0 +1,14 @@
+{
+  "build_id": "91c73fdd575061318d68886316afeac72388b2ab",
+  "elf": {
+    "path": "../switch-port/analysis/nx2elf/Repentance.elf",
+    "sha256": "0538e4fb54c8bdcca995121412126355ebdba66e39adb41567e4ba06da436bfc"
+  },
+  "method": "TemporaryEffects.GetCollectibleEffectNum",
+  "native_symbol": "IsaacRepentance::TemporaryEffects::GetEffectNum(eCollectibleType) const",
+  "rva": "0x4a7228",
+  "size": "0x68",
+  "abi": ["x0 borrowed TemporaryEffects*", "w1 CollectibleType", "w0 unsigned count"],
+  "prologue": ["39408408", "34000068", "2a1f03e0", "d65f03c0"],
+  "verification_level": "hardware_required"
+}

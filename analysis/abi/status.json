@@ -17,11 +17,14 @@
   ],
   "frontier": {
     "blocker": {
-      "args": [],
+      "args": [
+        "<table>",
+        0
+      ],
       "classification": "pending",
       "hardware_required": true,
-      "line": 3748,
-      "name": "TemporaryEffects.GetCollectibleEffectNum",
+      "line": 3917,
+      "name": "EntityPlayer.GetPill",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua",
       "switch_status": "unresolved"
@@ -144,6 +147,11 @@
       },
       {
         "name": "LC_RNG__SetSeed",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_TemporaryEffects__GetCollectibleEffectNum",
         "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
         "verification_level": "hardware_required"
       },
@@ -378,6 +386,12 @@
       },
       {
         "name": "LC_RNG__SetSeed",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_TemporaryEffects__GetCollectibleEffectNum",
         "resolver_exposed": true,
         "source": "runtime/source/program/main.cpp",
         "verification_level": "hardware_required"
