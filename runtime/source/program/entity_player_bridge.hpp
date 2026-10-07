@@ -15,6 +15,35 @@ constexpr std::size_t kPendingCacheFlagsOffset = 0x1958;
  * -1, matching the Lua-facing integer sentinel used by this bridge. */
 constexpr std::size_t kBabySkinOffset = 0x20E8;
 
+/* Entity_Player::temporaryEffects in the pinned Repentance.nro.  The
+ * object is embedded in the player, not allocated by the Lua bridge.  Lua
+ * must receive the address of this live object as a borrowed opaque pointer;
+ * it must never attach an __gc finalizer or otherwise take ownership. */
+constexpr std::size_t kTemporaryEffectsOffset = 0x18D8;
+constexpr std::size_t kTemporaryEffectsSize = 0x30;
+constexpr std::size_t kTemporaryEffectsOwnerOffset = 0x28;
+constexpr std::size_t kTemporaryEffectsRequiredBytes =
+    kTemporaryEffectsOffset + kTemporaryEffectsSize;
+
+/* Keep pointer arithmetic and the host-testable identity policy separate
+ * from Horizon's mapping query.  A null owner is tolerated during object
+ * construction; a mapped, non-null owner must identify the player that owns
+ * the embedded TemporaryEffects object. */
+inline void* GetBorrowedTemporaryEffects(void* player, bool player_mapped,
+                                         bool effects_mapped,
+                                         bool owner_mapped, void* owner) {
+    if (!player || !player_mapped || !effects_mapped)
+        return nullptr;
+    const auto address = reinterpret_cast<std::uintptr_t>(player);
+    if ((address & (alignof(void*) - 1)) != 0 ||
+        address > static_cast<std::uintptr_t>(-1) -
+                      kTemporaryEffectsRequiredBytes)
+        return nullptr;
+    if (owner_mapped && owner && owner != player)
+        return nullptr;
+    return reinterpret_cast<void*>(address + kTemporaryEffectsOffset);
+}
+
 /* Entity_Player::HasTrinket(const eTrinketType, bool) in the pinned
  * Repentance.nro.  The two inventory slots are compared by the native
  * routine after masking the golden modifier bit; the actual engine call is
@@ -49,6 +78,28 @@ inline bool InvokeHasCollectible(void* player, unsigned int collectible,
                                kHasCollectibleRva)
         return false;
     return native(player, collectible, ignore_modifiers);
+}
+
+/* TemporaryEffects::HasEffect(eCollectibleType) const in the pinned
+ * Repentance.nro.  This is the Lua-facing HasCollectibleEffect method.  The
+ * symbol is a 0x64-byte AArch64 function at RVA 0x4a6d60 and takes the
+ * borrowed TemporaryEffects object in x0 plus the collectible id in w1. */
+constexpr std::uintptr_t kHasCollectibleEffectRva = 0x4A6D60;
+constexpr std::size_t kHasCollectibleEffectSize = 0x64;
+
+using HasCollectibleEffectNative = bool (*)(void*, unsigned int);
+
+inline bool InvokeHasCollectibleEffect(
+    void* effects, unsigned int collectible, std::uintptr_t module_base,
+    HasCollectibleEffectNative native, bool effects_mapped) {
+    if (!effects ||
+        (reinterpret_cast<std::uintptr_t>(effects) & (alignof(void*) - 1)) !=
+            0 ||
+        !module_base || !native || !effects_mapped ||
+        module_base > static_cast<std::uintptr_t>(-1) -
+                           kHasCollectibleEffectRva)
+        return false;
+    return native(effects, collectible);
 }
 
 using HasTrinketNative = bool (*)(void*, unsigned int, bool);

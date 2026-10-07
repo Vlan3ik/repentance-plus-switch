@@ -1,0 +1,25 @@
+{
+  "build_id": "91c73fdd575061318d68886316afeac72388b2ab",
+  "elf": {
+    "path": "../switch-port/analysis/nx2elf/Repentance.elf",
+    "sha256": "0538e4fb54c8bdcca995121412126355ebdba66e39adb41567e4ba06da436bfc"
+  },
+  "method": "EntityPlayer.GetEffects",
+  "field": {
+    "name": "temporaryEffects",
+    "offset": "0x18d8",
+    "size": "0x30",
+    "owner_offset": "0x28",
+    "owner_type": "Entity_Player*"
+  },
+  "abi": ["x0 player", "x0 borrowed TemporaryEffects*"],
+  "proofs": [
+    {"kind": "constructor_owner_store", "rva": "0x4a6754", "instructions": ["f9001401"]},
+    {"kind": "clear_embedded_field", "rva": "0x2dccec", "instructions": ["52831b08", "8b080014"]},
+    {"kind": "trigger_new_room_embedded_field", "rva": "0x2f47dc", "instructions": ["52831b08", "8b080274"]},
+    {"kind": "trigger_new_room_embedded_field", "rva": "0x2f4874", "instructions": ["8b080274"]},
+    {"kind": "ambush_embedded_field", "rva": "0x5094", "instructions": ["52831b17"]},
+    {"kind": "player_collide_embedded_field", "rva": "0x5b998", "instructions": ["d3438929", "52831b0a", "d37df129", "aa1f03f8", "8b0a02ca"]}
+  ],
+  "verification_level": "hardware_required"
+}

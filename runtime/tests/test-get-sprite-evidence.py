@@ -40,7 +40,9 @@ def main() -> None:
     borrowed_start = main_text.index("local borrowedSpriteMeta")
     borrowed_end = main_text.index("function Sprite()", borrowed_start)
     borrowed = main_text[borrowed_start:borrowed_end]
-    assert "ffi.gc" not in borrowed
+    # Comments document why ownership is absent; reject only an actual
+    # ffi.gc invocation in the borrowed-wrapper body.
+    assert not re.search(r"ffi\.gc\s*\(", borrowed)
     assert "IsaacPort_ANM2_Destroy" not in borrowed
 
     # When the adjacent pinned analysis checkout is present, verify the

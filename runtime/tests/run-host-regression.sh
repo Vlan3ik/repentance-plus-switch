@@ -22,6 +22,11 @@ python3 ./runtime/tests/test-game-get-room-evidence.py
 python3 ./runtime/tests/test-get-sprite-evidence.py
 ./runtime/tests/test-get-baby-skin.sh
 python3 ./runtime/tests/test-get-baby-skin-evidence.py
+./runtime/tests/test-get-effects.sh
+python3 ./runtime/tests/test-get-effects-evidence.py
+./runtime/tests/test-effects-lua-dispatch.sh "$STOCK_DIR" "$MOD_DIR"
+./runtime/tests/test-has-collectible-effect.sh
+python3 ./runtime/tests/test-has-collectible-effect-evidence.py
 ./runtime/tests/test-has-collectible.sh
 python3 ./runtime/tests/test-has-collectible-evidence.py
 ./runtime/tests/test-post-game-started-hook.sh

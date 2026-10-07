@@ -32,4 +32,4 @@ cc -shared -fPIC -O2 "$ROOT_DIR/tests/host_stubs.c" \
     -o "$BUILD_DIR/libisaac_port_host_stubs.so"
 LD_PRELOAD="$BUILD_DIR/libisaac_port_host_stubs.so" \
 "$HOST_LUAJIT" "$ROOT_DIR/tests/bootstrap_host.lua" "$STOCK_DIR" "$MOD_DIR" \
-    "$BUILD_DIR/libisaac_port_host_stubs.so"
+    "$BUILD_DIR/libisaac_port_host_stubs.so" "${4:-}"

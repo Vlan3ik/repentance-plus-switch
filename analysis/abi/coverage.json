@@ -1900,10 +1900,10 @@
         "zhl": []
       },
       "kind": "runtime_frontier_blocker",
-      "name": "EntityPlayer.GetEffects",
+      "name": "EntityPlayer.GetCollectibleNum",
       "runtime": {
         "observed": true,
-        "order": 422,
+        "order": 424,
         "status": "unsupported"
       },
       "switch": {
@@ -1911,7 +1911,7 @@
         "hardware_required": true,
         "status": "unresolved"
       },
-      "usage_count": 151
+      "usage_count": 7
     },
     {
       "evidence": {
@@ -2070,31 +2070,23 @@
   ],
   "runtime": {
     "blocker": {
-      "args": [
-        "<table>"
-      ],
-      "line": 3732,
-      "name": "EntityPlayer.GetEffects",
+      "args": [],
+      "line": 3748,
+      "name": "EntityPlayer.GetCollectibleNum",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua"
     },
     "blocker_report": {
-      "args": [
-        "<table>"
-      ],
+      "args": [],
       "classification": "pending",
       "evidence": {
         "operations": [
           {
-            "args": [
-              "stable_identity",
-              "retained_value",
-              "player_isolation"
-            ],
-            "kind": "fixture_satisfied",
-            "line": 3695,
-            "name": "EntityPlayer.GetData",
-            "seq": 420,
+            "args": [],
+            "kind": "call",
+            "line": 3732,
+            "name": "EntityPlayer.GetEffects",
+            "seq": 422,
             "source": "<modroot>/main.lua"
           },
           {
@@ -2102,27 +2094,28 @@
               1
             ],
             "kind": "call",
-            "line": 3709,
-            "name": "EntityPlayer.HasCollectible",
-            "seq": 421,
+            "line": 3732,
+            "name": "TemporaryEffects.HasCollectibleEffect",
+            "seq": 423,
             "source": "<modroot>/main.lua"
           },
           {
             "args": [
-              "<table>"
+              "<table>",
+              1
             ],
             "kind": "unsupported",
-            "line": 3732,
-            "name": "EntityPlayer.GetEffects",
-            "seq": 422,
+            "line": 2062,
+            "name": "EntityPlayer.GetCollectibleNum",
+            "seq": 424,
             "source": "<modroot>/main.lua"
           }
         ],
         "oracle_stage": "post_game_started_then_post_update_minimal_state",
         "verification_level": "host_only"
       },
-      "line": 3732,
-      "name": "EntityPlayer.GetEffects",
+      "line": 3748,
+      "name": "EntityPlayer.GetCollectibleNum",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua",
       "switch": {
@@ -2132,7 +2125,7 @@
       },
       "usage": {
         "frontier_occurrences": 1,
-        "static_receiver_method_count": 151
+        "static_receiver_method_count": 7
       }
     },
     "oracle_present": true,
@@ -2144,7 +2137,7 @@
           "player_isolation"
         ],
         "kind": "fixture_satisfied",
-        "line": 202,
+        "line": 220,
         "name": "EntityPlayer.GetData",
         "seq": 1,
         "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
@@ -2156,7 +2149,7 @@
           "player_isolation"
         ],
         "kind": "fixture_satisfied",
-        "line": 204,
+        "line": 222,
         "name": "EntityPlayer.GetData",
         "seq": 2,
         "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
@@ -2168,7 +2161,7 @@
           "player_isolation"
         ],
         "kind": "fixture_satisfied",
-        "line": 205,
+        "line": 223,
         "name": "EntityPlayer.GetData",
         "seq": 3,
         "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
@@ -2180,7 +2173,7 @@
           "player_isolation"
         ],
         "kind": "fixture_satisfied",
-        "line": 207,
+        "line": 225,
         "name": "EntityPlayer.GetData",
         "seq": 4,
         "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
@@ -6133,7 +6126,7 @@
           15
         ],
         "kind": "callback_probe",
-        "line": 409,
+        "line": 427,
         "name": "POST_GAME_STARTED",
         "seq": 389,
         "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
@@ -6233,7 +6226,7 @@
           1
         ],
         "kind": "callback_probe",
-        "line": 409,
+        "line": 427,
         "name": "POST_UPDATE",
         "seq": 400,
         "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
@@ -6458,13 +6451,32 @@
         "source": "<modroot>/main.lua"
       },
       {
-        "args": [
-          "<table>"
-        ],
-        "kind": "unsupported",
+        "args": [],
+        "kind": "call",
         "line": 3732,
         "name": "EntityPlayer.GetEffects",
         "seq": 422,
+        "source": "<modroot>/main.lua"
+      },
+      {
+        "args": [
+          1
+        ],
+        "kind": "call",
+        "line": 3732,
+        "name": "TemporaryEffects.HasCollectibleEffect",
+        "seq": 423,
+        "source": "<modroot>/main.lua"
+      },
+      {
+        "args": [
+          "<table>",
+          1
+        ],
+        "kind": "unsupported",
+        "line": 2062,
+        "name": "EntityPlayer.GetCollectibleNum",
+        "seq": 424,
         "source": "<modroot>/main.lua"
       }
     ],

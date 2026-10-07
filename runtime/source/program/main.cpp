@@ -152,6 +152,15 @@ constexpr std::uint32_t kExpectedEntityPlayerHasCollectiblePrologue[] = {
     0xd10183ff, 0xa9017bfd, 0x910043fd, 0xa90267fa,
     0xa9035ff8, 0xa90457f6, 0xa9054ff4,
 };
+/* REPENTOGON/ZHL symbol: TemporaryEffects::HasEffect(eCollectibleType)
+ * const, exposed to Lua as TemporaryEffects:HasCollectibleEffect. The
+ * complete ELF symbol is 0x64 bytes in the pinned Repentance.nro. */
+constexpr std::uintptr_t kTemporaryEffectsHasCollectibleEffectRva = 0x4a6d60;
+constexpr std::size_t kTemporaryEffectsHasCollectibleEffectSize = 0x64;
+constexpr std::uint32_t
+    kExpectedTemporaryEffectsHasCollectibleEffectPrologue[] = {
+        0x39408408, 0x34000068, 0x2a1f03e0, 0xd65f03c0,
+    };
 /* Entity::GetSprite() returns the embedded ANM2 at Entity+0x48 in the
  * pinned Repentance.nro.  This is a borrowed pointer, not an allocation. */
 constexpr std::size_t kEntitySpriteSize = 0x158;
@@ -739,6 +748,8 @@ typedef struct { void *_; } IsaacPortRoom;
 IsaacPortRoom* LL_Game__GetRoom(void);
 void* LC_Entity__GetSprite(void*);
 int LC_Entity_Player__GetBabySkin(void*);
+void* LC_Entity_Player__GetEffects(void*);
+bool LC_TemporaryEffects__HasCollectibleEffect(void*, unsigned int);
 bool IsaacPort_Entity_Player__HasTrinket(void*, unsigned int, bool);
 bool LC_Entity_Player__HasCollectible(void*, unsigned int, bool);
 void L_Free(char*);
@@ -924,6 +935,25 @@ local function getEntityPlayerBabySkin(self)
   return ffi.C.LC_Entity_Player__GetBabySkin(player)
 end
 
+-- EntityPlayer:GetEffects() returns the embedded TemporaryEffects object.
+-- The object is owned by the live player; this wrapper deliberately uses a
+-- plain table and never applies ffi.gc to the borrowed pointer.
+local borrowedEffectsMeta = {}
+borrowedEffectsMeta.__index = {
+  HasCollectibleEffect = function(self, collectible)
+    local native = rawget(self, '__native')
+    if not native or native == ffi.NULL then return false end
+    return ffi.C.LC_TemporaryEffects__HasCollectibleEffect(native, collectible)
+  end,
+}
+local function getBorrowedEntityPlayerEffects(self)
+  local player = rawget(self, '__cdata')
+  if not player or player == ffi.NULL then return nil end
+  local native = ffi.C.LC_Entity_Player__GetEffects(player)
+  if native == ffi.NULL then return nil end
+  return setmetatable({ __native = native, __borrowed = true }, borrowedEffectsMeta)
+end
+
 -- EntityPlayer:HasTrinket(id[, ignoreModifiers]) is a Repentance method.
 -- The stock two-argument cdef remains intact; this project symbol carries
 -- the native third argument and defaults it exactly as the retail API does.
@@ -983,6 +1013,7 @@ function RegisterMod(name, apiVersion)
       classes.Entity.functions.GetSprite = getBorrowedEntitySprite
       classes.EntityPlayer.functions.GetSprite = getBorrowedEntitySprite
       classes.EntityPlayer.functions.GetBabySkin = getEntityPlayerBabySkin
+      classes.EntityPlayer.functions.GetEffects = getBorrowedEntityPlayerEffects
       classes.EntityPlayer.functions.HasTrinket = getEntityPlayerHasTrinket
       compat.Entity = exposeClass(classes.Entity)
       compat.EntityPlayer = exposeClass(classes.EntityPlayer)
@@ -1571,6 +1602,73 @@ extern "C" int LC_Entity_Player__GetBabySkin(void* player) {
         player, player_mapped, field_mapped);
 }
 
+/* TemporaryEffects is embedded at Entity_Player+0x18d8 in the pinned NRO.
+ * Return only a checked borrowed address: no allocation, retain, or __gc
+ * ownership crosses the Lua boundary.  Methods on the opaque object are
+ * intentionally a separate frontier blocker. */
+extern "C" void* LC_Entity_Player__GetEffects(void* player) {
+    if (!g_repentance_base || !player)
+        return nullptr;
+    const auto object = reinterpret_cast<std::uintptr_t>(player);
+    if ((object & (alignof(void*) - 1)) != 0 ||
+        object > static_cast<std::uintptr_t>(-1) -
+                     isaac_port::entity_player::kTemporaryEffectsRequiredBytes)
+        return nullptr;
+
+    const bool player_mapped = IsMappedDataRange(
+        object, isaac_port::entity_player::kTemporaryEffectsRequiredBytes,
+        false);
+    if (!player_mapped)
+        return nullptr;
+    const auto effects = object +
+                         isaac_port::entity_player::kTemporaryEffectsOffset;
+    const bool effects_mapped = IsMappedDataRange(
+        effects, isaac_port::entity_player::kTemporaryEffectsSize, false);
+    const auto owner_slot = effects +
+                            isaac_port::entity_player::kTemporaryEffectsOwnerOffset;
+    const bool owner_mapped = IsMappedDataRange(owner_slot, sizeof(void*), false);
+    void* owner = nullptr;
+    if (owner_mapped)
+        std::memcpy(&owner, reinterpret_cast<const void*>(owner_slot),
+                    sizeof(owner));
+    return isaac_port::entity_player::GetBorrowedTemporaryEffects(
+        player, player_mapped, effects_mapped, owner_mapped, owner);
+}
+
+/* TemporaryEffects is an embedded, borrowed object. Resolve only the
+ * pinned HasEffect(eCollectibleType) symbol and fail closed if either the
+ * object mapping or the NRO code signature is not what this build expects. */
+extern "C" bool LC_TemporaryEffects__HasCollectibleEffect(
+    void* effects, unsigned int collectible) {
+    if (!g_repentance_base || !effects ||
+        g_repentance_base > static_cast<std::uintptr_t>(-1) -
+                                kTemporaryEffectsHasCollectibleEffectRva)
+        return false;
+
+    const auto object = reinterpret_cast<std::uintptr_t>(effects);
+    if ((object & (alignof(void*) - 1)) != 0 ||
+        !IsMappedDataRange(
+            object, isaac_port::entity_player::kTemporaryEffectsSize, false))
+        return false;
+
+    const auto target = g_repentance_base +
+                        kTemporaryEffectsHasCollectibleEffectRva;
+    if (target > static_cast<std::uintptr_t>(-1) -
+                  (kTemporaryEffectsHasCollectibleEffectSize - 1) ||
+        !IsMappedCodeAddress(target) ||
+        !IsMappedCodeAddress(target + kTemporaryEffectsHasCollectibleEffectSize -
+                             1) ||
+        !MatchesCode(target,
+                     kExpectedTemporaryEffectsHasCollectibleEffectPrologue,
+                     sizeof(kExpectedTemporaryEffectsHasCollectibleEffectPrologue)))
+        return false;
+
+    const auto native = reinterpret_cast<
+        isaac_port::entity_player::HasCollectibleEffectNative>(target);
+    return isaac_port::entity_player::InvokeHasCollectibleEffect(
+        effects, collectible, g_repentance_base, native, true);
+}
+
 /* The NRO itself owns HasTrinket's inventory and golden-modifier semantics.
  * This wrapper only resolves the pinned symbol after all gates have passed;
  * returning false on any failed gate is safer than calling a stale address.
@@ -1943,6 +2041,10 @@ extern "C" void* luaJIT_nx_resolve(const char* name) {
         return reinterpret_cast<void*>(&LC_Entity_Player__EvaluateItems);
     if (name && std::strcmp(name, "LC_Entity_Player__GetBabySkin") == 0)
         return reinterpret_cast<void*>(&LC_Entity_Player__GetBabySkin);
+    if (name && std::strcmp(name, "LC_Entity_Player__GetEffects") == 0)
+        return reinterpret_cast<void*>(&LC_Entity_Player__GetEffects);
+    if (name && std::strcmp(name, "LC_TemporaryEffects__HasCollectibleEffect") == 0)
+        return reinterpret_cast<void*>(&LC_TemporaryEffects__HasCollectibleEffect);
     if (name && std::strcmp(name, "LC_Entity_Player__HasTrinket") == 0)
         return reinterpret_cast<void*>(&LC_Entity_Player__HasTrinket);
     if (name && std::strcmp(name, "LC_Entity_Player__HasCollectible") == 0)

@@ -188,6 +188,24 @@ function fakePlayer:HasCollectible(collectible)
     -- remain covered by the ARM-gated bridge and hardware evidence test.
     return false
 end
+-- GetEffects returns one stable borrowed opaque object.  The first method
+-- on that object is now wired by the Switch bridge; keep its deterministic
+-- false result in the oracle so execution advances to the next blocker.
+local fakeTemporaryEffects = {}
+function fakeTemporaryEffects:HasCollectibleEffect(collectible)
+    record("call", "TemporaryEffects.HasCollectibleEffect", {collectible}, 2)
+    return false
+end
+setmetatable(fakeTemporaryEffects, { __index = function(_, key)
+    return function(...)
+        record("unsupported", "TemporaryEffects." .. tostring(key), {...}, 2)
+        return unsupported("TemporaryEffects." .. tostring(key), 2)
+    end
+end })
+function fakePlayer:GetEffects()
+    record("call", "EntityPlayer.GetEffects", {}, 2)
+    return fakeTemporaryEffects
+end
 setmetatable(fakePlayer, { __index = function(_, key)
     return function(...)
         record("unsupported", "EntityPlayer." .. tostring(key), {...}, 2)

@@ -17,6 +17,9 @@ IMPLEMENTED = {
     "LL_Isaac__GetCostumeIdByPath", "LL_Isaac__GetCurseIdByName",
     "LL_Isaac__GetSoundIdByName", "LC_RNG__SetSeed",
     "LC_RNG__RandomInt", "LC_RNG__RandomFloat", "LC_RNG__Next",
+    "LL_Isaac__GetPlayer", "LC_Entity__GetType", "LC_Entity__GetRef",
+    "LC_Entity__SetRef", "LC_Entity_Player__GetEffects",
+    "LC_TemporaryEffects__HasCollectibleEffect",
 }
 
 

@@ -1,4 +1,8 @@
 local ffi = require("ffi")
+ffi.cdef[=[
+void* LC_Entity_Player__GetEffects(void*);
+bool LC_TemporaryEffects__HasCollectibleEffect(void*, unsigned int);
+]=]
 local stock = assert(arg[1], "stock scripts_v2 path required")
 local modroot = assert(arg[2], "mod path required")
 assert(ffi.load(assert(arg[3], "stub library required"), true))
@@ -126,6 +130,21 @@ local stockIsaac = Isaac
 local stockIsaacAddCallback = stockIsaac.AddCallback
 local nextCompatCallback = 0
 local compatActiveMod
+local borrowedEffectsMeta = {}
+borrowedEffectsMeta.__index = {
+    HasCollectibleEffect = function(self, collectible)
+        local native = rawget(self, "__native")
+        if not native or native == ffi.NULL then return false end
+        return ffi.C.LC_TemporaryEffects__HasCollectibleEffect(native, collectible)
+    end,
+}
+local function getBorrowedEntityPlayerEffects(self)
+    local player = rawget(self, "__cdata")
+    if not player or player == ffi.NULL then return nil end
+    local native = ffi.C.LC_Entity_Player__GetEffects(player)
+    if native == ffi.NULL then return nil end
+    return setmetatable({__native = native, __borrowed = true}, borrowedEffectsMeta)
+end
 function stockIsaac.AddCallback(callbackId, fn, entityId)
     return compatActiveMod:AddCallback(callbackId, fn, entityId)
 end
@@ -146,6 +165,7 @@ function RegisterMod(name, apiVersion)
                 end
                 return setmetatable({}, { __class = classData.meta })
             end
+            classes.EntityPlayer.functions.GetEffects = getBorrowedEntityPlayerEffects
             compat.Entity = exposeClass(classes.Entity)
             compat.EntityPlayer = exposeClass(classes.EntityPlayer)
         end
@@ -175,5 +195,8 @@ function RegisterMod(name, apiVersion)
 end
 
 assert(loadfile(modroot .. "/main.lua"))()
+if arg[4] and arg[4] ~= "" then
+    assert(loadfile(arg[4]))()
+end
 assert(Game.GetRoom() == Game.GetRoom(), "Game.GetRoom must preserve pointer identity")
 io.stdout:write("REPENTANCE_PLUS_HOST_BOOTSTRAP_READY\n")
