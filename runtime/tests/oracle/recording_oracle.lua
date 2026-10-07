@@ -159,6 +159,10 @@ setmetatable(fakeSprite, { __index = function(_, key)
     record("unsupported", "Sprite." .. tostring(key), {}, 2)
     return unsupported("Sprite." .. tostring(key), 2)
 end })
+function fakeSprite:IsPlaying(animation)
+    record("call", "Sprite.IsPlaying", {animation or ""}, 2)
+    return false
+end
 function fakePlayer:GetSprite()
     record("call", "EntityPlayer.GetSprite", {}, 2)
     return fakeSprite

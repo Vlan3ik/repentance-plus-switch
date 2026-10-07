@@ -2,6 +2,7 @@
 #include "nn/fs.hpp"
 #include "mod_persistence.hpp"
 #include "entity_player_bridge.hpp"
+#include "anm2_bridge.hpp"
 #include "game_room_bridge.hpp"
 #include "generated/embedded_lua.hpp"
 #include "generated/mod_ids.hpp"
@@ -123,6 +124,9 @@ constexpr std::uintptr_t kAnm2ConstructorRva = 0x6540;
 constexpr std::uintptr_t kAnm2DestructorRva = 0x71a4;
 constexpr std::uintptr_t kAnm2PlayRva = 0xa1f4;
 constexpr std::uintptr_t kAnm2LoadRva = 0xc970;
+/* REPENTOGON/ZHL symbol IsaacRepentance::ANM2::IsPlaying(const char*) for
+ * the pinned Repentance.nro build. */
+constexpr std::uintptr_t kAnm2IsPlayingRva = 0xa454;
 constexpr std::size_t kAnm2Size = 0x158;
 constexpr std::uintptr_t kAnm2ScaleOffset = 0xdc;
 constexpr std::uintptr_t kAnm2PlaybackSpeedOffset = 0x144;
@@ -156,6 +160,9 @@ constexpr std::uint32_t kExpectedAnm2PlayPrologue[] = {
 };
 constexpr std::uint32_t kExpectedAnm2LoadPrologue[] = {
     0xa9ba7bfd, 0xf9000bfb, 0x910003fd, 0xa90267fa,
+};
+constexpr std::uint32_t kExpectedAnm2IsPlayingPrologue[] = {
+    0xa9bf7bfd, 0x910003fd, 0xf9401c08, 0xb4000128,
 };
 constexpr std::uintptr_t kMainMallocRva = 0x7d2b0;
 constexpr std::uintptr_t kMainFreeRva = 0x7d300;
@@ -311,6 +318,21 @@ bool IsMappedCodeAddress(std::uintptr_t address) {
     return R_SUCCEEDED(svcQueryMemory(&memory, &page_info, address)) &&
            memory.perm == Perm_Rx && address >= memory.addr &&
            address < memory.addr + memory.size;
+}
+
+bool IsMappedCString(const char* value) {
+    if (!value)
+        return false;
+    const auto address = reinterpret_cast<std::uintptr_t>(value);
+    constexpr std::size_t kMaxCStringSize = 4096;
+    for (std::size_t index = 0; index < kMaxCStringSize; ++index) {
+        if (address > static_cast<std::uintptr_t>(-1) - index ||
+            !IsMappedDataRange(address + index, 1, false))
+            return false;
+        if (value[index] == '\0')
+            return true;
+    }
+    return false;
 }
 
 void* GetLiveManager() {
@@ -711,6 +733,7 @@ void* IsaacPort_ANM2_Create(void);
 void IsaacPort_ANM2_Destroy(void*);
 void IsaacPort_ANM2_Load(void*, const char*, bool);
 void IsaacPort_ANM2_Play(void*, const char*, bool);
+bool IsaacPort_ANM2_IsPlaying(void*, const char*);
 void IsaacPort_ANM2_SetScale(void*, const Vector2*);
 void IsaacPort_ANM2_GetScale(void*, Vector2*);
 void IsaacPort_ANM2_SetPlaybackSpeed(void*, float);
@@ -829,6 +852,9 @@ function methods:Load(path, loadGraphics)
 end
 function methods:Play(animation, force)
   ffi.C.IsaacPort_ANM2_Play(rawget(self, '__native'), animation, not not force)
+end
+function methods:IsPlaying(animation)
+  return ffi.C.IsaacPort_ANM2_IsPlaying(rawget(self, '__native'), animation or '')
 end
 
 local spriteMeta = {
@@ -1711,6 +1737,29 @@ extern "C" void IsaacPort_ANM2_Play(void* object, const char* animation,
         g_repentance_base + kAnm2PlayRva)(object, animation, force);
 }
 
+extern "C" bool IsaacPort_ANM2_IsPlaying(void* object,
+                                           const char* animation) {
+    if (!g_repentance_base || !object)
+        return false;
+    const auto object_address = reinterpret_cast<std::uintptr_t>(object);
+    if ((object_address & (alignof(void*) - 1)) != 0 ||
+        !IsMappedDataRange(object_address, kAnm2Size, false) ||
+        !IsMappedCString(animation))
+        return false;
+    if (g_repentance_base > static_cast<std::uintptr_t>(-1) -
+                                kAnm2IsPlayingRva)
+        return false;
+    const auto target = g_repentance_base + kAnm2IsPlayingRva;
+    if (!IsMappedCodeAddress(target) ||
+        !MatchesCode(target, kExpectedAnm2IsPlayingPrologue,
+                     sizeof(kExpectedAnm2IsPlayingPrologue)))
+        return false;
+    const auto native = reinterpret_cast<isaac_port::anm2::IsPlayingNative>(
+        target);
+    return isaac_port::anm2::InvokeIsPlaying(
+        object, animation, native, true, true);
+}
+
 extern "C" void IsaacPort_ANM2_SetScale(void* object,
                                          const LuaVector2* scale) {
     if (object && scale)
@@ -1805,6 +1854,8 @@ extern "C" void* luaJIT_nx_resolve(const char* name) {
         return reinterpret_cast<void*>(&IsaacPort_ANM2_Load);
     if (name && std::strcmp(name, "IsaacPort_ANM2_Play") == 0)
         return reinterpret_cast<void*>(&IsaacPort_ANM2_Play);
+    if (name && std::strcmp(name, "IsaacPort_ANM2_IsPlaying") == 0)
+        return reinterpret_cast<void*>(&IsaacPort_ANM2_IsPlaying);
     if (name && std::strcmp(name, "IsaacPort_ANM2_SetScale") == 0)
         return reinterpret_cast<void*>(&IsaacPort_ANM2_SetScale);
     if (name && std::strcmp(name, "IsaacPort_ANM2_GetScale") == 0)
@@ -1985,7 +2036,10 @@ extern "C" void HookRunRepentance() {
                             sizeof(kExpectedAnm2PlayPrologue)) &&
                 MatchesCode(repentance_base + kAnm2LoadRva,
                             kExpectedAnm2LoadPrologue,
-                            sizeof(kExpectedAnm2LoadPrologue));
+                            sizeof(kExpectedAnm2LoadPrologue)) &&
+                MatchesCode(repentance_base + kAnm2IsPlayingRva,
+                            kExpectedAnm2IsPlayingPrologue,
+                            sizeof(kExpectedAnm2IsPlayingPrologue));
             if (!manager_signatures_ok) {
                 Logging.Log(
                     "[isaac-port] skipping engine hook: Manager signatures "

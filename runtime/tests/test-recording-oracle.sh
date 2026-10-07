@@ -66,7 +66,7 @@ evaluate_calls = [event for event in d["operations"]
 assert evaluate_calls
 if d["status"] == "host_bootstrap_blocked":
     assert d.get("first_unsupported")
-    assert d["first_unsupported"]["name"] == "Sprite.IsPlaying"
+    assert d["first_unsupported"]["name"] == "EntityPlayer.HasTrinket"
     fixture_calls = [event for event in d["operations"]
                      if event.get("name") == "EntityPlayer.GetData"
                      and event.get("kind") == "fixture_satisfied"]

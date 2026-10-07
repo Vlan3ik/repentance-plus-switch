@@ -17,11 +17,14 @@
   ],
   "frontier": {
     "blocker": {
-      "args": [],
+      "args": [
+        "<table>",
+        1
+      ],
       "classification": "pending",
       "hardware_required": true,
-      "line": 3605,
-      "name": "Sprite.IsPlaying",
+      "line": 3649,
+      "name": "EntityPlayer.HasTrinket",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua",
       "switch_status": "unresolved"
@@ -54,6 +57,11 @@
       },
       {
         "name": "IsaacPort_ANM2_GetScale",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_IsPlaying",
         "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
         "verification_level": "hardware_required"
       },
@@ -235,6 +243,12 @@
       },
       {
         "name": "IsaacPort_ANM2_GetScale",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "IsaacPort_ANM2_IsPlaying",
         "resolver_exposed": true,
         "source": "runtime/source/program/main.cpp",
         "verification_level": "hardware_required"

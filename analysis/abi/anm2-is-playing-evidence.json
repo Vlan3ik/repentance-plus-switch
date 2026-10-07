@@ -1,0 +1,24 @@
+{
+  "method": "Sprite.IsPlaying",
+  "symbol": "IsaacRepentance::ANM2::IsPlaying(const char*)",
+  "rva": "0xa454",
+  "size": 96,
+  "build_id": "91c73fdd575061318d68886316afeac72388b2ab",
+  "elf": {
+    "path": "../switch-port/analysis/nx2elf/Repentance.elf",
+    "sha256": "0538e4fb54c8bdcca995121412126355ebdba66e39adb41567e4ba06da436bfc"
+  },
+  "prologue": ["a9bf7bfd", "910003fd", "f9401c08", "b4000128"],
+  "abi": {
+    "this": "x0",
+    "animation": "x1 const char*",
+    "return": "w0 bool",
+    "default_animation": ""
+  },
+  "ownership": {
+    "owned_sprite": "caller-owned ANM2 is not destroyed by IsPlaying",
+    "borrowed_sprite": "Entity.GetSprite result remains borrowed and non-owning"
+  },
+  "verification_level": "hardware_required",
+  "provenance": "llvm-objdump of the pinned Repentance.elf; RVA and live ANM2 pointer remain hardware_required"
+}
