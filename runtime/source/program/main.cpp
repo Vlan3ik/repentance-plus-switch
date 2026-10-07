@@ -2,6 +2,7 @@
 #include "nn/fs.hpp"
 #include "mod_persistence.hpp"
 #include "entity_player_bridge.hpp"
+#include "game_room_bridge.hpp"
 #include "generated/embedded_lua.hpp"
 #include "generated/mod_ids.hpp"
 extern "C" {
@@ -78,6 +79,10 @@ constexpr std::uint32_t kExpectedGameUpdatePrologue[] = {
     0xd107c3ff, 0xa9197bfd, 0x910643fd, 0xf900d3fc,
 };
 constexpr std::uintptr_t kGameGlobalRva = 0xabb448;
+/* REPENTOGON/ZHL/ARM64 cross-reference for Game::_room in the pinned
+ * Repentance.nro. This is only a non-owning pointer exposure; Room methods
+ * remain separate frontier items. */
+constexpr std::uintptr_t kGameRoomOffset = 0x21550;
 constexpr std::uintptr_t kManagerGlobalRva = 0xabcce0;
 /* IsaacRepentance::Manager::execute_start_game() is the common post-menu
  * lifecycle gate for new, continued, rerun, and debug starts.  Its ABI is
@@ -128,6 +133,9 @@ constexpr std::uint32_t kExpectedEntityPlayerEvaluateItemsPrologue[] = {
     0x6db63bef, 0x6d0133ed, 0x6d022beb, 0x6d0323e9,
     0xa9047bfd, 0x910103fd, 0xa9056ffc, 0xa90667fa,
 };
+/* Entity::GetSprite() returns the embedded ANM2 at Entity+0x48 in the
+ * pinned Repentance.nro.  This is a borrowed pointer, not an allocation. */
+constexpr std::size_t kEntitySpriteSize = 0x158;
 constexpr std::uint32_t kExpectedRngSetSeedPrologue[] = {
     0xb9000001, 0xf00032e8, 0xf9416508, 0x52800189,
 };
@@ -479,6 +487,34 @@ bool ReadGameFrameCount(int* frame_out) {
     return true;
 }
 
+/* Return the live Room object held by Game without allocating or retaining it.
+ * Every address read is gated by the pinned module and a mapped-data check;
+ * unsupported or stale engine state returns NULL to Lua. */
+void* GetGameRoom() {
+    if (!g_repentance_base)
+        return nullptr;
+
+    const auto game_global = g_repentance_base + kGameGlobalRva;
+    if (game_global < g_repentance_base)
+        return nullptr;
+
+    const auto read_pointer = [](std::uintptr_t address, void** value) {
+        if (!value || !IsMappedDataRange(address, sizeof(void*), false))
+            return false;
+        std::memcpy(value, reinterpret_cast<const void*>(address),
+                    sizeof(void*));
+        return true;
+    };
+    void* room = nullptr;
+    isaac_port::game_room::Resolve(
+        game_global, kGameRoomOffset,
+        [](std::uintptr_t address, std::size_t size, bool require_write) {
+            return IsMappedDataRange(address, size, require_write);
+        },
+        read_pointer, &room);
+    return room;
+}
+
 const isaac_port::embedded_lua::LuaFile* FindEmbeddedLua(const char* path) {
     if (!path)
         return nullptr;
@@ -662,6 +698,10 @@ bool InstallBootstrapCompatibility(lua_State* state) {
     static constexpr char kCompatibility[] = R"LUA(
 local ffi = require('ffi')
 ffi.cdef[[
+typedef struct { void *_; } IsaacPortRoom;
+IsaacPortRoom* LL_Game__GetRoom(void);
+void* LC_Entity__GetSprite(void*);
+int LC_Entity_Player__GetBabySkin(void*);
 void L_Free(char*);
 void L_Mod_SaveData(const char*, const char*, int);
 char* L_Mod_LoadData(const char*, int*);
@@ -676,6 +716,17 @@ void IsaacPort_ANM2_GetScale(void*, Vector2*);
 void IsaacPort_ANM2_SetPlaybackSpeed(void*, float);
 float IsaacPort_ANM2_GetPlaybackSpeed(void*);
 ]]
+
+-- The retail scripts_v2 snapshot is intentionally kept pristine in the
+-- repository. Expose the live Game::_room pointer from this tracked
+-- compatibility layer instead of requiring edits to stock cdefs/bindings.
+-- This cdata is non-owning: no __gc handler and no retained reference.
+local IsaacPortRoom = ffi.metatype('IsaacPortRoom', {
+  __tostring = function() return 'Room (non-owning)' end,
+})
+function Game.GetRoom()
+  return ffi.C.LL_Game__GetRoom()
+end
 
 -- Isaac.LoadModData/SaveModData are absent from this stock Switch script
 -- snapshot. Route them through the same byte-string ABI as META_Mod. The
@@ -805,6 +856,31 @@ local spriteMeta = {
   end,
 }
 
+-- Entity:GetSprite() returns an ANM2 owned by the live Entity.  Keep this
+-- metatype separate from Sprite()'s allocating metatype: no ffi.gc is ever
+-- attached to the borrowed pointer, so Lua collection cannot destroy an
+-- engine-owned object.
+local borrowedSpriteMeta = {
+  __index = spriteMeta.__index,
+  __newindex = spriteMeta.__newindex,
+}
+local function borrowedSprite(native)
+  if native == ffi.NULL then return nil end
+  return setmetatable({ __native = native, __borrowed = true }, borrowedSpriteMeta)
+end
+
+local function getBorrowedEntitySprite(self)
+  local entity = rawget(self, '__cdata')
+  if not entity or entity == ffi.NULL then return nil end
+  return borrowedSprite(ffi.C.LC_Entity__GetSprite(entity))
+end
+
+local function getEntityPlayerBabySkin(self)
+  local player = rawget(self, '__cdata')
+  if not player or player == ffi.NULL then return -1 end
+  return ffi.C.LC_Entity_Player__GetBabySkin(player)
+end
+
 function Sprite()
   local native = ffi.C.IsaacPort_ANM2_Create()
   if native == ffi.NULL then error('ANM2 allocation failed', 2) end
@@ -851,6 +927,9 @@ function RegisterMod(name, apiVersion)
         end
         return setmetatable({}, { __class = classData.meta })
       end
+      classes.Entity.functions.GetSprite = getBorrowedEntitySprite
+      classes.EntityPlayer.functions.GetSprite = getBorrowedEntitySprite
+      classes.EntityPlayer.functions.GetBabySkin = getEntityPlayerBabySkin
       compat.Entity = exposeClass(classes.Entity)
       compat.EntityPlayer = exposeClass(classes.EntityPlayer)
     end
@@ -953,6 +1032,10 @@ void DispatchLuaCallbackWithBool(std::int32_t callback_id, bool value) {
 }
 
 } // namespace
+
+extern "C" void* LL_Game__GetRoom() {
+    return GetGameRoom();
+}
 
 HOOK_DEFINE_TRAMPOLINE(ManagerUpdateHook) {
     static void Callback(void* manager) {
@@ -1395,6 +1478,45 @@ extern "C" void LC_Entity_Player__EvaluateItems(void* player) {
         player_mapped, target_mapped);
 }
 
+extern "C" void* LC_Entity__GetSprite(void* entity) {
+    if (!g_repentance_base || !entity)
+        return nullptr;
+    const auto object = reinterpret_cast<std::uintptr_t>(entity);
+    if ((object & (alignof(void*) - 1)) != 0)
+        return nullptr;
+    if (object > static_cast<std::uintptr_t>(-1) -
+                    isaac_port::entity_player::kSpritePointerOffset -
+                    kEntitySpriteSize)
+        return nullptr;
+    if (!IsMappedDataRange(
+            object,
+            isaac_port::entity_player::kSpritePointerOffset +
+                kEntitySpriteSize,
+            false))
+        return nullptr;
+    const auto sprite = object +
+                        isaac_port::entity_player::kSpritePointerOffset;
+    const bool mapped = IsMappedDataRange(sprite, kEntitySpriteSize, false);
+    return isaac_port::entity_player::GetBorrowedSprite(entity, true, mapped);
+}
+
+extern "C" int LC_Entity_Player__GetBabySkin(void* player) {
+    if (!g_repentance_base || !player)
+        return -1;
+    const auto object = reinterpret_cast<std::uintptr_t>(player);
+    if ((object & (alignof(void*) - 1)) != 0 ||
+        object > static_cast<std::uintptr_t>(-1) -
+                     isaac_port::entity_player::kBabySkinOffset -
+                     sizeof(std::int32_t))
+        return -1;
+    const auto field = object + isaac_port::entity_player::kBabySkinOffset;
+    const bool player_mapped = IsMappedDataRange(object, sizeof(void*), false);
+    const bool field_mapped = IsMappedDataRange(
+        field, sizeof(std::int32_t), false);
+    return isaac_port::entity_player::ReadBabySkin(
+        player, player_mapped, field_mapped);
+}
+
 extern "C" void L_EnableCallback(unsigned int callback_id) {
     if (callback_id == 1)
         g_post_update_enabled = true;
@@ -1639,6 +1761,8 @@ extern "C" void* luaJIT_nx_resolve(const char* name) {
         return reinterpret_cast<void*>(&L_Mod_RemoveData);
     if (name && std::strcmp(name, "LL_Isaac__GetFrameCount") == 0)
         return reinterpret_cast<void*>(&LL_Isaac__GetFrameCount);
+    if (name && std::strcmp(name, "LL_Game__GetRoom") == 0)
+        return reinterpret_cast<void*>(&LL_Game__GetRoom);
     if (name && std::strcmp(name, "LL_Isaac__GetItemIdByName") == 0)
         return reinterpret_cast<void*>(&LL_Isaac__GetItemIdByName);
     if (name && std::strcmp(name, "LL_Isaac__GetTrinketIdByName") == 0)
@@ -1669,6 +1793,10 @@ extern "C" void* luaJIT_nx_resolve(const char* name) {
         return reinterpret_cast<void*>(&LC_Entity_Player__AddCacheFlags);
     if (name && std::strcmp(name, "LC_Entity_Player__EvaluateItems") == 0)
         return reinterpret_cast<void*>(&LC_Entity_Player__EvaluateItems);
+    if (name && std::strcmp(name, "LC_Entity_Player__GetBabySkin") == 0)
+        return reinterpret_cast<void*>(&LC_Entity_Player__GetBabySkin);
+    if (name && std::strcmp(name, "LC_Entity__GetSprite") == 0)
+        return reinterpret_cast<void*>(&LC_Entity__GetSprite);
     if (name && std::strcmp(name, "IsaacPort_ANM2_Create") == 0)
         return reinterpret_cast<void*>(&IsaacPort_ANM2_Create);
     if (name && std::strcmp(name, "IsaacPort_ANM2_Destroy") == 0)

@@ -194,6 +194,18 @@ def generate(output: Path) -> dict:
             "verification_level": "host_only",
         },
         {
+            "name": "host_dss_isolated",
+            "command": "./runtime/tests/dss/test_dss_host.sh",
+            "scope": "exact bundled Repentance Plus DSS sources with minimal recording/fake APIs; reports deterministic first missing leaf or bootstrap success",
+            "verification_level": "host_only",
+        },
+        {
+            "name": "host_chapi_0946_isolated",
+            "command": "./runtime/tests/chapi/test-bootstrap.sh",
+            "scope": "exact bundled Repentance Plus Custom Health API 0.946 sources with recording/fake APIs; no full mod, native pointers, or console claim",
+            "verification_level": "host_only",
+        },
+        {
             "name": "host_persistence",
             "command": "./runtime/tests/test-persistence-host.sh",
             "scope": "LuaJIT + in-memory persistence stub; verifies Lua-facing save/load/remove contract only",
@@ -216,6 +228,42 @@ def generate(output: Path) -> dict:
             "command": "./runtime/tests/test-evaluate-items.sh",
             "scope": "mock opaque Entity_Player pointer; verifies one void EvaluateItems call and mapping guards only",
             "verification_level": "host_only",
+        },
+        {
+            "name": "host_game_get_room",
+            "command": "./runtime/tests/test-game-get-room.sh",
+            "scope": "mock non-owning Room pointer; verifies stable identity, resolver declaration, and Game::_room guard shape",
+            "verification_level": "host_only",
+        },
+        {
+            "name": "static_game_get_room_evidence",
+            "command": "python3 ./runtime/tests/test-game-get-room-evidence.py",
+            "scope": "pinned Repentance.elf BuildID plus four independent ARM64 Game::_room callsite references at +0x21550",
+            "verification_level": "hardware_required",
+        },
+        {
+            "name": "host_get_sprite",
+            "command": "./runtime/tests/test-get-sprite.sh",
+            "scope": "fake Entity buffer; verifies the borrowed embedded ANM2 address at Entity+0x48 and null/mapping guards",
+            "verification_level": "host_only",
+        },
+        {
+            "name": "static_get_sprite_evidence",
+            "command": "python3 ./runtime/tests/test-get-sprite-evidence.py",
+            "scope": "pinned Repentance.nro BuildID and Entity+0x48 evidence; confirms the borrowed wrapper has no destructor",
+            "verification_level": "hardware_required",
+        },
+        {
+            "name": "host_get_baby_skin",
+            "command": "./runtime/tests/test-get-baby-skin.sh",
+            "scope": "fake Entity_Player storage; verifies signed int32 read at Entity_Player+0x20E8 and null/mapping/overflow guards",
+            "verification_level": "host_only",
+        },
+        {
+            "name": "static_get_baby_skin_evidence",
+            "command": "python3 ./runtime/tests/test-get-baby-skin-evidence.py",
+            "scope": "pinned Repentance.nro BuildID plus Init/TriggerNewStage writes and init_baby_skin/InitBabyStats reads at Entity_Player+0x20E8",
+            "verification_level": "hardware_required",
         },
         {
             "name": "hardware_persistence_sentinel",

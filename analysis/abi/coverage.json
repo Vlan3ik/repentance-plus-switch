@@ -961,7 +961,7 @@
       "name": "RNG",
       "runtime": {
         "observed": true,
-        "order": 356
+        "order": 360
       },
       "switch": {
         "confidence": "unknown",
@@ -980,7 +980,7 @@
       "name": "RegisterMod",
       "runtime": {
         "observed": true,
-        "order": 304
+        "order": 308
       },
       "switch": {
         "confidence": "unknown",
@@ -1092,7 +1092,7 @@
       "name": "AddCallback",
       "runtime": {
         "observed": true,
-        "order": 383
+        "order": 387
       },
       "switch": {
         "confidence": "unknown",
@@ -1116,7 +1116,7 @@
       "name": "AddPriorityCallback",
       "runtime": {
         "observed": true,
-        "order": 354
+        "order": 358
       },
       "switch": {
         "confidence": "unknown",
@@ -1192,7 +1192,7 @@
       "name": "DebugString",
       "runtime": {
         "observed": true,
-        "order": 386
+        "order": 390
       },
       "switch": {
         "confidence": "unknown",
@@ -1287,7 +1287,7 @@
       "name": "GetCardIdByName",
       "runtime": {
         "observed": true,
-        "order": 184
+        "order": 188
       },
       "switch": {
         "confidence": "unknown",
@@ -1313,7 +1313,7 @@
       "name": "GetChallenge",
       "runtime": {
         "observed": true,
-        "order": 390
+        "order": 394
       },
       "switch": {
         "confidence": "unknown",
@@ -1332,7 +1332,7 @@
       "name": "GetChallengeIdByName",
       "runtime": {
         "observed": true,
-        "order": 253
+        "order": 257
       },
       "switch": {
         "confidence": "unknown",
@@ -1351,7 +1351,7 @@
       "name": "GetCostumeIdByPath",
       "runtime": {
         "observed": true,
-        "order": 8
+        "order": 12
       },
       "switch": {
         "confidence": "unknown",
@@ -1370,7 +1370,7 @@
       "name": "GetEntityTypeByName",
       "runtime": {
         "observed": true,
-        "order": 185
+        "order": 189
       },
       "switch": {
         "confidence": "unknown",
@@ -1389,7 +1389,7 @@
       "name": "GetEntityVariantByName",
       "runtime": {
         "observed": true,
-        "order": 243
+        "order": 247
       },
       "switch": {
         "confidence": "unknown",
@@ -1503,7 +1503,7 @@
       "name": "GetItemIdByName",
       "runtime": {
         "observed": true,
-        "order": 121
+        "order": 125
       },
       "switch": {
         "confidence": "unknown",
@@ -1522,7 +1522,7 @@
       "name": "GetPillEffectByName",
       "runtime": {
         "observed": true,
-        "order": 249
+        "order": 253
       },
       "switch": {
         "confidence": "unknown",
@@ -1593,7 +1593,7 @@
       "name": "GetPlayer",
       "runtime": {
         "observed": true,
-        "order": 392
+        "order": 402
       },
       "switch": {
         "confidence": "unknown",
@@ -1676,7 +1676,7 @@
       "name": "GetSoundIdByName",
       "runtime": {
         "observed": true,
-        "order": 297
+        "order": 301
       },
       "switch": {
         "confidence": "unknown",
@@ -1695,7 +1695,7 @@
       "name": "GetTrinketIdByName",
       "runtime": {
         "observed": true,
-        "order": 144
+        "order": 148
       },
       "switch": {
         "confidence": "unknown",
@@ -1870,16 +1870,40 @@
       "usage_count": 6
     },
     {
+      "evidence": {
+        "contract": "stable per-entity table identity, value retention, and player isolation",
+        "host_test": "runtime/tests/test-recording-oracle.sh",
+        "isaacscript": [],
+        "zhl": []
+      },
+      "kind": "lua_fixture_contract",
+      "name": "EntityPlayer.GetData",
+      "runtime": {
+        "observed": true,
+        "order": 0,
+        "status": "fixture_satisfied",
+        "verification_level": "host_only"
+      },
+      "switch": {
+        "confidence": "not_applicable",
+        "hardware_required": true,
+        "reason": "Lua wrapper fixture; no native endpoint implemented",
+        "rva": null,
+        "status": "not_claimed"
+      },
+      "usage_count": 748
+    },
+    {
       "classification": "pending",
       "evidence": {
         "isaacscript": [],
         "zhl": []
       },
       "kind": "runtime_frontier_blocker",
-      "name": "Game.GetRoom",
+      "name": "Sprite.IsPlaying",
       "runtime": {
         "observed": true,
-        "order": 397,
+        "order": 408,
         "status": "unsupported"
       },
       "switch": {
@@ -1887,7 +1911,7 @@
         "hardware_required": true,
         "status": "unresolved"
       },
-      "usage_count": 44
+      "usage_count": 18
     },
     {
       "evidence": {
@@ -1912,7 +1936,7 @@
       "name": "EntityPlayer.AddCacheFlags",
       "runtime": {
         "observed": true,
-        "order": 393,
+        "order": 397,
         "status": "host_tested",
         "verification_level": "host_only"
       },
@@ -1923,59 +1947,170 @@
         "status": "unresolved"
       },
       "usage_count": 0
+    },
+    {
+      "evidence": {
+        "host_test": "runtime/tests/test-get-baby-skin.sh",
+        "isaacscript": [
+          {
+            "name": "GetBabySkin",
+            "source": "types/classes/EntityPlayer.d.ts"
+          }
+        ],
+        "static_elf_evidence": "analysis/abi/entity-player-baby-skin-evidence.json",
+        "zhl": []
+      },
+      "kind": "runtime_observed_method",
+      "name": "EntityPlayer.GetBabySkin",
+      "runtime": {
+        "observed": true,
+        "order": 405,
+        "status": "host_tested",
+        "verification_level": "host_only"
+      },
+      "switch": {
+        "confidence": "unknown",
+        "hardware_required": true,
+        "rva": null,
+        "status": "unresolved"
+      },
+      "usage_count": 1
+    },
+    {
+      "evidence": {
+        "host_test": "runtime/tests/test-get-sprite.sh",
+        "isaacscript": [
+          {
+            "name": "GetSprite",
+            "source": "types/classes/Entity.d.ts"
+          },
+          {
+            "name": "GetSprite",
+            "source": "types/classes/GridEntity.d.ts"
+          },
+          {
+            "name": "GetSprite",
+            "source": "types/classes/CostumeSpriteDesc.d.ts"
+          },
+          {
+            "name": "GetSprite",
+            "source": "types/classes/GenericPrompt.d.ts"
+          },
+          {
+            "name": "GetSprite",
+            "source": "types/classes/hud/HUDMessage.d.ts"
+          },
+          {
+            "name": "GetSprite",
+            "source": "types/classes/rendering/Beam.d.ts"
+          }
+        ],
+        "static_elf_evidence": "analysis/abi/entity-get-sprite-evidence.json",
+        "zhl": [
+          {
+            "pattern": "",
+            "signature": "inline ANM2* GetSprite() { return &_sprite; }",
+            "source": "ItemOverlay.zhl",
+            "symbol": "GetSprite"
+          }
+        ]
+      },
+      "kind": "runtime_observed_method",
+      "name": "EntityPlayer.GetSprite",
+      "runtime": {
+        "observed": true,
+        "order": 403,
+        "status": "host_tested",
+        "verification_level": "host_only"
+      },
+      "switch": {
+        "confidence": "unknown",
+        "hardware_required": true,
+        "rva": null,
+        "status": "unresolved"
+      },
+      "usage_count": 85
+    },
+    {
+      "evidence": {
+        "host_test": "runtime/tests/test-game-get-room.sh",
+        "isaacscript": [
+          {
+            "name": "GetRoom",
+            "source": "types/classes/Game.d.ts"
+          },
+          {
+            "name": "GetRoom",
+            "source": "types/mods/MinimapAPI.d.ts"
+          },
+          {
+            "name": "GetRoom",
+            "source": "types/mods/StageAPIInterfaces.d.ts"
+          }
+        ],
+        "static_elf_evidence": "analysis/abi/game-get-room-evidence.json",
+        "zhl": []
+      },
+      "kind": "runtime_observed_method",
+      "name": "Game.GetRoom",
+      "runtime": {
+        "observed": true,
+        "order": 400,
+        "status": "host_tested",
+        "verification_level": "host_only"
+      },
+      "switch": {
+        "confidence": "unknown",
+        "hardware_required": true,
+        "rva": null,
+        "status": "unresolved"
+      },
+      "usage_count": 44
     }
   ],
   "runtime": {
     "blocker": {
-      "args": [
-        "<table>"
-      ],
-      "line": 3570,
-      "name": "Game.GetRoom",
+      "args": [],
+      "line": 3605,
+      "name": "Sprite.IsPlaying",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua"
     },
     "blocker_report": {
-      "args": [
-        "<table>"
-      ],
+      "args": [],
       "classification": "pending",
       "evidence": {
         "operations": [
           {
             "args": [],
             "kind": "call",
-            "line": 2948,
-            "name": "EntityPlayer.EvaluateItems",
-            "seq": 395,
+            "line": 1868,
+            "name": "EntityPlayer.GetBabySkin",
+            "seq": 406,
             "source": "<modroot>/main.lua"
           },
           {
-            "args": [
-              1
-            ],
-            "kind": "callback_probe",
-            "line": 321,
-            "name": "POST_UPDATE",
-            "seq": 396,
-            "source": "...ce-plus-switch/runtime/tests/oracle/recording_oracle.lua"
+            "args": [],
+            "kind": "call",
+            "line": 1870,
+            "name": "EntityPlayer.GetSprite",
+            "seq": 407,
+            "source": "<modroot>/main.lua"
           },
           {
-            "args": [
-              "<table>"
-            ],
+            "args": [],
             "kind": "unsupported",
-            "line": 3570,
-            "name": "Game.GetRoom",
-            "seq": 397,
+            "line": 1872,
+            "name": "Sprite.IsPlaying",
+            "seq": 408,
             "source": "<modroot>/main.lua"
           }
         ],
         "oracle_stage": "post_game_started_then_post_update_minimal_state",
         "verification_level": "host_only"
       },
-      "line": 3570,
-      "name": "Game.GetRoom",
+      "line": 3605,
+      "name": "Sprite.IsPlaying",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua",
       "switch": {
@@ -1985,11 +2120,59 @@
       },
       "usage": {
         "frontier_occurrences": 1,
-        "static_receiver_method_count": 44
+        "static_receiver_method_count": 18
       }
     },
     "oracle_present": true,
     "order": [
+      {
+        "args": [
+          "stable_identity",
+          "retained_value",
+          "player_isolation"
+        ],
+        "kind": "fixture_satisfied",
+        "line": 181,
+        "name": "EntityPlayer.GetData",
+        "seq": 1,
+        "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
+      },
+      {
+        "args": [
+          "stable_identity",
+          "retained_value",
+          "player_isolation"
+        ],
+        "kind": "fixture_satisfied",
+        "line": 183,
+        "name": "EntityPlayer.GetData",
+        "seq": 2,
+        "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
+      },
+      {
+        "args": [
+          "stable_identity",
+          "retained_value",
+          "player_isolation"
+        ],
+        "kind": "fixture_satisfied",
+        "line": 184,
+        "name": "EntityPlayer.GetData",
+        "seq": 3,
+        "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
+      },
+      {
+        "args": [
+          "stable_identity",
+          "retained_value",
+          "player_isolation"
+        ],
+        "kind": "fixture_satisfied",
+        "line": 186,
+        "name": "EntityPlayer.GetData",
+        "seq": 4,
+        "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
+      },
       {
         "args": [
           "Repentance Plus",
@@ -1998,7 +2181,7 @@
         "kind": "register_mod",
         "line": 16,
         "name": "RegisterMod",
-        "seq": 1,
+        "seq": 5,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2006,7 +2189,7 @@
         "kind": "construct",
         "line": 22,
         "name": "RNG",
-        "seq": 2,
+        "seq": 6,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2016,7 +2199,7 @@
         "kind": "call",
         "line": 64,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 3,
+        "seq": 7,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2026,7 +2209,7 @@
         "kind": "call",
         "line": 65,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 4,
+        "seq": 8,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2036,7 +2219,7 @@
         "kind": "call",
         "line": 66,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 5,
+        "seq": 9,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2046,7 +2229,7 @@
         "kind": "call",
         "line": 67,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 6,
+        "seq": 10,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2056,7 +2239,7 @@
         "kind": "call",
         "line": 68,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 7,
+        "seq": 11,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2066,7 +2249,7 @@
         "kind": "call",
         "line": 69,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 8,
+        "seq": 12,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2076,7 +2259,7 @@
         "kind": "call",
         "line": 177,
         "name": "Isaac.GetCostumeIdByPath",
-        "seq": 9,
+        "seq": 13,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2086,7 +2269,7 @@
         "kind": "call",
         "line": 181,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 10,
+        "seq": 14,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2096,7 +2279,7 @@
         "kind": "call",
         "line": 182,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 11,
+        "seq": 15,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2106,7 +2289,7 @@
         "kind": "call",
         "line": 183,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 12,
+        "seq": 16,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2116,7 +2299,7 @@
         "kind": "call",
         "line": 184,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 13,
+        "seq": 17,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2126,7 +2309,7 @@
         "kind": "call",
         "line": 185,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 14,
+        "seq": 18,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2136,7 +2319,7 @@
         "kind": "call",
         "line": 186,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 15,
+        "seq": 19,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2146,7 +2329,7 @@
         "kind": "call",
         "line": 187,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 16,
+        "seq": 20,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2156,7 +2339,7 @@
         "kind": "call",
         "line": 188,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 17,
+        "seq": 21,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2166,7 +2349,7 @@
         "kind": "call",
         "line": 192,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 18,
+        "seq": 22,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2176,7 +2359,7 @@
         "kind": "call",
         "line": 193,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 19,
+        "seq": 23,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2186,7 +2369,7 @@
         "kind": "call",
         "line": 194,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 20,
+        "seq": 24,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2196,7 +2379,7 @@
         "kind": "call",
         "line": 195,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 21,
+        "seq": 25,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2206,7 +2389,7 @@
         "kind": "call",
         "line": 196,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 22,
+        "seq": 26,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2216,7 +2399,7 @@
         "kind": "call",
         "line": 197,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 23,
+        "seq": 27,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2226,7 +2409,7 @@
         "kind": "call",
         "line": 198,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 24,
+        "seq": 28,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2236,7 +2419,7 @@
         "kind": "call",
         "line": 199,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 25,
+        "seq": 29,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2246,7 +2429,7 @@
         "kind": "call",
         "line": 200,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 26,
+        "seq": 30,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2256,7 +2439,7 @@
         "kind": "call",
         "line": 201,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 27,
+        "seq": 31,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2266,7 +2449,7 @@
         "kind": "call",
         "line": 202,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 28,
+        "seq": 32,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2276,7 +2459,7 @@
         "kind": "call",
         "line": 203,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 29,
+        "seq": 33,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2286,7 +2469,7 @@
         "kind": "call",
         "line": 204,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 30,
+        "seq": 34,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2296,7 +2479,7 @@
         "kind": "call",
         "line": 205,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 31,
+        "seq": 35,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2306,7 +2489,7 @@
         "kind": "call",
         "line": 206,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 32,
+        "seq": 36,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2316,7 +2499,7 @@
         "kind": "call",
         "line": 207,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 33,
+        "seq": 37,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2326,7 +2509,7 @@
         "kind": "call",
         "line": 208,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 34,
+        "seq": 38,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2336,7 +2519,7 @@
         "kind": "call",
         "line": 209,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 35,
+        "seq": 39,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2346,7 +2529,7 @@
         "kind": "call",
         "line": 210,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 36,
+        "seq": 40,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2356,7 +2539,7 @@
         "kind": "call",
         "line": 211,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 37,
+        "seq": 41,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2366,7 +2549,7 @@
         "kind": "call",
         "line": 212,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 38,
+        "seq": 42,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2376,7 +2559,7 @@
         "kind": "call",
         "line": 224,
         "name": "Isaac.GetItemIdByName",
-        "seq": 39,
+        "seq": 43,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2386,7 +2569,7 @@
         "kind": "call",
         "line": 225,
         "name": "Isaac.GetItemIdByName",
-        "seq": 40,
+        "seq": 44,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2396,7 +2579,7 @@
         "kind": "call",
         "line": 226,
         "name": "Isaac.GetItemIdByName",
-        "seq": 41,
+        "seq": 45,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2406,7 +2589,7 @@
         "kind": "call",
         "line": 227,
         "name": "Isaac.GetItemIdByName",
-        "seq": 42,
+        "seq": 46,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2416,7 +2599,7 @@
         "kind": "call",
         "line": 228,
         "name": "Isaac.GetItemIdByName",
-        "seq": 43,
+        "seq": 47,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2426,7 +2609,7 @@
         "kind": "call",
         "line": 229,
         "name": "Isaac.GetItemIdByName",
-        "seq": 44,
+        "seq": 48,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2436,7 +2619,7 @@
         "kind": "call",
         "line": 230,
         "name": "Isaac.GetItemIdByName",
-        "seq": 45,
+        "seq": 49,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2446,7 +2629,7 @@
         "kind": "call",
         "line": 231,
         "name": "Isaac.GetItemIdByName",
-        "seq": 46,
+        "seq": 50,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2456,7 +2639,7 @@
         "kind": "call",
         "line": 232,
         "name": "Isaac.GetItemIdByName",
-        "seq": 47,
+        "seq": 51,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2466,7 +2649,7 @@
         "kind": "call",
         "line": 233,
         "name": "Isaac.GetItemIdByName",
-        "seq": 48,
+        "seq": 52,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2476,7 +2659,7 @@
         "kind": "call",
         "line": 234,
         "name": "Isaac.GetItemIdByName",
-        "seq": 49,
+        "seq": 53,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2486,7 +2669,7 @@
         "kind": "call",
         "line": 235,
         "name": "Isaac.GetItemIdByName",
-        "seq": 50,
+        "seq": 54,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2496,7 +2679,7 @@
         "kind": "call",
         "line": 236,
         "name": "Isaac.GetItemIdByName",
-        "seq": 51,
+        "seq": 55,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2506,7 +2689,7 @@
         "kind": "call",
         "line": 237,
         "name": "Isaac.GetItemIdByName",
-        "seq": 52,
+        "seq": 56,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2516,7 +2699,7 @@
         "kind": "call",
         "line": 238,
         "name": "Isaac.GetItemIdByName",
-        "seq": 53,
+        "seq": 57,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2526,7 +2709,7 @@
         "kind": "call",
         "line": 239,
         "name": "Isaac.GetItemIdByName",
-        "seq": 54,
+        "seq": 58,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2536,7 +2719,7 @@
         "kind": "call",
         "line": 240,
         "name": "Isaac.GetItemIdByName",
-        "seq": 55,
+        "seq": 59,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2546,7 +2729,7 @@
         "kind": "call",
         "line": 241,
         "name": "Isaac.GetItemIdByName",
-        "seq": 56,
+        "seq": 60,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2556,7 +2739,7 @@
         "kind": "call",
         "line": 242,
         "name": "Isaac.GetItemIdByName",
-        "seq": 57,
+        "seq": 61,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2566,7 +2749,7 @@
         "kind": "call",
         "line": 243,
         "name": "Isaac.GetItemIdByName",
-        "seq": 58,
+        "seq": 62,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2576,7 +2759,7 @@
         "kind": "call",
         "line": 244,
         "name": "Isaac.GetItemIdByName",
-        "seq": 59,
+        "seq": 63,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2586,7 +2769,7 @@
         "kind": "call",
         "line": 245,
         "name": "Isaac.GetItemIdByName",
-        "seq": 60,
+        "seq": 64,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2596,7 +2779,7 @@
         "kind": "call",
         "line": 246,
         "name": "Isaac.GetItemIdByName",
-        "seq": 61,
+        "seq": 65,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2606,7 +2789,7 @@
         "kind": "call",
         "line": 247,
         "name": "Isaac.GetItemIdByName",
-        "seq": 62,
+        "seq": 66,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2616,7 +2799,7 @@
         "kind": "call",
         "line": 248,
         "name": "Isaac.GetItemIdByName",
-        "seq": 63,
+        "seq": 67,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2626,7 +2809,7 @@
         "kind": "call",
         "line": 249,
         "name": "Isaac.GetItemIdByName",
-        "seq": 64,
+        "seq": 68,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2636,7 +2819,7 @@
         "kind": "call",
         "line": 250,
         "name": "Isaac.GetItemIdByName",
-        "seq": 65,
+        "seq": 69,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2646,7 +2829,7 @@
         "kind": "call",
         "line": 251,
         "name": "Isaac.GetItemIdByName",
-        "seq": 66,
+        "seq": 70,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2656,7 +2839,7 @@
         "kind": "call",
         "line": 252,
         "name": "Isaac.GetItemIdByName",
-        "seq": 67,
+        "seq": 71,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2666,7 +2849,7 @@
         "kind": "call",
         "line": 253,
         "name": "Isaac.GetItemIdByName",
-        "seq": 68,
+        "seq": 72,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2676,7 +2859,7 @@
         "kind": "call",
         "line": 254,
         "name": "Isaac.GetItemIdByName",
-        "seq": 69,
+        "seq": 73,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2686,7 +2869,7 @@
         "kind": "call",
         "line": 255,
         "name": "Isaac.GetItemIdByName",
-        "seq": 70,
+        "seq": 74,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2696,7 +2879,7 @@
         "kind": "call",
         "line": 257,
         "name": "Isaac.GetItemIdByName",
-        "seq": 71,
+        "seq": 75,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2706,7 +2889,7 @@
         "kind": "call",
         "line": 258,
         "name": "Isaac.GetItemIdByName",
-        "seq": 72,
+        "seq": 76,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2716,7 +2899,7 @@
         "kind": "call",
         "line": 259,
         "name": "Isaac.GetItemIdByName",
-        "seq": 73,
+        "seq": 77,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2726,7 +2909,7 @@
         "kind": "call",
         "line": 260,
         "name": "Isaac.GetItemIdByName",
-        "seq": 74,
+        "seq": 78,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2736,7 +2919,7 @@
         "kind": "call",
         "line": 261,
         "name": "Isaac.GetItemIdByName",
-        "seq": 75,
+        "seq": 79,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2746,7 +2929,7 @@
         "kind": "call",
         "line": 262,
         "name": "Isaac.GetItemIdByName",
-        "seq": 76,
+        "seq": 80,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2756,7 +2939,7 @@
         "kind": "call",
         "line": 263,
         "name": "Isaac.GetItemIdByName",
-        "seq": 77,
+        "seq": 81,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2766,7 +2949,7 @@
         "kind": "call",
         "line": 265,
         "name": "Isaac.GetItemIdByName",
-        "seq": 78,
+        "seq": 82,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2776,7 +2959,7 @@
         "kind": "call",
         "line": 266,
         "name": "Isaac.GetItemIdByName",
-        "seq": 79,
+        "seq": 83,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2786,7 +2969,7 @@
         "kind": "call",
         "line": 267,
         "name": "Isaac.GetItemIdByName",
-        "seq": 80,
+        "seq": 84,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2796,7 +2979,7 @@
         "kind": "call",
         "line": 268,
         "name": "Isaac.GetItemIdByName",
-        "seq": 81,
+        "seq": 85,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2806,7 +2989,7 @@
         "kind": "call",
         "line": 269,
         "name": "Isaac.GetItemIdByName",
-        "seq": 82,
+        "seq": 86,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2816,7 +2999,7 @@
         "kind": "call",
         "line": 270,
         "name": "Isaac.GetItemIdByName",
-        "seq": 83,
+        "seq": 87,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2826,7 +3009,7 @@
         "kind": "call",
         "line": 271,
         "name": "Isaac.GetItemIdByName",
-        "seq": 84,
+        "seq": 88,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2836,7 +3019,7 @@
         "kind": "call",
         "line": 272,
         "name": "Isaac.GetItemIdByName",
-        "seq": 85,
+        "seq": 89,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2846,7 +3029,7 @@
         "kind": "call",
         "line": 273,
         "name": "Isaac.GetItemIdByName",
-        "seq": 86,
+        "seq": 90,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2856,7 +3039,7 @@
         "kind": "call",
         "line": 274,
         "name": "Isaac.GetItemIdByName",
-        "seq": 87,
+        "seq": 91,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2866,7 +3049,7 @@
         "kind": "call",
         "line": 275,
         "name": "Isaac.GetItemIdByName",
-        "seq": 88,
+        "seq": 92,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2876,7 +3059,7 @@
         "kind": "call",
         "line": 276,
         "name": "Isaac.GetItemIdByName",
-        "seq": 89,
+        "seq": 93,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2886,7 +3069,7 @@
         "kind": "call",
         "line": 277,
         "name": "Isaac.GetItemIdByName",
-        "seq": 90,
+        "seq": 94,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2896,7 +3079,7 @@
         "kind": "call",
         "line": 278,
         "name": "Isaac.GetItemIdByName",
-        "seq": 91,
+        "seq": 95,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2906,7 +3089,7 @@
         "kind": "call",
         "line": 279,
         "name": "Isaac.GetItemIdByName",
-        "seq": 92,
+        "seq": 96,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2916,7 +3099,7 @@
         "kind": "call",
         "line": 280,
         "name": "Isaac.GetItemIdByName",
-        "seq": 93,
+        "seq": 97,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2926,7 +3109,7 @@
         "kind": "call",
         "line": 281,
         "name": "Isaac.GetItemIdByName",
-        "seq": 94,
+        "seq": 98,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2936,7 +3119,7 @@
         "kind": "call",
         "line": 282,
         "name": "Isaac.GetItemIdByName",
-        "seq": 95,
+        "seq": 99,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2946,7 +3129,7 @@
         "kind": "call",
         "line": 283,
         "name": "Isaac.GetItemIdByName",
-        "seq": 96,
+        "seq": 100,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2956,7 +3139,7 @@
         "kind": "call",
         "line": 284,
         "name": "Isaac.GetItemIdByName",
-        "seq": 97,
+        "seq": 101,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2966,7 +3149,7 @@
         "kind": "call",
         "line": 285,
         "name": "Isaac.GetItemIdByName",
-        "seq": 98,
+        "seq": 102,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2976,7 +3159,7 @@
         "kind": "call",
         "line": 286,
         "name": "Isaac.GetItemIdByName",
-        "seq": 99,
+        "seq": 103,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2986,7 +3169,7 @@
         "kind": "call",
         "line": 287,
         "name": "Isaac.GetItemIdByName",
-        "seq": 100,
+        "seq": 104,
         "source": "<modroot>/main.lua"
       },
       {
@@ -2996,7 +3179,7 @@
         "kind": "call",
         "line": 289,
         "name": "Isaac.GetItemIdByName",
-        "seq": 101,
+        "seq": 105,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3006,7 +3189,7 @@
         "kind": "call",
         "line": 290,
         "name": "Isaac.GetItemIdByName",
-        "seq": 102,
+        "seq": 106,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3016,7 +3199,7 @@
         "kind": "call",
         "line": 291,
         "name": "Isaac.GetItemIdByName",
-        "seq": 103,
+        "seq": 107,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3026,7 +3209,7 @@
         "kind": "call",
         "line": 292,
         "name": "Isaac.GetItemIdByName",
-        "seq": 104,
+        "seq": 108,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3036,7 +3219,7 @@
         "kind": "call",
         "line": 293,
         "name": "Isaac.GetItemIdByName",
-        "seq": 105,
+        "seq": 109,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3046,7 +3229,7 @@
         "kind": "call",
         "line": 294,
         "name": "Isaac.GetItemIdByName",
-        "seq": 106,
+        "seq": 110,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3056,7 +3239,7 @@
         "kind": "call",
         "line": 295,
         "name": "Isaac.GetItemIdByName",
-        "seq": 107,
+        "seq": 111,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3066,7 +3249,7 @@
         "kind": "call",
         "line": 296,
         "name": "Isaac.GetItemIdByName",
-        "seq": 108,
+        "seq": 112,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3076,7 +3259,7 @@
         "kind": "call",
         "line": 299,
         "name": "Isaac.GetItemIdByName",
-        "seq": 109,
+        "seq": 113,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3086,7 +3269,7 @@
         "kind": "call",
         "line": 300,
         "name": "Isaac.GetItemIdByName",
-        "seq": 110,
+        "seq": 114,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3096,7 +3279,7 @@
         "kind": "call",
         "line": 301,
         "name": "Isaac.GetItemIdByName",
-        "seq": 111,
+        "seq": 115,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3106,7 +3289,7 @@
         "kind": "call",
         "line": 302,
         "name": "Isaac.GetItemIdByName",
-        "seq": 112,
+        "seq": 116,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3116,7 +3299,7 @@
         "kind": "call",
         "line": 303,
         "name": "Isaac.GetItemIdByName",
-        "seq": 113,
+        "seq": 117,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3126,7 +3309,7 @@
         "kind": "call",
         "line": 304,
         "name": "Isaac.GetItemIdByName",
-        "seq": 114,
+        "seq": 118,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3136,7 +3319,7 @@
         "kind": "call",
         "line": 305,
         "name": "Isaac.GetItemIdByName",
-        "seq": 115,
+        "seq": 119,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3146,7 +3329,7 @@
         "kind": "call",
         "line": 306,
         "name": "Isaac.GetItemIdByName",
-        "seq": 116,
+        "seq": 120,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3156,7 +3339,7 @@
         "kind": "call",
         "line": 307,
         "name": "Isaac.GetItemIdByName",
-        "seq": 117,
+        "seq": 121,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3166,7 +3349,7 @@
         "kind": "call",
         "line": 308,
         "name": "Isaac.GetItemIdByName",
-        "seq": 118,
+        "seq": 122,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3176,7 +3359,7 @@
         "kind": "call",
         "line": 309,
         "name": "Isaac.GetItemIdByName",
-        "seq": 119,
+        "seq": 123,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3186,7 +3369,7 @@
         "kind": "call",
         "line": 310,
         "name": "Isaac.GetItemIdByName",
-        "seq": 120,
+        "seq": 124,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3196,7 +3379,7 @@
         "kind": "call",
         "line": 311,
         "name": "Isaac.GetItemIdByName",
-        "seq": 121,
+        "seq": 125,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3206,7 +3389,7 @@
         "kind": "call",
         "line": 312,
         "name": "Isaac.GetItemIdByName",
-        "seq": 122,
+        "seq": 126,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3216,7 +3399,7 @@
         "kind": "call",
         "line": 354,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 123,
+        "seq": 127,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3226,7 +3409,7 @@
         "kind": "call",
         "line": 355,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 124,
+        "seq": 128,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3236,7 +3419,7 @@
         "kind": "call",
         "line": 356,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 125,
+        "seq": 129,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3246,7 +3429,7 @@
         "kind": "call",
         "line": 357,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 126,
+        "seq": 130,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3256,7 +3439,7 @@
         "kind": "call",
         "line": 358,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 127,
+        "seq": 131,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3266,7 +3449,7 @@
         "kind": "call",
         "line": 359,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 128,
+        "seq": 132,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3276,7 +3459,7 @@
         "kind": "call",
         "line": 360,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 129,
+        "seq": 133,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3286,7 +3469,7 @@
         "kind": "call",
         "line": 361,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 130,
+        "seq": 134,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3296,7 +3479,7 @@
         "kind": "call",
         "line": 362,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 131,
+        "seq": 135,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3306,7 +3489,7 @@
         "kind": "call",
         "line": 363,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 132,
+        "seq": 136,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3316,7 +3499,7 @@
         "kind": "call",
         "line": 364,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 133,
+        "seq": 137,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3326,7 +3509,7 @@
         "kind": "call",
         "line": 365,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 134,
+        "seq": 138,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3336,7 +3519,7 @@
         "kind": "call",
         "line": 366,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 135,
+        "seq": 139,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3346,7 +3529,7 @@
         "kind": "call",
         "line": 367,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 136,
+        "seq": 140,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3356,7 +3539,7 @@
         "kind": "call",
         "line": 368,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 137,
+        "seq": 141,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3366,7 +3549,7 @@
         "kind": "call",
         "line": 369,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 138,
+        "seq": 142,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3376,7 +3559,7 @@
         "kind": "call",
         "line": 370,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 139,
+        "seq": 143,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3386,7 +3569,7 @@
         "kind": "call",
         "line": 371,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 140,
+        "seq": 144,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3396,7 +3579,7 @@
         "kind": "call",
         "line": 372,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 141,
+        "seq": 145,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3406,7 +3589,7 @@
         "kind": "call",
         "line": 375,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 142,
+        "seq": 146,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3416,7 +3599,7 @@
         "kind": "call",
         "line": 376,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 143,
+        "seq": 147,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3426,7 +3609,7 @@
         "kind": "call",
         "line": 377,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 144,
+        "seq": 148,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3436,7 +3619,7 @@
         "kind": "call",
         "line": 378,
         "name": "Isaac.GetTrinketIdByName",
-        "seq": 145,
+        "seq": 149,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3446,7 +3629,7 @@
         "kind": "call",
         "line": 383,
         "name": "Isaac.GetCardIdByName",
-        "seq": 146,
+        "seq": 150,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3456,7 +3639,7 @@
         "kind": "call",
         "line": 384,
         "name": "Isaac.GetCardIdByName",
-        "seq": 147,
+        "seq": 151,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3466,7 +3649,7 @@
         "kind": "call",
         "line": 385,
         "name": "Isaac.GetCardIdByName",
-        "seq": 148,
+        "seq": 152,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3476,7 +3659,7 @@
         "kind": "call",
         "line": 386,
         "name": "Isaac.GetCardIdByName",
-        "seq": 149,
+        "seq": 153,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3486,7 +3669,7 @@
         "kind": "call",
         "line": 387,
         "name": "Isaac.GetCardIdByName",
-        "seq": 150,
+        "seq": 154,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3496,7 +3679,7 @@
         "kind": "call",
         "line": 388,
         "name": "Isaac.GetCardIdByName",
-        "seq": 151,
+        "seq": 155,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3506,7 +3689,7 @@
         "kind": "call",
         "line": 389,
         "name": "Isaac.GetCardIdByName",
-        "seq": 152,
+        "seq": 156,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3516,7 +3699,7 @@
         "kind": "call",
         "line": 390,
         "name": "Isaac.GetCardIdByName",
-        "seq": 153,
+        "seq": 157,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3526,7 +3709,7 @@
         "kind": "call",
         "line": 391,
         "name": "Isaac.GetCardIdByName",
-        "seq": 154,
+        "seq": 158,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3536,7 +3719,7 @@
         "kind": "call",
         "line": 392,
         "name": "Isaac.GetCardIdByName",
-        "seq": 155,
+        "seq": 159,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3546,7 +3729,7 @@
         "kind": "call",
         "line": 393,
         "name": "Isaac.GetCardIdByName",
-        "seq": 156,
+        "seq": 160,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3556,7 +3739,7 @@
         "kind": "call",
         "line": 394,
         "name": "Isaac.GetCardIdByName",
-        "seq": 157,
+        "seq": 161,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3566,7 +3749,7 @@
         "kind": "call",
         "line": 395,
         "name": "Isaac.GetCardIdByName",
-        "seq": 158,
+        "seq": 162,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3576,7 +3759,7 @@
         "kind": "call",
         "line": 396,
         "name": "Isaac.GetCardIdByName",
-        "seq": 159,
+        "seq": 163,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3586,7 +3769,7 @@
         "kind": "call",
         "line": 397,
         "name": "Isaac.GetCardIdByName",
-        "seq": 160,
+        "seq": 164,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3596,7 +3779,7 @@
         "kind": "call",
         "line": 398,
         "name": "Isaac.GetCardIdByName",
-        "seq": 161,
+        "seq": 165,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3606,7 +3789,7 @@
         "kind": "call",
         "line": 399,
         "name": "Isaac.GetCardIdByName",
-        "seq": 162,
+        "seq": 166,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3616,7 +3799,7 @@
         "kind": "call",
         "line": 400,
         "name": "Isaac.GetCardIdByName",
-        "seq": 163,
+        "seq": 167,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3626,7 +3809,7 @@
         "kind": "call",
         "line": 401,
         "name": "Isaac.GetCardIdByName",
-        "seq": 164,
+        "seq": 168,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3636,7 +3819,7 @@
         "kind": "call",
         "line": 402,
         "name": "Isaac.GetCardIdByName",
-        "seq": 165,
+        "seq": 169,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3646,7 +3829,7 @@
         "kind": "call",
         "line": 403,
         "name": "Isaac.GetCardIdByName",
-        "seq": 166,
+        "seq": 170,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3656,7 +3839,7 @@
         "kind": "call",
         "line": 404,
         "name": "Isaac.GetCardIdByName",
-        "seq": 167,
+        "seq": 171,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3666,7 +3849,7 @@
         "kind": "call",
         "line": 405,
         "name": "Isaac.GetCardIdByName",
-        "seq": 168,
+        "seq": 172,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3676,7 +3859,7 @@
         "kind": "call",
         "line": 406,
         "name": "Isaac.GetCardIdByName",
-        "seq": 169,
+        "seq": 173,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3686,7 +3869,7 @@
         "kind": "call",
         "line": 407,
         "name": "Isaac.GetCardIdByName",
-        "seq": 170,
+        "seq": 174,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3696,7 +3879,7 @@
         "kind": "call",
         "line": 408,
         "name": "Isaac.GetCardIdByName",
-        "seq": 171,
+        "seq": 175,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3706,7 +3889,7 @@
         "kind": "call",
         "line": 409,
         "name": "Isaac.GetCardIdByName",
-        "seq": 172,
+        "seq": 176,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3716,7 +3899,7 @@
         "kind": "call",
         "line": 410,
         "name": "Isaac.GetCardIdByName",
-        "seq": 173,
+        "seq": 177,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3726,7 +3909,7 @@
         "kind": "call",
         "line": 411,
         "name": "Isaac.GetCardIdByName",
-        "seq": 174,
+        "seq": 178,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3736,7 +3919,7 @@
         "kind": "call",
         "line": 412,
         "name": "Isaac.GetCardIdByName",
-        "seq": 175,
+        "seq": 179,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3746,7 +3929,7 @@
         "kind": "call",
         "line": 413,
         "name": "Isaac.GetCardIdByName",
-        "seq": 176,
+        "seq": 180,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3756,7 +3939,7 @@
         "kind": "call",
         "line": 415,
         "name": "Isaac.GetCardIdByName",
-        "seq": 177,
+        "seq": 181,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3766,7 +3949,7 @@
         "kind": "call",
         "line": 416,
         "name": "Isaac.GetCardIdByName",
-        "seq": 178,
+        "seq": 182,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3776,7 +3959,7 @@
         "kind": "call",
         "line": 417,
         "name": "Isaac.GetCardIdByName",
-        "seq": 179,
+        "seq": 183,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3786,7 +3969,7 @@
         "kind": "call",
         "line": 418,
         "name": "Isaac.GetCardIdByName",
-        "seq": 180,
+        "seq": 184,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3796,7 +3979,7 @@
         "kind": "call",
         "line": 419,
         "name": "Isaac.GetCardIdByName",
-        "seq": 181,
+        "seq": 185,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3806,7 +3989,7 @@
         "kind": "call",
         "line": 420,
         "name": "Isaac.GetCardIdByName",
-        "seq": 182,
+        "seq": 186,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3816,7 +3999,7 @@
         "kind": "call",
         "line": 421,
         "name": "Isaac.GetCardIdByName",
-        "seq": 183,
+        "seq": 187,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3826,7 +4009,7 @@
         "kind": "call",
         "line": 424,
         "name": "Isaac.GetCardIdByName",
-        "seq": 184,
+        "seq": 188,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3836,7 +4019,7 @@
         "kind": "call",
         "line": 425,
         "name": "Isaac.GetCardIdByName",
-        "seq": 185,
+        "seq": 189,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3846,7 +4029,7 @@
         "kind": "call",
         "line": 432,
         "name": "Isaac.GetEntityTypeByName",
-        "seq": 186,
+        "seq": 190,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3856,7 +4039,7 @@
         "kind": "call",
         "line": 457,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 187,
+        "seq": 191,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3866,7 +4049,7 @@
         "kind": "call",
         "line": 458,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 188,
+        "seq": 192,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3876,7 +4059,7 @@
         "kind": "call",
         "line": 459,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 189,
+        "seq": 193,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3886,7 +4069,7 @@
         "kind": "call",
         "line": 460,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 190,
+        "seq": 194,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3896,7 +4079,7 @@
         "kind": "call",
         "line": 461,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 191,
+        "seq": 195,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3906,7 +4089,7 @@
         "kind": "call",
         "line": 462,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 192,
+        "seq": 196,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3916,7 +4099,7 @@
         "kind": "call",
         "line": 463,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 193,
+        "seq": 197,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3926,7 +4109,7 @@
         "kind": "call",
         "line": 465,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 194,
+        "seq": 198,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3936,7 +4119,7 @@
         "kind": "call",
         "line": 466,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 195,
+        "seq": 199,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3946,7 +4129,7 @@
         "kind": "call",
         "line": 467,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 196,
+        "seq": 200,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3956,7 +4139,7 @@
         "kind": "call",
         "line": 468,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 197,
+        "seq": 201,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3966,7 +4149,7 @@
         "kind": "call",
         "line": 469,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 198,
+        "seq": 202,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3976,7 +4159,7 @@
         "kind": "call",
         "line": 470,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 199,
+        "seq": 203,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3986,7 +4169,7 @@
         "kind": "call",
         "line": 471,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 200,
+        "seq": 204,
         "source": "<modroot>/main.lua"
       },
       {
@@ -3996,7 +4179,7 @@
         "kind": "call",
         "line": 472,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 201,
+        "seq": 205,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4006,7 +4189,7 @@
         "kind": "call",
         "line": 473,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 202,
+        "seq": 206,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4016,7 +4199,7 @@
         "kind": "call",
         "line": 474,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 203,
+        "seq": 207,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4026,7 +4209,7 @@
         "kind": "call",
         "line": 475,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 204,
+        "seq": 208,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4036,7 +4219,7 @@
         "kind": "call",
         "line": 476,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 205,
+        "seq": 209,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4046,7 +4229,7 @@
         "kind": "call",
         "line": 478,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 206,
+        "seq": 210,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4056,7 +4239,7 @@
         "kind": "call",
         "line": 479,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 207,
+        "seq": 211,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4066,7 +4249,7 @@
         "kind": "call",
         "line": 480,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 208,
+        "seq": 212,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4076,7 +4259,7 @@
         "kind": "call",
         "line": 481,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 209,
+        "seq": 213,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4086,7 +4269,7 @@
         "kind": "call",
         "line": 482,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 210,
+        "seq": 214,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4096,7 +4279,7 @@
         "kind": "call",
         "line": 483,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 211,
+        "seq": 215,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4106,7 +4289,7 @@
         "kind": "call",
         "line": 484,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 212,
+        "seq": 216,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4116,7 +4299,7 @@
         "kind": "call",
         "line": 485,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 213,
+        "seq": 217,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4126,7 +4309,7 @@
         "kind": "call",
         "line": 487,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 214,
+        "seq": 218,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4136,7 +4319,7 @@
         "kind": "call",
         "line": 488,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 215,
+        "seq": 219,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4146,7 +4329,7 @@
         "kind": "call",
         "line": 489,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 216,
+        "seq": 220,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4156,7 +4339,7 @@
         "kind": "call",
         "line": 490,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 217,
+        "seq": 221,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4166,7 +4349,7 @@
         "kind": "call",
         "line": 491,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 218,
+        "seq": 222,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4176,7 +4359,7 @@
         "kind": "call",
         "line": 492,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 219,
+        "seq": 223,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4186,7 +4369,7 @@
         "kind": "call",
         "line": 493,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 220,
+        "seq": 224,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4196,7 +4379,7 @@
         "kind": "call",
         "line": 494,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 221,
+        "seq": 225,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4206,7 +4389,7 @@
         "kind": "call",
         "line": 495,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 222,
+        "seq": 226,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4216,7 +4399,7 @@
         "kind": "call",
         "line": 496,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 223,
+        "seq": 227,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4226,7 +4409,7 @@
         "kind": "call",
         "line": 497,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 224,
+        "seq": 228,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4236,7 +4419,7 @@
         "kind": "call",
         "line": 499,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 225,
+        "seq": 229,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4246,7 +4429,7 @@
         "kind": "call",
         "line": 500,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 226,
+        "seq": 230,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4256,7 +4439,7 @@
         "kind": "call",
         "line": 501,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 227,
+        "seq": 231,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4266,7 +4449,7 @@
         "kind": "call",
         "line": 502,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 228,
+        "seq": 232,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4276,7 +4459,7 @@
         "kind": "call",
         "line": 503,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 229,
+        "seq": 233,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4286,7 +4469,7 @@
         "kind": "call",
         "line": 504,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 230,
+        "seq": 234,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4296,7 +4479,7 @@
         "kind": "call",
         "line": 505,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 231,
+        "seq": 235,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4306,7 +4489,7 @@
         "kind": "call",
         "line": 506,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 232,
+        "seq": 236,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4316,7 +4499,7 @@
         "kind": "call",
         "line": 507,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 233,
+        "seq": 237,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4326,7 +4509,7 @@
         "kind": "call",
         "line": 508,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 234,
+        "seq": 238,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4336,7 +4519,7 @@
         "kind": "call",
         "line": 509,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 235,
+        "seq": 239,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4346,7 +4529,7 @@
         "kind": "call",
         "line": 510,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 236,
+        "seq": 240,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4356,7 +4539,7 @@
         "kind": "call",
         "line": 511,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 237,
+        "seq": 241,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4366,7 +4549,7 @@
         "kind": "call",
         "line": 512,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 238,
+        "seq": 242,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4376,7 +4559,7 @@
         "kind": "call",
         "line": 549,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 239,
+        "seq": 243,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4386,7 +4569,7 @@
         "kind": "call",
         "line": 550,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 240,
+        "seq": 244,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4396,7 +4579,7 @@
         "kind": "call",
         "line": 551,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 241,
+        "seq": 245,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4406,7 +4589,7 @@
         "kind": "call",
         "line": 552,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 242,
+        "seq": 246,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4416,7 +4599,7 @@
         "kind": "call",
         "line": 581,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 243,
+        "seq": 247,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4426,7 +4609,7 @@
         "kind": "call",
         "line": 582,
         "name": "Isaac.GetEntityVariantByName",
-        "seq": 244,
+        "seq": 248,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4436,7 +4619,7 @@
         "kind": "call",
         "line": 587,
         "name": "Isaac.GetPillEffectByName",
-        "seq": 245,
+        "seq": 249,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4446,7 +4629,7 @@
         "kind": "call",
         "line": 588,
         "name": "Isaac.GetPillEffectByName",
-        "seq": 246,
+        "seq": 250,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4456,7 +4639,7 @@
         "kind": "call",
         "line": 589,
         "name": "Isaac.GetPillEffectByName",
-        "seq": 247,
+        "seq": 251,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4466,7 +4649,7 @@
         "kind": "call",
         "line": 590,
         "name": "Isaac.GetPillEffectByName",
-        "seq": 248,
+        "seq": 252,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4476,7 +4659,7 @@
         "kind": "call",
         "line": 591,
         "name": "Isaac.GetPillEffectByName",
-        "seq": 249,
+        "seq": 253,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4486,7 +4669,7 @@
         "kind": "call",
         "line": 592,
         "name": "Isaac.GetPillEffectByName",
-        "seq": 250,
+        "seq": 254,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4496,7 +4679,7 @@
         "kind": "call",
         "line": 911,
         "name": "Isaac.GetChallengeIdByName",
-        "seq": 251,
+        "seq": 255,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4506,7 +4689,7 @@
         "kind": "call",
         "line": 912,
         "name": "Isaac.GetChallengeIdByName",
-        "seq": 252,
+        "seq": 256,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4516,7 +4699,7 @@
         "kind": "call",
         "line": 913,
         "name": "Isaac.GetChallengeIdByName",
-        "seq": 253,
+        "seq": 257,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4526,7 +4709,7 @@
         "kind": "call",
         "line": 914,
         "name": "Isaac.GetChallengeIdByName",
-        "seq": 254,
+        "seq": 258,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4536,7 +4719,7 @@
         "kind": "register_callback",
         "line": 2962,
         "name": "Mod.AddCallback",
-        "seq": 255,
+        "seq": 259,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4546,7 +4729,7 @@
         "kind": "register_callback",
         "line": 2973,
         "name": "Mod.AddCallback",
-        "seq": 256,
+        "seq": 260,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4556,7 +4739,7 @@
         "kind": "register_callback",
         "line": 3002,
         "name": "Mod.AddCallback",
-        "seq": 257,
+        "seq": 261,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4566,7 +4749,7 @@
         "kind": "register_callback",
         "line": 3060,
         "name": "Mod.AddCallback",
-        "seq": 258,
+        "seq": 262,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4576,7 +4759,7 @@
         "kind": "register_callback",
         "line": 3144,
         "name": "Mod.AddCallback",
-        "seq": 259,
+        "seq": 263,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4586,7 +4769,7 @@
         "kind": "register_callback",
         "line": 3564,
         "name": "Mod.AddCallback",
-        "seq": 260,
+        "seq": 264,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4596,7 +4779,7 @@
         "kind": "register_callback",
         "line": 4022,
         "name": "Mod.AddCallback",
-        "seq": 261,
+        "seq": 265,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4606,7 +4789,7 @@
         "kind": "register_callback",
         "line": 4543,
         "name": "Mod.AddCallback",
-        "seq": 262,
+        "seq": 266,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4616,7 +4799,7 @@
         "kind": "register_callback",
         "line": 5033,
         "name": "Mod.AddCallback",
-        "seq": 263,
+        "seq": 267,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4626,7 +4809,7 @@
         "kind": "register_callback",
         "line": 5263,
         "name": "Mod.AddCallback",
-        "seq": 264,
+        "seq": 268,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4636,7 +4819,7 @@
         "kind": "register_callback",
         "line": 5325,
         "name": "Mod.AddCallback",
-        "seq": 265,
+        "seq": 269,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4647,7 +4830,7 @@
         "kind": "register_callback",
         "line": 5795,
         "name": "Mod.AddCallback",
-        "seq": 266,
+        "seq": 270,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4657,7 +4840,7 @@
         "kind": "register_callback",
         "line": 5906,
         "name": "Mod.AddCallback",
-        "seq": 267,
+        "seq": 271,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4667,7 +4850,7 @@
         "kind": "register_callback",
         "line": 6132,
         "name": "Mod.AddCallback",
-        "seq": 268,
+        "seq": 272,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4677,7 +4860,7 @@
         "kind": "register_callback",
         "line": 6151,
         "name": "Mod.AddCallback",
-        "seq": 269,
+        "seq": 273,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4687,7 +4870,7 @@
         "kind": "register_callback",
         "line": 6203,
         "name": "Mod.AddCallback",
-        "seq": 270,
+        "seq": 274,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4697,7 +4880,7 @@
         "kind": "register_callback",
         "line": 6235,
         "name": "Mod.AddCallback",
-        "seq": 271,
+        "seq": 275,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4707,7 +4890,7 @@
         "kind": "register_callback",
         "line": 6378,
         "name": "Mod.AddCallback",
-        "seq": 272,
+        "seq": 276,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4717,7 +4900,7 @@
         "kind": "register_callback",
         "line": 6432,
         "name": "Mod.AddCallback",
-        "seq": 273,
+        "seq": 277,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4727,7 +4910,7 @@
         "kind": "register_callback",
         "line": 6638,
         "name": "Mod.AddCallback",
-        "seq": 274,
+        "seq": 278,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4737,7 +4920,7 @@
         "kind": "register_callback",
         "line": 6853,
         "name": "Mod.AddCallback",
-        "seq": 275,
+        "seq": 279,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4747,7 +4930,7 @@
         "kind": "register_callback",
         "line": 6952,
         "name": "Mod.AddCallback",
-        "seq": 276,
+        "seq": 280,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4757,7 +4940,7 @@
         "kind": "register_callback",
         "line": 6992,
         "name": "Mod.AddCallback",
-        "seq": 277,
+        "seq": 281,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4767,7 +4950,7 @@
         "kind": "register_callback",
         "line": 7046,
         "name": "Mod.AddCallback",
-        "seq": 278,
+        "seq": 282,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4777,7 +4960,7 @@
         "kind": "register_callback",
         "line": 7086,
         "name": "Mod.AddCallback",
-        "seq": 279,
+        "seq": 283,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4787,7 +4970,7 @@
         "kind": "register_callback",
         "line": 7108,
         "name": "Mod.AddCallback",
-        "seq": 280,
+        "seq": 284,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4797,7 +4980,7 @@
         "kind": "register_callback",
         "line": 7348,
         "name": "Mod.AddCallback",
-        "seq": 281,
+        "seq": 285,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4807,7 +4990,7 @@
         "kind": "register_callback",
         "line": 7415,
         "name": "Mod.AddCallback",
-        "seq": 282,
+        "seq": 286,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4817,7 +5000,7 @@
         "kind": "register_callback",
         "line": 8102,
         "name": "Mod.AddCallback",
-        "seq": 283,
+        "seq": 287,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4827,7 +5010,7 @@
         "kind": "register_callback",
         "line": 8144,
         "name": "Mod.AddCallback",
-        "seq": 284,
+        "seq": 288,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4837,7 +5020,7 @@
         "kind": "register_callback",
         "line": 8179,
         "name": "Mod.AddCallback",
-        "seq": 285,
+        "seq": 289,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4847,7 +5030,7 @@
         "kind": "register_callback",
         "line": 8195,
         "name": "Mod.AddCallback",
-        "seq": 286,
+        "seq": 290,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4857,7 +5040,7 @@
         "kind": "register_callback",
         "line": 8245,
         "name": "Mod.AddCallback",
-        "seq": 287,
+        "seq": 291,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4867,7 +5050,7 @@
         "kind": "register_callback",
         "line": 8444,
         "name": "Mod.AddCallback",
-        "seq": 288,
+        "seq": 292,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4877,7 +5060,7 @@
         "kind": "register_callback",
         "line": 8499,
         "name": "Mod.AddCallback",
-        "seq": 289,
+        "seq": 293,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4887,7 +5070,7 @@
         "kind": "register_callback",
         "line": 8721,
         "name": "Mod.AddCallback",
-        "seq": 290,
+        "seq": 294,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4898,7 +5081,7 @@
         "kind": "register_callback",
         "line": 8734,
         "name": "Mod.AddCallback",
-        "seq": 291,
+        "seq": 295,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4909,7 +5092,7 @@
         "kind": "register_callback",
         "line": 8754,
         "name": "Mod.AddCallback",
-        "seq": 292,
+        "seq": 296,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4920,7 +5103,7 @@
         "kind": "register_callback",
         "line": 8813,
         "name": "Mod.AddCallback",
-        "seq": 293,
+        "seq": 297,
         "source": "<modroot>/main.lua"
       },
       {
@@ -4931,8 +5114,8 @@
         "kind": "register_mod",
         "line": 3,
         "name": "RegisterMod",
-        "seq": 294,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/dssmenucore.lua"
+        "seq": 298,
+        "source": "<modroot>/scripts/dssmenucore.lua"
       },
       {
         "args": [
@@ -4941,8 +5124,8 @@
         "kind": "call",
         "line": 73,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 295,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/dssmenucore.lua"
+        "seq": 299,
+        "source": "<modroot>/scripts/dssmenucore.lua"
       },
       {
         "args": [
@@ -4951,8 +5134,8 @@
         "kind": "call",
         "line": 74,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 296,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/dssmenucore.lua"
+        "seq": 300,
+        "source": "<modroot>/scripts/dssmenucore.lua"
       },
       {
         "args": [
@@ -4961,8 +5144,8 @@
         "kind": "call",
         "line": 75,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 297,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/dssmenucore.lua"
+        "seq": 301,
+        "source": "<modroot>/scripts/dssmenucore.lua"
       },
       {
         "args": [
@@ -4971,8 +5154,8 @@
         "kind": "call",
         "line": 76,
         "name": "Isaac.GetSoundIdByName",
-        "seq": 298,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/dssmenucore.lua"
+        "seq": 302,
+        "source": "<modroot>/scripts/dssmenucore.lua"
       },
       {
         "args": [
@@ -4981,8 +5164,8 @@
         "kind": "register_callback",
         "line": 2029,
         "name": "Mod.AddCallback",
-        "seq": 299,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/dssmenucore.lua"
+        "seq": 303,
+        "source": "<modroot>/scripts/dssmenucore.lua"
       },
       {
         "args": [
@@ -4991,8 +5174,8 @@
         "kind": "register_callback",
         "line": 2959,
         "name": "Mod.AddCallback",
-        "seq": 300,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/dssmenucore.lua"
+        "seq": 304,
+        "source": "<modroot>/scripts/dssmenucore.lua"
       },
       {
         "args": [
@@ -5001,8 +5184,8 @@
         "kind": "register_callback",
         "line": 2980,
         "name": "Mod.AddCallback",
-        "seq": 301,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/dssmenucore.lua"
+        "seq": 305,
+        "source": "<modroot>/scripts/dssmenucore.lua"
       },
       {
         "args": [
@@ -5011,8 +5194,8 @@
         "kind": "register_callback",
         "line": 2991,
         "name": "Mod.AddCallback",
-        "seq": 302,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/dssmenucore.lua"
+        "seq": 306,
+        "source": "<modroot>/scripts/dssmenucore.lua"
       },
       {
         "args": [
@@ -5021,8 +5204,8 @@
         "kind": "register_callback",
         "line": 2998,
         "name": "Mod.AddCallback",
-        "seq": 303,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/dssmenucore.lua"
+        "seq": 307,
+        "source": "<modroot>/scripts/dssmenucore.lua"
       },
       {
         "args": [
@@ -5031,8 +5214,8 @@
         "kind": "register_callback",
         "line": 3052,
         "name": "Mod.AddCallback",
-        "seq": 304,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/dssmenucore.lua"
+        "seq": 308,
+        "source": "<modroot>/scripts/dssmenucore.lua"
       },
       {
         "args": [
@@ -5042,8 +5225,8 @@
         "kind": "register_mod",
         "line": 65,
         "name": "RegisterMod",
-        "seq": 305,
-        "source": "...Ñ/isaac/repentanceplus/scripts/customhealthapi/core.lua"
+        "seq": 309,
+        "source": "<modroot>/scripts/customhealthapi/core.lua"
       },
       {
         "args": [
@@ -5054,8 +5237,8 @@
         "kind": "register_callback",
         "line": 2,
         "name": "Mod.AddPriorityCallback",
-        "seq": 306,
-        "source": "...eplus/scripts/customhealthapi/reimpl/actives/clicker.lua"
+        "seq": 310,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/actives/clicker.lua"
       },
       {
         "args": [
@@ -5066,8 +5249,8 @@
         "kind": "register_callback",
         "line": 20,
         "name": "Mod.AddPriorityCallback",
-        "seq": 307,
-        "source": "...eplus/scripts/customhealthapi/reimpl/actives/clicker.lua"
+        "seq": 311,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/actives/clicker.lua"
       },
       {
         "args": [
@@ -5078,8 +5261,8 @@
         "kind": "register_callback",
         "line": 4,
         "name": "Mod.AddPriorityCallback",
-        "seq": 308,
-        "source": "...eplus/scripts/customhealthapi/reimpl/actives/genesis.lua"
+        "seq": 312,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/actives/genesis.lua"
       },
       {
         "args": [
@@ -5089,8 +5272,8 @@
         "kind": "register_callback",
         "line": 7,
         "name": "Mod.AddCallback",
-        "seq": 309,
-        "source": "...ipts/customhealthapi/reimpl/actives/glowinghourglass.lua"
+        "seq": 313,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/actives/glowinghourglass.lua"
       },
       {
         "args": [
@@ -5100,8 +5283,8 @@
         "kind": "register_callback",
         "line": 23,
         "name": "Mod.AddCallback",
-        "seq": 310,
-        "source": "...ipts/customhealthapi/reimpl/actives/glowinghourglass.lua"
+        "seq": 314,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/actives/glowinghourglass.lua"
       },
       {
         "args": [
@@ -5112,8 +5295,8 @@
         "kind": "register_callback",
         "line": 5,
         "name": "Mod.AddPriorityCallback",
-        "seq": 311,
-        "source": "...scripts/customhealthapi/reimpl/actives/hiddenplayers.lua"
+        "seq": 315,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/actives/hiddenplayers.lua"
       },
       {
         "args": [
@@ -5124,8 +5307,8 @@
         "kind": "register_callback",
         "line": 25,
         "name": "Mod.AddPriorityCallback",
-        "seq": 312,
-        "source": "...scripts/customhealthapi/reimpl/actives/hiddenplayers.lua"
+        "seq": 316,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/actives/hiddenplayers.lua"
       },
       {
         "args": [
@@ -5136,8 +5319,8 @@
         "kind": "register_callback",
         "line": 2,
         "name": "Mod.AddPriorityCallback",
-        "seq": 313,
-        "source": "...anceplus/scripts/customhealthapi/reimpl/actives/misc.lua"
+        "seq": 317,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/actives/misc.lua"
       },
       {
         "args": [
@@ -5148,8 +5331,8 @@
         "kind": "register_callback",
         "line": 25,
         "name": "Mod.AddPriorityCallback",
-        "seq": 314,
-        "source": "...anceplus/scripts/customhealthapi/reimpl/actives/misc.lua"
+        "seq": 318,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/actives/misc.lua"
       },
       {
         "args": [
@@ -5159,8 +5342,8 @@
         "kind": "register_callback",
         "line": 159,
         "name": "Mod.AddCallback",
-        "seq": 315,
-        "source": "...anceplus/scripts/customhealthapi/reimpl/actives/misc.lua"
+        "seq": 319,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/actives/misc.lua"
       },
       {
         "args": [
@@ -5171,8 +5354,8 @@
         "kind": "register_callback",
         "line": 205,
         "name": "Mod.AddPriorityCallback",
-        "seq": 316,
-        "source": "...ceplus/scripts/customhealthapi/reimpl/cards/strength.lua"
+        "seq": 320,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/cards/strength.lua"
       },
       {
         "args": [
@@ -5183,8 +5366,8 @@
         "kind": "register_callback",
         "line": 2,
         "name": "Mod.AddPriorityCallback",
-        "seq": 317,
-        "source": "...ntanceplus/scripts/customhealthapi/reimpl/cards/misc.lua"
+        "seq": 321,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/cards/misc.lua"
       },
       {
         "args": [
@@ -5195,8 +5378,8 @@
         "kind": "register_callback",
         "line": 195,
         "name": "Mod.AddPriorityCallback",
-        "seq": 318,
-        "source": "...ts/customhealthapi/reimpl/itempedestals/brittlebones.lua"
+        "seq": 322,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/itempedestals/brittlebones.lua"
       },
       {
         "args": [
@@ -5207,8 +5390,8 @@
         "kind": "register_callback",
         "line": 240,
         "name": "Mod.AddPriorityCallback",
-        "seq": 319,
-        "source": "...ts/customhealthapi/reimpl/itempedestals/brittlebones.lua"
+        "seq": 323,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/itempedestals/brittlebones.lua"
       },
       {
         "args": [
@@ -5219,8 +5402,8 @@
         "kind": "register_callback",
         "line": 255,
         "name": "Mod.AddPriorityCallback",
-        "seq": 320,
-        "source": "...ts/customhealthapi/reimpl/itempedestals/brittlebones.lua"
+        "seq": 324,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/itempedestals/brittlebones.lua"
       },
       {
         "args": [
@@ -5231,8 +5414,8 @@
         "kind": "register_callback",
         "line": 318,
         "name": "Mod.AddPriorityCallback",
-        "seq": 321,
-        "source": "...ts/customhealthapi/reimpl/itempedestals/brittlebones.lua"
+        "seq": 325,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/itempedestals/brittlebones.lua"
       },
       {
         "args": [
@@ -5243,8 +5426,8 @@
         "kind": "register_callback",
         "line": 2,
         "name": "Mod.AddPriorityCallback",
-        "seq": 322,
-        "source": "...us/scripts/customhealthapi/reimpl/itempedestals/core.lua"
+        "seq": 326,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/itempedestals/core.lua"
       },
       {
         "args": [
@@ -5255,8 +5438,8 @@
         "kind": "register_callback",
         "line": 17,
         "name": "Mod.AddPriorityCallback",
-        "seq": 323,
-        "source": "...us/scripts/customhealthapi/reimpl/itempedestals/core.lua"
+        "seq": 327,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/itempedestals/core.lua"
       },
       {
         "args": [
@@ -5266,8 +5449,8 @@
         "kind": "register_callback",
         "line": 271,
         "name": "Mod.AddCallback",
-        "seq": 324,
-        "source": "...us/scripts/customhealthapi/reimpl/itempedestals/core.lua"
+        "seq": 328,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/itempedestals/core.lua"
       },
       {
         "args": [
@@ -5277,8 +5460,8 @@
         "kind": "register_callback",
         "line": 285,
         "name": "Mod.AddCallback",
-        "seq": 325,
-        "source": "...us/scripts/customhealthapi/reimpl/itempedestals/core.lua"
+        "seq": 329,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/itempedestals/core.lua"
       },
       {
         "args": [
@@ -5289,8 +5472,8 @@
         "kind": "register_callback",
         "line": 34,
         "name": "Mod.AddPriorityCallback",
-        "seq": 326,
-        "source": "...ntanceplus/scripts/customhealthapi/reimpl/pills/misc.lua"
+        "seq": 330,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/pills/misc.lua"
       },
       {
         "args": [
@@ -5301,8 +5484,8 @@
         "kind": "register_callback",
         "line": 35,
         "name": "Mod.AddPriorityCallback",
-        "seq": 327,
-        "source": "...ntanceplus/scripts/customhealthapi/reimpl/pills/misc.lua"
+        "seq": 331,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/pills/misc.lua"
       },
       {
         "args": [
@@ -5313,8 +5496,8 @@
         "kind": "register_callback",
         "line": 51,
         "name": "Mod.AddPriorityCallback",
-        "seq": 328,
-        "source": "...ntanceplus/scripts/customhealthapi/reimpl/pills/misc.lua"
+        "seq": 332,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/pills/misc.lua"
       },
       {
         "args": [
@@ -5325,8 +5508,8 @@
         "kind": "register_callback",
         "line": 68,
         "name": "Mod.AddPriorityCallback",
-        "seq": 329,
-        "source": "...ntanceplus/scripts/customhealthapi/reimpl/pills/misc.lua"
+        "seq": 333,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/pills/misc.lua"
       },
       {
         "args": [
@@ -5337,8 +5520,8 @@
         "kind": "register_callback",
         "line": 4,
         "name": "Mod.AddPriorityCallback",
-        "seq": 330,
-        "source": "...anceplus/scripts/customhealthapi/reimpl/apioverrides.lua"
+        "seq": 334,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/apioverrides.lua"
       },
       {
         "args": [
@@ -5349,8 +5532,8 @@
         "kind": "register_callback",
         "line": 18,
         "name": "Mod.AddPriorityCallback",
-        "seq": 331,
-        "source": "...anceplus/scripts/customhealthapi/reimpl/apioverrides.lua"
+        "seq": 335,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/apioverrides.lua"
       },
       {
         "args": [
@@ -5360,8 +5543,8 @@
         "kind": "register_callback",
         "line": 32,
         "name": "Mod.AddCallback",
-        "seq": 332,
-        "source": "...anceplus/scripts/customhealthapi/reimpl/apioverrides.lua"
+        "seq": 336,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/apioverrides.lua"
       },
       {
         "args": [
@@ -5372,8 +5555,8 @@
         "kind": "register_callback",
         "line": 4,
         "name": "Mod.AddPriorityCallback",
-        "seq": 333,
-        "source": "...repentanceplus/scripts/customhealthapi/reimpl/damage.lua"
+        "seq": 337,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/damage.lua"
       },
       {
         "args": [
@@ -5384,8 +5567,8 @@
         "kind": "register_callback",
         "line": 114,
         "name": "Mod.AddPriorityCallback",
-        "seq": 334,
-        "source": "...repentanceplus/scripts/customhealthapi/reimpl/damage.lua"
+        "seq": 338,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/damage.lua"
       },
       {
         "args": [
@@ -5396,8 +5579,8 @@
         "kind": "register_callback",
         "line": 219,
         "name": "Mod.AddPriorityCallback",
-        "seq": 335,
-        "source": "...repentanceplus/scripts/customhealthapi/reimpl/damage.lua"
+        "seq": 339,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/damage.lua"
       },
       {
         "args": [
@@ -5407,8 +5590,8 @@
         "kind": "register_callback",
         "line": 523,
         "name": "Mod.AddCallback",
-        "seq": 336,
-        "source": "...repentanceplus/scripts/customhealthapi/reimpl/damage.lua"
+        "seq": 340,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/damage.lua"
       },
       {
         "args": [
@@ -5419,8 +5602,8 @@
         "kind": "register_callback",
         "line": 2,
         "name": "Mod.AddPriorityCallback",
-        "seq": 337,
-        "source": "...epentanceplus/scripts/customhealthapi/reimpl/pickups.lua"
+        "seq": 341,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/pickups.lua"
       },
       {
         "args": [
@@ -5431,8 +5614,8 @@
         "kind": "register_callback",
         "line": 17,
         "name": "Mod.AddPriorityCallback",
-        "seq": 338,
-        "source": "...epentanceplus/scripts/customhealthapi/reimpl/pickups.lua"
+        "seq": 342,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/pickups.lua"
       },
       {
         "args": [
@@ -5443,8 +5626,8 @@
         "kind": "register_callback",
         "line": 913,
         "name": "Mod.AddPriorityCallback",
-        "seq": 339,
-        "source": "...epentanceplus/scripts/customhealthapi/reimpl/pickups.lua"
+        "seq": 343,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/pickups.lua"
       },
       {
         "args": [
@@ -5455,8 +5638,8 @@
         "kind": "register_callback",
         "line": 948,
         "name": "Mod.AddPriorityCallback",
-        "seq": 340,
-        "source": "...epentanceplus/scripts/customhealthapi/reimpl/pickups.lua"
+        "seq": 344,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/pickups.lua"
       },
       {
         "args": [
@@ -5467,8 +5650,8 @@
         "kind": "register_callback",
         "line": 5,
         "name": "Mod.AddPriorityCallback",
-        "seq": 341,
-        "source": "...eplus/scripts/customhealthapi/reimpl/renderhealthbar.lua"
+        "seq": 345,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/renderhealthbar.lua"
       },
       {
         "args": [
@@ -5479,8 +5662,8 @@
         "kind": "register_callback",
         "line": 22,
         "name": "Mod.AddPriorityCallback",
-        "seq": 342,
-        "source": "...eplus/scripts/customhealthapi/reimpl/renderhealthbar.lua"
+        "seq": 346,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/renderhealthbar.lua"
       },
       {
         "args": [
@@ -5490,8 +5673,8 @@
         "kind": "register_callback",
         "line": 82,
         "name": "Mod.AddCallback",
-        "seq": 343,
-        "source": "...epentanceplus/scripts/customhealthapi/reimpl/restock.lua"
+        "seq": 347,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/restock.lua"
       },
       {
         "args": [
@@ -5502,8 +5685,8 @@
         "kind": "register_callback",
         "line": 268,
         "name": "Mod.AddPriorityCallback",
-        "seq": 344,
-        "source": "...epentanceplus/scripts/customhealthapi/reimpl/restock.lua"
+        "seq": 348,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/restock.lua"
       },
       {
         "args": [
@@ -5513,8 +5696,8 @@
         "kind": "register_callback",
         "line": 6,
         "name": "Mod.AddCallback",
-        "seq": 345,
-        "source": "...entanceplus/scripts/customhealthapi/reimpl/resyncing.lua"
+        "seq": 349,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/resyncing.lua"
       },
       {
         "args": [
@@ -5525,8 +5708,8 @@
         "kind": "register_callback",
         "line": 23,
         "name": "Mod.AddPriorityCallback",
-        "seq": 346,
-        "source": "...entanceplus/scripts/customhealthapi/reimpl/resyncing.lua"
+        "seq": 350,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/resyncing.lua"
       },
       {
         "args": [
@@ -5537,8 +5720,8 @@
         "kind": "register_callback",
         "line": 5,
         "name": "Mod.AddPriorityCallback",
-        "seq": 347,
-        "source": "...anceplus/scripts/customhealthapi/reimpl/shardofglass.lua"
+        "seq": 351,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/shardofglass.lua"
       },
       {
         "args": [
@@ -5549,8 +5732,8 @@
         "kind": "register_callback",
         "line": 23,
         "name": "Mod.AddPriorityCallback",
-        "seq": 348,
-        "source": "...anceplus/scripts/customhealthapi/reimpl/shardofglass.lua"
+        "seq": 352,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/shardofglass.lua"
       },
       {
         "args": [
@@ -5561,8 +5744,8 @@
         "kind": "register_callback",
         "line": 16,
         "name": "Mod.AddPriorityCallback",
-        "seq": 349,
-        "source": "...ntanceplus/scripts/customhealthapi/reimpl/sumptorium.lua"
+        "seq": 353,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/sumptorium.lua"
       },
       {
         "args": [
@@ -5573,8 +5756,8 @@
         "kind": "register_callback",
         "line": 33,
         "name": "Mod.AddPriorityCallback",
-        "seq": 350,
-        "source": "...ntanceplus/scripts/customhealthapi/reimpl/sumptorium.lua"
+        "seq": 354,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/sumptorium.lua"
       },
       {
         "args": [
@@ -5584,8 +5767,8 @@
         "kind": "register_callback",
         "line": 189,
         "name": "Mod.AddCallback",
-        "seq": 351,
-        "source": "...ntanceplus/scripts/customhealthapi/reimpl/sumptorium.lua"
+        "seq": 355,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/sumptorium.lua"
       },
       {
         "args": [
@@ -5595,8 +5778,8 @@
         "kind": "register_callback",
         "line": 220,
         "name": "Mod.AddCallback",
-        "seq": 352,
-        "source": "...ntanceplus/scripts/customhealthapi/reimpl/sumptorium.lua"
+        "seq": 356,
+        "source": "<modroot>/scripts/customhealthapi/reimpl/sumptorium.lua"
       },
       {
         "args": [
@@ -5607,8 +5790,8 @@
         "kind": "register_callback",
         "line": 4,
         "name": "Mod.AddPriorityCallback",
-        "seq": 353,
-        "source": "...entanceplus/scripts/customhealthapi/savingandloading.lua"
+        "seq": 357,
+        "source": "<modroot>/scripts/customhealthapi/savingandloading.lua"
       },
       {
         "args": [
@@ -5619,8 +5802,8 @@
         "kind": "register_callback",
         "line": 21,
         "name": "Mod.AddPriorityCallback",
-        "seq": 354,
-        "source": "...entanceplus/scripts/customhealthapi/savingandloading.lua"
+        "seq": 358,
+        "source": "<modroot>/scripts/customhealthapi/savingandloading.lua"
       },
       {
         "args": [
@@ -5631,8 +5814,8 @@
         "kind": "register_callback",
         "line": 39,
         "name": "Mod.AddPriorityCallback",
-        "seq": 355,
-        "source": "...entanceplus/scripts/customhealthapi/savingandloading.lua"
+        "seq": 359,
+        "source": "<modroot>/scripts/customhealthapi/savingandloading.lua"
       },
       {
         "args": [
@@ -5642,16 +5825,16 @@
         "kind": "register_callback",
         "line": 181,
         "name": "Mod.AddCallback",
-        "seq": 356,
-        "source": "...Ñ/isaac/repentanceplus/scripts/customhealthapi/core.lua"
+        "seq": 360,
+        "source": "<modroot>/scripts/customhealthapi/core.lua"
       },
       {
         "args": [],
         "kind": "construct",
         "line": 4,
         "name": "RNG",
-        "seq": 357,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 361,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5660,8 +5843,8 @@
         "kind": "register_callback",
         "line": 114,
         "name": "Mod.AddCallback",
-        "seq": 358,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 362,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5671,8 +5854,8 @@
         "kind": "register_callback",
         "line": 120,
         "name": "Mod.AddCallback",
-        "seq": 359,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 363,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5682,8 +5865,8 @@
         "kind": "register_callback",
         "line": 124,
         "name": "Mod.AddCallback",
-        "seq": 360,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 364,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5693,8 +5876,8 @@
         "kind": "register_callback",
         "line": 128,
         "name": "Mod.AddCallback",
-        "seq": 361,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 365,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5704,8 +5887,8 @@
         "kind": "register_callback",
         "line": 190,
         "name": "Mod.AddCallback",
-        "seq": 362,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 366,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5715,8 +5898,8 @@
         "kind": "register_callback",
         "line": 194,
         "name": "Mod.AddCallback",
-        "seq": 363,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 367,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5726,8 +5909,8 @@
         "kind": "register_callback",
         "line": 198,
         "name": "Mod.AddCallback",
-        "seq": 364,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 368,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5737,8 +5920,8 @@
         "kind": "register_callback",
         "line": 263,
         "name": "Mod.AddCallback",
-        "seq": 365,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 369,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5747,8 +5930,8 @@
         "kind": "register_callback",
         "line": 394,
         "name": "Mod.AddCallback",
-        "seq": 366,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 370,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5757,8 +5940,8 @@
         "kind": "register_callback",
         "line": 441,
         "name": "Mod.AddCallback",
-        "seq": 367,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 371,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5767,8 +5950,8 @@
         "kind": "register_callback",
         "line": 455,
         "name": "Mod.AddCallback",
-        "seq": 368,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 372,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5777,8 +5960,8 @@
         "kind": "register_callback",
         "line": 510,
         "name": "Mod.AddCallback",
-        "seq": 369,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 373,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5787,8 +5970,8 @@
         "kind": "register_callback",
         "line": 517,
         "name": "Mod.AddCallback",
-        "seq": 370,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 374,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5798,8 +5981,8 @@
         "kind": "register_callback",
         "line": 537,
         "name": "Mod.AddCallback",
-        "seq": 371,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 375,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5808,8 +5991,8 @@
         "kind": "register_callback",
         "line": 593,
         "name": "Mod.AddCallback",
-        "seq": 372,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 376,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5818,8 +6001,8 @@
         "kind": "register_callback",
         "line": 721,
         "name": "Mod.AddCallback",
-        "seq": 373,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 377,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5828,8 +6011,8 @@
         "kind": "register_callback",
         "line": 799,
         "name": "Mod.AddCallback",
-        "seq": 374,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 378,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5838,8 +6021,8 @@
         "kind": "register_callback",
         "line": 815,
         "name": "Mod.AddCallback",
-        "seq": 375,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 379,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5848,8 +6031,8 @@
         "kind": "register_callback",
         "line": 855,
         "name": "Mod.AddCallback",
-        "seq": 376,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 380,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5858,8 +6041,8 @@
         "kind": "register_callback",
         "line": 892,
         "name": "Mod.AddCallback",
-        "seq": 377,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 381,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5868,8 +6051,8 @@
         "kind": "register_callback",
         "line": 912,
         "name": "Mod.AddCallback",
-        "seq": 378,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 382,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5878,8 +6061,8 @@
         "kind": "register_callback",
         "line": 970,
         "name": "Mod.AddCallback",
-        "seq": 379,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 383,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5888,8 +6071,8 @@
         "kind": "register_callback",
         "line": 1003,
         "name": "Mod.AddCallback",
-        "seq": 380,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 384,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5899,8 +6082,8 @@
         "kind": "register_callback",
         "line": 1037,
         "name": "Mod.AddCallback",
-        "seq": 381,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 385,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5910,8 +6093,8 @@
         "kind": "register_callback",
         "line": 1110,
         "name": "Mod.AddCallback",
-        "seq": 382,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 386,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5920,8 +6103,8 @@
         "kind": "register_callback",
         "line": 1355,
         "name": "Mod.AddCallback",
-        "seq": 383,
-        "source": "...Ð¼ÐµÐ½ÑÑ/isaac/repentanceplus/scripts/customhealth.lua"
+        "seq": 387,
+        "source": "<modroot>/scripts/customhealth.lua"
       },
       {
         "args": [
@@ -5930,7 +6113,7 @@
         "kind": "register_callback",
         "line": 9013,
         "name": "Mod.AddCallback",
-        "seq": 384,
+        "seq": 388,
         "source": "<modroot>/main.lua"
       },
       {
@@ -5938,10 +6121,10 @@
           15
         ],
         "kind": "callback_probe",
-        "line": 321,
+        "line": 388,
         "name": "POST_GAME_STARTED",
-        "seq": 385,
-        "source": "...ce-plus-switch/runtime/tests/oracle/recording_oracle.lua"
+        "seq": 389,
+        "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
       },
       {
         "args": [
@@ -5950,7 +6133,7 @@
         "kind": "call",
         "line": 2680,
         "name": "Isaac.DebugString",
-        "seq": 386,
+        "seq": 390,
         "source": "<modroot>/main.lua"
       },
       {
@@ -5960,7 +6143,7 @@
         "kind": "call",
         "line": 2696,
         "name": "Isaac.DebugString",
-        "seq": 387,
+        "seq": 391,
         "source": "<modroot>/main.lua"
       },
       {
@@ -5970,7 +6153,7 @@
         "kind": "call",
         "line": 2934,
         "name": "Isaac.GetPlayer",
-        "seq": 388,
+        "seq": 392,
         "source": "<modroot>/main.lua"
       },
       {
@@ -5978,7 +6161,7 @@
         "kind": "call",
         "line": 2935,
         "name": "Isaac.GetChallenge",
-        "seq": 389,
+        "seq": 393,
         "source": "<modroot>/main.lua"
       },
       {
@@ -5986,7 +6169,7 @@
         "kind": "call",
         "line": 2938,
         "name": "Isaac.GetChallenge",
-        "seq": 390,
+        "seq": 394,
         "source": "<modroot>/main.lua"
       },
       {
@@ -5994,7 +6177,7 @@
         "kind": "call",
         "line": 2940,
         "name": "Isaac.GetChallenge",
-        "seq": 391,
+        "seq": 395,
         "source": "<modroot>/main.lua"
       },
       {
@@ -6002,7 +6185,7 @@
         "kind": "call",
         "line": 2945,
         "name": "Game.GetNumPlayers",
-        "seq": 392,
+        "seq": 396,
         "source": "<modroot>/main.lua"
       },
       {
@@ -6012,7 +6195,7 @@
         "kind": "call",
         "line": 2946,
         "name": "Isaac.GetPlayer",
-        "seq": 393,
+        "seq": 397,
         "source": "<modroot>/main.lua"
       },
       {
@@ -6022,7 +6205,7 @@
         "kind": "call",
         "line": 2947,
         "name": "EntityPlayer.AddCacheFlags",
-        "seq": 394,
+        "seq": 398,
         "source": "<modroot>/main.lua"
       },
       {
@@ -6030,7 +6213,7 @@
         "kind": "call",
         "line": 2948,
         "name": "EntityPlayer.EvaluateItems",
-        "seq": 395,
+        "seq": 399,
         "source": "<modroot>/main.lua"
       },
       {
@@ -6038,19 +6221,79 @@
           1
         ],
         "kind": "callback_probe",
-        "line": 321,
+        "line": 388,
         "name": "POST_UPDATE",
-        "seq": 396,
-        "source": "...ce-plus-switch/runtime/tests/oracle/recording_oracle.lua"
+        "seq": 400,
+        "source": "<projectroot>/repentance-plus-switch/runtime/tests/oracle/recording_oracle.lua"
+      },
+      {
+        "args": [],
+        "kind": "call",
+        "line": 3570,
+        "name": "Game.GetRoom",
+        "seq": 401,
+        "source": "<modroot>/main.lua"
+      },
+      {
+        "args": [],
+        "kind": "call",
+        "line": 3585,
+        "name": "Game.GetNumPlayers",
+        "seq": 402,
+        "source": "<modroot>/main.lua"
       },
       {
         "args": [
-          "<table>"
+          0
         ],
+        "kind": "call",
+        "line": 3586,
+        "name": "Isaac.GetPlayer",
+        "seq": 403,
+        "source": "<modroot>/main.lua"
+      },
+      {
+        "args": [],
+        "kind": "call",
+        "line": 3587,
+        "name": "EntityPlayer.GetSprite",
+        "seq": 404,
+        "source": "<modroot>/main.lua"
+      },
+      {
+        "args": [
+          "stable_identity",
+          "retained_value",
+          "player_isolation"
+        ],
+        "kind": "fixture_satisfied",
+        "line": 3590,
+        "name": "EntityPlayer.GetData",
+        "seq": 405,
+        "source": "<modroot>/main.lua"
+      },
+      {
+        "args": [],
+        "kind": "call",
+        "line": 1868,
+        "name": "EntityPlayer.GetBabySkin",
+        "seq": 406,
+        "source": "<modroot>/main.lua"
+      },
+      {
+        "args": [],
+        "kind": "call",
+        "line": 1870,
+        "name": "EntityPlayer.GetSprite",
+        "seq": 407,
+        "source": "<modroot>/main.lua"
+      },
+      {
+        "args": [],
         "kind": "unsupported",
-        "line": 3570,
-        "name": "Game.GetRoom",
-        "seq": 397,
+        "line": 1872,
+        "name": "Sprite.IsPlaying",
+        "seq": 408,
         "source": "<modroot>/main.lua"
       }
     ],
@@ -6153,10 +6396,10 @@
     }
   },
   "summary": {
-    "entry_count": 91,
-    "isaacscript_evidenced": 11,
-    "runtime_observed": 18,
-    "unresolved": 91,
-    "zhl_evidenced": 8
+    "entry_count": 95,
+    "isaacscript_evidenced": 14,
+    "runtime_observed": 22,
+    "unresolved": 94,
+    "zhl_evidenced": 9
   }
 }

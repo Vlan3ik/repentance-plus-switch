@@ -17,13 +17,11 @@
   ],
   "frontier": {
     "blocker": {
-      "args": [
-        "<table>"
-      ],
+      "args": [],
       "classification": "pending",
       "hardware_required": true,
-      "line": 3570,
-      "name": "Game.GetRoom",
+      "line": 3605,
+      "name": "Sprite.IsPlaying",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua",
       "switch_status": "unresolved"
@@ -90,6 +88,16 @@
         "verification_level": "hardware_required"
       },
       {
+        "name": "LC_Entity_Player__GetBabySkin",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity__GetSprite",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
         "name": "LC_RNG__Next",
         "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
         "verification_level": "hardware_required"
@@ -106,6 +114,11 @@
       },
       {
         "name": "LC_RNG__SetSeed",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Game__GetRoom",
         "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
         "verification_level": "hardware_required"
       },
@@ -263,6 +276,18 @@
         "verification_level": "hardware_required"
       },
       {
+        "name": "LC_Entity_Player__GetBabySkin",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity__GetSprite",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
         "name": "LC_RNG__Next",
         "resolver_exposed": true,
         "source": "runtime/source/program/main.cpp",
@@ -282,6 +307,12 @@
       },
       {
         "name": "LC_RNG__SetSeed",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LL_Game__GetRoom",
         "resolver_exposed": true,
         "source": "runtime/source/program/main.cpp",
         "verification_level": "hardware_required"
@@ -550,6 +581,18 @@
       "verification_level": "host_only"
     },
     {
+      "command": "./runtime/tests/dss/test_dss_host.sh",
+      "name": "host_dss_isolated",
+      "scope": "exact bundled Repentance Plus DSS sources with minimal recording/fake APIs; reports deterministic first missing leaf or bootstrap success",
+      "verification_level": "host_only"
+    },
+    {
+      "command": "./runtime/tests/chapi/test-bootstrap.sh",
+      "name": "host_chapi_0946_isolated",
+      "scope": "exact bundled Repentance Plus Custom Health API 0.946 sources with recording/fake APIs; no full mod, native pointers, or console claim",
+      "verification_level": "host_only"
+    },
+    {
       "command": "./runtime/tests/test-persistence-host.sh",
       "name": "host_persistence",
       "scope": "LuaJIT + in-memory persistence stub; verifies Lua-facing save/load/remove contract only",
@@ -572,6 +615,42 @@
       "name": "host_evaluate_items",
       "scope": "mock opaque Entity_Player pointer; verifies one void EvaluateItems call and mapping guards only",
       "verification_level": "host_only"
+    },
+    {
+      "command": "./runtime/tests/test-game-get-room.sh",
+      "name": "host_game_get_room",
+      "scope": "mock non-owning Room pointer; verifies stable identity, resolver declaration, and Game::_room guard shape",
+      "verification_level": "host_only"
+    },
+    {
+      "command": "python3 ./runtime/tests/test-game-get-room-evidence.py",
+      "name": "static_game_get_room_evidence",
+      "scope": "pinned Repentance.elf BuildID plus four independent ARM64 Game::_room callsite references at +0x21550",
+      "verification_level": "hardware_required"
+    },
+    {
+      "command": "./runtime/tests/test-get-sprite.sh",
+      "name": "host_get_sprite",
+      "scope": "fake Entity buffer; verifies the borrowed embedded ANM2 address at Entity+0x48 and null/mapping guards",
+      "verification_level": "host_only"
+    },
+    {
+      "command": "python3 ./runtime/tests/test-get-sprite-evidence.py",
+      "name": "static_get_sprite_evidence",
+      "scope": "pinned Repentance.nro BuildID and Entity+0x48 evidence; confirms the borrowed wrapper has no destructor",
+      "verification_level": "hardware_required"
+    },
+    {
+      "command": "./runtime/tests/test-get-baby-skin.sh",
+      "name": "host_get_baby_skin",
+      "scope": "fake Entity_Player storage; verifies signed int32 read at Entity_Player+0x20E8 and null/mapping/overflow guards",
+      "verification_level": "host_only"
+    },
+    {
+      "command": "python3 ./runtime/tests/test-get-baby-skin-evidence.py",
+      "name": "static_get_baby_skin_evidence",
+      "scope": "pinned Repentance.nro BuildID plus Init/TriggerNewStage writes and init_baby_skin/InitBabyStats reads at Entity_Player+0x20E8",
+      "verification_level": "hardware_required"
     },
     {
       "command": "not_run: requires Switch save/restart/load cycle",

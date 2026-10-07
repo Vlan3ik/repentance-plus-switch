@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "elf": "../switch-port/analysis/nx2elf/Repentance.elf",
+  "elf_sha256": "0538e4fb54c8bdcca995121412126355ebdba66e39adb41567e4ba06da436bfc",
+  "build_id": "91c73fdd575061318d68886316afeac72388b2ab",
+  "class": "Game",
+  "member": "_room",
+  "offset": "0x21550",
+  "return_contract": "non-owning Room*; NULL on failed mapping or unavailable Game",
+  "uses": [
+    {
+      "function": "Game::StartRoomTransition",
+      "rva": "0x353db0",
+      "evidence": "loads Game::_room, then calls Room::IsBeastRoom",
+      "instruction_addresses": ["0x353db0", "0x353db4"],
+      "instructions": ["f8696900", "940c747f"]
+    },
+    {
+      "function": "Entity::CollideWithGrid",
+      "rva": "0x5a30c",
+      "evidence": "loads Game::_room, then calls Room::IsDungeon/GetClampedPosition",
+      "instruction_addresses": ["0x5a30c", "0x5a310", "0x5a324"],
+      "instructions": ["f8696914", "54000141", "94185eeb"]
+    },
+    {
+      "function": "Entity_Player::CollideWithGrid",
+      "rva": "0x5b828",
+      "evidence": "loads Game::_room in player collision path",
+      "instruction_addresses": ["0x5b828", "0x5b82c", "0x5b844"],
+      "instructions": ["f8746917", "4ea01c01", "941855c7"]
+    },
+    {
+      "function": "Camera::clamped_to_room",
+      "rva": "0x32854",
+      "evidence": "loads Game::_room for camera room bounds",
+      "instruction_addresses": ["0x32854", "0x32858"],
+      "instructions": ["f8696900", "9418f9d6"]
+    }
+  ],
+  "provenance": "llvm-objdump of the pinned Repentance.elf SHA-256 above; four independent ARM64 static callsites; RVA remains hardware_required"
+}

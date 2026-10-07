@@ -6,6 +6,8 @@ PROJECT_DIR=$(cd "$ROOT_DIR/../.." && pwd)
 STOCK_DIR=${1:-"$PROJECT_DIR/switch-port/reference/stock-lua/dlc/resources/scripts_v2"}
 MOD_DIR=${2:-"$PROJECT_DIR/repentanceplus"}
 OUT_JSON=${3:-"$ROOT_DIR/../analysis/api-usage/runtime-frontier.json"}
+STOCK_DIR=$(realpath -e -- "$STOCK_DIR")
+MOD_DIR=$(realpath -e -- "$MOD_DIR")
 BUILD_DIR=$(mktemp -d)
 trap 'rm -rf "$BUILD_DIR"' EXIT
 
@@ -31,6 +33,17 @@ LD_PRELOAD="$BUILD_DIR/libisaac_port_host_stubs.so" "$BUILD_DIR/luajit/src/luaji
   "$ROOT_DIR/tests/oracle/recording_oracle.lua" "$STOCK_DIR" "$MOD_DIR" "$OUT_JSON" \
   "$BUILD_DIR/libisaac_port_host_stubs.so"
 test -s "$OUT_JSON"
+# Resolve the same inputs through symlinks as a second invocation.  The
+# oracle's canonicalization must make the complete report byte-identical.
+ln -s "$STOCK_DIR" "$BUILD_DIR/stock-link"
+ln -s "$MOD_DIR" "$BUILD_DIR/mod-link"
+SECOND_JSON="$BUILD_DIR/second-frontier.json"
+LD_PRELOAD="$BUILD_DIR/libisaac_port_host_stubs.so" "$BUILD_DIR/luajit/src/luajit" \
+  "$ROOT_DIR/tests/oracle/recording_oracle.lua" "$BUILD_DIR/stock-link" "$BUILD_DIR/mod-link" "$SECOND_JSON" \
+  "$BUILD_DIR/libisaac_port_host_stubs.so" >/dev/null
+test -s "$SECOND_JSON"
+cmp -s "$OUT_JSON" "$SECOND_JSON"
+test "$(sha256sum "$OUT_JSON" | awk '{print $1}')" = "$(sha256sum "$SECOND_JSON" | awk '{print $1}')"
 MOD_LUA_COUNT=$(find "$MOD_DIR" -type f -name '*.lua' -printf '%f\n' | wc -l)
 test "$MOD_LUA_COUNT" -eq 53
 python3 - "$OUT_JSON" <<'PY'
@@ -53,7 +66,12 @@ evaluate_calls = [event for event in d["operations"]
 assert evaluate_calls
 if d["status"] == "host_bootstrap_blocked":
     assert d.get("first_unsupported")
-    assert d["first_unsupported"]["name"] == "Game.GetRoom"
+    assert d["first_unsupported"]["name"] == "Sprite.IsPlaying"
+    fixture_calls = [event for event in d["operations"]
+                     if event.get("name") == "EntityPlayer.GetData"
+                     and event.get("kind") == "fixture_satisfied"]
+    assert len(fixture_calls) >= 4
+    assert fixture_calls[0]["args"] == ["stable_identity", "retained_value", "player_isolation"]
     blocker = d["first_unsupported"]
     assert isinstance(blocker, dict)
     assert isinstance(blocker.get("name"), str) and blocker["name"]

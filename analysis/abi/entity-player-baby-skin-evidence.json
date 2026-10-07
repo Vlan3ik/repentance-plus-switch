@@ -1,0 +1,28 @@
+{
+  "build_id": "91c73fdd575061318d68886316afeac72388b2ab",
+  "elf": {
+    "path": "../switch-port/analysis/nx2elf/Repentance.elf",
+    "sha256": "0538e4fb54c8bdcca995121412126355ebdba66e39adb41567e4ba06da436bfc"
+  },
+  "class": "Entity_Player",
+  "field": {
+    "name": "babySkin",
+    "offset": "0x20e8",
+    "size": 4,
+    "signed": true,
+    "type": "int32"
+  },
+  "method": "EntityPlayer.GetBabySkin",
+  "proofs": [
+    {"kind": "write", "symbol": "Entity_Player::Init", "rva": "0x279094", "instructions": ["b920ea68"]},
+    {"kind": "read", "symbol": "Entity_Player::Init", "rva": "0x279c4c", "instructions": ["b960ea74"]},
+    {"kind": "call", "symbol": "Entity_Player::Init", "rva": "0x279c5c", "instructions": ["940ff899"]},
+    {"kind": "write", "symbol": "Entity_Player::Init", "rva": "0x279c60", "instructions": ["b920ea74"]},
+    {"kind": "write", "symbol": "Entity_Player::TriggerNewStage", "rva": "0x2c60ec", "instructions": ["b920ea68"]},
+    {"kind": "write", "symbol": "Entity_Player::TriggerNewStage", "rva": "0x2c6120", "instructions": ["b920ea68"]},
+    {"kind": "read", "symbol": "Entity_Player::init_baby_skin", "rva": "0x27b064", "instructions": ["b960e802"]},
+    {"kind": "read", "symbol": "Entity_Player::InitBabyStats", "rva": "0x29b7ec", "instructions": ["b960e808"]}
+  ],
+  "invalid_read_sentinel": -1,
+  "verification_level": "hardware_required"
+}

@@ -266,16 +266,48 @@ def apply_runtime(entries: list[dict[str, Any]], frontier: dict[str, Any]) -> No
 
 def add_host_verified_runtime_entries(entries: list[dict[str, Any]],
                                       frontier: dict[str, Any],
+                                      usage: dict[str, Any],
                                       zhl: dict[str, list[dict[str, str]]],
                                       ts: dict[str, list[dict[str, str]]]) -> None:
     """Keep implemented narrow endpoints visible after the frontier advances.
 
-    AddCacheFlags is intentionally host-tested only: the ARM64 field and live
-    Entity_Player pointer still require the pinned NRO on hardware.  It is
-    emitted here because the runtime frontier's first blocker is now the
-    separate EvaluateItems endpoint.
+    Narrow endpoints are intentionally host-tested only: live ARM64 objects
+    still require the pinned NRO on hardware.  They are emitted here because
+    the recording frontier observes them before the next unsupported call.
     """
     by_name = {entry["name"]: entry for entry in entries}
+    # Entity:GetData is implemented by the stock Lua entity wrapper as stable
+    # per-handle table state.  A recording-proxy fixture can prove that Lua
+    # contract, but this must never be presented as a native ABI endpoint.
+    for index, event in enumerate(frontier["order"]):
+        if not isinstance(event, dict) or event.get("name") != "EntityPlayer.GetData":
+            continue
+        name = "EntityPlayer.GetData"
+        entry = by_name.get(name)
+        if entry is None:
+            entry = {
+                "kind": "lua_fixture_contract",
+                "name": name,
+                "usage_count": method_usage(usage, name),
+                "runtime": {"observed": True, "order": index,
+                             "status": "fixture_satisfied", "verification_level": "host_only"},
+                "evidence": {
+                    "zhl": zhl_for("GetData", zhl),
+                    "isaacscript": ts.get("GetData", []),
+                    "host_test": "runtime/tests/test-recording-oracle.sh",
+                    "contract": "stable per-entity table identity, value retention, and player isolation",
+                },
+                "switch": {"rva": None, "confidence": "not_applicable",
+                           "status": "not_claimed", "hardware_required": True,
+                           "reason": "Lua wrapper fixture; no native endpoint implemented"},
+            }
+            entries.append(entry)
+            by_name[name] = entry
+        else:
+            entry["runtime"] = {"observed": True, "order": index,
+                                 "status": "fixture_satisfied", "verification_level": "host_only"}
+        break
+
     for index, event in enumerate(frontier["order"]):
         if not isinstance(event, dict) or event.get("name") != "EntityPlayer.AddCacheFlags":
             continue
@@ -300,7 +332,102 @@ def add_host_verified_runtime_entries(entries: list[dict[str, Any]],
         else:
             entry["runtime"] = {"observed": True, "order": index,
                                  "status": "host_tested", "verification_level": "host_only"}
-        return
+        break
+
+    for index, event in enumerate(frontier["order"]):
+        if not isinstance(event, dict) or event.get("name") != "Game.GetRoom" \
+                or event.get("kind") != "call":
+            continue
+        name = "Game.GetRoom"
+        entry = by_name.get(name)
+        if entry is None:
+            entry = {
+                "kind": "runtime_observed_method",
+                "name": name,
+                "usage_count": method_usage(usage, name),
+                "runtime": {"observed": True, "order": index,
+                             "status": "host_tested", "verification_level": "host_only"},
+                "evidence": {
+                    "zhl": zhl_for("GetRoom", zhl),
+                    "isaacscript": ts.get("GetRoom", []),
+                    "host_test": "runtime/tests/test-game-get-room.sh",
+                    "static_elf_evidence": "analysis/abi/game-get-room-evidence.json",
+                },
+                "switch": {"rva": None, "confidence": "unknown",
+                           "status": "unresolved", "hardware_required": True},
+            }
+            entries.append(entry)
+            by_name[name] = entry
+        else:
+            entry["runtime"] = {"observed": True, "order": index,
+                                 "status": "host_tested", "verification_level": "host_only"}
+        break
+
+    for index, event in enumerate(frontier["order"]):
+        if not isinstance(event, dict) or event.get("name") != "EntityPlayer.GetSprite" \
+                or event.get("kind") != "call":
+            continue
+        name = "EntityPlayer.GetSprite"
+        entry = by_name.get(name)
+        if entry is None:
+            entry = {
+                "kind": "runtime_observed_method",
+                "name": name,
+                "usage_count": method_usage(usage, name),
+                "runtime": {"observed": True, "order": index,
+                             "status": "host_tested", "verification_level": "host_only"},
+                "evidence": {
+                    "zhl": zhl_for("GetSprite", zhl),
+                    "isaacscript": ts.get("GetSprite", []),
+                    "host_test": "runtime/tests/test-get-sprite.sh",
+                    "static_elf_evidence": "analysis/abi/entity-get-sprite-evidence.json",
+                },
+                "switch": {"rva": None, "confidence": "unknown",
+                           "status": "unresolved", "hardware_required": True},
+            }
+            entries.append(entry)
+            by_name[name] = entry
+        else:
+            entry["runtime"] = {"observed": True, "order": index,
+                                 "status": "host_tested", "verification_level": "host_only"}
+            entry["evidence"]["host_test"] = "runtime/tests/test-get-sprite.sh"
+            entry["evidence"]["static_elf_evidence"] = \
+                "analysis/abi/entity-get-sprite-evidence.json"
+            entry["switch"]["hardware_required"] = True
+        break
+
+    for index, event in enumerate(frontier["order"]):
+        if not isinstance(event, dict) or event.get("name") != "EntityPlayer.GetBabySkin" \
+                or event.get("kind") != "call":
+            continue
+        name = "EntityPlayer.GetBabySkin"
+        entry = by_name.get(name)
+        if entry is None:
+            entry = {
+                "kind": "runtime_observed_method",
+                "name": name,
+                "usage_count": method_usage(usage, name),
+                "runtime": {"observed": True, "order": index,
+                             "status": "host_tested", "verification_level": "host_only"},
+                "evidence": {
+                    "zhl": zhl_for("GetBabySkin", zhl),
+                    "isaacscript": ts.get("GetBabySkin", []),
+                    "host_test": "runtime/tests/test-get-baby-skin.sh",
+                    "static_elf_evidence": "analysis/abi/entity-player-baby-skin-evidence.json",
+                },
+                "switch": {"rva": None, "confidence": "unknown",
+                           "status": "unresolved", "hardware_required": True},
+            }
+            entries.append(entry)
+            by_name[name] = entry
+        else:
+            entry["runtime"] = {"observed": True, "order": index,
+                                 "status": "host_tested", "verification_level": "host_only"}
+            entry["evidence"]["host_test"] = "runtime/tests/test-get-baby-skin.sh"
+            entry["evidence"]["static_elf_evidence"] = \
+                "analysis/abi/entity-player-baby-skin-evidence.json"
+            entry["switch"]["hardware_required"] = True
+        break
 
 
 def build(usage: dict[str, Any], frontier_path: Path | None, zhl_dir: Path, isaacscript_dir: Path, isaacscript_rg_dir: Path) -> dict[str, Any]:
@@ -312,7 +439,7 @@ def build(usage: dict[str, Any], frontier_path: Path | None, zhl_dir: Path, isaa
     frontier = frontier_data(frontier_path)
     entries = [make_entry(kind, name, count, zhl, ts) for kind, name, count in usage_entries(usage)]
     apply_runtime(entries, frontier)
-    add_host_verified_runtime_entries(entries, frontier, zhl, ts)
+    add_host_verified_runtime_entries(entries, frontier, usage, zhl, ts)
     blocker = blocker_record(frontier, usage)
     if blocker and not any(entry["name"] == blocker["name"] for entry in entries):
         entries.append({

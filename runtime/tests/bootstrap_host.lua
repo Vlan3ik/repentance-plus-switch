@@ -40,6 +40,8 @@ function hudClass:Render(...) end
 hudClass.__index = function(_, key) return rawget(hudClass, key) end
 local hud = setmetatable({}, hudClass)
 Game.GetHUD = function() return hud end
+local hostRoom = {}
+function Game.GetRoom() return hostRoom end
 setmetatable(Game, { __call = function(self) return self end })
 PILLEFFECT_SHOT_SPEED_DOWN = -1001
 PILLEFFECT_SHOT_SPEED_UP = -1002
@@ -173,4 +175,5 @@ function RegisterMod(name, apiVersion)
 end
 
 assert(loadfile(modroot .. "/main.lua"))()
+assert(Game.GetRoom() == Game.GetRoom(), "Game.GetRoom must preserve pointer identity")
 io.stdout:write("REPENTANCE_PLUS_HOST_BOOTSTRAP_READY\n")

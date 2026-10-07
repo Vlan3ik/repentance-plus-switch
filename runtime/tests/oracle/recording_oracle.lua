@@ -3,15 +3,26 @@
 -- boundary and does not emulate engine state or copy any upstream harness.
 local ffi = require("ffi")
 local bit = require("bit")
-local stock = assert(arg[1], "stock scripts_v2 path required")
-local modroot = assert(arg[2], "mod path required")
+local function shell_quote(value)
+    return "'" .. tostring(value):gsub("'", "'\\''") .. "'"
+end
+local function canonical_path(value)
+    local input = assert(value)
+    local pipe = io.popen("realpath -e -- " .. shell_quote(input), "r")
+    if not pipe then return input end
+    local resolved = pipe:read("*l")
+    pipe:close()
+    return resolved and resolved ~= "" and resolved or input
+end
+local stock = canonical_path(assert(arg[1], "stock scripts_v2 path required"))
+local modroot = canonical_path(assert(arg[2], "mod path required"))
 local outpath = assert(arg[3], "output JSON path required")
 local projectroot = modroot:gsub("/[^/]+$", "")
 assert(ffi.load(assert(arg[4], "stub library required"), true))
 
 local function portable_string(value)
-    return tostring(value):gsub(modroot, "<modroot>")
-        :gsub(stock, "<stockroot>"):gsub(projectroot, "<projectroot>")
+    return tostring(value):gsub("^@", ""):gsub(modroot, "<modroot>")
+        :gsub(stock, "<stock>"):gsub(projectroot, "<projectroot>")
         :gsub("^/home/[^/]+/.*", "<absolute-path>")
 end
 
@@ -52,7 +63,7 @@ local function compact_args(args)
 end
 local function caller(level)
     local i = debug.getinfo((level or 2) + 1, "Sl") or {}
-    return { source = portable_string(i.short_src or i.source or "?"), line = i.currentline or 0 }
+    return { source = portable_string(i.source or i.short_src or "?"), line = i.currentline or 0 }
 end
 local function record(kind, name, args, level)
     local c = caller((level or 2) + 1)
@@ -119,7 +130,14 @@ local stockGame, stockSfx, stockRng = Game, SFXManager, RNG
 -- stage provide exactly one player and one active game slot, then let the
 -- first unimplemented player operation fail through the recording boundary.
 -- This is an observation fixture, not an API implementation.
-local fakePlayer = { __pending_cache_flags = 0 }
+-- Match the stock Lua entity wrapper's userdata-side state: each cached
+-- handle owns one stable table, and GetData returns that exact table on every
+-- call.  This is a host fixture contract, not an EntityPlayer native ABI
+-- implementation.
+local function make_fake_player()
+    return { __pending_cache_flags = 0, __data = {} }
+end
+local fakePlayer = make_fake_player()
 function fakePlayer:AddCacheFlags(flags)
     record("call", "EntityPlayer.AddCacheFlags", {flags}, 2)
     self.__pending_cache_flags = bit.bor(self.__pending_cache_flags,
@@ -128,15 +146,64 @@ end
 function fakePlayer:EvaluateItems()
     record("call", "EntityPlayer.EvaluateItems", {}, 2)
 end
+local function fake_get_data(self)
+    local data = rawget(self, "__data")
+    record("fixture_satisfied", "EntityPlayer.GetData", {
+        "stable_identity", "retained_value", "player_isolation"
+    }, 2)
+    return data
+end
+fakePlayer.GetData = fake_get_data
+local fakeSprite = {}
+setmetatable(fakeSprite, { __index = function(_, key)
+    record("unsupported", "Sprite." .. tostring(key), {}, 2)
+    return unsupported("Sprite." .. tostring(key), 2)
+end })
+function fakePlayer:GetSprite()
+    record("call", "EntityPlayer.GetSprite", {}, 2)
+    return fakeSprite
+end
+function fakePlayer:GetBabySkin()
+    record("call", "EntityPlayer.GetBabySkin", {}, 2)
+    return 0
+end
 setmetatable(fakePlayer, { __index = function(_, key)
     return function(...)
         record("unsupported", "EntityPlayer." .. tostring(key), {...}, 2)
         return unsupported("EntityPlayer." .. tostring(key), 2)
     end
 end })
+-- Guard the fixture itself so a future refactor cannot silently turn GetData
+-- into a fresh table or share state between independent entity handles.
+do
+    local secondPlayer = make_fake_player()
+    secondPlayer.GetData = fake_get_data
+    local firstData = fakePlayer:GetData()
+    firstData.__oracle_sentinel = "retained"
+    assert(fakePlayer:GetData() == firstData, "GetData must preserve table identity")
+    assert(fakePlayer:GetData().__oracle_sentinel == "retained",
+        "GetData must retain values in the handle table")
+    assert(secondPlayer:GetData() ~= firstData,
+        "different players must have distinct GetData tables")
+    firstData.__oracle_sentinel = nil
+end
 stockGame.GetNumPlayers = function()
     record("call", "Game.GetNumPlayers", {}, 2)
     return 1
+end
+-- Game.GetRoom is now a verified non-owning pointer boundary. Keep the
+-- pointer identity stable for the whole host run, but intentionally expose
+-- no Room methods: the next oracle blocker must be the first Room operation.
+local fakeRoom = {}
+setmetatable(fakeRoom, { __index = function(_, key)
+    return function(...)
+        record("unsupported", "Room." .. tostring(key), {...}, 2)
+        return unsupported("Room." .. tostring(key), 2)
+    end
+end })
+stockGame.GetRoom = function()
+    record("call", "Game.GetRoom", {}, 2)
+    return fakeRoom
 end
 
 -- Keep construction inert while still exposing the calls the mod performs

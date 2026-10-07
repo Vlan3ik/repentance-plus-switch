@@ -103,6 +103,68 @@ class CoverageGeneratorTest(unittest.TestCase):
         self.assertEqual(result["runtime"]["blocker"]["name"],
                          "EntityPlayer.EvaluateItems")
 
+    def test_lua_get_data_fixture_is_host_only_not_native_endpoint(self):
+        usage = {"callbacks": {}, "global_calls": {}, "isaac_methods": {}}
+        frontier = {
+            "operations": [{"seq": 1, "name": "EntityPlayer.GetData",
+                            "kind": "fixture_satisfied",
+                            "args": ["stable_identity", "retained_value", "player_isolation"]}],
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "frontier.json"
+            path.write_text(json.dumps(frontier))
+            result = coverage.build(usage, path, Path("/missing"),
+                                    Path("/missing"), Path("/missing"))
+        entry = next(e for e in result["entries"]
+                     if e["name"] == "EntityPlayer.GetData")
+        self.assertEqual(entry["kind"], "lua_fixture_contract")
+        self.assertEqual(entry["runtime"]["status"], "fixture_satisfied")
+        self.assertEqual(entry["runtime"]["verification_level"], "host_only")
+        self.assertEqual(entry["switch"]["status"], "not_claimed")
+        self.assertTrue(entry["switch"]["hardware_required"])
+
+    def test_get_sprite_keeps_host_and_hardware_evidence_distinct(self):
+        usage = {"callbacks": {}, "global_calls": {}, "isaac_methods": {}}
+        frontier = {
+            "operations": [{"seq": 1, "name": "EntityPlayer.GetSprite",
+                            "kind": "call"}],
+            "first_unsupported": {"name": "EntityPlayer.GetData",
+                                  "reason": "missing_lua_api"},
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "frontier.json"
+            path.write_text(json.dumps(frontier))
+            result = coverage.build(usage, path, Path("/missing"),
+                                    Path("/missing"), Path("/missing"))
+        entry = next(e for e in result["entries"]
+                     if e["name"] == "EntityPlayer.GetSprite")
+        self.assertEqual(entry["runtime"]["status"], "host_tested")
+        self.assertEqual(entry["runtime"]["verification_level"], "host_only")
+        self.assertEqual(entry["evidence"]["host_test"],
+                         "runtime/tests/test-get-sprite.sh")
+        self.assertTrue(entry["switch"]["hardware_required"])
+
+    def test_get_baby_skin_keeps_host_and_hardware_evidence_distinct(self):
+        usage = {"callbacks": {}, "global_calls": {}, "isaac_methods": {}}
+        frontier = {
+            "operations": [{"seq": 1, "name": "EntityPlayer.GetBabySkin",
+                            "kind": "call"}],
+            "first_unsupported": {"name": "Sprite.IsPlaying",
+                                  "reason": "missing_lua_api"},
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "frontier.json"
+            path.write_text(json.dumps(frontier))
+            result = coverage.build(usage, path, Path("/missing"),
+                                    Path("/missing"), Path("/missing"))
+        entry = next(e for e in result["entries"]
+                     if e["name"] == "EntityPlayer.GetBabySkin")
+        self.assertEqual(entry["runtime"]["status"], "host_tested")
+        self.assertEqual(entry["runtime"]["verification_level"], "host_only")
+        self.assertEqual(entry["evidence"]["host_test"],
+                         "runtime/tests/test-get-baby-skin.sh")
+        self.assertTrue(entry["switch"]["hardware_required"])
+
 
 if __name__ == "__main__":
     unittest.main()

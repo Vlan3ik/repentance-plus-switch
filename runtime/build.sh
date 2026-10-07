@@ -45,6 +45,8 @@ cp "$ROOT_DIR/source/program/mod_persistence.hpp" \
    "$STAGE_DIR/source/program/mod_persistence.hpp"
 cp "$ROOT_DIR/source/program/entity_player_bridge.hpp" \
    "$STAGE_DIR/source/program/entity_player_bridge.hpp"
+cp "$ROOT_DIR/source/program/game_room_bridge.hpp" \
+   "$STAGE_DIR/source/program/game_room_bridge.hpp"
 
 mkdir -p "$STAGE_DIR/source/generated"
 python3 "$LUA_GENERATOR" \

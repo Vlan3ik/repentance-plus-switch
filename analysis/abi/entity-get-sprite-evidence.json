@@ -1,0 +1,31 @@
+{
+  "build_id": "91c73fdd575061318d68886316afeac72388b2ab",
+  "elf": {
+    "path": "switch-port/analysis/nx2elf/Repentance.elf",
+    "sha256": "0538e4fb54c8bdcca995121412126355ebdba66e39adb41567e4ba06da436bfc"
+  },
+  "symbol": "IsaacRepentance::Entity::GetSprite",
+  "offset": "0x48",
+  "callsite": {
+    "rva": "0x4f2f5c",
+    "instructions": [
+      "91012000",
+      "d65f03c0"
+    ],
+    "disassembly": [
+      "add x0, x0, #0x48",
+      "ret"
+    ],
+    "note": "Pinned ELF has identical-code-folded body under KAGE::Graphics::Manager::GetDevice; REPENTOGON/ZHL Entity::GetSprite match resolves to this two-instruction body."
+  },
+  "return": "borrowed embedded ANM2 pointer",
+  "verification_level": "hardware_required",
+  "sources": [
+    "REPENTOGON/ZHL Entity::GetSprite binding",
+    "pinned Repentance.elf Entity layout cross-reference"
+  ],
+  "notes": [
+    "The result must not be passed to IsaacPort_ANM2_Destroy.",
+    "The offset is valid only for the pinned Repentance.nro build."
+  ]
+}
