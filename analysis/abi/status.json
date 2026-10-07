@@ -21,7 +21,7 @@
       "classification": "pending",
       "hardware_required": true,
       "line": 3748,
-      "name": "EntityPlayer.GetCollectibleNum",
+      "name": "TemporaryEffects.GetCollectibleEffectNum",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua",
       "switch_status": "unresolved"
@@ -99,6 +99,11 @@
       },
       {
         "name": "LC_Entity_Player__GetBabySkin",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__GetCollectibleNum",
         "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
         "verification_level": "hardware_required"
       },
@@ -319,6 +324,12 @@
       },
       {
         "name": "LC_Entity_Player__GetBabySkin",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__GetCollectibleNum",
         "resolver_exposed": true,
         "source": "runtime/source/program/main.cpp",
         "verification_level": "hardware_required"

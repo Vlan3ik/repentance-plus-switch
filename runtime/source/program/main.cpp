@@ -152,6 +152,15 @@ constexpr std::uint32_t kExpectedEntityPlayerHasCollectiblePrologue[] = {
     0xd10183ff, 0xa9017bfd, 0x910043fd, 0xa90267fa,
     0xa9035ff8, 0xa90457f6, 0xa9054ff4,
 };
+/* REPENTOGON/ZHL symbol: Entity_Player::NumCollectibleHeld(eCollectibleType,
+ * bool) const in the pinned Repentance.nro.  The stock binding has only the
+ * collectible id; the bridge supplies ignoreModifiers=false. */
+constexpr std::uintptr_t kEntityPlayerGetCollectibleNumRva = 0x29164c;
+constexpr std::size_t kEntityPlayerGetCollectibleNumSize = 0x570;
+constexpr std::uint32_t kExpectedEntityPlayerGetCollectibleNumPrologue[] = {
+    0xa9bb7bfd, 0xa90167fa, 0x910003fd, 0xa9025ff8,
+    0xa90357f6, 0xa9044ff4, 0xf00040d8,
+};
 /* REPENTOGON/ZHL symbol: TemporaryEffects::HasEffect(eCollectibleType)
  * const, exposed to Lua as TemporaryEffects:HasCollectibleEffect. The
  * complete ELF symbol is 0x64 bytes in the pinned Repentance.nro. */
@@ -752,6 +761,7 @@ void* LC_Entity_Player__GetEffects(void*);
 bool LC_TemporaryEffects__HasCollectibleEffect(void*, unsigned int);
 bool IsaacPort_Entity_Player__HasTrinket(void*, unsigned int, bool);
 bool LC_Entity_Player__HasCollectible(void*, unsigned int, bool);
+int LC_Entity_Player__GetCollectibleNum(void*, unsigned int);
 void L_Free(char*);
 void L_Mod_SaveData(const char*, const char*, int);
 char* L_Mod_LoadData(const char*, int*);
@@ -1740,6 +1750,41 @@ extern "C" bool LC_Entity_Player__HasCollectible(void* player,
         player, collectible, false, g_repentance_base, native, true, true);
 }
 
+/* scripts_v2 exposes GetCollectibleNum with the stock one-argument ABI.
+ * NumCollectibleHeld has a native ignoreModifiers flag, whose retail default
+ * is false.  Guard the complete mapped player footprint and pinned symbol
+ * before making the call. */
+extern "C" int LC_Entity_Player__GetCollectibleNum(void* player,
+                                                    unsigned int collectible) {
+    if (!g_repentance_base || !player ||
+        g_repentance_base > static_cast<std::uintptr_t>(-1) -
+                                kEntityPlayerGetCollectibleNumRva)
+        return 0;
+
+    const auto object = reinterpret_cast<std::uintptr_t>(player);
+    if ((object & (alignof(void*) - 1)) != 0 ||
+        object > static_cast<std::uintptr_t>(-1) -
+                     isaac_port::entity_player::kGetCollectibleNumRequiredBytes ||
+        !IsMappedDataRange(
+            object, isaac_port::entity_player::kGetCollectibleNumRequiredBytes,
+            false))
+        return 0;
+
+    const auto target = g_repentance_base + kEntityPlayerGetCollectibleNumRva;
+    if (target > static_cast<std::uintptr_t>(-1) -
+                    (kEntityPlayerGetCollectibleNumSize - 1) ||
+        !IsMappedCodeAddress(target) ||
+        !IsMappedCodeAddress(target + kEntityPlayerGetCollectibleNumSize - 1) ||
+        !MatchesCode(target, kExpectedEntityPlayerGetCollectibleNumPrologue,
+                     sizeof(kExpectedEntityPlayerGetCollectibleNumPrologue)))
+        return 0;
+
+    const auto native = reinterpret_cast<
+        isaac_port::entity_player::GetCollectibleNumNative>(target);
+    return isaac_port::entity_player::InvokeGetCollectibleNum(
+        player, collectible, g_repentance_base, native, true);
+}
+
 extern "C" void L_EnableCallback(unsigned int callback_id) {
     if (callback_id == 1)
         g_post_update_enabled = true;
@@ -2049,6 +2094,8 @@ extern "C" void* luaJIT_nx_resolve(const char* name) {
         return reinterpret_cast<void*>(&LC_Entity_Player__HasTrinket);
     if (name && std::strcmp(name, "LC_Entity_Player__HasCollectible") == 0)
         return reinterpret_cast<void*>(&LC_Entity_Player__HasCollectible);
+    if (name && std::strcmp(name, "LC_Entity_Player__GetCollectibleNum") == 0)
+        return reinterpret_cast<void*>(&LC_Entity_Player__GetCollectibleNum);
     if (name && std::strcmp(name, "IsaacPort_Entity_Player__HasTrinket") == 0)
         return reinterpret_cast<void*>(&IsaacPort_Entity_Player__HasTrinket);
     if (name && std::strcmp(name, "LC_Entity__GetSprite") == 0)

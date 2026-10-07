@@ -1,0 +1,28 @@
+{
+  "build_id": "91c73fdd575061318d68886316afeac72388b2ab",
+  "elf": {
+    "path": "../switch-port/analysis/nx2elf/Repentance.elf",
+    "sha256": "0538e4fb54c8bdcca995121412126355ebdba66e39adb41567e4ba06da436bfc"
+  },
+  "method": "EntityPlayer.GetCollectibleNum",
+  "symbol": {
+    "rva": "0x29164c",
+    "size": 1392,
+    "abi": ["x0 player", "w1 collectible", "w2 ignoreModifiers", "w0 int"]
+  },
+  "prologue": [
+    "a9bb7bfd", "a90167fa", "910003fd", "a9025ff8",
+    "a90357f6", "a9044ff4", "f00040d8"
+  ],
+  "direct_player_access": {
+    "highest_offset": "0x27dc",
+    "required_bytes": "0x27e0",
+    "notes": "Native body directly reads Entity_Player+0x27dc; pointer targets are guarded by native null checks."
+  },
+  "proofs": [
+    {"kind": "direct_field_read", "rva": "0x291860", "instructions": ["b967de88"]},
+    {"kind": "direct_field_read", "rva": "0x2918f8", "instructions": ["b967de88"]},
+    {"kind": "direct_field_read", "rva": "0x29192c", "instructions": ["b967de88"]}
+  ],
+  "verification_level": "hardware_required"
+}

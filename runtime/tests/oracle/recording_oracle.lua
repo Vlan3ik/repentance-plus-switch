@@ -188,6 +188,13 @@ function fakePlayer:HasCollectible(collectible)
     -- remain covered by the ARM-gated bridge and hardware evidence test.
     return false
 end
+function fakePlayer:GetCollectibleNum(collectible)
+    record("call", "EntityPlayer.GetCollectibleNum", {collectible}, 2)
+    -- The stock binding exposes only the id; the native bridge supplies the
+    -- retail ignoreModifiers=false default.  Zero keeps this probe
+    -- deterministic while allowing the oracle to reach the next blocker.
+    return 0
+end
 -- GetEffects returns one stable borrowed opaque object.  The first method
 -- on that object is now wired by the Switch bridge; keep its deterministic
 -- false result in the oracle so execution advances to the next blocker.

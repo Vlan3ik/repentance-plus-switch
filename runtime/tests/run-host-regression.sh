@@ -29,6 +29,8 @@ python3 ./runtime/tests/test-get-effects-evidence.py
 python3 ./runtime/tests/test-has-collectible-effect-evidence.py
 ./runtime/tests/test-has-collectible.sh
 python3 ./runtime/tests/test-has-collectible-evidence.py
+./runtime/tests/test-get-collectible-num.sh
+python3 ./runtime/tests/test-get-collectible-num-evidence.py
 ./runtime/tests/test-post-game-started-hook.sh
 ./runtime/tests/dss/test_dss_host.sh "$STOCK_DIR" "$MOD_DIR" \
     >"$REGRESSION_TMP/dss.first"

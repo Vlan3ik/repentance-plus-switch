@@ -66,7 +66,7 @@ evaluate_calls = [event for event in d["operations"]
 assert evaluate_calls
 if d["status"] == "host_bootstrap_blocked":
     assert d.get("first_unsupported")
-    assert d["first_unsupported"]["name"] == "EntityPlayer.GetCollectibleNum"
+    assert d["first_unsupported"]["name"] == "TemporaryEffects.GetCollectibleEffectNum"
     trinket_calls = [event for event in d["operations"]
                      if event.get("name") == "EntityPlayer.HasTrinket"
                      and event.get("kind") == "call"]
@@ -80,9 +80,13 @@ if d["status"] == "host_bootstrap_blocked":
                      and event.get("kind") == "call"]
     assert effects_calls
     effect_calls = [event for event in d["operations"]
-                    if event.get("name") == "TemporaryEffects.HasCollectibleEffect"
-                    and event.get("kind") == "call"]
+                     if event.get("name") == "TemporaryEffects.HasCollectibleEffect"
+                     and event.get("kind") == "call"]
     assert effect_calls and effect_calls[-1]["args"]
+    collectible_num_calls = [event for event in d["operations"]
+                             if event.get("name") == "EntityPlayer.GetCollectibleNum"
+                             and event.get("kind") == "call"]
+    assert collectible_num_calls and collectible_num_calls[-1]["args"]
     fixture_calls = [event for event in d["operations"]
                      if event.get("name") == "EntityPlayer.GetData"
                      and event.get("kind") == "fixture_satisfied"]

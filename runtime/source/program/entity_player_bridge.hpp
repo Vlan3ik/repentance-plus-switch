@@ -80,6 +80,25 @@ inline bool InvokeHasCollectible(void* player, unsigned int collectible,
     return native(player, collectible, ignore_modifiers);
 }
 
+/* Entity_Player::NumCollectibleHeld(eCollectibleType, bool) const in the
+ * pinned Repentance.nro.  The stock Lua binding exposes only the collectible
+ * id, so the resolver supplies the retail default ignoreModifiers=false. */
+constexpr std::uintptr_t kGetCollectibleNumRva = 0x29164C;
+constexpr std::size_t kGetCollectibleNumSize = 0x570;
+constexpr std::size_t kGetCollectibleNumRequiredBytes = 0x27E0;
+
+using GetCollectibleNumNative = int (*)(void*, unsigned int, bool);
+
+inline int InvokeGetCollectibleNum(void* player, unsigned int collectible,
+                                   std::uintptr_t module_base,
+                                   GetCollectibleNumNative native,
+                                   bool player_mapped) {
+    if (!player || !module_base || !native || !player_mapped ||
+        module_base > static_cast<std::uintptr_t>(-1) - kGetCollectibleNumRva)
+        return 0;
+    return native(player, collectible, false);
+}
+
 /* TemporaryEffects::HasEffect(eCollectibleType) const in the pinned
  * Repentance.nro.  This is the Lua-facing HasCollectibleEffect method.  The
  * symbol is a 0x64-byte AArch64 function at RVA 0x4a6d60 and takes the
