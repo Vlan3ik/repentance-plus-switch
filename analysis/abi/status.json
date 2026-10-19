@@ -18,13 +18,16 @@
   "frontier": {
     "blocker": {
       "args": [
-        "<table>",
-        0
+        6,
+        1,
+        0,
+        false,
+        false
       ],
       "classification": "pending",
       "hardware_required": true,
-      "line": 3917,
-      "name": "EntityPlayer.GetPill",
+      "line": 3952,
+      "name": "Isaac.FindByType",
       "reason": "missing_lua_api",
       "source": "<modroot>/main.lua",
       "switch_status": "unresolved"
@@ -112,6 +115,11 @@
       },
       {
         "name": "LC_Entity_Player__GetEffects",
+        "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__GetPill",
         "source": "runtime/source/program/main.cpp:luaJIT_nx_resolve",
         "verification_level": "hardware_required"
       },
@@ -344,6 +352,12 @@
       },
       {
         "name": "LC_Entity_Player__GetEffects",
+        "resolver_exposed": true,
+        "source": "runtime/source/program/main.cpp",
+        "verification_level": "hardware_required"
+      },
+      {
+        "name": "LC_Entity_Player__GetPill",
         "resolver_exposed": true,
         "source": "runtime/source/program/main.cpp",
         "verification_level": "hardware_required"

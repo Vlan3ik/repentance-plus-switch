@@ -195,6 +195,10 @@ function fakePlayer:GetCollectibleNum(collectible)
     -- deterministic while allowing the oracle to reach the next blocker.
     return 0
 end
+function fakePlayer:GetPill(slot)
+    record("call", "EntityPlayer.GetPill", {slot or 0}, 2)
+    return 0
+end
 -- GetEffects returns one stable borrowed opaque object.  The first method
 -- on that object is now wired by the Switch bridge; keep its deterministic
 -- false result in the oracle so execution advances to the next blocker.

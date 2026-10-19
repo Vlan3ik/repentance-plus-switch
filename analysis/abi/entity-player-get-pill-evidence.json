@@ -1,0 +1,24 @@
+{
+  "build_id": "91c73fdd575061318d68886316afeac72388b2ab",
+  "elf": {
+    "path": "../switch-port/analysis/nx2elf/Repentance.elf",
+    "sha256": "0538e4fb54c8bdcca995121412126355ebdba66e39adb41567e4ba06da436bfc"
+  },
+  "method": "EntityPlayer.GetPill",
+  "symbol": {
+    "rva": "0x2e8d80",
+    "size": 36,
+    "abi": ["x0 player", "w1 slot", "w0 PillColor"]
+  },
+  "prologue": [
+    "8b21cc08", "b95c1508", "34000068", "2a1f03e0",
+    "d65f03c0", "93407c28", "8b080c08", "b95c1100",
+    "d65f03c0"
+  ],
+  "direct_player_access": {
+    "highest_offset": "0x1c2c",
+    "required_bytes": "0x1c30",
+    "notes": "Four pill slots use an eight-byte stride; each flag is at +0x1c14 and color at +0x1c10."
+  },
+  "verification_level": "hardware_required"
+}

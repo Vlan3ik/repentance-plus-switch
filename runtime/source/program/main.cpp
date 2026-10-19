@@ -161,6 +161,14 @@ constexpr std::uint32_t kExpectedEntityPlayerGetCollectibleNumPrologue[] = {
     0xa9bb7bfd, 0xa90167fa, 0x910003fd, 0xa9025ff8,
     0xa90357f6, 0xa9044ff4, 0xf00040d8,
 };
+/* REPENTOGON/ZHL symbol: Entity_Player::GetPill(int) in the pinned NRO. */
+constexpr std::uintptr_t kEntityPlayerGetPillRva = 0x2e8d80;
+constexpr std::size_t kEntityPlayerGetPillSize = 0x24;
+constexpr std::uint32_t kExpectedEntityPlayerGetPillPrologue[] = {
+    0x8b21cc08, 0xb95c1508, 0x34000068, 0x2a1f03e0,
+    0xd65f03c0, 0x93407c28, 0x8b080c08, 0xb95c1100,
+    0xd65f03c0,
+};
 /* REPENTOGON/ZHL symbol: TemporaryEffects::HasEffect(eCollectibleType)
  * const, exposed to Lua as TemporaryEffects:HasCollectibleEffect. The
  * complete ELF symbol is 0x64 bytes in the pinned Repentance.nro. */
@@ -771,6 +779,7 @@ unsigned int LC_TemporaryEffects__GetCollectibleEffectNum(void*, unsigned int);
 bool IsaacPort_Entity_Player__HasTrinket(void*, unsigned int, bool);
 bool LC_Entity_Player__HasCollectible(void*, unsigned int, bool);
 int LC_Entity_Player__GetCollectibleNum(void*, unsigned int);
+unsigned int LC_Entity_Player__GetPill(void*, unsigned int);
 void L_Free(char*);
 void L_Mod_SaveData(const char*, const char*, int);
 char* L_Mod_LoadData(const char*, int*);
@@ -1039,6 +1048,11 @@ function RegisterMod(name, apiVersion)
       classes.EntityPlayer.functions.GetBabySkin = getEntityPlayerBabySkin
       classes.EntityPlayer.functions.GetEffects = getBorrowedEntityPlayerEffects
       classes.EntityPlayer.functions.HasTrinket = getEntityPlayerHasTrinket
+      classes.EntityPlayer.functions.GetPill = function(self, slot)
+        local player = rawget(self, '__cdata')
+        if not player or player == ffi.NULL then return 0 end
+        return ffi.C.LC_Entity_Player__GetPill(player, slot or 0)
+      end
       compat.Entity = exposeClass(classes.Entity)
       compat.EntityPlayer = exposeClass(classes.EntityPlayer)
     end
@@ -1833,6 +1847,37 @@ extern "C" int LC_Entity_Player__GetCollectibleNum(void* player,
         player, collectible, g_repentance_base, native, true);
 }
 
+/* scripts_v2 exposes GetPill with an optional slot; the native symbol takes
+ * a signed slot index, so the narrow bridge accepts only the four embedded
+ * slots and defaults nil to slot zero in Lua. */
+extern "C" unsigned int LC_Entity_Player__GetPill(void* player,
+                                                   unsigned int slot) {
+    if (!g_repentance_base || !player ||
+        g_repentance_base > static_cast<std::uintptr_t>(-1) -
+                                kEntityPlayerGetPillRva)
+        return 0;
+    const auto object = reinterpret_cast<std::uintptr_t>(player);
+    if ((object & (alignof(void*) - 1)) != 0 ||
+        object > static_cast<std::uintptr_t>(-1) -
+                     isaac_port::entity_player::kGetPillRequiredBytes ||
+        !IsMappedDataRange(object,
+                           isaac_port::entity_player::kGetPillRequiredBytes,
+                           false))
+        return 0;
+    const auto target = g_repentance_base + kEntityPlayerGetPillRva;
+    if (target > static_cast<std::uintptr_t>(-1) -
+                    (kEntityPlayerGetPillSize - 1) ||
+        !IsMappedCodeAddress(target) ||
+        !IsMappedCodeAddress(target + kEntityPlayerGetPillSize - 1) ||
+        !MatchesCode(target, kExpectedEntityPlayerGetPillPrologue,
+                     sizeof(kExpectedEntityPlayerGetPillPrologue)))
+        return 0;
+    const auto native = reinterpret_cast<
+        isaac_port::entity_player::GetPillNative>(target);
+    return isaac_port::entity_player::InvokeGetPill(
+        player, slot, g_repentance_base, native, true);
+}
+
 extern "C" void L_EnableCallback(unsigned int callback_id) {
     if (callback_id == 1)
         g_post_update_enabled = true;
@@ -2146,6 +2191,8 @@ extern "C" void* luaJIT_nx_resolve(const char* name) {
         return reinterpret_cast<void*>(&LC_Entity_Player__HasCollectible);
     if (name && std::strcmp(name, "LC_Entity_Player__GetCollectibleNum") == 0)
         return reinterpret_cast<void*>(&LC_Entity_Player__GetCollectibleNum);
+    if (name && std::strcmp(name, "LC_Entity_Player__GetPill") == 0)
+        return reinterpret_cast<void*>(&LC_Entity_Player__GetPill);
     if (name && std::strcmp(name, "IsaacPort_Entity_Player__HasTrinket") == 0)
         return reinterpret_cast<void*>(&IsaacPort_Entity_Player__HasTrinket);
     if (name && std::strcmp(name, "LC_Entity__GetSprite") == 0)

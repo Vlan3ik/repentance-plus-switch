@@ -15,6 +15,31 @@ constexpr std::size_t kPendingCacheFlagsOffset = 0x1958;
  * -1, matching the Lua-facing integer sentinel used by this bridge. */
 constexpr std::size_t kBabySkinOffset = 0x20E8;
 
+/* Entity_Player::GetPill(int) in the pinned Repentance.nro.  The four pill
+ * slots are laid out as a flag at +0x1c14 and a color at +0x1c10, with an
+ * eight-byte stride.  Lua's optional slot defaults to zero. */
+constexpr std::uintptr_t kGetPillRva = 0x2E8D80;
+constexpr std::size_t kGetPillSize = 0x24;
+constexpr std::size_t kGetPillFirstColorOffset = 0x1C10;
+constexpr std::size_t kGetPillFirstFlagOffset = 0x1C14;
+constexpr std::size_t kGetPillSlotStride = 0x8;
+constexpr unsigned int kGetPillSlotCount = 4;
+constexpr std::size_t kGetPillRequiredBytes =
+    kGetPillFirstFlagOffset +
+    (kGetPillSlotCount - 1) * kGetPillSlotStride + sizeof(std::uint32_t);
+
+using GetPillNative = unsigned int (*)(void*, int);
+
+inline unsigned int InvokeGetPill(void* player, unsigned int slot,
+                                  std::uintptr_t module_base,
+                                  GetPillNative native, bool player_mapped) {
+    if (!player || slot >= kGetPillSlotCount || !module_base || !native ||
+        !player_mapped || module_base > static_cast<std::uintptr_t>(-1) -
+                                kGetPillRva)
+        return 0;
+    return native(player, static_cast<int>(slot));
+}
+
 /* Entity_Player::temporaryEffects in the pinned Repentance.nro.  The
  * object is embedded in the player, not allocated by the Lua bridge.  Lua
  * must receive the address of this live object as a borrowed opaque pointer;
