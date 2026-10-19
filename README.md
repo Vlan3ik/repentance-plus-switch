@@ -58,7 +58,15 @@ sd:/atmosphere/contents/010021C000B6A000/
 Это **alpha/hardware bring-up**, а не обещание полностью пройденного мода:
 полный Isaac ABI и все 43 используемых callback ещё восстанавливаются. Если
 игра падает или мод не появляется, приложите Atmosphère crash report и строки
-`[isaac-port]` из debug log к GitHub Issue.
+`[isaac-port]`, если они есть, из debug log к GitHub Issue.
+
+### Hardware alpha / troubleshooting
+
+Для известного падения сразу после запуска см. [разбор Issue #1](docs/ISSUE_1_NNRTLD_CRASH.md):
+это подтверждённый pre-entry crash в `nnrtld`: `Repentance.nro` не зафиксирован
+как успешно загруженный.
+Чек-лист чистой переустановки и список необходимых диагностических данных
+находятся в этом документе.
 
 Ожидаемая успешная последовательность маркеров:
 

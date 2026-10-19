@@ -97,11 +97,17 @@ stock content mount before Lua script loading has been restored.
 Deploy the resulting `out/atmosphere/` tree to the SD root. Keep the existing
 `subsdk0`, `subsdk1` and the game's original `main.npdm` untouched.
 
-The reproducible container build currently produces:
+The `subsdk9` extracted from the published GitHub `v0.2.0-alpha` release ZIP,
+implicated by [Issue #1](../docs/ISSUE_1_NNRTLD_CRASH.md), was recorded as:
 
 ```text
 sha256  b448277bd53d68f6c9dd6832c884e2a65eed3b8722ebedcdfa7442e42f4f9010  out/subsdk9
 ```
+
+This is a historical v0.2.0-alpha release hash, not a claim about the current
+working tree or a current release artifact. For any new build, calculate the
+actual output hash locally with `sha256sum out/subsdk9` and record it alongside
+the exact commit and release being tested.
 
 Do **not** deploy the `main.npdm` temporarily generated inside
 `.build/exlaunch-stage/deploy/`. It comes from exlaunch's qlaunch template and
